@@ -18,3 +18,8 @@ MAIN.insertAdjacentHTML('beforebegin', `
 </nav>
 </header>
 `);
+
+const myModal = document.getElementById('modalContactForm')
+const myInput = document.getElementById('myInput')
+const btnClose = document.getElementById('btnClose')
+
