@@ -1,3 +1,6 @@
+#ELEMENTOS
+• Buscador 
+
 #INTERFACES
 • Animación Inicio
 • Productos 
