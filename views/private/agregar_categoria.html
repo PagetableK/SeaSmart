@@ -1,115 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agregar categoria</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+ 
+    <!-- Botón para abrir el pop-up-->
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <title>tabla</title>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
+        <i class="fas fa-pencil-alt"></i> Agregar categoria
+      </button>
 
-</head>
+      <!-- Pop-up -->
+      <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
 
-<body>
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Imagen</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><img src="../../resources/img/hombre.jpg" alt="Hombres" class="img-thumbnail w-2 h-2"></td>
-        <td>Hombres</td>
-        <td>
-          <!-- Botón para abrir el pop-up-->
-
-          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal">
-            <i class="fas fa-pencil-alt"></i> Editar
-          </button>
-
-          <!-- Pop-up -->
-          <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
-
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-                <div class="modal-header text-center">
-                  <h5 class="modal-title w-10 font-weight-bold">Editar categoría</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                  <form class="row g-3 needs-validation" novalidate>
-
-                    <div class="col-12">
-                      <label for="nombreProducto" class="form-label">Nombre de la categoria</label>
-                      <div class="row">
-                        <div class="col-md-4 ms-auto">Imagen de la categoria:</div>
-                      </div>
-                      <input type="text" class="form-control" id="nombreProducto" required>
-                    </div>
-                    <div class="col-12">
-                      <label for="descripcion" class="form-label">Descripción de la categoría:</label>
-                      <textarea class="form-control" id="descripcion" rows="3"></textarea>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                </div>
-
-              </div>
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h5 class="modal-title w-10 font-weight-bold">Agregar categoría</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
+            <div class="modal-body">
+              <form class="row g-3 needs-validation" novalidate>
+
+                <div class="col-12">
+                  <label for="nombreProducto" class="form-label">Nombre de la categoria</label>
+                  <div class="row">
+                    <div class="col-md-4 ms-auto">Imagen de la categoria:</div>
+                  </div>
+                  <input type="text" class="form-control" id="nombreProducto" required>
+                </div>
+                <div class="col-12">
+                  <label for="descripcion" class="form-label">Descripción de la categoría:</label>
+                  <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar categoria</button>
+            </div>
+
           </div>
-
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-            <i class="fas fa-trash"></i> Eliminar
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td><img src="../../resources/img/mujer.jpg" alt="Mujeres" class="img-thumbnail w-2 h-2"></td>
-        <td>Mujeres</td>
-        <td>
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editModal">
-            <i class="fas fa-pencil-alt"></i> Editar
-          </button>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-            <i class="fas fa-trash"></i> Eliminar
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Modals para editar y eliminar-->
-  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-    aria-hidden="true">
-  </div>
-
-  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-    aria-hidden="true">
-  </div>
-
-  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script>
-
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-    crossorigin="anonymous"></script>
+        </div>
+      </div>
 
 </body>
-
 </html>
