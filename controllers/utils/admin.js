@@ -6,21 +6,37 @@
 const MAIN = document.querySelector('main');
 var AnchoP = document.querySelector('html');
 let colorBotones;
+let [colorBoton1, colorBoton2, colorBoton3, colorBoton4, colorBoton5, colorBoton6,
+colorBoton7] = Array(7).fill('bg-light');
+let [colorTexto1, colorTexto2, colorTexto3, colorTexto4, colorTexto5, colorTexto6,
+  colorTexto7] = Array(7).fill('text-dark');
 let estiloIconoC;
 let estiloBotonC;
+let titulo = document.title;
 
 
 if(window.screen.width < 992)
 {
   estiloIconoC = 'style="display: none;"';
   estiloBotonC = 'style="display: block;"';
-  colorBotones = '';
+  [colorBoton1, colorBoton2, colorBoton3, colorBoton4, colorBoton5, colorBoton6,
+    colorBoton7] = '';
 }
 else
 {
   estiloIconoC = 'style="display: block;"';
   estiloBotonC = 'style="display: none;"';
-  colorBotones = 'bg-light';
+
+  if(titulo == 'Tallas')
+  {
+    colorBoton7 = 'bg-info';
+    colorTexto7 = 'text-light';
+  } 
+  else if(titulo == 'Colores')
+  {
+    colorBoton6 = 'bg-info';
+    colorTexto6 = 'text-light';
+  }
 }
 
 MAIN.insertAdjacentHTML('beforebegin', `
@@ -44,29 +60,29 @@ MAIN.insertAdjacentHTML('beforebegin', `
           </div>
           <div class="col col-lg-1 collapse navbar-collapse d-flex align-items-center justify-content-center" id="navbarNav">
             <ul class="navbar-nav grid gap-3">
-              <li class="nav-item rounded-pill ${colorBotones} mx-auto px-auto" id="">
-                  <a class="nav-link" aria-current="page" href="#"><span style="font-weight: 600;">Calificaciones</span></a>
+              <li class="nav-item rounded-pill ${colorBoton1} mx-auto px-auto" id="">
+                <a class="nav-link fs-6" href="#"><span class="${colorTexto1}" style="font-weight: 600;">Calificaciones</span></a>
               </li>
-              <li class="nav-item rounded-pill ${colorBotones} mx-auto px-auto" id="" >
-                <a class="nav-link" href="#"><span style="font-weight: 600;">Pedidos</span></a>
+              <li class="nav-item rounded-pill ${colorBoton2} mx-auto px-auto" id="" >
+                <a class="nav-link fs-6" href="#"><span class="${colorTexto2}" style="font-weight: 600;">Pedidos</span></a>
               </li>
-              <li class="nav-item rounded-pill ${colorBotones} mx-auto px-auto" id="">
-                <a class="nav-link" href="#"><span style="font-weight: 600;">Productos</span></a>
+              <li class="nav-item rounded-pill ${colorBoton3} mx-auto px-auto" id="">
+                <a class="nav-link fs-6" href="#"><span class="${colorTexto3}" style="font-weight: 600;">Productos</span></a>
               </li>
-              <li class="nav-item rounded-pill ${colorBotones} mx-auto px-auto" id="">
-                <a class="nav-link" href="#"><span style="font-weight: 600;">Sub-categorías</span></a>
+              <li class="nav-item rounded-pill ${colorBoton4} mx-auto px-auto" id="">
+                <a class="nav-link fs-6" href="#"><span class="${colorTexto4}" style="font-weight: 600;">Sub-categorías</span></a>
               </li>
-              <li class="nav-item rounded-pill ${colorBotones} mx-auto px-auto" id="">
-                <a class="nav-link" href="#"><span style="font-weight: 600;">Categorías</span></a>
+              <li class="nav-item rounded-pill ${colorBoton5} mx-auto px-auto" id="">
+                <a class="nav-link fs-6" href="#"><span class="${colorTexto5}" style="font-weight: 600;">Categorías</span></a>
               </li>
-              <li class="nav-item rounded-pill ${colorBotones} mx-auto px-auto" id="">
-                <a class="nav-link" href="#"><span style="font-weight: 600;">Colores</span></a>
+              <li class="nav-item rounded-pill ${colorBoton6} mx-auto px-auto" id="">
+                <a class="nav-link fs-6" href="colores.html"><span class="${colorTexto6}" style="font-weight: 600;">Colores</span></a>
               </li>
-              <li class="nav-item rounded-pill ${colorBotones} mx-auto px-auto" id="">
-                <a class="nav-link" href="#"><span style="font-weight: 600;">Tallas</span></a>
+              <li class="nav-item rounded-pill ${colorBoton7} mx-auto px-auto" id="">
+                <a class="nav-link fs-6" href="tallas.html"><span class="${colorTexto7}" style="font-weight: 600;">Tallas</span></a>
               </li>
               <li class="nav-item mx-auto px-auto" id="cerrar-sesion" ${estiloBotonC}>
-                <a class="nav-link" href="#"><span style="font-weight: 600;">Cerrar sesión</span></a>
+                <a class="nav-link fs-6" href="index.html"><span style="font-weight: 600;">Cerrar sesión</span></a>
               </li>
             </ul>
           </div>
@@ -75,7 +91,7 @@ MAIN.insertAdjacentHTML('beforebegin', `
               <img src="../../resources/img/user.png" class="dropdown-toggle" type="button" width="50px"
                 height="50px" data-bs-toggle="dropdown" aria-expanded="false">
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item me-5" href="#" id="cerrarS">Cerrar sesión</a></li>
+                <li><a class="dropdown-item me-5" href="index.html" id="cerrarS">Cerrar sesión</a></li>
               </ul>
             </div>
           </nav>
