@@ -37,6 +37,21 @@ else
     colorBoton6 = 'bg-info';
     colorTexto6 = 'text-light';
   }
+  else if(titulo == 'Categorías')
+  {
+    colorBoton5 = 'bg-info';
+    colorTexto5 = 'text-light';
+  }
+  else if(titulo == 'Sub-categorías')
+  {
+    colorBoton4 = 'bg-info';
+    colorTexto4 = 'text-light';
+  }
+  else if(titulo == 'Productos')
+  {
+    colorBoton3 = 'bg-info';
+    colorTexto3 = 'text-light';
+  }
 }
 
 MAIN.insertAdjacentHTML('beforebegin', `
@@ -67,13 +82,13 @@ MAIN.insertAdjacentHTML('beforebegin', `
                 <a class="nav-link fs-6" href="#"><span class="${colorTexto2}" style="font-weight: 600;">Pedidos</span></a>
               </li>
               <li class="nav-item rounded-pill ${colorBoton3} mx-auto px-auto" id="">
-                <a class="nav-link fs-6" href="#"><span class="${colorTexto3}" style="font-weight: 600;">Productos</span></a>
+                <a class="nav-link fs-6" href="productos.html"><span class="${colorTexto3}" style="font-weight: 600;">Productos</span></a>
               </li>
               <li class="nav-item rounded-pill ${colorBoton4} mx-auto px-auto" id="">
-                <a class="nav-link fs-6" href="#"><span class="${colorTexto4}" style="font-weight: 600;">Sub-categorías</span></a>
+                <a class="nav-link fs-6" href="subcategorias.html"><span class="${colorTexto4}" style="font-weight: 600;">Sub-categorías</span></a>
               </li>
               <li class="nav-item rounded-pill ${colorBoton5} mx-auto px-auto" id="">
-                <a class="nav-link fs-6" href="#"><span class="${colorTexto5}" style="font-weight: 600;">Categorías</span></a>
+                <a class="nav-link fs-6" href="categorias.html"><span class="${colorTexto5}" style="font-weight: 600;">Categorías</span></a>
               </li>
               <li class="nav-item rounded-pill ${colorBoton6} mx-auto px-auto" id="">
                 <a class="nav-link fs-6" href="colores.html"><span class="${colorTexto6}" style="font-weight: 600;">Colores</span></a>
