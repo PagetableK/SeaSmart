@@ -1,12 +1,11 @@
 #ELEMENTOS
-• Buscador 
+• Tablas
+• Filtros 
 
-#INTERFACES
-• Animación Inicio
-• Productos 
-• Editar producto
-• Categorías 
-• Sub categorías
-• Pedidos 
-• Información de pedido
-• Editar pedido
+#INTERFACES 
+• Inicio de sesión
+• Información producto
+• Agregar existencia
+• Asignaciones rápidas
+• Colores 
+• Tallas 
