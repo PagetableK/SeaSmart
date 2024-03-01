@@ -1,70 +1,76 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Agregar categoria</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
- 
-    <!-- Botón para abrir el pop-up-->
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
-        <i class="fas fa-pencil-alt"></i> Agregar categoria
-      </button>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agregar categoria</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
 
-      <!-- Pop-up -->
-      <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
+<body>
+  <h1>Hello, world!</h1>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header text-center">
-              <h5 class="modal-title w-10 font-weight-bold">Agregar categoría</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+  <!-- Botón para abrir el pop-up-->
 
-            <div class="modal-body">
-              <form class="row g-3 needs-validation" novalidate>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
+    <i class="fas fa-pencil-alt"></i> Agregar categoria
+  </button>
 
-                <div class="row g-0">
-                  <div class="col-sm-6 col-md-8">Nombre de la categoria
-                  </div>
-                  <div class="col-6 col-md-4">Imagen de la categoria:</div>
-                </div>
+  <!-- Pop-up -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
 
-                <style>
-                  /* Definir el ancho del input*/
-                  input.short-width {
-                      width: 400px;
-                  }
-              </style>
-              
-              <!-- Input con ancho ajustado -->
-              <input type="text" class="form-control short-width" id="nombreProducto" required>
-
-                <div class="col-12">
-                  <label for="descripcion" class="form-label">Descripción de la categoría:</label>
-                  <textarea class="form-control" id="descripcion" rows="3"></textarea>
-                </div>
-
-                <div class="mb-3">
-                  <input type="file" class="form-control" aria-label="file example" required>
-                  <div class="invalid-feedback">Example invalid form file feedback</div>
-                </div>
-              
-
-              </form>
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar categoria</button>
-            </div>
-
-          </div>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h5 class="modal-title w-10 font-weight-bold">Agregar categoría</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
+        <div class="modal-body">
+          <form class="row g-3 needs-validation" novalidate>
+
+            <div class="row g-0">
+              <div class="col-sm-6 col-md-8">Nombre de la categoria
+              </div>
+              <div class="col-6 col-md-4">Imagen de la categoria:</div>
+            </div>
+
+            <style>
+              /* Definir el ancho del input*/
+              input.short-width {
+                width: 400px;
+              }
+            </style>
+
+            <!-- Input con ancho ajustado -->
+            <input type="text" class="form-control short-width" id="nombreProducto" required>
+
+            <div class="col-12">
+              <label for="descripcion" class="form-label">Descripción de la categoría:</label>
+              <textarea class="form-control" id="descripcion" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <input type="file" class="form-control" aria-label="file example" required>
+              <div class="invalid-feedback">Example invalid form file feedback</div>
+            </div>
+
+
+          </form>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar categoria</button>
+        </div>
+
       </div>
+    </div>
+  </div>
 
 </body>
+
 </html>
