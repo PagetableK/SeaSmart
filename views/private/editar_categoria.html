@@ -27,55 +27,56 @@
         <td>Hombres</td>
         <td>
           <!-- Botón para abrir el pop-up-->
-
-          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal">
-            <i class="fas fa-pencil-alt"></i> Editar
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Editar
           </button>
 
           <!-- Pop-up -->
-          <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
-
-            <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
               <div class="modal-content">
-                <div class="modal-header text-center">
-                  <h5 class="modal-title w-10 font-weight-bold">Editar categoría</h5>
+
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar categoría</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
-                  <form class="row g-3 needs-validation" novalidate>
-
-                    <div class="row g-0">
-                      <div class="col-sm-6 col-md-8">Nombre de la categoria
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="mb-md-6">
+                          <label for="recipient-name" class="col-form-label">Nombre de la categoría:</label>
+                          <input type="text" class="form-control" id="recipient-name">
+                        </div>
                       </div>
-                      <div class="col-6 col-md-4">Imagen de la categoria:</div>
+                      <div class="row">
+                        <div class="mb-3">
+                          <label for="message-text" class="col-form-label">Descripción:</label>
+                          <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                      </div>
                     </div>
 
-                    <style>
-                      /* Definir el ancho del input*/
-                      input.short-width {
-                        width: 400px;
-                      }
-                    </style>
-
-                    <!-- Input con ancho ajustado -->
-                    <input type="text" class="form-control short-width" id="nombreProducto" required>
-
-                    <div class="col-12">
-                      <label for="descripcion" class="form-label">Descripción de la categoría:</label>
-                      <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <label for="recipient-name" class="col-form-label text-md-right">Imagen de la categoría:</label>
+                      </div>
+                      <div class="row">
+                        <input type="file" class="form-control" aria-label="file example" required>
+                        <div class="invalid-feedback">Example invalid form file feedback</div>
+                      </div>
+                      <div class="row">
+                        <img src="../../resources/img/image.png" alt="imagen representante"
+                          class="img-thumbnail col-md-6 col-md-3">
+                      </div>
                     </div>
-                    <!--  Para seleccionar archivos locales -->
-                    <div class="mb-3">
-                      <input type="file" class="form-control" aria-label="file example" required>
-                      <div class="invalid-feedback">Example invalid form file feedback</div>
-                    </div>
-
-
-                  </form>
+                  </div>
                 </div>
+
                 <div class="modal-footer d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Editar categoría</button>
                 </div>
 
               </div>
