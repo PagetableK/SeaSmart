@@ -1,0 +1,83 @@
+<!doctype html>
+<!-- Definir idioma de la página -->
+<html lang="es">
+
+<!-- Inicio del encabezado de la página -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agregar producto</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <style>
+    .modal-footer {
+      justify-content: center;
+    }
+  </style>
+
+</head>
+<!-- Fin del encabezado de la página -->
+
+<!-- Inicio del cuerpo de la página -->
+
+<body>
+  <main>
+    <h1>Botón de agregar producto, pantalla agregar producto</h1>
+
+    <!-- Botón para abrir el pop-up -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productoModal">
+      Agregar producto
+    </button>
+
+    <!-- Pop-up -->
+    <div class="modal fade" id="productoModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title w-100 font-weight-bold">Agregar producto</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <!-- Cuerpo del modal -->
+          <div class="modal-body">
+            <form class="row g-3 needs-validation" novalidate>
+              <div class="col-md-6">
+                <label for="categoria" class="form-label">Categoría:</label>
+                <input type="text" class="form-control" id="categoria" value="Hombres" readonly>
+              </div>
+              <div class="col-md-6">
+                <label for="subcategoria" class="form-label">Sub-categoría:</label>
+                <!-- Opciones de subcategorías -->
+                <select class="form-select" id="subcategoria">
+                  <option selected>Licras</option>
+                  <option selected>Shorts</option>
+                  <option selected>Sunga</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="nombreProducto" class="form-label">Nombre del producto:</label>
+                <input type="text" class="form-control" id="nombreProducto" required>
+              </div>
+              <div class="col-12">
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <textarea class="form-control" id="descripcion" rows="3"></textarea>
+              </div>
+            </form>
+          </div>
+          <!-- Footer del modal -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary close" data-bs-dismiss="modal">Agregar producto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+<!-- Fin del cuerpo de la página -->
+
+</html>
