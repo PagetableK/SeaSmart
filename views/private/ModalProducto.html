@@ -91,7 +91,8 @@
                                     <div class="col-12">
                                         <img src="../../resources/img/filtro2.png" alt="">
                                     </div>
-                                    <div class="col-12 d-flex justify-content-start mt-2">
+                                    <div class="col d-flex justify-content-start mt-2">
+                                        <div class="col d-flex justify-content-start">
                                             <p class="m-2">Color:</p>
                                             <div class="dropdown">
                                                 <button class="btn dropdown-toggle" id="colores" type="button"
@@ -103,6 +104,8 @@
                                                     <li><a class="dropdown-item" href="#">Rojo</a></li>
                                                 </ul>
                                             </div>
+                                        </div>
+                                        <div class="col d-flex justify-content-start">
                                             <p class="m-2">Talla:</p>
                                             <div class="dropdown">
                                                 <button class="btn dropdown-toggle" id="tallas" type="button"
@@ -117,11 +120,12 @@
                                                     <li><a class="dropdown-item" href="#">XXL</a></li>
                                                 </ul>
                                             </div>
+                                        </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-start align-items-center mt-4">
                                         <div class="container-fluid table-responsive">
                                             <!-- Tabla con los datos -->
-                                            <table class="table">
+                                            <table class="table" id="tabla-existencias">
                                                 <!-- Cabeceras de la tabla -->
                                                 <thead>
                                                     <tr>
@@ -269,29 +273,63 @@
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex align-items-center justify-content-center">
-                                        <button class="btn rounded-pill ps-5 pe-5 fw-bold text-light bg-primary m-2" id="btnAgregarExistencia">Agregar existencia +</button>
-                                        <button class="btn rounded-pill ps-5 pe-5 fw-bold text-light bg-primary m-2" id="btnAsignación Rápida">
+                                        <button class="btn rounded-pill ps-5 pe-5 fw-bold text-light bg-primary m-2"
+                                            id="btnAgregarExistencia">Agregar existencia +</button>
+                                        <button class="btn rounded-pill ps-5 pe-5 fw-bold text-light bg-primary m-2"
+                                            id="btnAsignación Rápida">
                                             Asignación rápida
                                             <img src="../../resources/img/llave_inglesa.png" alt="llave-inglesa">
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col bg-danger">
-                                    <div class="col">
-                                        <p class="fs-4 fw-semibold">Información del producto</p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="fs-4 fw-semibold">Información del producto</p>
+                                        </div>
                                     </div>
-                                    <div class="col d-flex align-items-start justify-content-start">
+                                    <div class="row d-flex align-items-start justify-content-start">
                                         <div class="col-2 pe-2" id="imagen-producto">
-                                            <img src="../../resources/img/short_rojo.png" alt="short-rojo" class="img-fluid">
+                                            <img src="../../resources/img/short_rojo.png" alt="short-rojo"
+                                                class="img-fluid">
                                         </div>
                                         <div class="col">
                                             <div class="col-12 d-flex align-items-start justify-content-start">
-                                                <p class="me-2">Agregado por</p>
-                                                <p class="fw-bold" id="admin-agregado">Susan Castillo</p>
+                                                <div class="row">
+                                                    <p class="me-2">Agregado por</p>
+                                                    <p class="fw-bold" id="admin-agregado">Susan Castillo</p>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="row">
+                                                        <div class="col d-flex">
+                                                            <p class="fw-bold">Categoría:</p>
+                                                            <p id="categoria-texto"> Hombres</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col d-flex">
+                                                            <p class="fw-bold">Subcategoria:</p>
+                                                            <p id="subcategoria-texto"> Hombres</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-12">
-                                                <p id="nombre-producto" class="fs-2">Shorts para nadar elásticos</p>
+                                                <p class="fs-2" id="nombre-producto">Shorts para nadar elásticos</p>
                                             </div>
+                                            <div class="col-12">
+                                                <p class="fs-2" id="estado-producto">Disponible</p>
+                                            </div>
+                                            <div class="col-12">
+                                                <hr>
+                                                <p class="fs-2" id="precio-producto">$20.00</p>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="fs-4">Descripción...</p>
                                         </div>
                                     </div>
                                 </div>
