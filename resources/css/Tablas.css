@@ -8,3 +8,7 @@ a{
     height: 81px;
     display: block;
 }
+
+.container-fluid.table-responsive{
+    max-height: 650px;
+}
