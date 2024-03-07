@@ -54,8 +54,8 @@ else
   }
   else if(titulo == 'Calificaciones')
   {
-    colorBoton3 = 'bg-info';
-    colorTexto3 = 'text-light';
+    colorBoton1 = 'bg-info';
+    colorTexto1 = 'text-light';
   }
 }
 
