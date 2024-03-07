@@ -21,7 +21,37 @@
         <div class="container-fluid">
             <div class="row d-flex align-items-center justify-content-end mt-5">
                 <div class="col-6">
-                    <button type="button" class="btn btn-primary ms-5">Agregar Tallas +</button>
+                    <!-- Botón para abrir el Modal -->
+                    <button type="button" class="btn btn-primary ms-5" data-bs-toggle="modal"
+                        data-bs-target="#productoModal">Agregar
+                        talla +</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="productoModal" tabindex="-1" aria-labelledby="productoModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <h5 class="modal-title w-100 font-weight-bold">Agregar talla</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <!-- Cuerpo del modal -->
+                                <div class="modal-body">
+                                    <form class="row g-3 needs-validation" novalidate>
+                                        <div class="col">
+                                            <label for="categoria" class="form-label">Talla a agregar:</label>
+                                            <input type="text" class="form-control" id="categoria" readonly>
+                                        </div>
+                                        <!-- Footer del modal -->
+                                        <div class="modal-footer d-flex align-items-center justify-content-center">
+                                            <button type="button" class="btn btn-primary close"
+                                                data-bs-dismiss="modal">Agregar
+                                                talla</button>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-6">
                     <form class="d-flex" role="busqueda">
@@ -90,12 +120,41 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="editModal_talla" tabindex="-1" aria-labelledby="productoModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100 font-weight-bold">Editar talla</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Cuerpo del modal -->
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" novalidate>
+                            <div class="col">
+                                <label for="categoria" class="form-label">Nueva talla a agregar:</label>
+                                <input type="text" class="form-control" id="categoria" readonly>
+                            </div>
+                            <!-- Footer del modal -->
+                            <div class="modal-footer d-flex align-items-center justify-content-center">
+                                <button type="button" class="btn btn-primary close" data-bs-dismiss="modal">Editar
+                                    talla</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="../../controllers/utils/admin.js" type="text/javascript"></script>
+    <!-- Controlador para el modal -->
+    <script src="../../resources/js/alertas.js" type="text/javascript"></script>
 
 </body>
 
