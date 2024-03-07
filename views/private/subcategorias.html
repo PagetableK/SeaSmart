@@ -26,7 +26,56 @@
             <!-- CREAMOS LA FILA DONDE COLOCAMOS EL BOTON "AGREGAR CATEGORIA"-->
             <div class="row mt-5">
                 <div class="col-6">
-                    <button type="button" class="btn btn-primary ms-5">Agregar subCategoría +</button>
+                    <!-- Botón para abrir el modal-->
+                    <button type="button" class="btn btn-primary ms-5" data-bs-toggle="modal"
+                        data-bs-target="#editModal" data-bs-target="#staticBackdrop">Agregar subCategoría +</button>
+                    <!-- Configuración del modal -->
+                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="productoModalLabel"
+                        aria-hidden="true">
+
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <h5 class="modal-title w-10 font-weight-bold">Agregar sub categoría</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <!-- Cuerpo del modal -->
+                                <div class="modal-body">
+                                    <form class="row g-3 needs-validation" novalidate>
+
+                                        <div class="col-md-6">
+                                            <label for="subcategoria" class="form-label">Categoría:</label>
+                                            <!-- Opciones de subcategorías -->
+                                            <select class="form-select" id="subcategoria">
+                                                <option selected>Hombre</option>
+                                                <option selected>Mujer</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="nombreProducto" class="form-label">Nombre de la sub
+                                                categoria:</label>
+
+                                            <input type="text" class="form-control" id="nombreProducto" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="descripcion" class="form-label">Descripción de la sub
+                                                categoría:</label>
+                                            <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- Footer del modal -->
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar
+                                        categoria</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <!-- CREAMOS LA COLUMNA DONDE COLOCAMOS LA "BARRA DE BUSQUEDA"  -->
                 <div class="col-6">
