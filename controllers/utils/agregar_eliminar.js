@@ -6,3 +6,5 @@ document.getElementById('celda-agregar-eliminar').innerHTML =`
     <img src="../../resources/img/eliminar.png" alt="lapizEditar" width="30px">
 </button>
 `;
+
+

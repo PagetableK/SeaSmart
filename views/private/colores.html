@@ -27,7 +27,7 @@
                 data-bs-target="#productoModal">
                 <div class="col-6">
                     <!-- Botón para abrir el Modal -->
-                    <button type="button" class="btn btn-primary ms-5">Agregar Colores +</button>
+                    <button type="button" class="btn btn-primary ms-5" onclick="abrirCrear()">Agregar Colores +</button>
                 </div>
                 <div class="col-6">
                     <!-- Buscador de colores -->
@@ -91,7 +91,7 @@
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="productoModal" tabindex="-1" aria-labelledby="productoModalLabel"
+        <div class="modal fade" id="agregarModal_color" tabindex="-1" aria-labelledby="productoModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -127,6 +127,8 @@
     <!-- Controlador para el modal -->
     <script src="../../resources/js/alertas.js" type="text/javascript"></script>
     <script src="../../controllers/utils/agregar_eliminar.js" type="text/javascript"></script>
+
+    <script src="../../controllers/private/colores.js"></script>
 </body>
 
 </html>
