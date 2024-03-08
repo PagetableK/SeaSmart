@@ -1,69 +1,3 @@
-/*
-    Controlador que se utilizará en sitio privado de administrador
-*/
-
-//Declarar constante para asignar el contenido de la etiqueta main
-const MAIN = document.querySelector('main');
-var AnchoP = document.querySelector('html');
-let colorBotones;
-let [colorBoton1, colorBoton2, colorBoton3, colorBoton4, colorBoton5, colorBoton6,
-colorBoton7] = Array(7).fill('bg-light');
-let [colorTexto1, colorTexto2, colorTexto3, colorTexto4, colorTexto5, colorTexto6,
-  colorTexto7] = Array(7).fill('text-dark');
-let estiloIconoC;
-let estiloBotonC;
-let titulo = document.title;
-
-
-if(window.screen.width < 992)
-{
-  estiloIconoC = 'style="display: none;"';
-  estiloBotonC = 'style="display: block;"';
-  [colorBoton1, colorBoton2, colorBoton3, colorBoton4, colorBoton5, colorBoton6,
-    colorBoton7] = '';
-}
-else
-{
-  estiloIconoC = 'style="display: block;"';
-  estiloBotonC = 'style="display: none;"';
-
-  if(titulo == 'Tallas')
-  {
-    colorBoton7 = 'bg-info';
-    colorTexto7 = 'text-light';
-  } 
-  else if(titulo == 'Colores')
-  {
-    colorBoton6 = 'bg-info';
-    colorTexto6 = 'text-light';
-  }
-  else if(titulo == 'Categorías')
-  {
-    colorBoton5 = 'bg-info';
-    colorTexto5 = 'text-light';
-  }
-  else if(titulo == 'Sub-categorías')
-  {
-    colorBoton4 = 'bg-info';
-    colorTexto4 = 'text-light';
-  }
-  else if(titulo == 'Productos')
-  {
-    colorBoton3 = 'bg-info';
-    colorTexto3 = 'text-light';
-  }
-  else if(titulo == 'Calificaciones')
-  {
-    colorBoton1 = 'bg-info';
-    colorTexto1 = 'text-light';
-  }
-  else if(titulo == 'Pedidos')
-  {
-    colorBoton2 = 'bg-info';
-    colorTexto2 = 'text-light';
-  }
-}
-
 MAIN.insertAdjacentHTML('beforebegin', `
 <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
@@ -93,7 +27,7 @@ MAIN.insertAdjacentHTML('beforebegin', `
                                         class="${colorTexto1}" style="font-weight: 600;">Calificaciones</span></a>
                             </li>
                             <li class="nav-item rounded-pill ${colorBoton2}" id="">
-                                <a class="nav-link fs-6 text-center" href="pedidos.html"><span class="${colorTexto2}"
+                                <a class="nav-link fs-6 text-center" href="#"><span class="${colorTexto2}"
                                         style="font-weight: 600;">Pedidos</span></a>
                             </li>
                             <li class="nav-item rounded-pill ${colorBoton3}" id="">
@@ -137,18 +71,3 @@ MAIN.insertAdjacentHTML('beforebegin', `
         </nav>
     </header>
 `);
-
-let btnCollapse = document.getElementById('btnCollapse');
-let imagenUsuario = document.getElementById('imagen-usuario');
-let SeaContainer = document.getElementById('seasmart-container');
-
-if(window.screen.width >= 992)
-{
-  btnCollapse.remove();
-}
-else
-{
-  imagenUsuario.remove();
-  SeaContainer.classList.add("d-flex");
-  SeaContainer.classList.add("justify-content-start");
-}
