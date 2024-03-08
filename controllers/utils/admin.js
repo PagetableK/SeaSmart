@@ -57,6 +57,11 @@ else
     colorBoton1 = 'bg-info';
     colorTexto1 = 'text-light';
   }
+  else if(titulo == 'Pedidos')
+  {
+    colorBoton2 = 'bg-info';
+    colorTexto2 = 'text-light';
+  }
 }
 
 MAIN.insertAdjacentHTML('beforebegin', `
@@ -88,7 +93,7 @@ MAIN.insertAdjacentHTML('beforebegin', `
                                         class="${colorTexto1}" style="font-weight: 600;">Calificaciones</span></a>
                             </li>
                             <li class="nav-item rounded-pill ${colorBoton2}" id="">
-                                <a class="nav-link fs-6 text-center" href="#"><span class="${colorTexto2}"
+                                <a class="nav-link fs-6 text-center" href="pedidos.html"><span class="${colorTexto2}"
                                         style="font-weight: 600;">Pedidos</span></a>
                             </li>
                             <li class="nav-item rounded-pill ${colorBoton3}" id="">
