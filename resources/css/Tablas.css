@@ -1,13 +1,11 @@
-#agregar-eliminar{
-    width: 200px;
-}
 
-a{
+
+/* a{
     text-decoration: none; 
     color: black;
     height: 81px;
     display: block;
-}
+} */
 
 .container-fluid.table-responsive{
     max-height: 650px;
