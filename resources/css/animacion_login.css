@@ -1,0 +1,88 @@
+#logoSeaSmart {
+    width: 50%;
+    height: 50%;
+    background-color: rgb(245, 234, 234);
+    transition: all 1s ease-in;
+}
+
+main:hover #logoSeaSmart{
+    animation: caja 1.5s ease-in infinite;
+}
+
+main:hover img{
+    animation: imagenCrecer 0.5s ease-in infinite;
+}
+
+img{
+    transition: all 1s ease-in;
+}
+
+@keyframes caja{
+    100% {
+        transform: translateX(50%);
+    }
+}
+
+@keyframes imagenCrecer {
+    100%{
+        transform: scale(100);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+span {
+    color: #4593EE;
+}
+
+#lbIniciarSesion {
+    font-size: 50px;
+    color: #55B8EB;
+}
+
+#btnIngresar {
+    background-color: #BCE7FD;
+    color: #418DE7;
+}
+
+.navbar {
+    background-color: #BCE7FD;
+    height: 140px;
+}
+
+a {
+    text-decoration: none;
+}
+
+#inputCorreo {
+    background-color: #DCF2F1;
+    border-color: #BCE7FD;
+    font-size: 18px;
+}
+
+#inputContra {
+    background-color: #DCF2F1;
+    border-color: #BCE7FD;
+    font-size: 18px;
+}
+
+#inputCorreo::placeholder {
+    color: #2B2D42;
+    opacity: 30%;
+    font-size: 18px;
+}
+
+#inputContra::placeholder {
+    color: #2B2D42;
+    opacity: 30%;
+    font-size: 18px;
+}

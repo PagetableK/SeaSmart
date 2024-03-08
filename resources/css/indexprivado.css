@@ -13,3 +13,31 @@ span{
 .navbar{
     background-color: #BCE7FD; height: 140px;
 }
+
+a{
+    text-decoration: none;
+}
+
+#inputCorreo{
+    background-color: #DCF2F1;
+    border-color: #BCE7FD;
+    font-size: 18px;
+}
+
+#inputContra{
+    background-color: #DCF2F1;
+    border-color: #BCE7FD;
+    font-size: 18px;
+}
+
+#inputCorreo::placeholder{
+    color: #2B2D42;
+    opacity: 30%;
+    font-size: 18px;
+}
+
+#inputContra::placeholder{
+    color: #2B2D42;
+    opacity: 30%;
+    font-size: 18px;
+}
