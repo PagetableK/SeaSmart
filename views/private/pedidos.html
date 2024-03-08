@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="../../resources/css/Tablas.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+    <main>
+        <!-- CREAMOS EL CONTENEDOR PADRE -->
+        <div class="container-fluid">
+            <div class="row mt-4">
+                <div class="col-6">
+                    <div class="col-12">
+                        <div class="text-start mt-3">Filtrado por</div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-1 text-center">Estado:</div>
+                            <!-- CREAMOS UN COMBO BOX DONDE SE VERAN LOS DETALLES DE LOS PEDIDOS -->
+                            <!-- DROPDOWN ES UN COMBO BOX -->
+                            <div class="dropdown col-5">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Todos
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Pendiente</a></li>
+                                    <li><a class="dropdown-item" href="#">Siendo enviado</a></li>
+                                    <li><a class="dropdown-item" href="#">Finalizado</a></li>
+                                    <li><a class="dropdown-item" href="#">Enviado</a></li>
+                                    <li><a class="dropdown-item" href="#">Anulado</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <!-- CREAMOS LAS CLASES PARA COLOCAR LAS FECHAS -->
+                        <div class="d-flex flex-row">
+                            <div class="p-2">Fecha de </div>
+                            <div class="md-form md-outline input-with-post-icon datepicker p-2">
+                                <input placeholder="Select date" type="date" id="example" class="form-control">
+                            </div>
+                            <div class="p-1 d-flex align-items-center">a</div>
+                            <div class="md-form md-outline input-with-post-icon datepicker p-2">
+                                <input placeholder="Select date" type="date" id="example" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <!--COLOCAMOS LA BARRA DE BUSQUEDA-->
+                        <form class="d-flex">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar un cliente..."
+                                aria-label="Search">
+                            <button class="btn" type="enviar"><img src="../../resources/img/lupa.png" class="img-fluid"
+                                    width="35px" height="35px" alt="buscarimg"></button>
+                        </form>
+                </div>
+            </div>
+
+            <!-- CREAMOS LA TABLA DONDE IRAN TODAS LAS FILAS Y COLUMNAS -->
+            <div class="row mt-5">
+                <table class="table">
+                    <!-- CREAMOS LA CABECERA DE LA TABLA DE PEDIDOS -->
+                    <thead>
+                        <tr>
+                            <th class="text-center">Nombre del cliente</th>
+                            <th class="text-center">Teléfono del cliente</th>
+                            <th class="text-center">Fecha de pedido</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Artículos</th>
+                            <th class="text-center">Total</th>
+                        </tr>
+                    </thead>
+                    <!-- CREAMOS EL INTERIOR DE LA TABLA (LAS FILAS Y COLUMNAS DE CADA INFORMACIÓN)-->
+                    <tbody>
+                        <!-- FILA 1 -->
+                        <tr>
+                            <td id="" class="text-center">Exequiel Bryan</td>
+                            <td class="text-center">12345678</td>
+                            <td class="text-center">17/01/2024</td>
+                            <td class="text-center">Entregado</td>
+                            <td class="text-center">1</td>
+                            <td class="text-center">$20.00</td>
+                            <!-- COLOCAMOS EL BOTON PARA VER MÁS INFORMACIÓN DEL PEDIDO-->
+                            <td id="" class="text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                    class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <!-- FILA 2 -->
+                        <tr>
+                            <td class="text-center">Hombres</td>
+                            <td class="text-center">Descripción...</td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <!-- COLOCAMOS EL BOTON PARA VER MÁS INFORMACIÓN DEL PEDIDO-->
+                            <td class="text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                    class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <!-- FILA 3 -->
+                        <tr>
+                            <td class="text-center">Infantil</td>
+                            <td class="text-center">Descripción...</td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <!-- COLOCAMOS EL BOTON PARA VER MÁS INFORMACIÓN DEL PEDIDO-->
+                            <td class="text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                    class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <!-- FILA 4 -->
+                        <tr>
+                            <td class="text-center">Accesorios</td>
+                            <td class="text-center">Descripción...</td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <!-- COLOCAMOS EL BOTON PARA VER MÁS INFORMACIÓN DEL PEDIDO-->
+                            <td class="text-center">
+                                <a href="productos.html"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                        fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                                    </svg></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
+
+
+</body>
+
+</html>
