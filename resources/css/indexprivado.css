@@ -1,0 +1,15 @@
+span{
+    color: #4593EE;
+}
+
+#lbIniciarSesion{
+    font-size: 50px; color: #55B8EB;
+}
+
+#btnIngresar{
+    background-color: #BCE7FD; color: #418DE7;
+}
+
+.navbar{
+    background-color: #BCE7FD; height: 140px;
+}

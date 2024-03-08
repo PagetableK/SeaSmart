@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="../../resources/css/Tablas.css">
+</head>
+
+<body>
+    <main>
+        <!-- Div contenedor de la tabla -->
+        <div class="container-fluid">
+            <!-- Tabla con los datos -->
+            <div class="table-responsive-md">
+                <table class="table">
+                    <!-- Cabeceras de la tabla -->
+                    <thead>
+                        <tr>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Handle</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <!-- Cuerpo de la tabla con la información -->
+                    <tbody>
+                        <!-- Fila 1 -->
+
+                        <tr id="fila-producto">
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td id="celda-agregar-eliminar">
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalInfo" aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="col-12">
+                                            <p class="fs-4 fw-semibold">Existencias</p>
+                                        </div>
+                                        <div class="col-12">
+                                            <img src="../../resources/img/filtro2.png" alt="">
+                                        </div>
+                                        <div class="col d-flex justify-content-start mt-2">
+                                            <div class="col d-flex justify-content-start">
+                                                <p class="m-2">Color:</p>
+                                                <div class="dropdown">
+                                                    <button class="btn dropdown-toggle btn-primary" id="colores"
+                                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Colores
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#">Azul</a></li>
+                                                        <li><a class="dropdown-item" href="#">Rojo</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col d-flex justify-content-start">
+                                                <p class="m-2">Talla:</p>
+                                                <div class="dropdown">
+                                                    <button class="btn dropdown-toggle btn-primary" id="tallas"
+                                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Tallas
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#">S</a></li>
+                                                        <li><a class="dropdown-item" href="#">M</a></li>
+                                                        <li><a class="dropdown-item" href="#">L</a></li>
+                                                        <li><a class="dropdown-item" href="#">XL</a></li>
+                                                        <li><a class="dropdown-item" href="#">XXL</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-start align-items-center mt-4">
+                                            <div class="container-fluid table-responsive">
+                                                <!-- Tabla con los datos -->
+                                                <table class="table" id="tabla-existencias">
+                                                    <!-- Cabeceras de la tabla -->
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Color</th>
+                                                            <th scope="col">Talla</th>
+                                                            <th scope="col">Existencias</th>
+                                                            <th scope="col">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <!-- Cuerpo de la tabla con la información -->
+                                                    <tbody>
+                                                        <!-- Fila 1 -->
+                                                        <tr>
+                                                            <td>Rojo</td>
+                                                            <td>S</td>
+                                                            <td>5</td>
+                                                            <td colspan="2">
+                                                                <button type="button" class="btn btn-success">
+                                                                    <img src="../../resources/img/lapiz.png"
+                                                                        alt="lapizEditar" width="25px">
+                                                                </button>
+                                                                <button type="button" class="btn btn-danger">
+                                                                    <img src="../../resources/img/eliminar.png"
+                                                                        alt="lapizEditar" width="25px">
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-center justify-content-center">
+                                            <div class="p-2">
+                                                <button class="btn p-3 rounded-pill fw-bold text-light bg-primary"
+                                                    id="btnAgregarExistencia">Agregar existencia</button>
+                                            </div>
+                                            <div class="p-2">
+                                                <button class="btn p-3 rounded-pill fw-bold text-light bg-primary"
+                                                    id="btnAsignacion">
+                                                    Asignación rápida
+                                                    <img src="../../resources/img/llave_inglesa.png"
+                                                        alt="llave-inglesa">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-1 d-flex" style="width: 25px;">
+                                        <div class="vr">
+
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p class="fs-4 fw-semibold">Información del producto</p>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex align-items-start justify-content-start">
+                                            <div class="col-2 pe-2" id="imagen-producto">
+                                                <img src="../../resources/img/short_rojo.png" alt="short-rojo"
+                                                    class="img-fluid">
+                                            </div>
+                                            <div class="col">
+                                                <div class="col-12 d-flex align-items-start justify-content-start">
+                                                    <div class="row">
+                                                        <p class="me-2">Agregado por</p>
+                                                        <p class="fw-bold" id="admin-agregado">Susan Castillo</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="row">
+                                                            <div class="col d-flex">
+                                                                <p class="fw-bold">Categoría:</p>
+                                                                <p id="categoria-texto" class="ms-1"> Hombres</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col d-flex">
+                                                                <p class="fw-bold">Subcategoria:</p>
+                                                                <p id="subcategoria-texto" class="ms-1">Shorts</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="fs-2" id="nombre-producto">Shorts para nadar elásticos</p>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="fs-2" id="estado-producto">Disponible</p>
+                                                </div>
+                                                <div class="col-12">
+                                                    <hr>
+                                                    <p class="fs-2" id="precio-producto">$20.00</p>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <p class="fs-4">This Essentials watershort in bright red offers a
+                                                    playful
+                                                    swim style you know you can rely on.
+                                                    A side pocket drainage system ensures they stay comfortable, even
+                                                    when wet, whilst a drawstring waist provides extra comfort
+                                                    and security. Our new 100% Recycled Nylon fabric is lightweight
+                                                    and comfortable as well as good for the environment,
+                                                    making this short the ideal choice for the pool or beach.</p>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-5 d-flex align-items-center justify-content-center">
+                                            <div class="col col-lg-3 d-flex align-items-center justify-content-center">
+                                                <button class="btn p-3 btn-success rounded-pill" id="EditarProducto">
+                                                    Editar producto
+                                                    <img src="../../resources/img/lapiz.png" alt="editarProducto"
+                                                        class="ms-2" height="20px">
+                                                </button>
+                                            </div>
+                                            <div class="col col-lg-3 d-flex align-items-center justify-content-center">
+                                                <button class="btn p-3 btn-danger rounded-pill" id="DesactivarProducto">
+                                                    Desactivar producto
+                                                    <img src="../../resources/img/eliminar.png" alt="desactivarProducto"
+                                                        class="ms-2" height="20px">
+                                                </button>
+                                            </div>
+                                            <div class="col col-lg-3 d-flex align-items-center justify-content-center">
+                                                <button class="btn p-3 rounded-pill text-light"
+                                                    style="background-color: #E0BD00;" id="VerComentarios">
+                                                    Ver comentarios
+                                                    <img src="../../resources/img/estrella.png" alt="editarProducto"
+                                                        class="ms-2" height="20px">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="../../controllers/utils/agregar_eliminar.js" type="text/javascript"></script>
+</body>
+
+</html>
