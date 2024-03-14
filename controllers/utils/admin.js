@@ -139,7 +139,7 @@ MAIN.insertAdjacentHTML('beforebegin', `
 `);
 
 let btnCollapse = document.getElementById('btnCollapse');
-let imagenUsuario = document.getElementById('imagen-usuario');
+let imagenUsuario = document.getElementById('cuenta');
 let SeaContainer = document.getElementById('seasmart-container');
 
 if(window.screen.width >= 992)

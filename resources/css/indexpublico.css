@@ -1,0 +1,13 @@
+#form-buscarCategoria{
+    background-color: #BCE7FD;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #79747E;
+    border-radius: 20px;
+    padding: 4px;
+}
+
+#buscarCategoria{
+    background-color: #BCE7FD;
+    border: 0;
+}
