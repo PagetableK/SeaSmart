@@ -1,7 +1,8 @@
 const MAIN = document.querySelector('main');
 
 MAIN.insertAdjacentHTML('beforebegin', `
-<header>
+
+<header class="sticky-top">
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
                     <div class="col d-flex" id="seasmart-container">
@@ -19,3 +20,4 @@ MAIN.insertAdjacentHTML('beforebegin', `
         </nav>
     </header>
 `);
+
