@@ -1,0 +1,41 @@
+#form-buscarCategoria{
+    background-color: #BCE7FD;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #79747E;
+    border-radius: 10px;
+    padding: 1px;
+}
+
+#buscarCategoria{
+    background-color: #BCE7FD;
+    border: 0;
+}
+
+#btnBuscarCategoria{
+    border-radius: 10px;
+}
+
+html{
+    overflow-x: hidden;
+}
+
+span{
+    color: #3E88DE;
+}
+
+#buscarCategoria{
+    font-size: 15px;
+}
+
+#cuenta{
+    width: 25px;
+}
+
+#carrito{
+    width: 25px;
+}
+
+.card{
+    width: 18rem;
+}

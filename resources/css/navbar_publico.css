@@ -1,0 +1,33 @@
+.dropdown-menu{
+    --bs-dropdown-link-active-bg:#BCE7FD;
+    --bs-dropdown-link-active-color:black;
+    --bs-dropdown-padding-x: 1rem;
+    --bs-dropdown-padding-y: 1rem;
+    --bs-dropdown-bg: #BCE7FD;
+}
+
+.dropdown-item{
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px solid #4285F4;
+}
+
+#btnRegistro{
+    background-color: #4285F4;
+    color: white;
+}
+
+.botonAbajo{
+    margin-top: 8px;
+}
+
+#cerrarS{
+    background-color: rgb(253, 29, 29);
+    --bs-dropdown-link-active-color:black;
+    color: white;
+    --bs-dropdown-link-active-bg:#7f4fd9;
+    --bs-dropdown-link-active-color:rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
