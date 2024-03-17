@@ -9,22 +9,26 @@
 </head>
 
 <body>
-    <main>
-        <div class="d-flex align-items-center justify-content-center">
+    <main class="mb-5 mt-5">
+        <div class="d-flex align-items-center justify-content-center m-5">
             <form>
-                <h3>Casi terminamos</h3>
-                <h6>Necesitamos su número de teléfono para poder contactarnos con usted</h6>
-                <div>
-                    <label for="validationDefault01" class="form-label">Número de teléfono</label>
-                    <input type="number" class="form-control" id="validationDefault01" required>
-                </div>
-                <div>
-                    <label for="validationDefault01" class="form-label">teléfono secundario / Teléfono de
-                        emergencia</label>
-                    <input type="text" class="form-control" id="validationDefault02" required>
-                </div>
-                <div class="mx-auto p-2" style="width: 200px;">
-                    <button class="btn btn-dark" type="submit">Registrarse</button>
+                <div class="border border-secondary rounded-5">
+                    <div class="m-5">
+                        <h3 class="mb-3">Casi terminamos</h3>
+                        <h6>Necesitamos su número de teléfono para poder contactarnos con usted</h6>
+                        <div class="mb-3">
+                            <label for="validationDefault01" class="form-label">Número de teléfono</label>
+                            <input type="number" class="form-control" id="validationDefault01" required placeholder="75854595">
+                        </div>
+                        <div class="mb-3">
+                            <label for="validationDefault02" class="form-label">teléfono secundario / Teléfono de
+                                emergencia</label>
+                            <input type="number" class="form-control" id="validationDefault02" required placeholder="25452547">
+                        </div>
+                        <div class="mx-auto p-2" style="width: 200px mb-3;">
+                            <button class="btn btn-dark" type="submit">Registrarse</button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
