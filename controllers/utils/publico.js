@@ -39,10 +39,10 @@ if (titulo == "SeaSmart") {
                         <div class="col-12 d-flex justify-content-center">
                             <ul class="navbar-nav grid gap-3 text-center" id="barra-elementos">
                                 <li id="cerrar-sesion">
-                                    Cerrar sesión
+                                    <a href="inicio_sesión.html">Iniciar sesión</a>
                                 </li>
                                 <li id="mi-carrito">
-                                    Mi carrito
+                                    <a href="registro.html">Registrarse</a>
                                 </li>
                             </ul>
                         </div>
@@ -53,8 +53,8 @@ if (titulo == "SeaSmart") {
                         <img src="../../resources/img/user.png" class="dropdown-toggle" type="button" width="25px"
                             height="25px" data-bs-toggle="dropdown" aria-expanded="false" alt="user">
                         <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item pe-5 ps-5 text-center" href="index.html" id="btnLogin">Iniciar sesión</a></li>
-                        <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="index.html" id="btnRegistro">Registrarse</a></li>
+                        <li><a class="dropdown-item pe-5 ps-5 text-center" href="inicio_sesión.html" id="btnLogin">Iniciar sesión</a></li>
+                        <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="registro.html" id="btnRegistro">Registrarse</a></li>
                         </ul>
                     </div>
                     <div class="btn" type="button" id="carrito">
@@ -109,7 +109,7 @@ else if(titulo == "Mi cuenta")
                             height="25px" data-bs-toggle="dropdown" aria-expanded="false" alt="user">
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item pe-5 ps-5 text-center" href="mi_cuenta.html" id="miCuenta">Mi cuenta</a></li>
-                            <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="#" id="cerrarS">Cerrar
+                            <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="index.html" id="cerrarS">Cerrar
                                     sesión<img src="../../resources/img/logout.png" alt="salir" class="ms-2" width="20px" height="px"></a></li>
                         </ul>
                     </div>
