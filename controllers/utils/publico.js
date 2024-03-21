@@ -407,7 +407,7 @@ MAIN.insertAdjacentHTML('afterend', `
                     <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
                 </div>
                 <div>
-                    <a href="quienes_somos.html"><p>¿Quiénes somos?</p></a>
+                    <a href="quienes_somos.html" id="quienes_somos"><p>¿Quiénes somos?</p></a>
                 </div>
                 <div>
                     <h6>Contáctanos</h6>

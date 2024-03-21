@@ -66,3 +66,8 @@ main{
 span{
     color: #3E88DE;
 }
+
+#quienes_somos{
+    text-decoration: underline;
+    color: blue;
+}
