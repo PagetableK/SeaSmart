@@ -59,6 +59,8 @@ main{
 
 #texto-ss{
     font-weight: 500; font-size: x-large;
+    margin: 0px;
+    padding: 0px;
 }
 
 span{
