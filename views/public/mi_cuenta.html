@@ -17,13 +17,17 @@
 </head>
 
 <!-- Cuerpo de la página -->
-
 <body>
+    <!-- Contenido principal de la página -->
     <main>
+        <!-- Contenedor padre del contenido -->
         <div class="container-fluid">
-            <div class="row mt-5">
-                <div class="col">
-                    <div class="col d-flex align-items-center gap-2">
+            <div class="row mt-5 d-flex align-items-center">
+                <!-- Menú lateral -->
+                <div class="col-12 col-lg-3 col-xl-2 grid gap-2 me-5" id="menu_cuenta">
+                    <!-- Título de menú -->
+                    <div class="col d-flex align-items-center justify-content-center gap-2">
+                        <!-- Ícono de menú -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" class="bi bi-columns-gap"
                             viewBox="0 0 16 16">
                             <path
@@ -31,17 +35,34 @@
                         </svg>
                         <p class="p-0 m-0 fs-2">Menú</p>
                     </div>
-                    <div class="col-12 d-grid gap-2">
-                        <div class="col-12 gap-2 ps-5 pe-5 d-flex">
-                            <button class="btn btn-primary" type="button">Button</button>
-                        </div>
-                        <div class="col-12 gap-2 ps-5 pe-5 d-flex">
-                            <button class="btn btn-primary" type="button">Button</button>
+                    <!-- Botones del menú -->
+                    <div class="col-12 d-flex justify-content-center mt-4">
+                        <div class="col-12 d-grid gap-3 mb-5">
+                            <!-- Botón mis pedidos -->
+                            <div class="col d-flex justify-content-center">
+                                <div class="vr"></div>
+                                <button class="btn btn-primary rounded-0" type="button"><img
+                                        src="../../resources/img/camion.png" alt="Camion" width="40px" height="25px">
+                                    Mis pedidos</button>
+                            </div>
+                            <!-- Botón mi información -->
+                            <div class="col d-flex justify-content-center">
+                                <div class="vr"></div>
+                                <button class="btn btn-primary rounded-0" type="button"><img
+                                        src="../../resources/img/user.png" alt="Camion" width="25px" height="25px"> Mi
+                                    información</button>
+                            </div>
+                            <!-- Botón cerrar sesión -->
+                            <div class="col d-flex justify-content-center ms-1">
+                                <button class="btn btn-primary rounded-pill fw-semibold" type="button">Cerrar sesión
+                                    <img src="../../resources/img/logout.png" alt="Cerrar Sesion" width="20px"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    a
+                <!-- Imagen de bienvenida -->
+                <div class="col-12 col-lg-8 col-xl-9">
+                    <img src="../../resources/img/menucuenta.png" alt="Bienvenida" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -51,5 +72,4 @@
     <!-- Mandar a llamar el navbar -->
     <script type="text/javascript" src="../../controllers/utils/publico.js"></script>
 </body>
-
 </html>

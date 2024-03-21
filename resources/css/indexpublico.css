@@ -34,6 +34,7 @@ span{
 
 #carrito{
     width: 25px;
+    --bs-btn-border-width:none;
 }
 
 .card{
