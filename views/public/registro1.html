@@ -15,30 +15,35 @@
 <body>
     <!-- Contenido principal del cuerpo de la página-->
     <main class="mb-5 mt-5">
-        <div class="d-flex align-items-center justify-content-center m-5">
-            <!-- Formulario de registro -->
-            <form>
-                <div class="border border-secondary rounded-5">
-                    <div class="m-5">
-                        <h3 class="mb-3">Casi terminamos</h3>
-                        <h6>Necesitamos su número de teléfono para poder contactarnos con usted</h6>
-                        <div class="mb-3">
-                            <label for="validationDefault01" class="form-label">Número de teléfono</label>
-                            <input type="text" class="form-control" id="validationDefault01" required
-                                placeholder="75854595">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8 col-sm-10">
+                    <!-- Formulario de registro -->
+                    <form>
+                        <div class="border border-secondary rounded-5">
+                            <div class="m-5">
+                                <h3 class="mb-3">Casi terminamos</h3>
+                                <h6>Necesitamos su número de teléfono para poder contactarnos con
+                                    usted</h6>
+                                <div class="mb-3">
+                                    <label for="telefono" class="form-label">Número de teléfono</label>
+                                    <input type="text" class="form-control" id="telefono" required
+                                        placeholder="75854595">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telefonoSecundario" class="form-label">Teléfono secundario / Teléfono de
+                                        emergencia</label>
+                                    <input type="text" class="form-control" id="telefonoSecundario" required
+                                        placeholder="25452547">
+                                </div>
+                                <div class="d-grid gap-1">
+                                    <button class="btn btn-dark btn-xl" type="submit">Continuar</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="validationDefault02" class="form-label">teléfono secundario / Teléfono de
-                                emergencia</label>
-                            <input type="text" class="form-control" id="validationDefault02" required
-                                placeholder="25452547">
-                        </div>
-                        <div class="d-grid gap-1 col-12 mx-auto">
-                            <button class="btn btn-dark btn-xl" type="submit">Continuar</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </main>
 

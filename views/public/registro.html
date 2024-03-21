@@ -15,59 +15,58 @@
 <body>
     <!-- Contenido principal del cuerpo de la página -->
     <main class="mb-5 mt-5">
-        <div class="d-flex align-items-center justify-content-center">
-            <!-- Formulario de registro -->
-            <form>
-                <div class="border border-secondary rounded-5">
-                    <div class="m-5">
-                        <h4>Regístrate</h4>
-                        <h6 class="mb-3">Ingresa tu información para crear una cuenta</h6>
-                        <div class="mb-3">
-                            <label for="validationDefault01" class="form-label">Nombres</label>
-                            <input type="text" class="form-control" id="validationDefault01" id="nombres"
-                                placeholder="Juana José" class="form-control" required>
-                        </div>
-                        <div class="mb-2">
-                            <label for="validationDefault02" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" id="validationDefault02" id="apellidos"
-                                placeholder="Carmen del Paz" class="form-control" required>
-                        </div>
-                        <div class="mb-2">
-                            <label for="validationDefaultUsername" class="form-label">DUI Documento único de
-                                identidad</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="inputGroupPrepend2">#</span>
-                                <input type="text" class="form-control" id="validationDefaultUsername" id="dui"
-                                    placeholder="00000000-0" class="form-control" aria-describedby="inputGroupPrepend2"
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Formulario de registro -->
+                <form class="col-lg-6 col-md-8 col-sm-10">
+                    <div class="border border-secondary rounded-5">
+                        <div class="m-5">
+                            <h4>Regístrate</h4>
+                            <h6 class="mb-3">Ingresa tu información para crear una cuenta</h6>
+                            <div class="mb-3">
+                                <label for="nombres" class="form-label">Nombres</label>
+                                <input type="text" class="form-control" id="nombres" placeholder="Juana José" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="apellidos" class="form-label">Apellidos</label>
+                                <input type="text" class="form-control" id="apellidos" placeholder="Carmen del Paz"
                                     required>
                             </div>
-                        </div>
-                        <div class="mb-2">
-                            <label for="validationDefault03" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" id="validationDefault03" id="correo" required
-                                placeholder="juanadelcarmen@gmail.com" class="form-control">
-                        </div>
-                        <div class="mb-2">
-                            <label for="validationDefault04" class="form-label">Confirme el correo electrónico</label>
-                            <input type="email" class="form-control" id="validationDefault04" id="confirmarCorreo"
-                                required placeholder="juanadelcarmen@gmail.com" class="form-control">
-                        </div>
-                        <div class="mb-2">
-                            <label for="validationDefault05" class="form-label">Crea una contraseña</label>
-                            <input type="password" class="form-control" id="validationDefault05" id="contraseña"
-                                required placeholder="............" class="form-control">
-                        </div>
-                        <div class="mb-2">
-                            <label for="validationDefault06" class="form-label">Confirme su contraseña</label>
-                            <input type="password" class="form-control" id="validationDefault06"
-                                id="confirmarContraseña" required placeholder="............" class="form-control">
-                        </div>
-                        <div class="d-grid gap-1 col-12 mx-auto">
-                            <button class="btn btn-dark btn-xl" type="submit">Continuar</button>
+                            <div class="mb-2">
+                                <label for="dui" class="form-label">DUI Documento único de identidad</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="inputGroupPrepend2">#</span>
+                                    <input type="text" class="form-control" id="dui" placeholder="00000000-0"
+                                        aria-describedby="inputGroupPrepend2" required>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <label for="correo" class="form-label">Correo electrónico</label>
+                                <input type="email" class="form-control" id="correo" required
+                                    placeholder="juanadelcarmen@gmail.com">
+                            </div>
+                            <div class="mb-2">
+                                <label for="confirmarCorreo" class="form-label">Confirme el correo electrónico</label>
+                                <input type="email" class="form-control" id="confirmarCorreo" required
+                                    placeholder="juanadelcarmen@gmail.com">
+                            </div>
+                            <div class="mb-2">
+                                <label for="contraseña" class="form-label">Crea una contraseña</label>
+                                <input type="password" class="form-control" id="contraseña" required
+                                    placeholder="............">
+                            </div>
+                            <div class="mb-2">
+                                <label for="confirmarContraseña" class="form-label">Confirme su contraseña</label>
+                                <input type="password" class="form-control" id="confirmarContraseña" required
+                                    placeholder="............">
+                            </div>
+                            <div class="d-grid gap-1">
+                                <button class="btn btn-dark btn-xl" type="submit">Continuar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </main>
 
