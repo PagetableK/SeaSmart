@@ -237,7 +237,7 @@ else if(titulo == "Mis pedidos")
                             height="25px" data-bs-toggle="dropdown" aria-expanded="false" alt="user">
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item pe-5 ps-5 text-center" href="mi_cuenta.html" id="miCuenta">Mi cuenta</a></li>
-                            <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="#" id="cerrarS">Cerrar
+                            <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="#" id="btnCerrarSesion_d">Cerrar
                                     sesión<img src="../../resources/img/logout.png" alt="salir" class="ms-2" width="20px" height="px"></a></li>
                         </ul>
                     </div>
@@ -293,7 +293,7 @@ else if(titulo == "Mi información")
                             height="25px" data-bs-toggle="dropdown" aria-expanded="false" alt="user">
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item pe-5 ps-5 text-center" href="mi_cuenta.html" id="miCuenta">Mi cuenta</a></li>
-                            <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="#" id="cerrarS">Cerrar
+                            <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="#" id="btnCerrarSesion_d">Cerrar
                                     sesión<img src="../../resources/img/logout.png" alt="salir" class="ms-2" width="20px" height="px"></a></li>
                         </ul>
                     </div>
@@ -352,7 +352,7 @@ else if(titulo == "Registro")
 </header>
     `);
 }
-else if(titulo == "Registro 1")
+else if(titulo == "Casi terminamos")
 {
     MAIN.insertAdjacentHTML('beforebegin', `
     <header>
