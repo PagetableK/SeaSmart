@@ -51,7 +51,7 @@ if (titulo == "SeaSmart") {
                         <img src="../../resources/img/user.png" class="dropdown-toggle" type="button" width="25px"
                             height="25px" data-bs-toggle="dropdown" alt="user">
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item pe-5 ps-5 text-center" href="inicio_sesión.html" id="btnLogin_d">Iniciar sesión</a></li>
+                            <li><a class="dropdown-item pe-5 ps-5 text-center" href="inicio_sesion.html" id="btnLogin_d">Iniciar sesión</a></li>
                             <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="registro.html" id="btnRegistro_d">Registrarse</a></li>
                         </ul>
                     </div>
