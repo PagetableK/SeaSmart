@@ -1,5 +1,14 @@
-.border{
-width: 600px;
+a{
+    text-decoration: inherit;
+    color: white;
 }
 
-JHVGHKG
+#regis{
+    text-decoration: underline;
+    color: blue;
+}
+
+#color_linea{
+    color: black;
+    height: 10px;
+}
