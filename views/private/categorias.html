@@ -1,14 +1,17 @@
 <!DOCTYPE html>
+
 <!-- Definir idioma de la página -->
 <html lang="es">
 
-<!-- Encabezado de la página -->
-
 <head>
+    <!-- Metadatos de la página web -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título del documento -->
     <title>Categorías</title>
+    <!-- Mandar a llamar el framework -->
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../resources/css/navbar_privado.css" rel="stylesheet">
 </head>
 
 <!-- Cuerpo de la página -->
@@ -64,120 +67,128 @@
             </div>
         </div>
 
-        <form>
-            <!-- Modal -->
-            <div class="modal fade" id="editModal_categoria" data-bs-backdrop="static" data-bs-keyboard="false"
-                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content">
+        <!-- Modal editar -->
+        <div class="modal fade" id="editModal_categoria">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
 
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar categoría</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar categoría</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="mb-md-6">
-                                            <label for="editar_categoria" class="col-form-label">Nombre de la
-                                                categoría:</label>
-                                            <input type="text" class="form-control" id="editar_categoria">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="mb-3">
-                                            <label for="descripcion_categoria"
-                                                class="col-form-label">Descripción:</label>
-                                            <textarea class="form-control" id="descripcion_categoria"></textarea>
-                                        </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="mb-md-6">
+                                        <label for="editar_categoria" class="col-form-label">Nombre de la
+                                            categoría:</label>
+                                        <input type="text" class="form-control" id="editar_categoria">
                                     </div>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <label for="recipient-name" class="col-form-label text-md-right">Imagen de la
-                                            categoría:</label>
-                                    </div>
-                                    <div class="row">
-                                        <input type="file" class="form-control" aria-label="file example" required>
-                                        <div class="invalid-feedback">Example invalid form file feedback</div>
-                                    </div>
-                                    <div class="row d-flex align-items-center justify-content-center">
-                                        <img src="../../resources/img/image.png" alt="imagen representante"
-                                            class="img-thumbnail col-md-6 col-md-3">
+                                <div class="row">
+                                    <div class="mb-3">
+                                        <label for="descripcion_categoria" class="col-form-label">Descripción:</label>
+                                        <textarea class="form-control" id="descripcion_categoria"></textarea>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="modal-footer d-flex justify-content-center">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Editar
-                                categoría</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <!-- Configuración del modal -->
-        <form>
-            <div class="modal fade" id="agregarModal_categoria">
-                <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content">
-                        <!-- Encabezado del modal -->
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar categoría</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <!-- Cuerpo del modal -->
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="mb-md-6">
-                                            <label for="nombre_Categoria" class="col-form-label">Nombre de la
-                                                categoría:</label>
-                                            <input type="text" class="form-control" id="nombre_Categoria">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="mb-3">
-                                            <label for="descripcion_Categoria"
-                                                class="col-form-label">Descripción:</label>
-                                            <textarea class="form-control" id="descripcion_Categoria"></textarea>
-                                        </div>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <label for="recipient-name" class="col-form-label text-md-right">Imagen de la
+                                        categoría:</label>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <label for="recipient-name" class="col-form-label text-md-right">Imagen de la
-                                            categoría:</label>
-                                    </div>
-                                    <div class="row">
-                                        <input type="file" class="form-control" aria-label="file example" required>
-                                        <div class="invalid-feedback">Example invalid form file feedback</div>
-                                    </div>
-                                    <div class="row d-flex align-items-center justify-content-center">
-                                        <img src="../../resources/img/image.png" alt="imagen representante"
-                                            class="img-thumbnail col-md-6 col-md-3">
-                                    </div>
+                                <div class="row">
+                                    <input type="file" class="form-control" aria-label="file example" required>
+                                    <div class="invalid-feedback">Example invalid form file feedback</div>
+                                </div>
+                                <div class="row d-flex align-items-center justify-content-center">
+                                    <img src="../../resources/img/image.png" alt="imagen representante"
+                                        class="img-thumbnail col-md-6 col-md-3">
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Footer del modal -->
-                        <div class="modal-footer d-flex justify-content-center">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar
-                                categoría</button>
-                        </div>
-
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Editar
+                            categoría</button>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+
+        <!-- Modal agregar -->
+        <div class="modal fade" id="agregarModal_categoria">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <!-- Encabezado del modal -->
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar categoría</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Cuerpo del modal -->
+                    <div class="modal-body">
+                        <form class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="mb-md-6">
+                                        <label for="nombre_Categoria" class="col-form-label">Nombre de la
+                                            categoría:</label>
+                                        <input type="text" class="form-control" id="nombre_Categoria">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3">
+                                        <label for="descripcion_Categoria" class="col-form-label">Descripción:</label>
+                                        <textarea class="form-control" id="descripcion_Categoria"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <label for="recipient-name" class="col-form-label text-md-right">Imagen de la
+                                        categoría:</label>
+                                </div>
+                                <div class="row">
+                                    <input type="file" class="form-control" aria-label="file example" required>
+                                    <div class="invalid-feedback">Example invalid form file feedback</div>
+                                </div>
+                                <div class="row d-flex align-items-center justify-content-center">
+                                    <img src="../../resources/img/image.png" alt="imagen representante"
+                                        class="img-thumbnail col-md-6 col-md-3">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Footer del modal -->
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar
+                            categoría</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal eliminar -->
+        <div class="modal fade" id="borrarModal_categoria">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Estás seguro de que quieres eliminar?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Eliminar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Mandar a llamar el framework -->
