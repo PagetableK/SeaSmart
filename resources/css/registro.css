@@ -1,4 +1,14 @@
-.border{
-width: 600px;
+a{
+    text-decoration: inherit;
+    color: white;
 }
 
+#regis{
+    text-decoration: underline;
+    color: blue;
+}
+
+#color_linea{
+    color: black;
+    height: 10px;
+}
