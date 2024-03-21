@@ -51,7 +51,7 @@ if (titulo == "SeaSmart") {
                         <img src="../../resources/img/user.png" class="dropdown-toggle" type="button" width="25px"
                             height="25px" data-bs-toggle="dropdown" alt="user">
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item pe-5 ps-5 text-center" href="inicio_sesión.html" id="btnLogin_d">Iniciar sesión</a></li>
+                            <li><a class="dropdown-item pe-5 ps-5 text-center" href="inicio_sesion.html" id="btnLogin_d">Iniciar sesión</a></li>
                             <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="registro.html" id="btnRegistro_d">Registrarse</a></li>
                         </ul>
                     </div>
@@ -304,6 +304,75 @@ else if(titulo == "Mi información")
             </div>
         </nav>
     </header>
+    `);
+}
+else if(titulo == "Inicio de sesión")
+{
+    MAIN.insertAdjacentHTML('beforebegin', `
+    <header>
+    <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
+        <div class="container-fluid">
+            <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container">
+                <div class="row">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                    </div>
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <p style="font-weight: 500; font-size: x-large;">S<span
+                                style="color: #3E88DE;">ea</span>S<span style="color: #3E88DE;">mart</span></p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </nav>
+</header>
+    `);
+}
+else if(titulo == "Registro")
+{
+    MAIN.insertAdjacentHTML('beforebegin', `
+    <header>
+    <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
+        <div class="container-fluid">
+            <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container">
+                <div class="row">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                    </div>
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <p style="font-weight: 500; font-size: x-large;">S<span
+                                style="color: #3E88DE;">ea</span>S<span style="color: #3E88DE;">mart</span></p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </nav>
+</header>
+    `);
+}
+else if(titulo == "Registro 1")
+{
+    MAIN.insertAdjacentHTML('beforebegin', `
+    <header>
+    <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
+        <div class="container-fluid">
+            <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container">
+                <div class="row">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                    </div>
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <p style="font-weight: 500; font-size: x-large;">S<span
+                                style="color: #3E88DE;">ea</span>S<span style="color: #3E88DE;">mart</span></p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </nav>
+</header>
     `);
 }
 
