@@ -1,87 +1,92 @@
 <!doctype html>
+
 <!-- Declaración del idioma para el documento -->
 <html lang="es">
 
-<!-- Encabezado de la página -->
-
 <head>
-  <!-- Título del documento -->
-  <title>Login</title>
-  <!-- Metadatos de la página web -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- IMPORTACIÓN DE RECURSOS EXTERNOS-->
-  <!-- Mandar a llamar el framework -->
-  <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../../resources/css/indexprivado.css" type="text/css" rel="stylesheet">
+    <!-- Metadatos de la página web -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Título del documento -->
+    <title>Login</title>
+    <!-- IMPORTACIÓN DE RECURSOS EXTERNOS-->
+    <!-- Mandar a llamar el framework -->
+    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Mandar a llamar css del navbar -->
+    <link rel="stylesheet" href="../../resources/css/indexprivado.css" type="text/css">
 </head>
 
 <!-- Cuerpo de la página web -->
 
 <body>
-  <!-- Encabezado de la página web -->
-  <header>
-    <nav class="navbar navbar-expand-lg">
-    </nav>
-  </header>
-  <!-- Contenido principal del documento -->
-  <main>
-    <!-- Contenedor principal con los formularios de inicio de sesión -->
-    <div class="container-fluid">
-      <div class="row mt-5">
-        <!-- Contenedor con el logo y el nombre de la página -->
-        <div class="col d-flex align-items-center justify-content-center">
-          <div class="row d-flex align-items-center justify-content-center">
-            <!-- Logo de la página -->
-            <div class="col-12 d-flex align-items-center justify-content-center">
-              <img src="../../resources/img/logogrande.png" alt="LogoSS" class="img-fluid">
+    <!-- Encabezado de la página web -->
+    <header>
+        <nav class="navbar navbar-expand-lg">
+        </nav>
+    </header>
+    <!-- Contenido principal de la página -->
+    <main>
+        <!-- Contenedor principal con los formularios de inicio de sesión -->
+        <div class="container-fluid">
+            <div class="row mt-5">
+                <!-- Contenedor con el logo y el nombre de la página -->
+                <div class="col d-flex align-items-center justify-content-center">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <!-- Logo de la página -->
+                        <div class="col-12 d-flex align-items-center justify-content-center">
+                            <img src="../../resources/img/logogrande.png" alt="LogoSS" class="img-fluid">
+                        </div>
+                        <!-- Nombre de la página -->
+                        <div class="col-12 d-flex align-items-center justify-content-center">
+                            <p class="fs-1">S<span>ea</span>S<span>mart</span></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contenedor con los formularios -->
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="row">
+                        <div class="row d-flex align-items-center justify-content-start">
+                            <div class="col-12 col-lg-10 col-xl-10">
+                                <p class="fw-bold text-center" id="lbIniciarSesion">Inicie sesión</p>
+                            </div>
+                        </div>
+                        <!-- Campo de correo electrónico -->
+                        <form>
+                            <div>
+                                <div class="col-12 col-lg-10 col-xl-10 mb-3">
+                                    <label for="inputCorreo" class="form-label fw-medium">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="inputCorreo"
+                                        placeholder="Jeanfranco@gmail.com">
+                                </div>
+                            </div>
+                            <!-- Campo de contraseña -->
+                            <div>
+                                <div class="col-12 col-lg-10 col-xl-10 mb-4">
+                                    <label for="inputContra" class="form-label fw-medium">Contraseña</label>
+                                    <input type="password" id="inputContra" class="form-control"
+                                        aria-describedby="passwordHelpBlock" placeholder="••••••••••••••••">
+                                </div>
+                            </div>
+                            <!-- Botón para ingresar al sistema -->
+                            <div>
+                                <div
+                                    class="col-12 col-lg-10 col-xl-10 d-flex align-items-center justify-content-center">
+                                    <a href="calificaciones.html" class="btn rounded-pill ps-5 pe-5 fw-bold"
+                                        id="btnIngresar">Ingresar</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <!-- Nombre de la página -->
-            <div class="col-12 d-flex align-items-center justify-content-center">
-              <p class="fs-1">S<span>ea</span>S<span>mart</span></p>
-            </div>
-          </div>
         </div>
-        <!-- Contenedor con los formularios -->
-        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex align-items-center justify-content-center">
-            <div class="row">
-              <div class="row d-flex align-items-center justify-content-start">
-                <div class="col-12 col-lg-10 col-xl-10">
-                  <p class="fw-bold text-center" id="lbIniciarSesion">Inicie sesión</p>
-                </div>
-              </div>
-              <!-- Campo de correo electrónico -->
-              <div class="row">
-                <div class="col-12 col-lg-10 col-xl-10 mb-3">
-                  <label for="exampleFormControlInput1" class="form-label fw-medium">Correo electrónico</label>
-                  <input type="email" class="form-control" id="exampleFormControlInput1"
-                    placeholder="Jeanfranco@gmail.com">
-                </div>
-              </div>
-              <!-- Campo de contraseña -->
-              <div class="row">
-                <div class="col-12 col-lg-10 col-xl-10 mb-4">
-                  <label for="inputPassword5" class="form-label fw-medium">Contraseña</label>
-                  <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock"
-                    placeholder="••••••••">
-                </div>
-              </div>
-              <!-- Botón para ingresar al sistema -->
-              <div class="row">
-                <div class="col-12 col-lg-10 col-xl-10 d-flex align-items-center justify-content-center">
-                  <a class="btn rounded-pill ps-5 pe-5 fw-bold"
-                     id="btnIngresar" href="calificaciones.html">Ingresar</a>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </main>
-  <!-- IMPORTANDO ARCHIVOS JAVASCRIPT -->
+    </main>
+    <!-- IMPORTANDO ARCHIVOS JAVASCRIPT -->
     <!-- Mandar a llamar el framework -->
     <script src="../../resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <!-- Mandar a llamar el controlador del index -->
+    <script src="../../controllers/private/index.js" type="text/javascript"></script>
 </body>
 
 </html>
