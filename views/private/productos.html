@@ -22,13 +22,13 @@
         <!-- CREAMOS EL CONTENEDOR PADRE DE LOS ELEMENTOS  BOTON AGREGAR Y LA BARRA DE BUSQUEDA-->
         <div class="container-fluid">
             <!-- CREAMOS LA FILA DONDE COLOCAMOS EL BOTON "AGREGAR PRODUCTO"-->
-            <div class="row mt-5">
-                <div class="col-6">
+            <div class="row mt-5 row-gap-3">
+                <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <!-- Botón para abrir el Modal -->
                     <button type="button" class="btn btn-primary ms-5" onclick="abrirCrear()">Agregar Producto +</button>
                 </div>
                 <!-- CREAMOS LA COLUMNA DONDE COLOCAMOS LA "BARRA DE BUSQUEDA"  -->
-                <div class="col-6">
+                <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <div class="">
                         <form class="d-flex">
                             <input class="form-control mr-sm-2" type="search" placeholder="Buscar producto..."
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <!-- CREAMOS LA FILA DONDE COLOCAMOS LA TABLA DE LOS ELEMENTOS DE "PRODUCTO" -->
-            <div class="row mt-5">
+            <div class="table-responsive-md mt-5">
                 <table class="table">
                     <!-- CREAMOS LA CABECERA DE LA TABLA DE PRODUCTO -->
                     <thead>

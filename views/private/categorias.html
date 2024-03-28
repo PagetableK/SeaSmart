@@ -22,25 +22,23 @@
         <!-- CREAMOS EL CONTENEDOR PADRE DE LOS ELEMENTOS  BOTON AGREGAR Y LA BARRA DE BUSQUEDA-->
         <div class="container-fluid">
             <!-- CREAMOS LA FILA Y COLUMNA DONDE COLOCAMOS EL BOTON "AGREGAR CATEGORIA" Y LA "BARRA DE BUSQUEDA"-->
-            <div class="row mt-5">
-                <div class="col-6">
+            <div class="row mt-5 row-gap-3">
+                <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <!-- Botón para abrir el modal -->
                     <button type="button" class="btn btn-primary ms-5" onclick="abrirCrear()">Agregar Categoría
                         +</button>
                 </div>
-                <div class="col-6">
-                    <div class="">
-                        <form class="d-flex">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar categorías..."
-                                aria-label="Search">
-                            <button class="btn" type="enviar"><img src="../../resources/img/lupa.png" class="img-fluid"
-                                    width="35px" height="35px" alt="buscarimg"></button>
-                        </form>
-                    </div>
+                <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <form class="d-flex">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar categorías..."
+                            aria-label="Search">
+                        <button class="btn" type="enviar"><img src="../../resources/img/lupa.png" class="img-fluid"
+                                width="35px" height="35px" alt="buscarimg"></button>
+                    </form>
                 </div>
             </div>
             <!-- CREAMOS LA FILA DONDE COLOCAMOS LA TABLA DE LOS ELEMENTOS DE LA CATEGORIA-->
-            <div class="row mt-5">
+            <div class="table-responsive-md mt-5">
                 <table class="table">
                     <!-- CREAMOS LA CABECERA DE LA TABLA DE CATEGORIA -->
                     <thead>

@@ -95,15 +95,15 @@ MAIN.insertAdjacentHTML('beforebegin', `
                                 <a class="nav-link fs-6 text-center" href="tallas.html"><span class="${colorTexto7}">Tallas</span></a>
                             </li>
                             <li class="nav-item mx-auto px-auto" id="cerrar-sesion">
-                                <a class="nav-link fs-6 text-center" href="index.html"><span>Cerrar sesión</span></a>
+                                <a class="nav-link fs-6 text-center" href="index.html"><span class="text-danger">Cerrar sesión</span></a>
                             </li>
                         </ul>
                     </div>
                     </div>
                     <div class="col d-flex align-items-center justify-content-center" id="imagen-usuario">
                         <div class="dropdown" id="cuenta">
-                            <img src="../../resources/img/user.png" class="dropdown-toggle" type="button" width="50px"
-                                height="50px" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="../../resources/img/user.png" class="dropdown-toggle" type="button" width="30px"
+                                height="30px" data-bs-toggle="dropdown" aria-expanded="false">
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item me-5" href="index.html" id="cerrarS">Cerrar sesión</a></li>
                             </ul>
