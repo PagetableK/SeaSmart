@@ -13,6 +13,8 @@
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Mandar a llamar css del navbar -->
     <link href="../../resources/css/navbar_privado.css" rel="stylesheet">
+    <!-- Mandar a llamar css de productos -->
+    <link href="../../resources/css/productos.css" rel="stylesheet">
 </head>
 
 <!-- Cuerpo de la página web -->
@@ -112,6 +114,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Modal de existencias -->
             <div class="modal fade" id="infoModal_producto">
                 <div class="modal-dialog modal-fullscreen">
                     <div class="modal-content">
@@ -121,11 +125,11 @@
                         <div class="modal-body">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-5">
-                                        <div class="col-12">
+                                    <div class="col-lg-5">
+                                        <div class="col-lg-12">
                                             <p class="fs-4 fw-semibold">Existencias</p>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-lg-12">
                                             <img src="../../resources/img/filtro2.png" alt="">
                                         </div>
                                         <div class="col d-flex justify-content-start mt-2">
@@ -159,8 +163,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 d-flex justify-content-start align-items-center mt-4">
-                                            <div class="container-fluid table-responsive">
+                                        <div class="col-lg-12 d-flex justify-content-start align-items-center mt-4">
+                                            <div class="container-fluid table-responsive" id="contenedor-tabla-existencias">
                                                 <!-- Tabla con los datos -->
                                                 <table class="table" id="tabla-existencias">
                                                     <!-- Cabeceras de la tabla -->
@@ -194,10 +198,12 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="col-12 d-flex align-items-center justify-content-center">
+                                        <div class="col-lg-12 d-flex align-items-center justify-content-center">
                                             <div class="p-2">
                                                 <button class="btn p-3 rounded-pill fw-bold text-light bg-primary"
-                                                    id="btnAgregarExistencia">Agregar existencia</button>
+                                                    id="btnAgregarExistencia">Agregar existencia +
+                                                    
+                                                </button>
                                             </div>
                                             <div class="p-2">
                                                 <button class="btn p-3 rounded-pill fw-bold text-light bg-primary"
@@ -209,10 +215,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-1 d-flex" style="width: 25px;">
+                                    <div class="col-1 d-flex" style="width: 25px;" id="separadorV">
                                         <div class="vr">
 
                                         </div>
+                                    </div>
+                                    <div class="pt-5 pb-5" id="separadorH">
+                                        <hr>
                                     </div>
                                     <div class="col">
                                         <div class="row">
@@ -221,7 +230,7 @@
                                             </div>
                                         </div>
                                         <div class="row d-flex align-items-start justify-content-start">
-                                            <div class="col-2 pe-2" id="imagen-producto">
+                                            <div class="col-12 col-sm-2 col-md-2 col-lg-2 pe-2 text-center" id="imagen-producto">
                                                 <img src="../../resources/img/short_rojo.png" alt="short-rojo"
                                                     class="img-fluid">
                                             </div>
@@ -246,13 +255,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-12">
+                                                <div class="col-lg-12">
                                                     <p class="fs-2" id="nombre-producto">Shorts para nadar elásticos</p>
                                                 </div>
-                                                <div class="col-12">
+                                                <div class="col-lg-12">
                                                     <p class="fs-2" id="estado-producto">Disponible</p>
                                                 </div>
-                                                <div class="col-12">
+                                                <div class="col-lg-12">
                                                     <hr>
                                                     <p class="fs-2" id="precio-producto">$20.00</p>
                                                     <hr>
@@ -271,22 +280,22 @@
                                                     making this short the ideal choice for the pool or beach.</p>
                                             </div>
                                         </div>
-                                        <div class="row mt-5 d-flex align-items-center justify-content-center">
-                                            <div class="col col-lg-3 d-flex align-items-center justify-content-center">
+                                        <div class="row mt-5 d-flex align-items-center justify-content-center gap-3">
+                                            <div class="col-12 col-sm-3 col-md-3 col-lg-3 d-flex align-items-center justify-content-center">
                                                 <button class="btn p-3 btn-success rounded-pill" id="EditarProducto">
                                                     Editar producto
                                                     <img src="../../resources/img/lapiz.png" alt="editarProducto"
                                                         class="ms-2" height="20px">
                                                 </button>
                                             </div>
-                                            <div class="col col-lg-3 d-flex align-items-center justify-content-center">
+                                            <div class="col-12 col-sm-3 col-md-3 col-lg-3 d-flex align-items-center justify-content-center">
                                                 <button class="btn p-3 btn-danger rounded-pill" id="DesactivarProducto">
                                                     Desactivar producto
                                                     <img src="../../resources/img/eliminar.png" alt="desactivarProducto"
                                                         class="ms-2" height="20px">
                                                 </button>
                                             </div>
-                                            <div class="col col-lg-3 d-flex align-items-center justify-content-center">
+                                            <div class="col-12 col-sm-3 col-md-3 col-lg-3 d-flex align-items-center justify-content-center">
                                                 <button class="btn p-3 rounded-pill text-light"
                                                     style="background-color: #E0BD00;" id="VerComentarios">
                                                     Ver comentarios

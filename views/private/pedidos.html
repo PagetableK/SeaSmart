@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <!-- Declaración del idioma -->
-<html lang="en">
+<html lang="es">
 
 <head>
     <!-- Metadatos de la página -->
@@ -24,8 +24,8 @@
         <div class="container-fluid">
             <div class="row mt-4">
                 <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <div class="ms-5 d-flex align-items-center" id="contenedor-img-filtro">
-                        <div class="text-start">Filtrar por</div>
+                    <div class="ms-4 d-flex align-items-center" id="contenedor-img-filtro">
+                        <div class="text-start">Filtros</div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-2"
                             viewBox="0 0 16 16">
                             <path
@@ -33,34 +33,40 @@
                             </path>
                         </svg>
                     </div>
-                    <div class="col-12 d-flex align-items-center mt-3 ms-5">
-                        <p>Estado:</p>
+                    <div class="col-11 d-flex align-items-center mt-4 ms-4">
+                        <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                            <p class="text-start">Estado:</p>
+                        </div>
                         <!-- CREAMOS UN COMBO BOX DONDE SE VERAN LOS DETALLES DE LOS PEDIDOS -->
                         <!-- DROPDOWN ES UN COMBO BOX -->
-                        <div class="dropdown ms-3">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Todos
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Pendiente</a></li>
-                                <li><a class="dropdown-item" href="#">Siendo enviado</a></li>
-                                <li><a class="dropdown-item" href="#">Finalizado</a></li>
-                                <li><a class="dropdown-item" href="#">Enviado</a></li>
-                                <li><a class="dropdown-item" href="#">Anulado</a></li>
-                            </ul>
+                        <div class="col">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Todos
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Pendiente</a></li>
+                                    <li><a class="dropdown-item" href="#">Siendo enviado</a></li>
+                                    <li><a class="dropdown-item" href="#">Finalizado</a></li>
+                                    <li><a class="dropdown-item" href="#">Enviado</a></li>
+                                    <li><a class="dropdown-item" href="#">Anulado</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="col ms-5">
-                        <!-- CREAMOS LAS CLASES PARA COLOCAR LAS FECHAS -->
-                        <div class="d-flex align-items-center flex-row p-2">
-                            <p class="text-center">Fecha de </p>
-                            <div class="md-form md-outline input-with-post-icon datepicker p-2">
-                                <input placeholder="Select date" type="date" id="example" class="form-control">
+                    <div class="col d-flex align-items-center mt-3 ms-4">
+                        <div class="row d-flex flex-row">
+                            <!-- CREAMOS LAS CLASES PARA COLOCAR LAS FECHAS -->
+                            <p class="text-start col-12 col-lg-3">Fecha de:</p>
+                            <div class="col-11 col-lg-4">
+                                <input placeholder="Seleccione rango de inicio" type="date" id="fechaInicio"
+                                    class="form-control">
                             </div>
-                            <p class="text-center">a</p>
-                            <div class="md-form md-outline input-with-post-icon datepicker p-2">
-                                <input placeholder="Select date" type="date" id="example" class="form-control">
+                            <p class="text-center col-12 col-lg-1">a</p>
+                            <div class="col-11 col-lg-4">
+                                <input placeholder="Seleccione rango  final" type="date" id="fechaFinal"
+                                    class="form-control">
                             </div>
                         </div>
                     </div>
@@ -79,7 +85,7 @@
             </div>
 
             <!-- CREAMOS LA TABLA DONDE IRAN TODAS LAS FILAS Y COLUMNAS -->
-            <div class="table-responsive-md">
+            <div class="table-responsive-md mt-5">
                 <table class="table">
                     <!-- CREAMOS LA CABECERA DE LA TABLA DE PEDIDOS -->
                     <thead>
@@ -114,7 +120,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div> 
+            </div>
         </div>
     </main>
     <!-- Mandar a llamar el framework -->
