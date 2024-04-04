@@ -24,7 +24,7 @@
         <!-- Contenedor padre -->
         <div class="container-fluid p-0">
             <!-- Fila 1 -->
-            <div class="row">
+            <div class="col">
                 <!-- Carrusel con imagenes -->
                 <div id="carouselExample" class="carousel slide">
                     <!-- Contenedor con las imagenes -->
@@ -57,28 +57,28 @@
                 </div>
             </div>
             <!-- Fila 2 -->
-            <div class="row mt-5 d-flex justify-content-center align-items-center">
-                <!-- Texto de bienvenida -->
-                <div class="col-6">
-                    <p class="text-center fs-1 fw-bold">¡BIENVENIDO A SEASMART!</p>
-                </div>
-                <div class="col-6 d-flex">
-                    <p class="fs-5 text-center">Donde encontrarás los mejores trajes de baño para lucir de maravilla
-                        dentro del agua
-                    </p>
+            <div class="container">
+                <div class="row mt-5 d-flex justify-content-center align-items-center">
+                    <!-- Texto de bienvenida -->
+                    <div class="col-12 col-lg-6">
+                        <p class="text-center fs-1 fw-bold">¡BIENVENIDO A SEASMART!</p>
+                    </div>
+                    <div class="col-12 col-lg-6 d-flex align-items-center">
+                        <p class="fs-5 text-center">Donde encontrarás los mejores trajes de baño para lucir de maravilla
+                            dentro del agua
+                        </p>
+                    </div>
                 </div>
             </div>
             <!-- Fila 3 -->
-            <div class="row">
-                <div class="col">
-                    <p class="text-center text-secondary fs-3 fw-bold ms-5 mt-5">Explora nuestras
-                        <span>categorías</span> y
-                        <span>productos</span>
-                    </p>
-                </div>
+            <div class="col">
+                <p class="text-center fs-3 fw-bold mt-5">Explora nuestras
+                    <span>categorías</span> y
+                    <span>productos</span>
+                </p>
             </div>
             <!-- Fila 4 -->
-            <div class="row p-5 grid gap-3 d-flex justify-content-center">
+            <div class="p-5 grid gap-3 d-flex justify-content-center">
                 <!-- Card de categoría -->
                 <div class="card d-flex align-items-center">
                     <!-- Imagen de la categoría -->
@@ -103,4 +103,5 @@
     <!-- Mandar a llamar el controlador -->
     <script type="text/javascript" src="../../controllers/private/index_publico.js"></script>
 </body>
+
 </html>
