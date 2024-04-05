@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <!-- Idioma de la página -->
-<html lang="en">
+<html lang="es">
 
 <head>
+    <!-- METADATOS DE LA PÁGINA -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título de la página -->
     <title>Mi información</title>
-
-    <!-- Mandar a llamar el css del navbar -->
-    <link rel="stylesheet" href="../../resources/css/navbar_publico.css" type="text/css">
-
     <!-- Mandamos a llamar al framework -->
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Mandar a llamar el css del navbar -->
@@ -18,91 +16,59 @@
     <link rel="stylesheet" href="../../resources/css/mi_informacion.css" type="text/css">
 </head>
 
-<body>
 
+<!-- Cuerpo de la página -->
+
+<body>
+    <!-- Contenido principal de la página -->
     <main>
         <!-- Creamos el contenedor padre de los elementos -->
         <div class="container-fluid">
             <div class="row mt-5 d-flex align-items-start">
                 <!-- Menú lateral -->
-                <div class="col-12 col-lg-3 col-xl-2 grid gap-2 me-5" id="menu_cuenta">
-                    <!-- Título de menú -->
-                    <div class="col d-flex align-items-center justify-content-center gap-2">
-                        <!-- Ícono de menú -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" class="bi bi-columns-gap"
-                            viewBox="0 0 16 16">
-                            <path
-                                d="M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z" />
-                        </svg>
-                        <p class="p-0 m-0 fs-2">Menú</p>
-                    </div>
-                    <!-- Botones del menú -->
-                    <div class="col-12 d-flex justify-content-center mt-4">
-                        <div class="col-12 d-grid gap-3 mb-5">
-                            <!-- Botón mis pedidos -->
-                            <div class="col d-flex justify-content-center">
-                                <div class="vr"></div>
-                                <a href="mis_pedidos.html"><button class="btn btn-primary rounded-0" type="button"><img
-                                        src="../../resources/img/camion.png" alt="Camion" width="40px" height="25px">
-                                    Mis pedidos</button></a>
-                            </div>
-                            <!-- Botón mi información -->
-                            <div class="col d-flex justify-content-center">
-                                <div class="vr"></div>
-                                <a href="mi_informacion.html"><button class="btn btn-primary rounded-0" type="button"><img
-                                        src="../../resources/img/user.png" alt="Camion" width="25px" height="25px"> Mi
-                                    información</button></a>
-                            </div>
-                            <!-- Botón cerrar sesión -->
-                            <div class="col d-flex justify-content-center ms-1">
-                                <button class="btn btn-primary rounded-pill fw-semibold" type="button">Cerrar sesión
-                                    <img src="../../resources/img/logout.png" alt="Cerrar Sesion" width="20px"></button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col" id="menu_cuenta">
+
                 </div>
-                <!-- Imagen de bienvenida -->
-                            <!-- Creamos el form -->
-            <div class="col d-flex justify-content-center">
-                <div class="col-5">
-                    <form>
-                        <fieldset disabled>
-                            <div class="mb-3">
-                                <label for="disabledTextInput" class="form-label">Nombres</label>
-                                <input type="text" id="disabledTextInput" class="form-control"
-                                    placeholder="Pablo Ismael">
+                <div class="col-12 col-lg-8 col-xl-9">
+                    <form class="">
+                        <fieldset disabled class="row d-flex">
+                            <p class="fw-bold fs-5">Información de contacto</p>
+                            <div class="col-10 col-sm-5 col-lg-5 mb-3">
+                                <label for="txtTelefono_movil" class="form-label">Teléfono móvil</label>
+                                <input type="text" class="form-control" placeholder="7845 9067" id="txtTelefono_movil">
                             </div>
-                            <div class="mb-3">
-                                <label for="disabledTextInput" class="form-label">Apellidos</label>
-                                <input type="text" id="disabledTextInput" class="form-control"
-                                    placeholder="Hernández García">
+                            <div class="col-1 mb-3 d-flex align-items-end">
+                                <div class="btn btn-success">
+                                    <img src="../../resources/img/editar.png" height="20px" width="20px" alt="editar" id="btnEditarTelefono">
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="disabledTextInput" class="form-label">DUI (Documento único de
-                                    identidad)</label>
-                                <input type="text" id="disabledTextInput" class="form-control" placeholder="12345678-9">
+                            <div class="col-10 col-sm-5 mb-3">
+                                <label for="txtTelefono_fijo" class="form-label">Teléfono fijo</label>
+                                <input type="text" class="form-control" placeholder="2375 1265" id="txtTelefono_fijo">
                             </div>
-                            <div class="mb-3">
-                                <label for="disabledTextInput" class="form-label">Correo electrónico</label>
-                                <input type="text" id="disabledTextInput" class="form-control"
-                                    placeholder="josuemartes@gmail.com">
+                            <div class="col-1 mb-3 d-flex align-items-end">
+                                <div class="btn btn-success">
+                                    <img src="../../resources/img/editar.png" height="20px" width="20px" alt="editar" id="btnEditarTelefonoFijo">
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="disabledTextInput" class="form-label">Teléfono móvil</label>
-                                <input type="text" id="disabledTextInput" class="form-control" placeholder="7845 9067">
+                            <p class="fw-bold fs-5 mt-5">Mis direcciones de envío</p>
+                            <div class="col-10 col-sm-5 mb-3">
+                                <label for="txtDireccion" class="form-label">Dirección 1</label>
+                                <input type="text" class="form-control"
+                                    placeholder="Avenida la ouija la campanera casa #89" id="txtDireccion">
                             </div>
-                            <div class="mb-3">
-                                <label for="disabledTextInput" class="form-label">Teléfono fijo</label>
-                                <input type="text" id="disabledTextInput" class="form-control" placeholder="2375 1265">
+                            <div class="col-1 mb-3 d-flex align-items-end">
+                                <div class="btn btn-success">
+                                    <img src="../../resources/img/editar.png" height="20px" width="20px" alt="editar" id="btnEditarDireccion">
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="disabledTextInput" class="form-label">Dirección</label>
-                                <input type="text" id="disabledTextInput" class="form-control"
-                                    placeholder="Avenida la ouija la campanera casa #89">
+                            <div class="col-12 col-sm-5 d-flex align-items-center justify-content-center fw-medium mt-4" id="contenedor-agregar-direccion"> 
+                                <p class="text-center agregar-direccion">Agregar dirección</p>
+                                <p class="agregar-direccion fs-5 ms-2">+</p>
                             </div>
+                        </fieldset>
                     </form>
                 </div>
-            </div>
             </div>
         </div>
     </main>
@@ -111,6 +77,8 @@
     <script src="../../resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <!-- Mandar a llamar el navbar -->
     <script type="text/javascript" src="../../controllers/utils/publico.js"></script>
+    <!-- Mandar a llamar el menú lateral -->
+    <script type="text/javascript" src="../../controllers/utils/menu_lateral.js"></script>
 </body>
 
 </html>

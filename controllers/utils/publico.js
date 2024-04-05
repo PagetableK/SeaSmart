@@ -96,10 +96,7 @@ else if(titulo == "Mi cuenta")
                     <div class="container-fluid d-flex justify-content-end">
                         <div class="col-12 d-flex justify-content-center">
                             <ul class="navbar-nav grid gap-3 text-center" id="barra-elementos">
-                                <li id="elemento-mi-cuenta">
-                                    <a class="pe-5 ps-5 text-center" href="mi_cuenta.html" id="btnMiCuenta_e">Mi cuenta</a>
-                                </li>
-                                <li id="elemnto-mis-pedidos">
+                                <li id="elemento-mis-pedidos">
                                     <a class="pe-5 ps-5 text-center" href="mis_pedidos.html" id="btnPedidos_e">Mis pedidos</a>
                                 </li>
                                 <li id="elemento-mi-informacion">
@@ -220,7 +217,7 @@ else if(titulo == "Mis pedidos")
                             <img src="../../resources/img/Logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <p style="font-weight: 500; font-size: x-large;">S<span
+                            <p style="font-weight: 500; font-size: x-large;" id="texto-ss">S<span
                                     style="color: #3E88DE;">ea</span>S<span style="color: #3E88DE;">mart</span></p>
                         </div>
                     </div>
@@ -235,13 +232,16 @@ else if(titulo == "Mis pedidos")
                     <div class="container-fluid d-flex justify-content-end">
                         <div class="col-12 d-flex justify-content-center">
                             <ul class="navbar-nav grid gap-3 text-center" id="barra-elementos">
-                                <li id="mi-carrito">
+                                <li id="elemento-mi-cuenta">
                                     <a href="mi_cuenta.html" id="btnMiCuenta_e">Mi cuenta</a>
                                 </li>
-                                <li id="mi-carrito">
+                                <li id="elemento-mi-informacion">
+                                    <a href="mi_informacion.html" id="btnMiInfo_e">Mi información</a>
+                                </li>
+                                <li id="elemento-mi-carrito">
                                     <a href="carrito.html" id="btnCarrito_e">Mi carrito</a>
                                 </li>
-                                <li id="cerrar-sesion">
+                                <li id="elemento-cerrar-sesion">
                                     <a href="index.html" id="btnCerrarSesion_e">Cerrar sesión</a>
                                 </li>
                             </ul>
@@ -267,6 +267,15 @@ else if(titulo == "Mis pedidos")
     </header>
     `);
 
+    if(window.screen.width < 992)
+    {
+        document.getElementById('menu_cuenta').remove();
+    }
+    else if(window.screen.width >= 992)
+    {
+        document.getElementById('menu_cuenta').classList.add('me-4');
+    }
+
     validacionElemento_Cerrar = false;
 }
 else if(titulo == "Mi información")
@@ -281,7 +290,7 @@ else if(titulo == "Mi información")
                             <img src="../../resources/img/Logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <p style="font-weight: 500; font-size: x-large;">S<span
+                            <p style="font-weight: 500; font-size: x-large;" id="texto-ss">S<span
                                     style="color: #3E88DE;">ea</span>S<span style="color: #3E88DE;">mart</span></p>
                         </div>
                     </div>
@@ -296,11 +305,17 @@ else if(titulo == "Mi información")
                     <div class="container-fluid d-flex justify-content-end">
                         <div class="col-12 d-flex justify-content-center">
                             <ul class="navbar-nav grid gap-3 text-center" id="barra-elementos">
-                                <li id="cerrar-sesion">
-                                    Cerrar sesión
+                                <li id="elemento-mi-cuenta">
+                                    <a href="mi_cuenta.html" id="btnMiCuenta_e">Mi cuenta</a>
                                 </li>
-                                <li id="mi-carrito">
-                                    Mi carrito
+                                <li id="elemento-mis-pedidos">
+                                    <a class="pe-5 ps-5 text-center" href="mis_pedidos.html" id="btnPedidos_e">Mis pedidos</a>
+                                </li>
+                                <li id="elemento-mi-carrito">
+                                    <a href="carrito.html" id="btnCarrito_e">Mi carrito</a>
+                                </li>
+                                <li id="elemento-cerrar-sesion">
+                                    <a href="index.html" id="btnCerrarSesion_e">Cerrar sesión</a>
                                 </li>
                             </ul>
                         </div>
@@ -312,7 +327,7 @@ else if(titulo == "Mi información")
                             height="25px" data-bs-toggle="dropdown" aria-expanded="false" alt="user">
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item pe-5 ps-5 text-center" href="mi_cuenta.html" id="miCuenta">Mi cuenta</a></li>
-                            <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="#" id="btnCerrarSesion_d">Cerrar
+                            <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="index.html" id="btnCerrarSesion_d">Cerrar
                                     sesión<img src="../../resources/img/logout.png" alt="salir" class="ms-2" width="20px" height="px"></a></li>
                         </ul>
                     </div>
@@ -324,6 +339,16 @@ else if(titulo == "Mi información")
         </nav>
     </header>
     `);
+
+    if(window.screen.width < 992)
+    {
+        document.getElementById('menu_cuenta').remove();
+        document.getElementById('contenedor-agregar-direccion').classList.add('mb-3');
+    }
+    else if(window.screen.width >= 992)
+    {
+        document.getElementById('menu_cuenta').classList.add('me-4');
+    }
 
     validacionElemento_Cerrar = false;
 }
