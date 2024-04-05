@@ -29,8 +29,8 @@ MENU_CUENTA.insertAdjacentHTML('afterbegin', `
         </div>
         <!-- Botón cerrar sesión -->
         <div class="col d-flex justify-content-center ms-1">
-            <button class="btn btn-primary rounded-pill fw-semibold" type="button">Cerrar sesión
-                <img src="../../resources/img/logout.png" alt="Cerrar Sesion" width="20px"></button>
+            <a href="index.html"><button class="btn btn-primary rounded-pill fw-semibold" type="button">Cerrar sesión
+                <img src="../../resources/img/logout.png" alt="Cerrar Sesion" width="20px"></button></a>
         </div>
     </div>
     `
