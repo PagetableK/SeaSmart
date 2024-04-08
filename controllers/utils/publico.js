@@ -9,7 +9,7 @@ if (titulo == "SeaSmart") {
                 <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                            <img src="../../resources/img/logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
@@ -56,7 +56,7 @@ if (titulo == "SeaSmart") {
                         </ul>
                     </div>
                     <div class="btn" type="button" id="carrito" onclick="abrirCarro()">
-                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px" onclick="alerta()">
+                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px" onclick="alerta()">
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@ else if(titulo == "Mi cuenta")
                 <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                            <img src="../../resources/img/logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
@@ -100,7 +100,7 @@ else if(titulo == "Mi cuenta")
                                     <a class="pe-5 ps-5 text-center" href="mi_informacion.html" id="btnInformacion_e">Mi información</a>
                                 </li>
                                 <li id="elemento-mi-carrito">
-                                    <a class="pe-5 ps-5 text-center" href="carrito.html" id="btnCarrito_e">Mi carrito</a>
+                                    <a class="pe-5 ps-5 text-center" href="carrito.html" id="btncarrito_de_comprase">Mi carrito</a>
                                 </li>
                                 <li id="elemento-cerrar-sesion">
                                     <a class="pe-5 ps-5 text-center" href="#" id="btnCerrarSesion_e">Cerrar sesión</a>
@@ -120,7 +120,7 @@ else if(titulo == "Mi cuenta")
                         </ul>
                     </div>
                     <div class="btn" type="button" id="carrito" onclick="abrirCarro()">
-                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px">
+                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px">
                     </div>
                 </div>
             </div>
@@ -142,7 +142,7 @@ else if(titulo=="Mi carrito")
                 <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                            <img src="../../resources/img/logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
@@ -160,7 +160,7 @@ else if(titulo=="Mi carrito")
                         <div class="col-12 d-flex justify-content-center">
                             <ul class="navbar-nav grid gap-3 text-center" id="barra-elementos">
                                 <li id="elemento-mi-carrito">
-                                    <a href="carrito.html" id="btnCarrito_e">Mi carrito</a>
+                                    <a href="carrito.html" id="btncarrito_de_comprase">Mi carrito</a>
                                 </li>
                                 <li id="elemento-mi-cuenta">
                                     <a href="mi_cuenta.html" id="btnMiCuenta_e">Mi cuenta</a>
@@ -186,7 +186,7 @@ else if(titulo=="Mi carrito")
                         </ul>
                     </div>
                     <div class="btn" type="button" id="carrito" onclick="abrirCarro()">
-                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px">
+                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px">
                     </div>
                 </div>
             </div>
@@ -203,7 +203,7 @@ else if(titulo == "Mis pedidos")
                 <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                            <img src="../../resources/img/logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <p style="font-weight: 500; font-size: x-large;">S<span
@@ -242,7 +242,7 @@ else if(titulo == "Mis pedidos")
                         </ul>
                     </div>
                     <div class="btn" type="button" id="carrito">
-                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px">
+                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px">
                     </div>
                 </div>
             </div>
@@ -259,7 +259,7 @@ else if(titulo == "Mi información")
                 <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                            <img src="../../resources/img/logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <p style="font-weight: 500; font-size: x-large;">S<span
@@ -298,7 +298,7 @@ else if(titulo == "Mi información")
                         </ul>
                     </div>
                     <div class="btn" type="button" id="carrito">
-                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px">
+                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px">
                     </div>
                 </div>
             </div>
@@ -315,7 +315,7 @@ else if(titulo == "Inicio de sesión")
             <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container">
                 <div class="row">
                     <div class="col-12 d-flex align-items-center justify-content-center">
-                        <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                        <img src="../../resources/img/logo1.png" width="55px" height="55px">
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <p style="font-weight: 500; font-size: x-large;">S<span
@@ -338,7 +338,7 @@ else if(titulo == "Registro")
             <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container">
                 <div class="row">
                     <div class="col-12 d-flex align-items-center justify-content-center">
-                        <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                        <img src="../../resources/img/logo1.png" width="55px" height="55px">
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <p style="font-weight: 500; font-size: x-large;">S<span
@@ -361,7 +361,7 @@ else if(titulo == "Casi terminamos")
             <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container">
                 <div class="row">
                     <div class="col-12 d-flex align-items-center justify-content-center">
-                        <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                        <img src="../../resources/img/logo1.png" width="55px" height="55px">
                     </div>
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <p style="font-weight: 500; font-size: x-large;">S<span
@@ -404,7 +404,7 @@ if (titulo == "sub_categoria") {
                 <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                            <img src="../../resources/img/logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
@@ -451,7 +451,7 @@ if (titulo == "sub_categoria") {
                         </ul>
                     </div>
                     <div class="btn" type="button" id="carrito" onclick="abrirCarro()">
-                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px" onclick="alerta()">
+                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px" onclick="alerta()">
                     </div>
                 </div>
             </div>
