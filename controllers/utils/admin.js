@@ -56,7 +56,7 @@ MAIN.insertAdjacentHTML('beforebegin', `
                     <div class="col" id="seasmart-container">
                         <div class="row d-flex justify-content-start">
                             <div class="col-12 d-flex align-items-center justify-content-center">
-                                <img src="../../resources/img/Logo1.png" width="75px" height="75px">
+                                <img src="../../resources/img/logo1.png" width="75px" height="75px">
                             </div>
                             <div class="col-12 d-flex align-items-center justify-content-center">
                                 <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
