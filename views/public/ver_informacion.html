@@ -19,7 +19,7 @@
 
 <body>
 
-    <main>
+    <main class="ps-5 pe-5">
 
         <!-- Creamos el contenedor padre -->
         <div class="container-fluid">
@@ -40,13 +40,15 @@
 
             <!-- Creamos el contenedor de la imagen -->
             <div class="row">
-                <div class="col-5">
-                    <img src="../../resources/img/traje_mujer4.png" class="rounded float-start" alt="...">
-                </div>
+                <img src="../../resources/img/traje_mujer4.png"
+                    class="col-md-5 col-sm-12 rounded float-start object-fit-cover" alt="...">
+
 
                 <!-- Creamos el contenedor del texto -->
-                <div class="col-5">
-                    <p class="fs-2">Traje de baño de una pieza</p>
+                <div class="col-12 col-md-5 col-lg-5">
+                    <b>
+                        <p class="fs-2">Traje de baño de una pieza</p>
+                    </b>
                     <div class="col-9 d-flex flex-row mb-3 d-grid gap-5">
                         <p class="text-start">Disponible</p>
                         <p class="text-end">4 restantes en stock</p>
@@ -54,7 +56,9 @@
 
                     <!-- Creamos la calificación de estrellas -->
                     <div class="ms-3 d-flex">
-                        <p>Calificación global</p>
+                        <b>
+                            <p>Calificación global</p>
+                        </b>
                         <div class="ms-3 pb-3">
                             <i class="bi bi-star-fill star"></i>
                             <i class="bi bi-star-fill star"></i>
@@ -68,10 +72,158 @@
                     <hr>
                     <p>$22.00</p>
                     <hr>
-                    <p>Tallas disponibles:</p>
+                    <b>
+                        <p>Tallas disponibles:</p>
+                    </b>
 
+                    <!-- Botones de las tallas -->
+                    <div class="col-12 mb-5">
+                        <button type="button" class="btn btn-outline-dark">XS</button>
+                        <button type="button" class="btn btn-outline-dark">S</button>
+                        <button type="button" class="btn btn-outline-dark">M</button>
+                        <button type="button" class="btn btn-outline-dark">L</button>
+                        <button type="button" class="btn btn-outline-dark">XL</button>
+                        <button type="button" class="btn btn-outline-dark">XXL</button>
+                    </div>
+
+                    <!--Creamos los botones de la cantidad -->
+                    <div class="col-5 d-flex align-items-center d-flex flex-column gap-3">
+                        <div class="d-flex gap-3 align-items-center">
+                            <p class="fw-bold fs-6 cantidad">Cantidad:</p>
+                            <img src="../..//resources/img/menos.png" alt="menos" class="img-fluid border p-1 cantidad">
+                            <p class="fs-6 cantidad" id="cantidadProducto">1</p>
+                            <img src="../../resources/img/mas.png" alt="menos" class="img-fluid border p-1 cantidad">
+                        </div>
+                    </div>
+
+                    <div class="col-12 d flex align-items-center d-flex flex-column mt-5 ">
+                        <button type="button" class="btn rounded-pill btn-warning p-2">Comprar ahora</button>
+                    </div>
 
                 </div>
+            </div>
+            <!-- Creamos la descripción del producto -->
+            <br>
+            <h3>
+                <p>Descripción</p>
+            </h3>
+            <p>This Essentials watershort in bright red offers a playful swim style you know you can rely on.
+                A side pocket drainage system ensures they stay comfortable, even when wet,
+                whilst a drawstring waist provides extra comfort and security. Our new 100%
+                Recycled Nylon fabric is lightweight and comfortable as well as good for the environment,
+                making this short the ideal choice for the pool or beach.</p>
+
+            <!--Creamos la columna principal de este apartado  -->
+            <div class="row">
+                <div class="col">
+                    <h5>
+                        <p>Reseñas</p>
+                    </h5>
+                    <!-- Creamos las estrellitas de calificaciones de reseñas -->
+                    <div class="ms-3 d-flex">
+                        <div class="ms-3 pb-3">
+                            <div class="d-flex gap-3">
+                                <div class="">
+                                    <i class="bi bi-star-fill star"></i>
+                                    <i class="bi bi-star-fill star"></i>
+                                    <i class="bi bi-star-fill star"></i>
+                                    <i class="bi bi-star-fill star"></i>
+                                    <i class="bi bi-star-fill star"></i>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <p class="textosinp">4.5</p>
+                                </div>
+                            </div>
+                            <p>3 Reseñas</p>
+                            <!-- Creamos el boton que dirige al apartado de añadir una reseña -->
+                            <div class="col-12 d flex align-items-center d-flex flex-column mt-5 ">
+                                <button type="button" class="btn rounded-pill btn-warning">Reseñar producto</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Creamos el apartado de comentarios de otras personas -->
+                <div class="col-12 col-md-5 col-lg-8">
+                    <div>
+                        <hr>
+                        <div class="ms-3 d-flex">
+                            <div class="d-flex align-items-center">
+                            <b>
+                                <p class="textosinp">Excelentes shorts</p>
+                            </b>
+                        </div>
+                            <div class="ms-3 pb-3">
+                                <i class="bi bi-star-fill star"></i>
+                                <i class="bi bi-star-fill star"></i>
+                                <i class="bi bi-star-fill star"></i>
+                                <i class="bi bi-star-fill star"></i>
+                                <i class="bi bi-star-fill star"></i>
+                            </div>
+                        </div>
+                        <p>Estos son mi tercer par, todos rojos. Nado casi todos los días y hago
+                            más de 1000 m con regularidad. Una cosa que he notado en la piscina
+                            es que estos baúles realmente se destacan. Muchos se mezclan y son
+                            difíciles de ver y he decidido que el negro es aburrido.
+                            Duran aproximadamente un año y luego sucumben al cloro.
+                            Estos son ideales si no tienes una forma ideal y posiblemente estés cargando
+                            demasiado peso (yo). Son cómodos de usar y se secan rápidamente.</p>
+                        <b>
+                            <p>22/04/2024 Por Vallegas</p>
+                        </b>
+                    </div>
+                    <div>
+                        <hr>
+                        <div class="ms-3 d-flex">
+                            <b>
+                                <p class="textosinp">Excelentes shorts</p>
+                            </b>
+                            <div class="ms-3 pb-3">
+                                <i class="bi bi-star-fill star"></i>
+                                <i class="bi bi-star-fill star"></i>
+                                <i class="bi bi-star-fill star"></i>
+                                <i class="bi bi-star-fill star"></i>
+                                <i class="bi bi-star-fill star"></i>
+                            </div>
+                        </div>
+                        <p>Estos son mi tercer par, todos rojos. Nado casi todos los días y hago
+                            más de 1000 m con regularidad. Una cosa que he notado en la piscina
+                            es que estos baúles realmente se destacan. Muchos se mezclan y son
+                            difíciles de ver y he decidido que el negro es aburrido.
+                            Duran aproximadamente un año y luego sucumben al cloro.
+                            Estos son ideales si no tienes una forma ideal y posiblemente estés cargando
+                            demasiado peso (yo). Son cómodos de usar y se secan rápidamente.</p>
+                        <b>
+                            <p>22/04/2024 Por Vallegas</p>
+                        </b>
+                    </div><div>
+                        <hr>
+                        <div class="ms-3 d-flex">
+                            <b>
+                                <p class="textosinp">Excelentes shorts</p>
+                            </b>
+                            <div class="ms-3 pb-3">
+                                <i class="bi bi-star-fill star"></i>
+                                <i class="bi bi-star-fill star"></i>
+                                <i class="bi bi-star-fill star"></i>
+                                <i class="bi bi-star-fill star"></i>
+                                <i class="bi bi-star-fill star"></i>
+                            </div>
+                        </div>
+                        <p>Estos son mi tercer par, todos rojos. Nado casi todos los días y hago
+                            más de 1000 m con regularidad. Una cosa que he notado en la piscina
+                            es que estos baúles realmente se destacan. Muchos se mezclan y son
+                            difíciles de ver y he decidido que el negro es aburrido.
+                            Duran aproximadamente un año y luego sucumben al cloro.
+                            Estos son ideales si no tienes una forma ideal y posiblemente estés cargando
+                            demasiado peso (yo). Son cómodos de usar y se secan rápidamente.</p>
+                        <b>
+                            <p>22/04/2024 Por Vallegas</p>
+                        </b>
+                    </div>
+                </div>
+
             </div>
         </div>
     </main>
