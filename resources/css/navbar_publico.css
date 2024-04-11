@@ -59,8 +59,15 @@ main{
 
 #texto-ss{
     font-weight: 500; font-size: x-large;
+    margin: 0px;
+    padding: 0px;
 }
 
 span{
     color: #3E88DE;
+}
+
+#quienes_somos{
+    text-decoration: underline;
+    color: blue;
 }
