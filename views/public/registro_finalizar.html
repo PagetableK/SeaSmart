@@ -32,13 +32,13 @@
                                 <div class="mb-4">
                                     <label for="telefono" class="form-label">Número de teléfono</label>
                                     <input type="text" class="form-control" id="telefono" required
-                                        placeholder="75854595">
+                                        placeholder="75854595" onkeypress="return /[0-9]/i.test(event.key)">
                                 </div>
                                 <div class="mb-4">
                                     <label for="telefonoSecundario" class="form-label">Teléfono secundario / Teléfono de
                                         emergencia</label>
                                     <input type="text" class="form-control" id="telefonoSecundario" required
-                                        placeholder="25452547">
+                                        placeholder="25452547" onkeypress="return /[0-9]/i.test(event.key)">
                                 </div>
                                 <div class="d-grid">
                                     <button class="btn btn-dark rounded-pill" type="submit">Registrarse</button>

@@ -29,18 +29,20 @@
                             <h6 class="mb-4">Ingresa tu información para crear una cuenta</h6>
                             <div class="mb-4">
                                 <label for="nombres" class="form-label">Nombres</label>
-                                <input type="text" class="form-control" id="nombres" placeholder="Juana José" required>
+                                <input type="text" class="form-control" id="nombres" placeholder="Juana José"
+                                    onkeypress="return /[A-Za-z ]/i.test(event.key)" required>
                             </div>
                             <div class="mb-4">
                                 <label for="apellidos" class="form-label">Apellidos</label>
                                 <input type="text" class="form-control" id="apellidos" placeholder="Carmen del Paz"
-                                    required>
+                                    onkeypress="return /[A-Za-z ]/i.test(event.key)" required>
                             </div>
                             <div class="mb-4">
                                 <label for="dui" class="form-label">DUI</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend2">#</span>
-                                    <input type="text" class="form-control" id="dui" placeholder="00000000-0" required>
+                                    <input type="text" class="form-control" id="dui" placeholder="00000000-0"
+                                        onkeypress="return /[0-9]/i.test(event.key)" required>
                                 </div>
                             </div>
                             <div class="mb-4">
