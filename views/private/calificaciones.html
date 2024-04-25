@@ -18,54 +18,42 @@
 <!-- Cuerpo de la página -->
 
 <body>
-
-    <main class="m-4">
-        <div class="row">
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <div class="row">
-                            <div class="col-2">
-                                <p class="text-end">Filtrar por:</p>
-                            </div>
-                            <div class="col-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-funnel" viewBox="0 0 16 16">
-                                    <path
-                                        d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z">
-                                    </path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-2">
-                                <p class="text-end">Fecha:</p>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="dropdown">
-                                    <select class="form-select form-select-sm" aria-label="Small select example">
-                                        <option selected>Seleccionar</option>
-                                        <option value="1">Más antiguo</option>
-                                        <option value="2">Más reciente</option>
-                                    </select>
-                                </div>
-
-                            </div>
+    <!-- Contenido principal de la página -->
+    <main>
+        <!-- Contenedor padre -->
+        <div class="container-fluid">
+            <div class="row mt-4">
+                <div class="col-11">
+                    <div class="d-flex align-items-center ms-4" id="contenedor-img-filtro">
+                        <div class="text-start">Filtros</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-2"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Filtrador de registros  -->
+                <div class="col-11 d-flex ms-4 mt-4">
+                    <div class="col-3 col-sm-2 col-md-1 col-lg-1">
+                        <p class="text-start">Ordenar por:</p>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="dropdown">
+                            <select class="form-select form-select-sm" aria-label="Small select example">
+                                <option value="1">Más antiguo</option>
+                                <option value="2">Más reciente</option>
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <form class="d-flex" role="busqueda">
-                    <input class="form-control" type="buscar" placeholder="Buscar un color..." aria-label="Buscar">
-                    <button class="btn" type="enviar"><img src="../../resources/img/lupa.png" class="img-fluid"
-                            width="35px" height="35px" alt="buscarimg"></button>
-                </form>
-            </div>
         </div>
-
-        <div class="table-responsive-md">
+        <!-- Tabla de datos responsiva -->
+        <div class="table-responsive-md mt-5">
             <table class="table table-hover">
+                <!-- Cabecera de la tabla -->
                 <thead>
                     <tr>
                         <th scope="col">Nombre del cliente</th>
@@ -76,15 +64,19 @@
                         <th scope="col">Visibilidad</th>
                     </tr>
                 </thead>
+                <!-- Cuerpo de la tabla -->
                 <tbody>
+                    <!-- Registro 1 -->
                     <tr>
                         <td>Exequiel Brayan</td>
                         <td>12345678</td>
                         <td>26/02/2024</td>
                         <td>1/5</td>
                         <td>Excelentisimo</td>
-                        <td><img src="../../resources/img/ojo_cerrado.jpg" class="rounded float-start" alt="..."></td>
+                        <td><img src="../../resources/img/ojo_cerrado.jpg" class="rounded float-start" alt="...">
+                        </td>
                     </tr>
+                    <!-- Registro 2 -->
                     <tr>
                         <td>Guinea Josué</td>
                         <td>87654321</td>
@@ -97,14 +89,13 @@
                 </tbody>
             </table>
         </div>
-
-
-
     </main>
     <!-- Mandar a llamar el framework -->
     <script src="../../resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <!-- Mandar a llamar el navbar -->
     <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
+    <!-- Mandar a llamar el controlador de calificaciones -->
+    <script type="text/javascript" src="../../controllers/private/calificaciones.js"></script>
 </body>
 
 </html>

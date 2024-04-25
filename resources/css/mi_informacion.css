@@ -18,3 +18,24 @@
     --bs-border-width:10px;
     min-height: 36px;
 }
+
+.btn.btn-success{
+    height: 38px;
+}
+
+.row.d-flex{
+    --bs-gutter-x:0rem;
+}
+
+.agregar-direccion{
+    margin-bottom: 0px;
+}
+
+#contenedor-agregar-direccion{
+    border: 1px; 
+    border-style: dashed; 
+    border-radius: 20px; 
+    font-size: 15px;
+    height: 45px;
+    cursor: pointer;
+}
