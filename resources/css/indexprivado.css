@@ -1,3 +1,15 @@
+html{
+    height:75%
+}
+
+body{
+    height: 100%;
+}
+
+main{
+    height: 100%;
+}
+
 span{
     color: #4593EE;
 }
