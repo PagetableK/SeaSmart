@@ -8,7 +8,7 @@ if (titulo == "SeaSmart") {
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid row-gap-3">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/logo1.png" width="55px" height="55px">
@@ -76,7 +76,7 @@ else if(titulo == "Mi cuenta")
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/logo1.png" width="55px" height="55px">
@@ -148,7 +148,7 @@ else if(titulo=="Mi carrito")
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/logo1.png" width="55px" height="55px">
@@ -211,7 +211,7 @@ else if(titulo == "Mis pedidos")
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/logo1.png" width="55px" height="55px">
@@ -284,7 +284,7 @@ else if(titulo == "Mi información")
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/logo1.png" width="55px" height="55px">
@@ -358,7 +358,7 @@ else if(titulo == "Inicio de sesión")
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/Logo1.png" width="55px" height="55px">
@@ -383,7 +383,7 @@ else if(titulo == "Registro")
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/Logo1.png" width="55px" height="55px">
@@ -408,7 +408,7 @@ else if(titulo == "Casi terminamos")
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/Logo1.png" width="55px" height="55px">
@@ -432,7 +432,7 @@ else if(titulo == "¿Quiénes somos?"){
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/Logo1.png" width="55px" height="55px">
@@ -480,7 +480,7 @@ if (titulo == "sub_categoria") {
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/logo1.png" width="55px" height="55px">
@@ -544,7 +544,7 @@ else if(titulo == "¿Quiénes somos?")
     <header>
     <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
         <div class="container-fluid">
-            <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container">
+            <div class="col-12 col-sm-2" id="seasmart-container">
                 <div class="row">
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <img src="../../resources/img/logo1.png" width="55px" height="55px">

@@ -1,7 +1,11 @@
 // Constante para establecer el formulario de registro del primer usuario.
-const SIGNUP_FORM = document.getElementById('formLogin');
+const SIGNUP_FORM = document.getElementById('formRegistrarse');
 // Constante para establecer el formulario de inicio de sesión.
 const LOGIN_FORM = document.getElementById('formLogin');
+// Constante para establecer el elemento del título principal.
+const LB_TITULO = document.getElementById('lbIniciarSesion');
+//Constante para establecer el contenedor de ambos form
+const CONTENEDOR_FORMS = document.getElementById('contenedorForms');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -15,13 +19,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         location.href = 'dashboard.html';
     } else if (DATA.status) {
         // Se establece el título del contenido principal.
-        MAIN_TITLE.textContent = 'Iniciar sesión';
+        LB_TITULO.textContent = 'Iniciar sesión';
         // Se muestra el formulario para iniciar sesión.
         LOGIN_FORM.classList.remove('d-none');
+        
+        CONTENEDOR_FORMS.
         sweetAlert(4, DATA.message, true);
     } else {
         // Se establece el título del contenido principal.
-        MAIN_TITLE.textContent = 'Registrar primer usuario';
+        LB_TITULO.textContent = 'Registrarse';
         // Se muestra el formulario para registrar el primer usuario.
         SIGNUP_FORM.classList.remove('d-none');
         sweetAlert(4, DATA.error, true);
