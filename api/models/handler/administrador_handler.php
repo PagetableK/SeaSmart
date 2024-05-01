@@ -35,4 +35,13 @@ class AdministradorHandler
             return false;
         }
     }
+
+    public function createRow()
+    {
+        $sql = 'INSERT INTO administrador(nombre_administrador, apellido_administrador, correo_administrador, alias_administrador, clave_administrador)
+                VALUES(?, ?, ?, ?, ?)';
+        $params = array($this->nombre, $this->apellido, $this->correo, $this->alias, $this->clave);
+        return Database::executeRow($sql, $params);
+    }
 }
+?>

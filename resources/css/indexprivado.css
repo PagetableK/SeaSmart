@@ -18,8 +18,21 @@ span{
     font-size: 50px; color: #55B8EB;
 }
 
-#btnIngresar{
-    background-color: #BCE7FD; color: #418DE7;
+.btnAccion{
+    background-color: #BCE7FD; color: #418DE7 !important;
+}
+
+.inputT{
+    background-color: #DCF2F1 !important;
+    border-color: #BCE7FD !important;
+    font-size: 18px !important;
+}
+
+.inputT::placeholder{
+    background-color: #DCF2F1 !important; 
+    color: #2B2D42 !important;
+    opacity: 30% !important;
+    font-size: 18px !important;
 }
 
 .navbar{
@@ -27,29 +40,5 @@ span{
 }
 
 a{
-    text-decoration: none;
-}
-
-#inputCorreo{
-    background-color: #DCF2F1;
-    border-color: #BCE7FD;
-    font-size: 18px;
-}
-
-#inputContra{
-    background-color: #DCF2F1;
-    border-color: #BCE7FD;
-    font-size: 18px;
-}
-
-#inputCorreo::placeholder{
-    color: #2B2D42;
-    opacity: 30%;
-    font-size: 18px;
-}
-
-#inputContra::placeholder{
-    color: #2B2D42;
-    opacity: 30%;
-    font-size: 18px;
+    text-decoration: none !important;
 }

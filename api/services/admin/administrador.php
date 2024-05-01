@@ -12,10 +12,33 @@ if (isset($_GET['action'])) {
     $result = array('status' => 0, 'session' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'username' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['idAdministrador'])) {
+        $result['session'] = 1;
 
+        switch ($_GET['action']) {
+            case 'getUser':
+                if(isset($_SESSION['aliasAdministrador'])){
+                    print('El usuario ha iniciado sesión');
+                }
+                break;
+        }
     } else {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+            case 'signUp':
+                $_POST = Validator::validateForm($_POST);
+                if(
+                    !$administrador->setNombre($_POST['nombreAdministrador'])
+                ){
+                    $result['error'] = $administrador->getDataError();
+                }
+                // else if($_POST['claveAdministrador'] != $_POST['confirmarClave']){
+
+                // }
+                else{
+                    $result['status'] = 1;
+                    $result['message'] = 'El administrador está registrado';
+                }
+                break;
             case 'logIn':
                 $_POST = Validator::validateForm($_POST);
                 if ($administrador->checkUser($_POST['correo'], $_POST['contra'])) {
@@ -39,3 +62,4 @@ if (isset($_GET['action'])) {
 } else {
     print(json_encode('Recurso no disponible'));
 }
+?>

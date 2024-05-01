@@ -1,19 +1,19 @@
 // Constante para establecer el formulario de registro del primer usuario.
-const SIGNUP_FORM = document.getElementById('formRegistrarse');
+const SIGNUP_FORM = document.getElementById('formRegistro');
 // Constante para establecer el formulario de inicio de sesión.
 const LOGIN_FORM = document.getElementById('formLogin');
 // Constante para establecer el elemento del título principal.
 const LB_TITULO = document.getElementById('lbIniciarSesion');
-//Constante para establecer el contenedor de ambos form
+// Constante para establecer el contenedor de ambos form.
 const CONTENEDOR_FORMS = document.getElementById('contenedorForms');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
-    // Llamada a la función para mostrar el encabezado y pie del documento.
+    // Llamada a la función para mostrar el encabezado del documento.
     loadTemplate();
     // Petición para consultar los usuarios registrados.
     const DATA = await fetchData(USER_API, 'readUsers');
-    // Se comprueba si existe una sesión, de lo contrario se sigue con el flujo normal.
+    // Se comprueba si existe una sesión, de lo contrario se ejecuta el código de forma normal.
     if (DATA.session) {
         // Se direcciona a la página web de bienvenida.
         location.href = 'dashboard.html';
@@ -22,16 +22,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         LB_TITULO.textContent = 'Iniciar sesión';
         // Se muestra el formulario para iniciar sesión.
         LOGIN_FORM.classList.remove('d-none');
-        
-        CONTENEDOR_FORMS.
+        //Cambia el tamaño de la columna del contenedor del form
+        CONTENEDOR_FORMS.classList.add('col-md-6');
+        //Muestra la alerta que informa el estado de la cuenta
         sweetAlert(4, DATA.message, true);
     } else {
         // Se establece el título del contenido principal.
         LB_TITULO.textContent = 'Registrarse';
         // Se muestra el formulario para registrar el primer usuario.
         SIGNUP_FORM.classList.remove('d-none');
-        sweetAlert(4, DATA.error, true);
+        //Cambia el tamaño de la columna del contenedor del form
+        CONTENEDOR_FORMS.classList.add('col-12', 'px-md-5');
+        //Muestra la alerta que informa el estado de la cuenta
+        sweetAlert(4, DATA.error, true);   
     }
+
+    console.log(DATA);
 });
 
 // Método del evento para cuando se envía el formulario de registro del primer usuario.

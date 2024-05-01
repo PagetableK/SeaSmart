@@ -43,69 +43,64 @@
                     </div>
                 </div>
                 <!-- Contenedor con los formularios -->
-                <div class="col-12" id="contenedorForms">
-                    <div class="row">
+                <div class="" id="contenedorForms">
+                    <div class="container-fluid">
                         <div class="row d-flex align-items-center justify-content-start">
                             <div class="col-12 col-lg-10">
-                                <p class="fw-bold text-center" id="lbIniciarSesion">Inicie sesión</p>
+                                <p class="fw-bold text-center" id="lbIniciarSesion"></p>
                             </div>
                         </div>
-                        <form id="formLogin" class="d-none">
+                        <form id="formLogin" class="row d-none">
                             <!-- Campo de correo electrónico -->
-                            <div>
-                                <div class="col-12 col-lg-10 mb-3">
-                                    <label for="inputCorreo" class="form-label fw-medium">Correo electrónico</label>
-                                    <input type="email" class="form-control" id="inputCorreo"
-                                        placeholder="Jeanfranco@gmail.com">
-                                </div>
+                            <div class="col-12 col-lg-10 mb-3">
+                                <label for="inputCorreo" class="form-label fw-medium">Correo electrónico</label>
+                                <input type="email" class="form-control inputT" id="inputCorreo"
+                                    placeholder="Jeanfranco@gmail.com">
                             </div>
                             <!-- Campo de contraseña -->
-                            <div>
-                                <div class="col-12 col-lg-10 mb-4">
-                                    <label for="inputContra" class="form-label fw-medium">Contraseña</label>
-                                    <input type="password" id="inputContra" class="form-control"
-                                        aria-describedby="passwordHelpBlock" placeholder="••••••••••••••••">
-                                </div>
+                            <div class="col-12 col-lg-10 mb-4">
+                                <label for="inputContra" class="form-label fw-medium">Contraseña</label>
+                                <input type="password" id="inputContra" class="form-control inputT"
+                                    aria-describedby="passwordHelpBlock" placeholder="••••••••••••••••">
                             </div>
                             <!-- Botón para ingresar al sistema -->
-                            <div>
-                                <div
-                                    class="col-12 col-lg-10 d-flex align-items-center justify-content-center">
-                                    <a href="dashboard.html" class="btn rounded-pill ps-5 pe-5 fw-bold"
-                                        id="btnIngresar">Ingresar</a>
-                                </div>
+                            <div class="col-12 col-lg-10 d-flex align-items-center justify-content-center">
+                                <a href="dashboard.html" class="btn rounded-pill ps-5 pe-5 fw-bold btnAccion"
+                                    id="btnIngresar">Ingresar</a>
                             </div>
                         </form>
-                        <form id="formRegistro">
+                        <form id="formRegistro" class="row d-none">
                             <!-- Campo de correo electrónico -->
-                            <div>
-                                <div class="col-12 col-lg-4 mb-3">
-                                    <label for="inputCorreo" class="form-label fw-medium">Correo electrónico</label>
-                                    <input type="email" class="form-control" id="inputCorreo"
-                                        placeholder="Jeanfranco@gmail.com">
-                                </div>
+                            <div class="col-12 col-lg-6 mb-3">
+                                <label for="inputCorreo_registro" class="form-label fw-medium">Correo electrónico</label>
+                                <input type="email" class="form-control inputT" id="inputCorreo_registro"
+                                    placeholder="correo@gmail.com">
                             </div>
                             <!-- Campo de contraseña -->
-                            <div>
-                                <div class="col-12 col-lg-4 mb-4">
-                                    <label for="inputContra" class="form-label fw-medium">Contraseña</label>
-                                    <input type="password" id="inputContra" class="form-control"
-                                        aria-describedby="passwordHelpBlock" placeholder="••••••••••••••••">
-                                </div>
+                            <div class="col-12 col-lg-6 mb-4">
+                                <label for="inputContra_registro" class="form-label fw-medium">Contraseña</label>
+                                <input type="password" id="inputContra_registro" class="form-control inputT"
+                                    aria-describedby="passwordHelpBlock" placeholder="••••••••••••••••">
+                            </div>
+                            <!-- Campo de Nombre -->
+                            <div class="col-12 col-lg-6 mb-3">
+                                <label for="inputNombre_registro" class="form-label fw-medium">Nombre</label>
+                                <input type="text" class="form-control inputT" id="inputNombre_registro">
+                            </div>
+                            <!-- Campo de Apellido -->
+                            <div class="col-12 col-lg-6 mb-3">
+                                <label for="inputApellido_registro" class="form-label fw-medium">Apellido</label>
+                                <input type="text" class="form-control inputT" id="inputApellido_registro">
                             </div>
                             <!-- Botón para ingresar al sistema -->
-                            <div>
-                                <div
-                                    class="col-12 col-lg-10 d-flex align-items-center justify-content-center">
-                                    <a href="dashboard.html" class="btn rounded-pill ps-5 pe-5 fw-bold"
-                                        id="btnIngresar">Registrarse</a>
-                                </div>
+                            <div class="col-12 col-lg-12 d-flex align-items-center justify-content-center">
+                                <a href="dashboard.html" class="btn rounded-pill ps-5 pe-5 fw-bold btnAccion"
+                                    id="btnRegistrarse">Registrarse</a>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </main>
     <!-- IMPORTANDO ARCHIVOS JAVASCRIPT -->
@@ -113,6 +108,12 @@
     <script src="../../resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <!-- Mandar a llamar el controlador del index -->
     <script src="../../controllers/private/index.js" type="text/javascript"></script>
+    <!-- Mandar a llamar la librería de alertas -->
+    <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+    <!-- Llamada al controlador general de la aplicación -->
+    <script type="text/javascript" src="../../controllers/utils/componentes.js"></script>
+    <!-- Mandar a llamar el controlador de la página web -->
+    <script src="../../controllers/utils/admin.js" type="text/javascript"></script>
 </body>
 
 </html>
