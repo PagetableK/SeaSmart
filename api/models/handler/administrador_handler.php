@@ -21,13 +21,12 @@ class AdministradorHandler
      */
     public function checkUser($email, $password)
     {
-        $sql = 'SELECT id_administrador, nombre_administrador, contra_administrador
+        $sql = 'SELECT id_administrador, nombre_administrador, contra_administrador, correo_administrador
                 FROM administradores
-                WHERE  correo_administrador = ?';
+                WHERE correo_administrador = ?';
         $params = array($email);
         $data = Database::getRow($sql, $params);
-        // if (password_verify($password, $data['contra_administrador'])) {
-        if ($password == 'contraseña123') {
+        if (password_verify($password, $data['contra_administrador'])) {
             $_SESSION['idAdministrador'] = $data['id_administrador'];
             $_SESSION['correoAdministrador'] = $data['correo_administrador'];
             return true;
@@ -38,9 +37,10 @@ class AdministradorHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO administrador(nombre_administrador, apellido_administrador, correo_administrador, alias_administrador, clave_administrador)
-                VALUES(?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->alias, $this->clave);
+        $sql = 'INSERT INTO administradores (nombre_administrador, apellido_administrador, correo_administrador, contra_administrador) VALUES
+        (?, ?, ?, ?);';
+
+        $params = array($this->nombre, $this->apellido, $this->correo, $this->contra);
         return Database::executeRow($sql, $params);
     }
 
@@ -52,4 +52,3 @@ class AdministradorHandler
         return Database::getRows($sql);
     }
 }
-?>

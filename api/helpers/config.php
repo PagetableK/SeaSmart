@@ -8,4 +8,3 @@ define('SERVER', 'localhost');
 define('DATABASE', 'dbseasmart');
 define('USERNAME', 'root');
 define('PASSWORD', '');
-?>

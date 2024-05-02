@@ -6,11 +6,14 @@ const USER_API = 'services/admin/administrador.php';
 
 //Declarar constante para asignar el contenido de la etiqueta main
 const MAIN = document.querySelector('main');
-var AnchoP = document.querySelector('html');
+// Constante para establecer el elemento del título principal.
+const LB_TITULO = document.getElementById('tituloPrincipal');
 
 const loadTemplate = async () => {
     const DATA = await fetchData(USER_API, 'getUser');
-
+    alert(DATA.session);
+    console.log(DATA);
+    alert(DATA.status);
     if (DATA.session) {
         if (DATA.status) {
             console.log('El usuario tiene una sesión activa');

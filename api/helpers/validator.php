@@ -221,10 +221,10 @@ class Validator
         if (strlen($value) < 8) {
             self::$password_error = 'La contraseña es menor a 8 caracteres';
             return false;
-        } elseif (strlen($value) <= 72) {
+        } elseif (strlen($value) <= 120) {
             return true;
         } else {
-            self::$password_error = 'La contraseña es mayor a 72 caracteres';
+            self::$password_error = 'La contraseña es mayor a 120 caracteres';
             return false;
         }
     }

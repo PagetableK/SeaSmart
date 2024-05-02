@@ -22,22 +22,67 @@ class AdministradorData extends AdministradorHandler
             return true;
         }
         else{
-            $this->data_error = 'El identificador del administrador es correcto';
+            $this->info_error = 'El identificador del administrador es correcto';
             return false;
         }
     }
 
     public function setNombre($valor, $min = 4, $max = 20)
     {
-        if(Validator::validateLength($valor, $min, $max))
-        {
+        if (!Validator::validateAlphabetic($valor)) {
+            $this->info_error = 'El nombre debe ser un valor alfabético';
+            return false;
+        } elseif (Validator::validateLength($valor, $min, $max)) {
+            $this->nombre = $valor;
             return true;
-        }
-        else
-        {
+        } else {
             $this->info_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
         }
     }
+
+    
+    public function setApellido($valor, $min = 4, $max = 50)
+    {
+        if (!Validator::validateAlphabetic($valor)) {
+            $this->info_error = 'El apellido debe ser un valor alfabético';
+            return false;
+        } elseif (Validator::validateLength($valor, $min, $max)) {
+            $this->apellido = $valor;
+            return true;
+        } else {
+            $this->info_error = 'El apellido debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setCorreo($valor, $min = 8, $max = 100)
+    {
+        if (!Validator::validateEmail($valor)) {
+            $this->info_error = 'El correo no es válido';
+            return false;
+        } elseif (Validator::validateLength($valor, $min, $max)) {
+            $this->correo = $valor;
+            return true;
+        } else {
+            $this->info_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setContra($valor)
+    {
+        if (Validator::validatePassword($valor)) {
+            $this->contra = password_hash($valor, PASSWORD_DEFAULT);
+            return true;
+        } else {
+            $this->info_error = Validator::getPasswordError();
+            return false;
+        }
+    }
+
+    public function getDataError()
+    {
+        return $this->info_error;
+    }
 }
-?>
