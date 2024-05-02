@@ -43,5 +43,13 @@ class AdministradorHandler
         $params = array($this->nombre, $this->apellido, $this->correo, $this->alias, $this->clave);
         return Database::executeRow($sql, $params);
     }
+
+    public function readAll()
+    {
+        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador
+                FROM administradores
+                ORDER BY apellido_administrador';
+        return Database::getRows($sql);
+    }
 }
 ?>

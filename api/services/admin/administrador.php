@@ -24,10 +24,19 @@ if (isset($_GET['action'])) {
     } else {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+            case 'readUsers':
+                if ($administrador->readAll()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Debe autenticarse para ingresar';
+                    $asd = $administrador->readAll();
+                } else {
+                    $result['error'] = 'Debe crear un administrador para comenzar';
+                }
+                break;
             case 'signUp':
                 $_POST = Validator::validateForm($_POST);
                 if(
-                    !$administrador->setNombre($_POST['nombreAdministrador'])
+                    !$administrador->setNombre($_POST['NombreAdmin'])
                 ){
                     $result['error'] = $administrador->getDataError();
                 }

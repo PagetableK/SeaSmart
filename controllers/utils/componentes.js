@@ -2,7 +2,7 @@
 *   CONTROLADOR DE USO GENERAL EN TODAS LAS PÁGINAS WEB.
 */
 // Constante para establecer la ruta base del servidor.
-const SERVER_URL = 'http://localhost/coffeeshop/api/';
+const SERVER_URL = 'http://localhost/SeaSmart/api/';
 
 /*
 *   Función para mostrar un mensaje de confirmación.
@@ -54,7 +54,7 @@ const sweetAlert = async (type, text, timer, url = null) => {
             icon = 'warning';
             break;
         case 4:
-            title = 'Avisoasd';
+            title = 'Aviso';
             icon = 'info';
     }
     // Se define un objeto con las opciones principales para el mensaje.

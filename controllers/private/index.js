@@ -36,8 +36,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         //Muestra la alerta que informa el estado de la cuenta
         sweetAlert(4, DATA.error, true);   
     }
-
-    console.log(DATA);
 });
 
 // Método del evento para cuando se envía el formulario de registro del primer usuario.
@@ -48,6 +46,8 @@ SIGNUP_FORM.addEventListener('submit', async (event) => {
     const FORM = new FormData(SIGNUP_FORM);
     // Petición para registrar el primer usuario del sitio privado.
     const DATA = await fetchData(USER_API, 'signUp', FORM);
+    console.log(DATA);
+
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         sweetAlert(1, DATA.message, true, 'index.html');
