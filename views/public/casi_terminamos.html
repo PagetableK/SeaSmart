@@ -32,13 +32,13 @@
                                 <div class="mb-3">
                                     <label for="telefono" class="form-label">Número de teléfono</label>
                                     <input type="text" class="form-control" id="telefono" required
-                                        placeholder="75854595">
+                                        placeholder="Ejemplo: 75854595" oninput="numeroNacional(event)">
                                 </div>
                                 <div class="mb-3">
                                     <label for="telefonoSecundario" class="form-label">Teléfono secundario / Teléfono de
                                         emergencia</label>
                                     <input type="text" class="form-control" id="telefonoSecundario" required
-                                        placeholder="25452547">
+                                        placeholder="Ejemplo: 25452547" oninput="numeroNacional(event)">
                                 </div>
                                 <div class="d-grid">
                                     <button class="btn btn-dark btn-xl d-grid rounded-pill" type="submit"><a href="index.html">Registrarse</a></button>
@@ -56,6 +56,9 @@
 
     <!-- Mandar a llamar el navbar -->
     <script type="text/javascript" src="../../controllers/utils/publico.js"></script>
+
+    <!-- Validar número de teléfono -->
+    <script src="../../resources/js/validar_telefono.js"></script>
 </body>
 
 </html>
