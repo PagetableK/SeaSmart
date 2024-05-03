@@ -19,16 +19,16 @@ class AdministradorHandler
     /*
      *  Métodos para gestionar la cuenta del administrador.
      */
-    public function checkUser($email, $password)
+    public function checkUser($correo, $contra)
     {
-        $sql = 'SELECT id_administrador, nombre_administrador, contra_administrador, correo_administrador
+        $sql = 'SELECT id_administrador, nombre_administrador, contra_administrador
                 FROM administradores
                 WHERE correo_administrador = ?';
-        $params = array($email);
+        $params = array($correo);
         $data = Database::getRow($sql, $params);
-        if (password_verify($password, $data['contra_administrador'])) {
+        if (password_verify($contra, $data['contra_administrador'])) {
             $_SESSION['idAdministrador'] = $data['id_administrador'];
-            $_SESSION['correoAdministrador'] = $data['correo_administrador'];
+            $_SESSION['correoAdministrador'] = $correo;
             return true;
         } else {
             return false;

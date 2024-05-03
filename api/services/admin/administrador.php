@@ -16,12 +16,19 @@ if (isset($_GET['action'])) {
 
         switch ($_GET['action']) {
             case 'getUser':
-                if(isset($_SESSION['correoAdministrador'])){
+                if (isset($_SESSION['correoAdministrador'])) {
                     $result['status'] = 1;
-                    $result['correoAdmin'] = $_SESSION['CorreoAdmin'];
-                }
-                else {
+                    $result['correoAdmin'] = $_SESSION['correoAdministrador'];
+                } else {
                     $result['error'] = 'Correo no definido';
+                }
+                break;
+            case 'logOut':
+                if (session_destroy()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Sesión eliminada correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al cerrar la sesión';
                 }
                 break;
         }
@@ -38,25 +45,22 @@ if (isset($_GET['action'])) {
                 break;
             case 'signUp':
                 $_POST = Validator::validateForm($_POST);
-                if(
-                    !$administrador->setNombre($_POST['NombreAdmin']) 
+                if (
+                    !$administrador->setNombre($_POST['NombreAdmin'])
                     or
-                    !$administrador->setApellido($_POST['ApellidoAdmin']) 
+                    !$administrador->setApellido($_POST['ApellidoAdmin'])
                     or
-                    !$administrador->setCorreo($_POST['CorreoAdmin']) 
+                    !$administrador->setCorreo($_POST['CorreoAdmin'])
                     or
                     !$administrador->setContra($_POST['ContraAdmin'])
-                ){
+                ) {
                     $result['error'] = $administrador->getDataError();
-                }
-                else if($_POST['ContraAdmin'] != $_POST['ConfirmarContra']){
+                } else if ($_POST['ContraAdmin'] != $_POST['ConfirmarContra']) {
                     $result['error'] = 'Las contraseñas son diferentes';
-                }
-                elseif ($administrador->createRow()) {
+                } elseif ($administrador->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Administrador registrado correctamente';
-                }
-                else {
+                } else {
                     $result['error'] = 'Ocurrió un problema al registrar el administrador';
                 }
                 break;
@@ -79,7 +83,8 @@ if (isset($_GET['action'])) {
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('Content-type: application/json; charset=utf-8');
     // Se imprime el resultado en formato JSON y se retorna al controlador.
+
     print (json_encode($result));
 } else {
-    print(json_encode('Recurso no disponible'));
+    print (json_encode('Recurso no disponible'));
 }

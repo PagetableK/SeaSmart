@@ -3,7 +3,7 @@
 */
 
 const USER_API = 'services/admin/administrador.php';
-
+console.log('a');
 //Declarar constante para asignar el contenido de la etiqueta main
 const MAIN = document.querySelector('main');
 // Constante para establecer el elemento del título principal.
@@ -11,9 +11,7 @@ const LB_TITULO = document.getElementById('tituloPrincipal');
 
 const loadTemplate = async () => {
     const DATA = await fetchData(USER_API, 'getUser');
-    alert(DATA.session);
     console.log(DATA);
-    alert(DATA.status);
     if (DATA.session) {
         if (DATA.status) {
             console.log('El usuario tiene una sesión activa');
@@ -117,7 +115,7 @@ const loadTemplate = async () => {
                                         <img src="../../resources/img/user.png" class="dropdown-toggle" type="button" width="30px"
                                             height="30px" data-bs-toggle="dropdown" aria-expanded="false">
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item me-5" href="index.html" id="cerrarS">Cerrar sesión</a></li>
+                                            <li><a class="dropdown-item me-5" onclick="logOut()" id="cerrarS">Cerrar sesión</a></li>
                                         </ul>
                                     </div>
                                 </div>

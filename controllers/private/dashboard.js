@@ -1,5 +1,5 @@
 // Constante para completar la ruta de la API.
-const PRODUCTO_API = 'services/admin/producto.php';
+const PRODUCTO_API = 'services/admin/productos.php';
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,8 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         greeting = 'Buenas noches';
     }
 
-    alert('asd');
-    
     // Llamada a la función para mostrar el encabezado y pie del documento.
     loadTemplate();
     // Se establece el título del contenido principal.
