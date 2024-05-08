@@ -21,3 +21,8 @@ else if(window.screen.width < 992){
 else{
     SEPARADORH.remove();
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Llamada a la función para mostrar el encabezado y pie del documento.
+    cargarPlantilla();
+});

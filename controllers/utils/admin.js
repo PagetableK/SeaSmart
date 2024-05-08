@@ -3,13 +3,12 @@
 */
 
 const USER_API = 'services/admin/administrador.php';
-console.log('a');
 //Declarar constante para asignar el contenido de la etiqueta main
 const MAIN = document.querySelector('main');
 // Constante para establecer el elemento del título principal.
 const LB_TITULO = document.getElementById('tituloPrincipal');
 
-const loadTemplate = async () => {
+const cargarPlantilla = async () => {
     const DATA = await fetchData(USER_API, 'getUser');
     console.log(DATA);
     if (DATA.session) {

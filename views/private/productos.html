@@ -24,16 +24,17 @@
         <!-- CREAMOS EL CONTENEDOR PADRE DE LOS ELEMENTOS  BOTON AGREGAR Y LA BARRA DE BUSQUEDA-->
         <div class="container-fluid">
             <!-- CREAMOS LA FILA DONDE COLOCAMOS EL BOTON "AGREGAR PRODUCTO"-->
-            <div class="row mt-5 row-gap-3">
+            <div class="row mt-5 row-gap-3 px-md-5">
                 <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <!-- Botón para abrir el Modal -->
                     <button type="button" class="btn btn-primary ms-5" onclick="abrirCrear()">Agregar Producto +</button>
                 </div>
                 <!-- CREAMOS LA COLUMNA DONDE COLOCAMOS LA "BARRA DE BUSQUEDA"  -->
-                <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <div class="">
-                        <form class="d-flex">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar producto..."
+                <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6 d-flex px-4 px-sm-0">
+                    <!--COLOCAMOS LA BARRA DE BUSQUEDA-->
+                    <div class="col">
+                        <form class="d-flex ps-3">
+                            <input class="form-control" type="search" placeholder="Buscar un producto..."
                                 aria-label="Search">
                             <button class="btn" type="enviar"><img src="../../resources/img/lupa.png" class="img-fluid"
                                     width="35px" height="35px" alt="buscarimg"></button>

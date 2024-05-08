@@ -12,7 +12,7 @@ const CONTENEDOR_FORMS = document.getElementById('contenedorForms');
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
     // Llamada a la función para mostrar el encabezado del documento.
-    loadTemplate();
+    cargarPlantilla();
     // Petición para consultar los usuarios registrados.
     const DATA = await fetchData(USER_API, 'readUsers');
     // Se comprueba si existe una sesión, de lo contrario se ejecuta el código de forma normal.

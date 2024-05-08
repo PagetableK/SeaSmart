@@ -43,6 +43,9 @@
                     <!-- CREAMOS LA CABECERA DE LA TABLA DE CATEGORIA -->
                     <thead>
                         <tr>
+                            <td colspan="4" id="filasEncontradas"></td>
+                        </tr>
+                        <tr>
                             <th class="text-center">Imagen</th>
                             <th class="text-center">Nombre</th>
                             <th class="text-center">Descripción</th>
@@ -50,15 +53,13 @@
                         </tr>
                     </thead>
                     <!-- CREAMOS EL INTERIOR DE LA TABLA (LAS FILAS Y COLUMNAS DE CADA CATEGORIA)-->
-                    <tbody>
+                    <tbody id="cuerpoTabla">
                         <!-- FILA 1 -->
                         <tr>
                             <td id="" class="text-center"><img src="../../resources/img/mujer_traje.jpg"></td>
                             <td class="text-center">Mujeres</td>
                             <td class="text-center">Descripción...</td>
-                            <td id="celda-agregar-eliminar" class="text-center">
-
-                            </td>
+                            <td id="celda-agregar-eliminar" class="text-center"></td>
                         </tr>
                     </tbody>
                 </table>
