@@ -25,7 +25,8 @@
             <div class="row mt-5 row-gap-3">
                 <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <!-- Botón para abrir el modal -->
-                    <button type="button" class="btn btn-primary ms-5" onclick="abrirCrear()">Agregar Categoría
+                    <button type="button" class="btn btn-primary ms-5" onclick="abrirModal('Agregar categoría')">Agregar
+                        Categoría
                         +</button>
                 </div>
                 <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -66,111 +67,63 @@
             </div>
         </div>
 
-        <!-- Modal editar -->
-        <div class="modal fade" id="editModal_categoria">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar categoría</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="mb-md-6">
-                                        <label for="editar_categoria" class="col-form-label">Nombre de la
-                                            categoría:</label>
-                                        <input type="text" class="form-control" id="editar_categoria">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-3">
-                                        <label for="descripcion_categoria" class="col-form-label">Descripción:</label>
-                                        <textarea class="form-control" id="descripcion_categoria"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <label for="recipient-name" class="col-form-label text-md-right">Imagen de la
-                                        categoría:</label>
-                                </div>
-                                <div class="row">
-                                    <input type="file" class="form-control" aria-label="file example" required
-                                        id="fotou">
-                                    <div class="invalid-feedback">Example invalid form file feedback</div>
-                                </div>
-                                <div class="row d-flex align-items-center justify-content-center">
-                                    <img src="../../resources/img/image.png" alt="imagen representante"
-                                        class="img-thumbnail col-md-6 col-md-3" id="imge">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Editar
-                            categoría</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Modal agregar -->
-        <div class="modal fade" id="agregarModal_categoria">
+        <div class="modal fade" id="Modal_categoria">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <!-- Encabezado del modal -->
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar categoría</h1>
+                        <h1 class="modal-title fs-5" id="tituloModal"></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <!-- Cuerpo del modal -->
-                    <div class="modal-body">
-                        <form class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="mb-md-6">
-                                        <label for="nombre_Categoria" class="col-form-label">Nombre de la
+                    <form id="formCategoria">
+                        <!-- Cuerpo del modal -->
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="mb-md-6">
+                                            <input type="number" class="d-none" id="idCategoria" name="idCategoria">
+                                            <label for="nombreCategoria" class="col-form-label">Nombre de la
+                                                categoría:</label>
+                                            <input type="text" class="form-control" id="nombreCategoria"
+                                                name="nombreCategoria">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3">
+                                            <label for="descripcionCategoria"
+                                                class="col-form-label">Descripción:</label>
+                                            <textarea class="form-control" id="descripcionCategoria"
+                                                name="descripcionCategoria"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <label for="imagenCategoria" class="col-form-label text-md-right">Imagen de la
                                             categoría:</label>
-                                        <input type="text" class="form-control" id="nombre_Categoria">
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-3">
-                                        <label for="descripcion_Categoria" class="col-form-label">Descripción:</label>
-                                        <textarea class="form-control" id="descripcion_Categoria"></textarea>
+                                    <div class="row">
+                                        <input type="file" class="form-control" id="imagenCategoria"
+                                            name="imagenCategoria" accept=".png, .jpg" onchange="cargarImagen(event)"
+                                            required>
+                                    </div>
+                                    <div class="row d-flex align-items-center justify-content-center">
+                                        <img src="../../resources/img/image.png" class="img-thumbnail col-md-6 col-md-3"
+                                            id="imgCategoria">
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <label for="recipient-name" class="col-form-label text-md-right">Imagen de la
-                                        categoría:</label>
-                                </div>
-                                <div class="row">
-                                    <input type="file" class="form-control" aria-label="file example" required
-                                        id="foto">
-                                    <div class="invalid-feedback">Example invalid form file feedback</div>
-                                </div>
-                                <div class="row d-flex align-items-center justify-content-center">
-                                    <img src="../../resources/img/image.png" alt="imagen representante"
-                                        class="img-thumbnail col-md-6 col-md-3" id="img">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- Footer del modal -->
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar
-                            categoría</button>
-                    </div>
+                        <!-- Footer del modal -->
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Agregar
+                                categoría</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -200,10 +153,6 @@
     <script type="text/javascript" src="../../controllers/utils/componentes.js"></script>
     <!-- Mandar a llamar el controlador de la página privada -->
     <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
-    <!-- Controlador para los botones de agregar y eliminar -->
-    <script type="text/javascript" src="../../controllers/utils/agregar_eliminar.js"></script>
-    <!-- Mandar a llamar el javascript con la función de previsualizar la imagen que se carge -->
-    <script type="text/javascript" src="../../resources/js/previsualizar_imagen.js"></script>
     <!-- Controlador js de categorias -->
     <script type="text/javascript" src="../../controllers/private/categorias.js"></script>
 </body>

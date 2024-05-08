@@ -209,6 +209,9 @@ const logOut = async () => {
 const fetchData = async (filename, action, form = null) => {
     // Se define una constante tipo objeto para establecer las opciones de la petición.
     const OPTIONS = {};
+    console.log(filename);
+    console.log(action);
+    console.log(form);
     // Se determina el tipo de petición a realizar.
     if (form) {
         OPTIONS.method = 'post';

@@ -34,7 +34,7 @@ class CategoriaHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO categoria(nombre_categoria, imagen_categoria, descripcion_categoria)
+        $sql = 'INSERT INTO categorias(nombre_categoria, imagen_categoria, descripcion_categoria)
                 VALUES(?, ?, ?)';
         $params = array($this->nombre, $this->imagen, $this->descripcion);
         return Database::executeRow($sql, $params);
