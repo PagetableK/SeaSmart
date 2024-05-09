@@ -13,3 +13,8 @@ span{
 .nav-link{
     font-weight: 600;
 }
+
+html, main{
+    min-height: 100%;
+    overflow: auto;
+}

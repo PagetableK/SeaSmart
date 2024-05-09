@@ -68,7 +68,7 @@ class CategoriaHandler
 
     public function updateRow()
     {
-        $sql = 'UPDATE categoria
+        $sql = 'UPDATE categorias
                 SET imagen_categoria = ?, nombre_categoria = ?, descripcion_categoria = ?
                 WHERE id_categoria = ?';
         $params = array($this->imagen, $this->nombre, $this->descripcion, $this->id);

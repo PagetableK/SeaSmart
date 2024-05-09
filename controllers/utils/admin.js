@@ -123,6 +123,28 @@ const cargarPlantilla = async () => {
                 </header>
             `);
 
+            // Se agrega el pie de la página web después del contenido principal.
+            MAIN.insertAdjacentHTML('afterend', `
+                <footer class="fixed-bottom">
+                    <nav class="navbar">
+                        <div class="container">
+                            <div>
+                                <img src="../../resources/img/logo.png" alt="logo">
+                                <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
+                            </div>
+                            <div>
+                                <h6>Nuestras redes</h6>
+                                <div>
+                                    <a href="https://facebook.com" target="_blank"><img src="../../resources/img/facebook.png" alt="facebook"></a>
+                                    <a href="https://instagram.com/sea__smart/" target="_blank"><img src="../../resources/img/instagram.png" alt="instagram"></a>
+                                    <a href="https://web.whatsapp.com/" target="_blank"><img src="../../resources/img/whatsapp.png" alt="whatsapp"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </footer>
+            `);
+
             let btnCollapse = document.getElementById('btnCollapse');
             let imagenUsuario = document.getElementById('cuenta');
             let SeaContainer = document.getElementById('seasmart-container');
