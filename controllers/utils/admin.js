@@ -17,15 +17,15 @@ const cargarPlantilla = async () => {
 
             let colorBotones;
             let [colorBoton1, colorBoton2, colorBoton3, colorBoton4, colorBoton5, colorBoton6,
-                colorBoton7] = Array(7).fill('bg-light');
+                colorBoton7, colorBoton8] = Array(8).fill('bg-light');
             let [colorTexto1, colorTexto2, colorTexto3, colorTexto4, colorTexto5, colorTexto6,
-                colorTexto7] = Array(7).fill('text-dark');
+                colorTexto7, colorTexto8] = Array(8).fill('text-dark');
             let titulo = document.title;
 
 
             if (window.screen.width < 992) {
                 [colorBoton1, colorBoton2, colorBoton3, colorBoton4, colorBoton5, colorBoton6,
-                    colorBoton7] = '';
+                    colorBoton7, colorBoton8] = '';
             }
             else {
                 if (titulo == 'Tallas') {
@@ -55,6 +55,10 @@ const cargarPlantilla = async () => {
                 else if (titulo == 'Pedidos') {
                     colorBoton2 = 'bg-info';
                     colorTexto2 = 'text-light';
+                }
+                else if (titulo == 'Usuarios') {
+                    colorBoton8 = 'bg-info';
+                    colorTexto8 = 'text-light';
                 }
             }
 
@@ -102,6 +106,9 @@ const cargarPlantilla = async () => {
                                         </li>
                                         <li class="nav-item rounded-pill ${colorBoton7}" id="">
                                             <a class="nav-link fs-6 text-center" href="tallas.html"><span class="${colorTexto7}">Tallas</span></a>
+                                        </li>
+                                        <li class="nav-item rounded-pill ${colorBoton8}" id="">
+                                            <a class="nav-link fs-6 text-center" href="usuarios.html"><span class="${colorTexto8}">Usuarios</span></a>
                                         </li>
                                         <li class="nav-item mx-auto px-auto" id="cerrar-sesion">
                                             <a class="nav-link fs-6 text-center" href="index.html"><span class="text-danger">Cerrar sesión</span></a>

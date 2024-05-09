@@ -1,11 +1,11 @@
 // Constante para completar la ruta de la API.
 const CATEGORIA_API = 'services/admin/categorias.php';
 // Constante para almacenar el modal de editar categoría.
-const MODALCATEGORIA = new bootstrap.Modal('#Modal_categoria');
+const MODALCATEGORIA = new bootstrap.Modal('#modalCategoria');
 // Constante que almacena el form de búsqueda.
 const FORM_BUSCAR = document.getElementById('formBuscar');
 // Constante para almacenar el modal de eliminar categoría.
-const MODALBCATEGORIA = new bootstrap.Modal('#borrarModal_categoria');
+const MODALBCATEGORIA = new bootstrap.Modal('#borrarModalCategoria');
 // Constantes para cargar los elementos de la tabla.
 const FILAS_ENCONTRADAS = document.getElementById('filasEncontradas'),
     CUERPO_TABLA = document.getElementById('cuerpoTabla');

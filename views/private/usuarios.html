@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <!-- Mandar a llamar el framework -->
+    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../resources/css/navbar_privado.css" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <div class="container-fluid">
+            <div class="row mt-5 row-gap-3">
+                <div class="col-12 d-flex gap-3">
+                    <div class="d-flex align-items-center">
+                        <p class="text-start mtexto-0">Tipo de usuario:</p>
+                    </div>
+                    <div class="dropdown">
+                        <select class="form-select form -select-sm" name="selectUsuarios" id="selectUsuarios">
+                            <option value="1">Administradores</option>
+                            <option value="2">Clientes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <!-- Botón para abrir el modal -->
+                    <button type="button" class="btn btn-primary ms-5" onclick="abrirModal('Agregar usuario')">Agregar
+                        usuario
+                        +</button>
+                </div>
+                <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <form class="d-flex" id="formBuscar">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar usuarios por nombre..."
+                            name="buscarUsuario" id="buscarUsuario" oninput="verificarReset()">
+                        <button class="btn" type="submit"><img src="../../resources/img/lupa.png" class="img-fluid"
+                                width="35px" height="35px" alt="buscarimg"></button>
+                    </form>
+                </div>
+                <div class="table-responsive-md mt-5">
+                    <table class="table table-hover">
+                        <!-- Cabecera de la tabla -->
+                        <thead>
+                            <tr>
+                                <td colspan="4" id="filasEncontradas"></td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Apellido</th>
+                                <th class="text-center">Correo</th>
+                                <th class="text-center">DUI</th>
+                                <th class="text-center">Teléfono</th>
+                                <th class="text-center">Teléfono fijo</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTabla">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal" id="ModalCliente">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="tituloModal"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form id="formCategoria">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <input type="number" class="d-none" id="idCliente" name="idCliente">
+                                        <label for="nombreCliente" class="col-form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="nombreCliente"
+                                            name="nombreCliente">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label for="apellidoCliente" class="col-form-label">Apellido</label>
+                                        <input type="text" class="form-control" id="apellidoCliente"
+                                            name="apellidoCliente">
+                                    </div>
+                                    <div class="col-12 col-md-6">Correo</div>
+                                    <div class="col-12 col-md-6">Contra</div>
+                                    <div class="col-12 col-md-6">DUI</div>
+                                    <div class="col-12 col-md-6">Teléfono móvil</div>
+                                    <div class="col-12 col-md-6">Teléfono fijo</div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- IMPORTANDO ARCHIVOS JAVASCRIPT -->
+    <!-- Mandar a llamar el framework -->
+    <script type="text/javascript" src="../../resources/js/bootstrap.bundle.min.js"></script>
+    <!-- Mandar a llamar la librería de alertas -->
+    <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+    <!-- Llamada al controlador general de la aplicación -->
+    <script type="text/javascript" src="../../controllers/utils/componentes.js"></script>
+    <!-- Mandar a llamar el controlador de la página privada -->
+    <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
+    <!-- Controlador js de categorias -->
+    <script type="text/javascript" src="../../controllers/private/usuarios.js"></script>
+</body>
+
+</html>

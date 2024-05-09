@@ -18,3 +18,7 @@ html, main{
     min-height: 100%;
     overflow: auto;
 }
+
+.mtexto-0{
+    margin: 0px;
+}
