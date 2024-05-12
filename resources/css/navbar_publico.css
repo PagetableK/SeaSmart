@@ -33,6 +33,7 @@ a{
     --bs-dropdown-link-active-bg:#7f4fd9;
     --bs-dropdown-link-active-color:rgb(255, 255, 255);
     border-radius: 10px;
+    border: none;
 }
 
 #seasmart-container{
@@ -40,7 +41,7 @@ a{
 }
 
 html{
-    height: 100%;
+    min-height: 100%;
 }
 
 body{
