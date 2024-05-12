@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro 1</title>
+    <title>Casi terminamos</title>
     <!-- Mandar a llamar el framework -->
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../resources/css/registro.css" rel="stylesheet">
@@ -23,24 +23,25 @@
                 <div class="col-lg-6 col-md-8 col-sm-10">
                     <!-- Formulario de registro -->
                     <form>
+                        <!-- Div donde estan los input para registrar los números de teléfono -->
                         <div class="border border-secondary rounded-5">
-                            <div class="m-5">
-                                <h3 class="mb-3">Casi terminamos</h3>
-                                <h6>Necesitamos su número de teléfono para poder contactarnos con
+                            <div class="me-4 ms-4 mt-5 mb-5">
+                                <h3 class="mb-4">Casi terminamos</h3>
+                                <h6 class="mb-4">Necesitamos su número de teléfono para poder contactarnos con
                                     usted</h6>
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label for="telefono" class="form-label">Número de teléfono</label>
                                     <input type="text" class="form-control" id="telefono" required
-                                        placeholder="75854595">
+                                        placeholder="Ejemplo: 75854595" oninput="numeroNacional(event)">
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label for="telefonoSecundario" class="form-label">Teléfono secundario / Teléfono de
                                         emergencia</label>
                                     <input type="text" class="form-control" id="telefonoSecundario" required
-                                        placeholder="25452547">
+                                        placeholder="Ejemplo: 25452547" oninput="numeroNacional(event)">
                                 </div>
                                 <div class="d-grid">
-                                    <button class="btn btn-dark btn-xl d-grid rounded-pill" type="submit"><a href="index.html">Registrarse</a></button>
+                                    <button class="btn btn-dark rounded-pill" type="submit">Registrarse</button>
                                 </div>
                             </div>
                         </div>
@@ -52,9 +53,11 @@
 
     <!-- Mandar a llamar el framework -->
     <script src="../../resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-
     <!-- Mandar a llamar el navbar -->
     <script type="text/javascript" src="../../controllers/utils/publico.js"></script>
+
+    <!-- Validar número de teléfono -->
+    <script src="../../resources/js/validar_telefono.js"></script>
 </body>
 
 </html>
