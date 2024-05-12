@@ -8,10 +8,10 @@ if (titulo == "SeaSmart") {
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid row-gap-3">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                            <img src="../../resources/img/logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
@@ -61,7 +61,7 @@ if (titulo == "SeaSmart") {
                         </ul>
                     </div>
                     <div class="btn" type="button" id="carrito" onclick="abrirCarro()">
-                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px" onclick="alerta()">
+                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px" onclick="alerta()">
                     </div>
                 </div>
             </div>
@@ -76,10 +76,10 @@ else if(titulo == "Mi cuenta")
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                            <img src="../../resources/img/logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
@@ -103,7 +103,7 @@ else if(titulo == "Mi cuenta")
                                     <a class="pe-5 ps-5 text-center" href="mi_informacion.html" id="btnInformacion_e">Mi información</a>
                                 </li>
                                 <li id="elemento-mi-carrito">
-                                    <a class="pe-5 ps-5 text-center" href="carrito.html" id="btnCarrito_e">Mi carrito</a>
+                                    <a class="pe-5 ps-5 text-center" href="carrito.html" id="btncarrito_de_comprase">Mi carrito</a>
                                 </li>
                                 <li id="elemento-cerrar-sesion">
                                     <a class="pe-5 ps-5 text-center" href="index.html" id="btnCerrarSesion_e">Cerrar sesión</a>
@@ -123,7 +123,7 @@ else if(titulo == "Mi cuenta")
                         </ul>
                     </div>
                     <div class="btn" type="button" id="carrito" onclick="abrirCarro()">
-                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px">
+                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px">
                     </div>
                 </div>
             </div>
@@ -148,10 +148,10 @@ else if(titulo=="Mi carrito")
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                            <img src="../../resources/img/logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
@@ -169,7 +169,7 @@ else if(titulo=="Mi carrito")
                         <div class="col-12 d-flex justify-content-center">
                             <ul class="navbar-nav grid gap-3 text-center" id="barra-elementos">
                                 <li id="elemento-mi-carrito">
-                                    <a href="carrito.html" id="btnCarrito_e">Mi carrito</a>
+                                    <a href="carrito.html" id="btncarrito_de_comprase">Mi carrito</a>
                                 </li>
                                 <li id="elemento-mi-cuenta">
                                     <a href="mi_cuenta.html" id="btnMiCuenta_e">Mi cuenta</a>
@@ -195,7 +195,7 @@ else if(titulo=="Mi carrito")
                         </ul>
                     </div>
                     <div class="btn" type="button" id="carrito" onclick="abrirCarro()">
-                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px">
+                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px">
                     </div>
                 </div>
             </div>
@@ -211,10 +211,10 @@ else if(titulo == "Mis pedidos")
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                            <img src="../../resources/img/logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <p style="font-weight: 500; font-size: x-large;" id="texto-ss">S<span
@@ -284,10 +284,10 @@ else if(titulo == "Mi información")
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                            <img src="../../resources/img/logo1.png" width="55px" height="55px">
                         </div>
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <p style="font-weight: 500; font-size: x-large;" id="texto-ss">S<span
@@ -358,7 +358,7 @@ else if(titulo == "Inicio de sesión")
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/Logo1.png" width="55px" height="55px">
@@ -383,7 +383,7 @@ else if(titulo == "Registro")
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/Logo1.png" width="55px" height="55px">
@@ -408,7 +408,7 @@ else if(titulo == "Casi terminamos")
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/Logo1.png" width="55px" height="55px">
@@ -432,7 +432,7 @@ else if(titulo == "¿Quiénes somos?"){
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
             <div class="container-fluid">
-                <div class="col-12 col-sm-2 col-md-2 col-lg-2 col-xl-2" id="seasmart-container" onclick="abrirIndex()">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <img src="../../resources/img/Logo1.png" width="55px" height="55px">
@@ -475,6 +475,70 @@ MAIN.insertAdjacentHTML('afterend', `
         </nav>
     </footer>
 `);
+if (titulo == "sub_categoria") {
+    MAIN.insertAdjacentHTML('beforebegin', `
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center justify-content-center">
+                            <img src="../../resources/img/logo1.png" width="55px" height="55px">
+                        </div>
+                        <div class="col-12 d-flex align-items-center justify-content-center">
+                            <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8 d-flex justify-content-center" id="divBuscador">
+                    <form class="d-flex w-75" role="busqueda" id="form-buscarCategoria">
+                        <input class="form-control" type="buscar" placeholder="Buscar una categoría.."
+                            aria-label="Buscar" id="buscarCategoria">
+                        <div class="btn input-group-addon d-flex align-items-center justify-content-center"
+                            id="btnBuscarCategoria">
+                            <img src="../../resources/img/lupaa.png" class="img-fluid" width="18px" height="18px"
+                                alt="buscarimg">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-4 col-xs-2 col-sm-2 col-md-2 d-flex justify-content-end" id="btnCollapse">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#listaCollapse">
+                        <span class="navbar-toggler-icon"></span></button>
+                </div>
+                <div class="collapse navbar-collapse" id="listaCollapse">
+                    <div class="container-fluid d-flex justify-content-end">
+                        <div class="col-12 d-flex justify-content-center">
+                            <ul class="navbar-nav grid gap-3 text-center" id="barra-elementos">
+                                <li id="elemento-login">
+                                    <a href="inicio_sesión.html" id="btnLogin_e">Iniciar sesión</a>
+                                </li>
+                                <li id="elemento-registro">
+                                    <a href="registro.html" id="btnRegistro_e">Registrarse</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 d-flex justify-content-center" id="opcionesUsuario">
+                    <div class="dropdown mt-2" id="cuenta">
+                        <img src="../../resources/img/user.png" class="dropdown-toggle" type="button" width="25px"
+                            height="25px" data-bs-toggle="dropdown" alt="user">
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item pe-5 ps-5 text-center" href="inicio_sesion.html" id="btnLogin_d">Iniciar sesión</a></li>
+                            <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="registro.html" id="btnRegistro_d">Registrarse</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn" type="button" id="carrito" onclick="abrirCarro()">
+                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px" onclick="alerta()">
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    `);
+}
+
 
 let btnCollapse = document.getElementById('btnCollapse');
 let listaCollapse = document.getElementById('listaCollapse');
