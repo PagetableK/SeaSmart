@@ -141,16 +141,16 @@ const eliminarCategoria = async () => {
 
 // Función para cargar la imagen al cargar un archivo en input file.
 function cargarImagen(event) {
-    // Se almacena el archivo cargado.
+    // Se almacena el archivo cargado en la variable archivoSeleccionado.
     var archivoSeleccionado = event.target.files[0];
-    // Se crea una variable tipo objeto.
+    // Se crea el objeto reader.
     var reader = new FileReader();
     // Se define una variable con el mismo valor que la constante IMG_CATEGORIA.
     var imgtag = IMG_CATEGORIA;
-    // Se codifica la cadena de caracteres con la imagen.
+    // El reader lee la cadena de caracteres.
     reader.readAsDataURL(archivoSeleccionado);
-    // Al cargar una imagen en el campo se dispara el evento
-    // que configura la imagen en la etiqueta imgCategoria.
+    // Cuando el reader termina de leer la cadena de caracteres se 
+    // dispara el evento que configura la imagen en la etiqueta imgCategoria.
     reader.onload = function (event) {
         imgtag.src = event.target.result;
     };
