@@ -57,11 +57,11 @@ const abrirModal = async (tituloModal, idsubCategoria) => {
             // Se cargan los campos de la base en una variable.
             const ROW = DATA.dataset;
             // Se carga el id de subcategoría en el input idsubCategoria.
-            ID_SUBCATEGORIA.value = ROW.id_subcategoria;
+            ID_SUBCATEGORIA.value = ROW.id_sub_categoria;
             // Se carga el nombre de subcategoría en el input nombresubCategoria.
-            NOMBRE_SUBCATEGORIA.value = ROW.nombre_subcategoria;
+            NOMBRE_SUBCATEGORIA.value = ROW.nombre_sub_categoria;
             // Se carga la descripción de la subcategoría en el input descripcionsubCategoria.
-            DESCRIPCION_SUBCATEGORIA.value = ROW.descripcion_subcategoria;
+            DESCRIPCION_SUBCATEGORIA.value = ROW.descripcion_sub_categoria;
             // Se abre el modal editar subcategoría.
             MODALSUBCATEGORIA.show();
         } else {
@@ -99,9 +99,9 @@ const abrirEliminar = async (idsubCategoria) => {
         // Se cargan los campos de la base en una variable.
         const ROW = DATA.dataset;
         // Se define el título del modal.
-        document.getElementById('tituloModalEliminar').innerHTML = "¿Desea eliminar la subcategoría " + ROW.nombre_subcategoria + "?";
+        document.getElementById('tituloModalEliminar').innerHTML = "¿Desea eliminar la subcategoría " + ROW.nombre_sub_categoria + "?";
         // Se carga el id subcategoría en el input inputIdsubCategoria.
-        document.getElementById('inputIdsubCategoria').value = ROW.id_subcategoria;
+        document.getElementById('inputIdsubCategoria').value = ROW.id_sub_categoria;
         // Se abre el modal borrar subcategoría.
         MODALBSUBCATEGORIA.show();
     } else {

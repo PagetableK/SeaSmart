@@ -71,9 +71,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'deleteRow':
-                if (
-                    !$subcategoria->setId($_POST['idsubCategoria'])
-                ) {
+                if (!$subcategoria->setId($_POST['idsubCategoria'])) {
                     $result['error'] = $subcategoria->getDataError();
                 } elseif ($subcategoria->deleteRow()) {
                     $result['status'] = 1;
@@ -96,4 +94,4 @@ if (isset($_GET['action'])) {
     //}
 } else {
     print(json_encode('Recurso no disponible'));
-}
+}   
