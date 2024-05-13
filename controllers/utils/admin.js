@@ -170,7 +170,7 @@ const cargarPlantilla = async () => {
             }
         }
         else {
-            console.log('La sesión ha terminado');
+            sweetAlert(3, DATA.error, false, 'index.html');
         }
     }
     else {

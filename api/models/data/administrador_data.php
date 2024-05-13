@@ -42,7 +42,7 @@ class AdministradorData extends AdministradorHandler
     }
 
     
-    public function setApellido($valor, $min = 4, $max = 50)
+    public function setApellido($valor, $min = 4, $max = 20)
     {
         if (!Validator::validateAlphabetic($valor)) {
             $this->info_error = 'El apellido debe ser un valor alfabético';
@@ -60,6 +60,9 @@ class AdministradorData extends AdministradorHandler
     {
         if (!Validator::validateEmail($valor)) {
             $this->info_error = 'El correo no es válido';
+            return false;
+        } else if($this->searchEmail($valor)){
+            $this->info_error = 'El correo ya está siendo usado por otro administrador';
             return false;
         } elseif (Validator::validateLength($valor, $min, $max)) {
             $this->correo = $valor;
