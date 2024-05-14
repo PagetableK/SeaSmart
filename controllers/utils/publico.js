@@ -19,8 +19,8 @@ if (titulo == "SeaSmart") {
                     </div>
                 </div>
                 <div class="col-12 col-sm-8 col-md-8 col-lg-8 d-flex justify-content-center" id="divBuscador">
-                    <form class="d-flex w-75" role="busqueda" id="form-buscarCategoria">
-                        <input class="form-control" type="buscar" placeholder="Buscar una categoría.."
+                    <form class="d-flex w-75 bg-light" role="busqueda" id="form-buscarCategoria">
+                        <input class="form-control bg-light" type="search" placeholder="Buscar una categoría.."
                             aria-label="Buscar" id="buscarCategoria">
                         <div class="btn input-group-addon d-flex align-items-center justify-content-center"
                             id="btnBuscarCategoria">
@@ -258,8 +258,8 @@ else if(titulo == "Mis pedidos")
                                     sesión<img src="../../resources/img/logout.png" alt="salir" class="ms-2" width="20px" height="px"></a></li>
                         </ul>
                     </div>
-                    <div class="btn" type="button" id="carrito">
-                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px">
+                    <div class="btn" type="button" id="carrito" onclick="abrirCarro()">
+                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px">
                     </div>
                 </div>
             </div>
@@ -331,8 +331,8 @@ else if(titulo == "Mi información")
                                     sesión<img src="../../resources/img/logout.png" alt="salir" class="ms-2" width="20px" height="px"></a></li>
                         </ul>
                     </div>
-                    <div class="btn" type="button" id="carrito">
-                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px">
+                    <div class="btn" type="button" id="carrito" onclick="abrirCarro()">
+                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px">
                     </div>
                 </div>
             </div>

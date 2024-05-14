@@ -37,7 +37,7 @@ BTNOCULTAR.remove();
 BTNOCULTAR1.remove();
 
 function ValidarCampos(asyn){
-    location.href='registro1.html';
+    location.href='registro_finalizar.html';
 }
 
 BTNCONTINUAR.addEventListener('submit', async(event) => {

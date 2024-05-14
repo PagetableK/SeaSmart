@@ -80,14 +80,22 @@ LOGIN_FORM.addEventListener('submit', async (event) => {
     }
 });
 
-function MostrarContra(inputContra){
+// Función para ocultar o mostrar la contraseña en input
+function mostrarContra(inputContra){
+    // Se almacena el elemento con el id en la variable input
     var input = document.getElementById(inputContra);
+
+    // Se valida que el elemento tenga asignado el atributo type
+    // con el valor text
     if(input.type == 'text'){
+        // Se cambia el atributo type a password
         input.type = 'password';
     }
     else{
+        // Se cambia el atributo type a text
         input.type = 'text';
     }
 
+    // Se cambia el focus hacia el input
     input.focus();
 }
