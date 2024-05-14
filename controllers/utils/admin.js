@@ -8,11 +8,11 @@ const MAIN = document.querySelector('main');
 // Constante para establecer el elemento del título principal.
 const LB_TITULO = document.getElementById('tituloPrincipal');
 
-const cargarPlantilla = async () => {
-    const DATA = await fetchData(USER_API, 'getUser');
-    console.log(DATA);
-    if (DATA.session) {
-        if (DATA.status) {
+//const cargarPlantilla = async () => {
+    //const DATA = await fetchData(USER_API, 'getUser');
+    //console.log(DATA);
+    //if (DATA.session) {
+        //if (DATA.status) {
             console.log('El usuario tiene una sesión activa');
 
             let colorBotones;
@@ -168,16 +168,17 @@ const cargarPlantilla = async () => {
                 SeaContainer.classList.add("d-flex");
                 SeaContainer.classList.add("justify-content-start");
             }
-        }
-        else {
-            sweetAlert(3, DATA.error, false, 'index.html');
-        }
-    }
-    else {
-        if (location.pathname.endsWith('index.html')) {
-        }
-        else {
-            location.href = 'index.html';
-        }
-    }
-}
+       // }
+        //else {
+        //    console.log('La sesión ha terminado');
+        //}
+    //}
+   // else {
+       // if (location.pathname.endsWith('index.html')) {
+       // }
+       // else {
+       //     location.href = 'index.html';
+       // }
+   // }
+//}
+

@@ -48,6 +48,14 @@ class CategoriaHandler
         return Database::getRows($sql);
     }
 
+    public function readAll1()
+    {
+        $sql = 'SELECT id_categoria, nombre_categoria
+                FROM categorias
+                ORDER BY nombre_categoria';
+        return Database::getRows($sql);
+    }
+
     public function readOne()
     {
         $sql = 'SELECT id_categoria, nombre_categoria, imagen_categoria, descripcion_categoria
