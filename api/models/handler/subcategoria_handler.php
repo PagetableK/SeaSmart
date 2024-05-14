@@ -44,6 +44,15 @@ class subCategoriaHandler
         return Database::getRows($sql);
     }
 
+    public function readWithId()
+    {
+        $sql = 'SELECT id_sub_categoria, nombre_sub_categoria, descripcion_sub_categoria
+                FROM sub_categorias where id_categoria = ?
+                ORDER BY nombre_sub_categoria';
+        $params = array($this->id_categoria);
+        return Database::getRows($sql, $params);
+    }
+
     public function readOne()
     {
         $sql = 'SELECT id_sub_categoria, nombre_sub_categoria, descripcion_sub_categoria, id_categoria

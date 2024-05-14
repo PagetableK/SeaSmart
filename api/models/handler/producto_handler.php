@@ -12,10 +12,7 @@ class ProductoHandler
     protected $id = null;
     protected $nombre = null;
     protected $descripcion = null;
-    protected $precio = null;
-    protected $existencias = null;
-    protected $imagen = null;
-    protected $subcategoria = null;
+    protected $id_subcategoria = null;
     protected $estado = null;
 
     // Constante para establecer la ruta de las imágenes.
@@ -38,9 +35,9 @@ class ProductoHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO producto(nombre_producto, descripcion_producto, precio_producto, existencias_producto, imagen_producto, estado_producto, id_categoria, id_administrador)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->descripcion, $this->precio, $this->existencias, $this->imagen, $this->estado, $this->subcategoria, $_SESSION['idAdministrador']);
+        $sql = 'INSERT INTO productos(nombre_producto, descripcion_producto, id_sub_categoria, id_administrador)
+                VALUES(?, ?, ?, ?)';
+        $params = array($this->nombre, $this->descripcion, $this->id_subcategoria, $_SESSION['idAdministrador']);
         return Database::executeRow($sql, $params);
     }
 

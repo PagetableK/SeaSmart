@@ -33,7 +33,7 @@ class subCategoriaData extends subCategoriaHandler
             $this->id_categoria = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de la subcategoría es incorrecto';
+            $this->data_error = 'El identificador de la categoría es incorrecto';
             return false;
         }
     }

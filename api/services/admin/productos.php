@@ -29,16 +29,12 @@ if (isset($_GET['action'])) {
                 if (
                     !$producto->setNombre($_POST['nombreProducto']) or
                     !$producto->setDescripcion($_POST['descripcionProducto']) or
-                    !$producto->setPrecio($_POST['precioProducto']) or
-                    !$producto->setSubcategoria($_POST['idSubcategoria']) or
-                    !$producto->setEstado(isset($_POST['estadoProducto']) ? 1 : 0)
+                    !$producto->setSubcategoria($_POST['selectSubcategoria']) 
                 ) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($producto->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Producto creado correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenProducto'], $producto::RUTA_IMAGEN);
                 } else {
                     $result['error'] = 'Ocurrió un problema al crear el producto';
                 }

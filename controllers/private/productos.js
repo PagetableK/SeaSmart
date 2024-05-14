@@ -1,9 +1,11 @@
 // Constante para completar la ruta de la API.
 const PRODUCTO_API = 'services/admin/productos.php';
-// Constante para completar la ruta de la API de administrador.
+// Constante para completar la ruta de la API de categorías.
 const CATEGORIA_API = 'services/admin/categorias.php';
-// Constante para completar la ruta de la API de administrador.
+// Constante para completar la ruta de la API de subcategorías.
 const SUBCATEGORIA_API = 'services/admin/subcategorias.php';
+// Constante para completar la ruta de la API de administrador.
+const ADMINISTRADOR_API = 'services/admin/administrador.php';
 // Constantes para cargar los elementos de la tabla.
 const FILAS_ENCONTRADAS = document.getElementById('filasEncontradas'),
     CUERPO_TABLA = document.getElementById('cuerpoTabla');
@@ -139,22 +141,8 @@ const abrirModal = async (tituloModal, idProducto) => {
         BOTON_ACCION.innerHTML = 'Agregar producto';
         // Se limpian los input para dejarlos vacíos.
         FORM_PRODUCTO.reset();
-        // Petición para obtener los registros de la tabla categorías.
-        const DATA = await fetchData(CATEGORIA_API, 'readAll');
-        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-        if (DATA.status) {
-            // Se recorre el conjunto de registros fila por fila.
-            DATA.dataset.forEach(row => {
-                // Se crean y concatenan las etiquetas option con los datos de cada registro.
-                SELECT_CATEGORIA.innerHTML += `
-                <option id="${row.id_categoria}">${row.nombre_categoria}</option>
-            `;
-            });
-        } else {
-            sweetAlert(2, DATA.error, false);
-        }
-        //Se manda a llamar la función para cargar las subcategorías en el combobox.
-        cargarSubCategorias();
+        // Cargar los registros de la tabla categorías en el select.
+        await fillSelect(CATEGORIA_API, 'readAll', 'selectCategoria');
         // Se abre el modal agregar producto.
         MODAL_PRODUCTO.show();
     }
@@ -192,15 +180,21 @@ const abrirModal = async (tituloModal, idProducto) => {
 }
 
 const cargarSubCategorias = async () => {
-    // Petición para obtener los registros de la tabla subcategorías.
-    const DATA = await fetchData(SUBCATEGORIA_API, 'readAll');
+    // Se vacía el contenido del select categoría.
+    SELECT_SUBCATEGORIA.innerHTML = '';
+    // Se almacena el campo con el valor del id_categoria.
+    const FORM = new FormData();
+    // Se agrega el valor del selectCategoria.
+    FORM.append('selectCategoria', SELECT_CATEGORIA.value);
+    // Petición para obtener los registros de la tabla subcategorías.1
+    const DATA = await fetchData(SUBCATEGORIA_API, 'readWithId', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las etiquetas option con los datos de cada registro.
             SELECT_SUBCATEGORIA.innerHTML += `
-            <option id="${row.id_sub_categoria}">${row.nombre_sub_categoria}</option>
+            <option value="${row.id_sub_categoria}">${row.nombre_sub_categoria}</option>
         `;
         });
     } else {
@@ -212,21 +206,28 @@ const cargarSubCategorias = async () => {
 FORM_PRODUCTO.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Se verifica la acción a realizar.
-    (ID_PRODUCTO.value) ? action = 'updateRow' : action = 'createRow';
-    // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(FORM_PRODUCTO);
-    // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(PRODUCTO_API, action, FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se cierra la caja de diálogo.
-        MODAL_PRODUCTO.hide();
-        // Se muestra un mensaje de éxito.
-        sweetAlert(1, DATA.message, true);
-        // Se carga nuevamente la tabla para visualizar los cambios.
-        cargarTabla();
-    } else {
-        sweetAlert(2, DATA.error, false);
+    if(SELECT_SUBCATEGORIA.value){
+        // Se verifica la acción a realizar.
+        (ID_PRODUCTO.value) ? action = 'updateRow' : action = 'createRow';
+        // Constante tipo objeto con los datos del formulario.
+        const FORM = new FormData(FORM_PRODUCTO);
+        // Se agrega el idSubcategoría al form.
+        // FORM.append('idSubcategoria', );
+        // Petición para guardar los datos del formulario.
+        const DATA = await fetchData(PRODUCTO_API, action, FORM);
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se cierra la caja de diálogo.
+            MODAL_PRODUCTO.hide();
+            // Se muestra un mensaje de éxito.
+            sweetAlert(1, DATA.message, true);
+            // Se carga nuevamente la tabla para visualizar los cambios.
+            cargarTabla();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    } else{
+        sweetAlert(3, 'Asegúrese de seleccionar una subcategoría', false);
     }
+
 });
