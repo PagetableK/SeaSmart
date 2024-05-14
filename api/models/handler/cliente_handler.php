@@ -16,7 +16,7 @@ class ClienteHandler
     protected $contra = null;
     protected $dui = null;
     protected $telefono = null;
-    protected $telefonofijo = null;
+    protected $telefono_fijo = null;
     protected $estado = null;
 
     /*
@@ -64,7 +64,7 @@ class ClienteHandler
         $sql = 'UPDATE clientes
                 SET nombre_cliente = ?, apellido_cliente = ?, correo_cliente = ?, dui_cliente = ?, telefono_movil = ?, telefono_fijo = ?
                 WHERE id_cliente = ?';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->telefonofijo, $this->id);
+        $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->telefono_fijo, $this->id);
         return Database::executeRow($sql, $params);
     }
 
@@ -95,7 +95,7 @@ class ClienteHandler
     {
         $sql = 'INSERT INTO clientes(nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_movil, contra_cliente, telefono_fijo)
                 VALUES(?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->contra, $this->telefonofijo);
+        $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->contra, $this->telefono_fijo);
         return Database::executeRow($sql, $params);
     }
 
@@ -121,7 +121,7 @@ class ClienteHandler
         $sql = 'UPDATE clientes
                 SET nombre_cliente = ?, apellido_cliente = ?, dui_cliente = ?, estado_cliente = ?, telefono_movil = ?, telefono_fijo = ?
                 WHERE id_cliente = ?';
-        $params = array($this->nombre, $this->apellido, $this->dui, $this->estado, $this->telefono, $this->telefonofijo, $this->id);
+        $params = array($this->nombre, $this->apellido, $this->dui, $this->estado, $this->telefono, $this->telefono_fijo, $this->id);
         return Database::executeRow($sql, $params);
     }
 
@@ -139,6 +139,15 @@ class ClienteHandler
                 FROM clientes
                 WHERE dui_cliente = ? OR correo_cliente = ? OR telefono_movil = ? OR telefono_fijo = ?';
         $params = array($value, $value, $value, $value);
+        return Database::getRow($sql, $params);
+    }
+
+    public function checkDuplicateWithId($value)
+    {
+        $sql = 'SELECT id_cliente
+                FROM clientes
+                WHERE (dui_cliente = ? OR correo_cliente = ? OR telefono_movil = ? OR telefono_fijo = ?) AND id_cliente != ?';
+        $params = array($value, $value, $value, $value, $this->id);
         return Database::getRow($sql, $params);
     }
 }

@@ -28,13 +28,13 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$clientes->setNombre($_POST['nombreCliente']) or
-                    !$clientes->setApellido($_POST['apellidoCliente']) or
-                    !$clientes->setCorreo($_POST['correoCliente']) or
-                    !$clientes->setContra($_POST['contraCliente']) or
-                    !$clientes->setDUI($_POST['duiCliente']) or
-                    !$clientes->setTelefono($_POST['telefonoCliente']) or
-                    !$clientes->setTelefonoFijo($_POST['telefonoFijoCliente'])
+                    !$clientes->setNombre($_POST['nombreCliente'], 0) or
+                    !$clientes->setApellido($_POST['apellidoCliente'], 0) or
+                    !$clientes->setCorreo($_POST['correoCliente'], 0) or
+                    !$clientes->setContra($_POST['contraCliente'], 0) or
+                    !$clientes->setDUI($_POST['duiCliente'], 0) or
+                    !$clientes->setTelefono($_POST['telefonoCliente'], 0) or
+                    !$clientes->setTelefonoFijo($_POST['telefonoFijoCliente'], 0)
                 ) {
                     $result['error'] = $clientes->getDataError();
                 } elseif ($_POST['contraCliente'] != $_POST['confirmarContraCliente']) {
@@ -71,10 +71,11 @@ if (isset($_GET['action'])) {
                     !$clientes->setId($_POST['idCliente']) or
                     !$clientes->setNombre($_POST['nombreCliente']) or
                     !$clientes->setApellido($_POST['apellidoCliente']) or
-                    !$clientes->setCorreo($_POST['correoCliente']) or
-                    !$clientes->setDUI($_POST['duiCliente']) or
-                    !$clientes->setTelefono($_POST['telefonoCliente']) or
-                    !$clientes->setTelefonoFijo($_POST['telefonoFijoCliente'])
+                    !$clientes->setCorreo($_POST['correoCliente'], 1) or
+                    !$clientes->setDUI($_POST['duiCliente'], 1) or
+                    !$clientes->setTelefono($_POST['telefonoCliente'], 1) or
+                    !$clientes->setTelefonoFijo($_POST['telefonoFijoCliente'], 1) or
+                    !$clientes->setEstado($_POST['estadoCliente'])
                 ) {
                     $result['error'] = $clientes->getDataError();
                 } elseif ($clientes->updateRow()) {

@@ -112,6 +112,7 @@ const cargarTabla = async (form = null) => {
         if (DATA.status) {
             // Se recorre el conjunto de registros fila por fila.
             DATA.dataset.forEach(row => {
+                //Se valida el estado del cliente para cargarlo en la columna.
                 var estadoCliente = validarEstado(row.estado_cliente);
                 // Se crean y concatenan las filas de la tabla con los datos de cada registro.
                 CUERPO_CLIENTES.innerHTML += `
@@ -160,10 +161,10 @@ function verificarReset() {
 
 // Función para determinar que modal se abrirá
 // en base al valor del dropdown (select)
-function validarAbrirModal(){
+function validarAbrirModal() {
     if (SELECT_USUARIOS.value == "Administradores") {
         abrirModalAdmin('Agregar usuario');
-    } else{
+    } else {
         abrirModalCliente('Agregar cliente');
     }
 }
@@ -181,6 +182,9 @@ const abrirModalAdmin = async (tituloModal, idAdministrador) => {
         BOTON_ACCION_ADMIN.innerHTML = tituloModal;
         // Se limpian los input para dejarlos vacíos.
         FORM_ADMIN.reset();
+        // Se habilitan los campos de contraseña y confirmar contraseña.
+        CONTRA_ADMIN.disabled = false;
+        CONFIRMAR_CONTRA_ADMIN.disabled = false;
         // Se muestra el modal para agregar administradores.
         MODAL_ADMIN.show();
     } else {
@@ -269,23 +273,23 @@ const eliminarAdmin = async () => {
     }
 }
 
-// Función para ocultar o mostrar la contraseña en input
+// Función para ocultar o mostrar la contraseña en input.
 function mostrarContra(inputContra) {
-    // Se almacena el elemento con el id en la variable input
+    // Se almacena el elemento con el id en la variable input.
     var input = document.getElementById(inputContra);
 
     // Se valida que el elemento tenga asignado el atributo type
-    // con el valor text
+    // con el valor text.
     if (input.type == 'text') {
-        // Se cambia el atributo type a password
+        // Se cambia el atributo type a password.
         input.type = 'password';
     }
     else {
-        // Se cambia el atributo type a text
+        // Se cambia el atributo type a text.
         input.type = 'text';
     }
 
-    // Se cambia el focus hacia el input
+    // Se cambia el focus hacia el input.
     input.focus();
 }
 

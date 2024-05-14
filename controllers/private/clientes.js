@@ -1,6 +1,6 @@
 // Ruta donde se encuentra el servicio de clientes.
 const CLIENTE_API = 'services/admin/clientes.php';
-// Se almacena el formCliente para agregar o editar un cliente
+// Se almacena el formCliente para agregar o editar un cliente.
 const FORM_CLIENTE = document.getElementById('formCliente');
 // Se almacenan dentro de constantes los campos del form formCliente.
 const ID_CLIENTE = document.getElementById('idCliente'),
@@ -13,12 +13,16 @@ const ID_CLIENTE = document.getElementById('idCliente'),
     TELEFONO_CLIENTE = document.getElementById('telefonoCliente'),
     TELEFONO_FIJO = document.getElementById('telefonoFijoCliente'),
     ESTADO_CLIENTE = document.getElementById('estadoCliente');
+// Se almacena el contenedor con el select estadoCliente.
+const CONTENEDOR_ESTADO = document.getElementById('contenedorEstadoCliente');
+// Se almacena el modal para eliminar un cliente.
+const MODAL_ELIMINAR_CLIENTE = new bootstrap.Modal('#borrarModalCliente');
 
-// Función que retorna el estado en base del resultado de la bd
-function validarEstado(estadoCliente){
-    if(estadoCliente == 1){
+// Función que retorna el estado en base del resultado de la bd.
+function validarEstado(estadoCliente) {
+    if (estadoCliente == 1) {
         return "Activo";
-    } else{
+    } else {
         return "Dado de baja";
     }
 }
@@ -36,10 +40,13 @@ const abrirModalCliente = async (tituloModal, idCliente) => {
         BOTON_ACCION_CLIENTE.innerHTML = tituloModal;
         // Se limpian los input para dejarlos vacíos.
         FORM_CLIENTE.reset();
-        // Se cambia el estado del checkbox a checked.
-        ESTADO_CLIENTE.checked = true;
-        // Se esconde el checkbox.
-        ESTADO_CLIENTE.classList.add('d-none');
+        // Se cambia el estado del select a activo.
+        ESTADO_CLIENTE.selectedIndex = 0;
+        // Se esconde el select.
+        CONTENEDOR_ESTADO.classList.add('d-none');
+        // Se habilitan los campos de contraseña y confirmar contraseña.
+        CONTRA_CLIENTE.disabled = false;
+        CONFIRMAR_CONTRA_CLIENTE.disabled = false;
         // Se muestra el modal para agregar clientes.
         MODAL_CLIENTE.show();
     } else {
@@ -62,7 +69,7 @@ const abrirModalCliente = async (tituloModal, idCliente) => {
             // Se cargan los campos de la base en una variable.
             const ROW = DATA.dataset;
             // Se carga el id de cliente en el input idCliente.
-            ID_CLIENTE.value = ROW.idCliente;
+            ID_CLIENTE.value = ROW.id_cliente;
             // Se carga el nombre del cliente en el input nombreCliente.
             NOMBRE_CLIENTE.value = ROW.nombre_cliente;
             // Se carga el apellido del cliente en el input apellidoCliente.
@@ -72,14 +79,14 @@ const abrirModalCliente = async (tituloModal, idCliente) => {
             // Se carga el DUI del cliente en el input duiCliente.
             DUI_CLIENTE.value = ROW.dui_cliente
             // Se valida el estado del cliente.
-            if(ROW.estadoCliente = 0){
-                // Se carga el estado del cliente en el checkbox estadoCliente.
-                ESTADO_CLIENTE.unchecked = true;
-            } else{
-                ESTADO_CLIENTE.checked = true;
+            if (ROW.estado_cliente == 0) {
+                // Se carga el estado del cliente en el select estadoCliente.
+                ESTADO_CLIENTE.selectedIndex = 1;
+            } else {
+                ESTADO_CLIENTE.selectedIndex = 0;
             }
-            // Se muestra el checkbox.
-            ESTADO_CLIENTE.classList.remove('d-none');
+            // Se muestra el select.
+            CONTENEDOR_ESTADO.classList.remove('d-none');
             // Se carga el teléfono del cliente.
             TELEFONO_CLIENTE.value = ROW.telefono_movil;
             // Se carga el teléfono fijo del cliente.
@@ -99,10 +106,18 @@ const abrirModalCliente = async (tituloModal, idCliente) => {
 FORM_CLIENTE.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Se verifica la acción a realizar.
-    (ID_CLIENTE.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(FORM_CLIENTE);
+    // Se verifica la acción a realizar.
+    if (ID_CLIENTE.value) {
+        action = 'updateRow';
+        // Se verifica el valor del select
+        // y se guarda en el form
+        (ESTADO_CLIENTE.selectedIndex) ? estadoCliente = 0 : estadoCliente = 1;
+        FORM.append('estadoCliente', estadoCliente);
+    } else {
+        action = 'createRow';
+    }
     // Petición para guardar los datos del formulario.
     const DATA = await fetchData(CLIENTE_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -117,3 +132,51 @@ FORM_CLIENTE.addEventListener('submit', async (event) => {
         sweetAlert(2, DATA.error, false);
     }
 });
+
+// Función para abrir el modal eliminar cliente.
+const abrirEliminarCliente = async (idCliente) => {
+    // Se define una constante tipo objeto que almacenará el idCliente.
+    const FORM = new FormData();
+    // Se almacena el nombre del campo y el valor (idCliente) en el formulario.
+    FORM.append('idCliente', idCliente);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(CLIENTE_API, 'readOne', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se cargan los campos de la base en una variable.
+        const ROW = DATA.dataset;
+        // Se define el título del modal.
+        document.getElementById('tituloModalEliminarCliente').innerHTML = "¿Desea eliminar el cliente " + ROW.nombre_cliente + "?";
+        // Se carga el idCliente en el input inputIdCliente.
+        document.getElementById('inputIdCliente').value = ROW.id_cliente;
+        // Se abre el modal borrar cliente.
+        MODAL_ELIMINAR_CLIENTE.show();
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+}
+
+// Función asíncrona que elimina un cliente.
+const eliminarCliente = async () => {
+    // Se define una variable con el valor del input inputIdCliente.
+    var idCliente = document.getElementById('inputIdCliente').value;
+    // Se define una constante tipo objeto donde se almacenará el idCliente.
+    const FORM = new FormData();
+    // Se almacena el nombre del campo y el valor (idCliente).
+    FORM.append('idCliente', idCliente);
+    // Petición para eliminar el registro seleccionado.
+    const DATA = await fetchData(CLIENTE_API, 'deleteRow', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        //Se oculta el modal.
+        MODAL_ELIMINAR_CLIENTE.hide();
+        // Se muestra un mensaje de éxito.
+        await sweetAlert(1, DATA.message, true);
+        // Se carga nuevamente la tabla para visualizar los cambios.
+        cargarTabla();
+    } else {
+        sweetAlert(2, DATA.error, false);
+        //Se oculta el modal.
+        MODAL_ELIMINAR_CLIENTE.hide();
+    }
+}

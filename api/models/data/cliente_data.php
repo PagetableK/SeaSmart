@@ -56,11 +56,14 @@ class ClienteData extends ClienteHandler
         }
     }
 
-    public function setCorreo($valor, $min = 8, $max = 100)
+    public function setCorreo($valor, $boolean, $min = 8, $max = 100)
     {
         if (!Validator::validateEmail($valor)) {
             $this->info_error = 'El correo no es válido';
             return false;
+        } else if($boolean and !$this->checkDuplicateWithId($valor)){
+            $this->correo = $valor;
+            return true;
         } else if($this->checkDuplicate($valor)){
             $this->info_error = 'El correo ya está siendo usado por otro cliente';
             return false;
@@ -84,11 +87,14 @@ class ClienteData extends ClienteHandler
         }
     }
 
-    public function setDUI($value)
+    public function setDUI($value, $boolean)
     {
         if (!Validator::validateDUI($value)) {
             $this->info_error = 'El DUI debe tener el formato ########-#';
             return false;
+        } else if($boolean and !$this->checkDuplicateWithId($value)){
+            $this->dui = $value;
+            return true;
         } elseif($this->checkDuplicate($value)) {
             $this->info_error = 'El DUI ingresado está siendo utilizado por otro cliente';
             return false;
@@ -109,12 +115,15 @@ class ClienteData extends ClienteHandler
         }
     }
 
-    public function setTelefono($value)
+    public function setTelefono($value, $boolean)
     {
-        if($this->checkDuplicate($value)){
+        if($boolean and !$this->checkDuplicateWithId($value)){
+            $this->telefono = $value;
+            return true;
+        } else if($this->checkDuplicate($value)){
             $this->info_error = 'El teléfono móvil ya está siendo usado';
             return false;
-        } elseif (Validator::validatePhone($value)) {
+        }  elseif (Validator::validatePhone($value)) {
             $this->telefono = $value;
             return true;
         } else {
@@ -123,22 +132,23 @@ class ClienteData extends ClienteHandler
         }
     }
 
-    public function setTelefonoFijo($value)
+    public function setTelefonoFijo($value, $boolean)
     {
         if($value == null){
             return true;
-        }else{
-            if($this->checkDuplicate($value)){
-                $this->info_error = 'El teléfono fijo ya está siendo usado';
-                return false;
-            }
-            else if (Validator::validatePhone($value)) {
-                $this->telefonofijo = $value;
-                return true;
-            }  else {
-                $this->info_error = 'El teléfono fijo debe tener el formato ####-####';
-                return false;
-            }
+        } else if($boolean and !$this->checkDuplicateWithId($value)){
+            $this->telefono_fijo = $value;
+            return true;
+        } else if($this->checkDuplicate($value)){
+            $this->info_error = 'El teléfono fijo ya está siendo usado';
+            return false;
+        }
+        else if (Validator::validatePhone($value)) {
+            $this->telefono_fijo = $value;
+            return true;
+        }  else {
+            $this->info_error = 'El teléfono fijo debe tener el formato ####-####';
+            return false;
         }
     }
 

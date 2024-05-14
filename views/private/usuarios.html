@@ -2,29 +2,35 @@
 <html lang="en">
 
 <head>
+    <!-- Metadatos de la página web -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título de la página -->
     <title>Usuarios</title>
     <!-- Mandar a llamar el framework -->
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Mandar a llamar css del navbar -->
     <link href="../../resources/css/navbar_privado.css" rel="stylesheet">
+    <!-- Mandar a llamar css de la página -->
+    <link href="../../resources/css/usuarios.css" rel="stylesheet">
 </head>
 
+<!-- Cuerpo de la página -->
 <body>
+    <!-- Contenido principal de la página -->
     <main>
+        <!-- Contenedor padre -->
         <div class="container-fluid">
             <div class="row mt-5 row-gap-3">
                 <div class="col-12 col-sm-6">
                     <!-- Botón para abrir el modal -->
-                    <button type="button" class="btn btn-primary ms-5" id="botonAgregar"
-                        onclick="validarAbrirModal()">
-                        </button>
+                    <button type="button" class="btn btn-primary ms-5" id="botonAgregar" onclick="validarAbrirModal()">
+                    </button>
                 </div>
                 <div class="col-12 col-sm-6">
                     <form class="d-flex" id="formBuscar">
-                        <input class="form-control mr-sm-2" type="search"
-                            placeholder="" name="buscarUsuario" id="buscarUsuario"
-                            oninput="verificarReset()">
+                        <input class="form-control mr-sm-2" type="search" placeholder="" name="buscarUsuario"
+                            id="buscarUsuario" oninput="verificarReset()">
                         <button class="btn" type="submit"><img src="../../resources/img/lupa.png" class="img-fluid"
                                 width="35px" height="35px" alt="buscarimg"></button>
                     </form>
@@ -41,7 +47,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="table-responsive-md d-none" id="tablaAdmin">
+                <div class="container-fluid table-responsive" id="tablaAdmin">
                     <table class="table table-hover">
                         <!-- Cabecera de la tabla -->
                         <thead>
@@ -61,7 +67,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="table-responsive-md d-none" id="tablaClientes">
+                <div class="table-responsive-md d-none container-fluid" id="tablaClientes">
                     <table class="table table-hover">
                         <!-- Cabecera de la tabla -->
                         <thead>
@@ -123,7 +129,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6">
                                         <label for="confirmarContraAdmin" class="form-label">Confirmar
                                             contraseña</label>
                                         <div class="col-12 d-flex">
@@ -173,7 +179,7 @@
                         </div>
                         <form id="formCliente">
                             <div class="modal-body">
-                                <div class="row">
+                                <div class="row row-gap-3">
                                     <div class="col-12 col-md-6">
                                         <input type="number" class="d-none" id="idCliente" name="idCliente">
                                         <label for="nombreCliente" class="col-form-label">Nombre</label>
@@ -186,9 +192,14 @@
                                             name="apellidoCliente" required>
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label for="duiCliente" class="form-label">DUI</label>
+                                        <input type="text" id="duiCliente" name="duiCliente" placeholder="00000000-0"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="col-12 col-md-6">
                                         <label for="correoCliente" class="col-form-label">Correo</label>
-                                        <input type="email" class="form-control" id="correoCliente"
-                                            name="correoCliente" required>
+                                        <input type="email" class="form-control" id="correoCliente" name="correoCliente"
+                                            required>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="contraCliente" class="form-label">Contraseña</label>
@@ -202,12 +213,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6">
                                         <label for="confirmarContraCliente" class="form-label">Confirmar
                                             contraseña</label>
                                         <div class="col-12 d-flex">
-                                            <input type="password" id="confirmarContraCliente" name="confirmarContraCliente"
-                                                class="form-control inputT" placeholder="••••••••••••••••" required>
+                                            <input type="password" id="confirmarContraCliente"
+                                                name="confirmarContraCliente" class="form-control inputT"
+                                                placeholder="••••••••••••••••" required>
                                             <div class="btn input-group-addon d-flex align-items-center justify-content-center"
                                                 onclick="mostrarContra('confirmarContraCliente')">
                                                 <img src="../../resources/img/ojo_ocultar.png" class="img-fluid"
@@ -215,25 +227,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
-                                        <label for="duiCliente" class="form-label">DUI</label>
-                                        <input type="text" id="duiCliente" name="duiCliente" placeholder="00000000-0" class="form-control" required>
-                                    </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6">
                                         <label for="telefonoCliente" class="form-label">Teléfono</label>
-                                        <input type="text" id="telefonoCliente" name="telefonoCliente" placeholder="0000-0000" class="form-control" required>
+                                        <input type="text" id="telefonoCliente" name="telefonoCliente"
+                                            placeholder="0000-0000" class="form-control" required>
                                     </div>
-                                    <div class="col-12">
-                                        <label for="telefonoFijoCliente" class="form-label">Teléfono fijo (Opcional)</label>
-                                        <input type="text" id="telefonoFijoCliente" name="telefonoFijoCliente" placeholder="0000-0000" class="form-control">
+                                    <div class="col-12 col-md-6">
+                                        <label for="telefonoFijoCliente" class="form-label">Teléfono fijo
+                                            (Opcional)</label>
+                                        <input type="text" id="telefonoFijoCliente" name="telefonoFijoCliente"
+                                            placeholder="0000-0000" class="form-control">
                                     </div>
-                                    <div class="col-12 d-none">
-                                        <label class="form-check-label" for="estadoCliente">Estado del cliente</label>
-                                        <div class="form-check form-switch d-flex column-gap-5">
-                                            <label class="form-check-label" for="estadoCliente">Inactivo</label>
-                                            <input class="form-check-input" type="checkbox" role="switch" id="estadoCliente" name="estadoCliente" onchange="">
-                                            <label class="form-check-label" for="estadoCliente">Activo</label>
-                                        </div>
+                                    <div class="col-12 col-md-6 d-none" id="contenedorEstadoCliente">
+                                        <label for="telefonoFijoCliente" class="form-label">Estado del cliente</label>
+                                        <select class="form-select" id="estadoCliente">
+                                            <option selected>Activo</option>
+                                            <option value="1">Dado de baja</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

@@ -56,11 +56,14 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
-    public function setCorreo($valor, $min = 8, $max = 100)
+    public function setCorreo($valor, $boolean, $min = 8, $max = 100)
     {
         if (!Validator::validateEmail($valor)) {
             $this->info_error = 'El correo no es válido';
             return false;
+        } else if($boolean and !$this->checkDuplicateWithId($valor)){
+            $this->correo = $valor;
+            return true;
         } else if($this->searchEmail($valor)){
             $this->info_error = 'El correo ya está siendo usado por otro administrador';
             return false;

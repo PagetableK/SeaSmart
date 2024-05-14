@@ -140,4 +140,13 @@ class AdministradorHandler
         $params = array($correo);
         return Database::getRow($sql, $params);
     }
+
+    public function checkDuplicateWithId($value)
+    {
+        $sql = 'SELECT id_administrador
+                FROM administradores
+                WHERE (correo_administrador = ?) AND id_administrador != ?';
+        $params = array($value, $this->id);
+        return Database::getRow($sql, $params);
+    }
 }

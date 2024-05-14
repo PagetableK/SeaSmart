@@ -30,7 +30,7 @@ if (isset($_GET['action'])) {
                 if (
                     !$administrador->setNombre($_POST['nombreAdministrador']) or
                     !$administrador->setApellido($_POST['apellidoAdministrador']) or
-                    !$administrador->setCorreo($_POST['correoAdministrador']) or
+                    !$administrador->setCorreo($_POST['correoAdministrador'], 0) or
                     !$administrador->setContra($_POST['contraAdministrador']) 
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -66,7 +66,7 @@ if (isset($_GET['action'])) {
                     !$administrador->setId($_POST['idAdministrador']) or
                     !$administrador->setNombre($_POST['nombreAdministrador']) or
                     !$administrador->setApellido($_POST['apellidoAdministrador']) or
-                    !$administrador->setCorreo($_POST['correoAdministrador'])
+                    !$administrador->setCorreo($_POST['correoAdministrador'], 1)
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->updateRow()) {
@@ -116,8 +116,7 @@ if (isset($_GET['action'])) {
                 if (
                     !$administrador->setNombre($_POST['nombreAdministrador']) or
                     !$administrador->setApellido($_POST['apellidoAdministrador']) or
-                    !$administrador->setCorreo($_POST['correoAdministrador']) or
-                    !$administrador->setAlias($_POST['aliasAdministrador'])
+                    !$administrador->setCorreo($_POST['correoAdministrador'], 1)
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->editProfile()) {
@@ -134,7 +133,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Contraseña actual incorrecta';
                 } elseif ($_POST['claveNueva'] != $_POST['confirmarClave']) {
                     $result['error'] = 'Confirmación de contraseña diferente';
-                } elseif (!$administrador->setClave($_POST['claveNueva'])) {
+                } elseif (!$administrador->setContra($_POST['claveNueva'])) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->changePassword()) {
                     $result['status'] = 1;
@@ -164,7 +163,7 @@ if (isset($_GET['action'])) {
                     or
                     !$administrador->setApellido($_POST['ApellidoAdmin'])
                     or
-                    !$administrador->setCorreo($_POST['CorreoAdmin'])
+                    !$administrador->setCorreo($_POST['CorreoAdmin'], 0)
                     or
                     !$administrador->setContra($_POST['ContraAdmin'])
                 ) {

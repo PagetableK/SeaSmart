@@ -1,6 +1,6 @@
 // Constante para completar la ruta de la API.
 const CATEGORIA_API = 'services/admin/categorias.php';
-// Constante para almacenar el modal de editar categoría.
+// Constante para almacenar el modal de agregar o editar categoría.
 const MODAL_CATEGORIA = new bootstrap.Modal('#modalCategoria');
 // Constante que almacena el form de búsqueda.
 const FORM_BUSCAR = document.getElementById('formBuscar');
@@ -75,8 +75,12 @@ const abrirModal = async (tituloModal, idCategoria) => {
     }
 }
 
+// Función que verifica cuando el input de búsqueda
+// se encuentra vacío para recargar los registros de la tabla.
 function verificarReset(){
+    // Se valida que el input esté vacío.
     if(document.getElementById('buscarCategoria').value==""){
+        // Se llama a la función para cargar los registros.
         cargarTabla();
     }
 }
@@ -186,6 +190,7 @@ FORM_CATEGORIA.addEventListener('submit', async (event) => {
     }
 });
 
+// Función para cargar los registros de la tabla.
 const cargarTabla = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     FILAS_ENCONTRADAS.textContent = '';
