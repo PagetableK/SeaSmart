@@ -12,6 +12,7 @@ class subCategoriaHandler
     protected $id = null;
     protected $nombre = null;
     protected $descripcion = null;
+    protected $id_categoria = null;
 
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
@@ -29,9 +30,9 @@ class subCategoriaHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO sub_categorias(nombre_sub_categoria, descripcion_sub_categoria)
-                VALUES(?, ?)';
-        $params = array($this->nombre, $this->descripcion);
+        $sql = 'INSERT INTO sub_categorias(nombre_sub_categoria, descripcion_sub_categoria, id_categoria)
+                VALUES(?, ?, ?)';
+        $params = array($this->nombre, $this->descripcion, $this->id_categoria);
         return Database::executeRow($sql, $params);
     }
 
@@ -45,7 +46,7 @@ class subCategoriaHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_sub_categoria, nombre_sub_categoria, descripcion_sub_categoria
+        $sql = 'SELECT id_sub_categoria, nombre_sub_categoria, descripcion_sub_categoria, id_categoria
                 FROM sub_categorias
                 WHERE id_sub_categoria = ?';
         $params = array($this->id);
@@ -55,9 +56,9 @@ class subCategoriaHandler
     public function updateRow()
     {
         $sql = 'UPDATE sub_categorias
-                SET nombre_sub_categoria = ?, descripcion_sub_categoria = ?
+                SET nombre_sub_categoria = ?, descripcion_sub_categoria = ?, id_categoria = ?
                 WHERE id_sub_categoria = ?';
-        $params = array($this->nombre, $this->descripcion, $this->id);
+        $params = array($this->nombre, $this->descripcion, $this->id_categoria,$this->id);
         return Database::executeRow($sql, $params);
     }
 

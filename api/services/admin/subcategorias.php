@@ -28,7 +28,8 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$subcategoria->setNombre($_POST['nombresubCategoria']) or
-                    !$subcategoria->setDescripcion($_POST['descripcionsubCategoria'])
+                    !$subcategoria->setDescripcion($_POST['descripcionsubCategoria']) or
+                    !$subcategoria->setIdCategoria($_POST['categoriaSelect'])
                 ) {
                     $result['error'] = $subcategoria->getDataError();
                 } elseif ($subcategoria->createRow()) {
@@ -60,6 +61,7 @@ if (isset($_GET['action'])) {
                 if (
                     !$subcategoria->setId($_POST['idsubCategoria']) or
                     !$subcategoria->setNombre($_POST['nombresubCategoria']) or
+                    !$subcategoria->setIdCategoria($_POST['categoriaSelect']) or
                     !$subcategoria->setDescripcion($_POST['descripcionsubCategoria'])
                 ) {
                     $result['error'] = $subcategoria->getDataError();
@@ -94,4 +96,4 @@ if (isset($_GET['action'])) {
     //}
 } else {
     print(json_encode('Recurso no disponible'));
-}   
+}

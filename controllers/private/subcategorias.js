@@ -16,7 +16,10 @@ const TITULO_MODAL = document.getElementById('tituloModal'),
 const FORM_SUBCATEGORIA = document.getElementById('formsubCategoria'),
     ID_SUBCATEGORIA = document.getElementById('idsubCategoria'),
     NOMBRE_SUBCATEGORIA = document.getElementById('nombresubCategoria'),
-    DESCRIPCION_SUBCATEGORIA = document.getElementById('descripcionsubCategoria');
+    DESCRIPCION_SUBCATEGORIA = document.getElementById('descripcionsubCategoria'),
+    ID_CATEGORIA = document.getElementById('categoriaSelect');
+//
+const CATEGORIA_API = 'services/admin/categorias.php';
 
 // Función para abrir el modal crear o editar subcategoría.
 const abrirModal = async (tituloModal, idsubCategoria) => {
@@ -32,6 +35,7 @@ const abrirModal = async (tituloModal, idsubCategoria) => {
         BOTON_ACCION.innerHTML = 'Agregar subcategoría';
         // Se limpian los input para dejarlos vacíos.
         FORM_SUBCATEGORIA.reset();
+        await fillSelect(CATEGORIA_API, 'readAll1', 'categoriaSelect');
         // Se abre el modal agregar categoría.
         MODALSUBCATEGORIA.show();
     }
@@ -62,6 +66,7 @@ const abrirModal = async (tituloModal, idsubCategoria) => {
             NOMBRE_SUBCATEGORIA.value = ROW.nombre_sub_categoria;
             // Se carga la descripción de la subcategoría en el input descripcionsubCategoria.
             DESCRIPCION_SUBCATEGORIA.value = ROW.descripcion_sub_categoria;
+            await fillSelect(CATEGORIA_API, 'readAll1', 'categoriaSelect', ROW.id_categoria);
             // Se abre el modal editar subcategoría.
             MODALSUBCATEGORIA.show();
         } else {
@@ -166,6 +171,7 @@ FORM_SUBCATEGORIA.addEventListener('submit', async (event) => {
         sweetAlert(2, DATA.error, false);
     }
 });
+
 
 const cargarTabla = async (form = null) => {
     // Se inicializa el contenido de la tabla.

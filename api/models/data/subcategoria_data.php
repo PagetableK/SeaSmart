@@ -27,6 +27,17 @@ class subCategoriaData extends subCategoriaHandler
         }
     }
 
+    public function setIdCategoria($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_categoria = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la subcategoría es incorrecto';
+            return false;
+        }
+    }
+
     public function setNombre($value, $min = 2, $max = 20)
     {
         if (!Validator::validateAlphanumeric($value)) {
