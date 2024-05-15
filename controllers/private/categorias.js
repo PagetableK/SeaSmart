@@ -1,7 +1,7 @@
 // Constante para completar la ruta de la API.
 const CATEGORIA_API = 'services/admin/categorias.php';
-// Constante para almacenar el modal de editar categoría.
-const MODALCATEGORIA = new bootstrap.Modal('#modalCategoria');
+// Constante para almacenar el modal de agregar o editar categoría.
+const MODAL_CATEGORIA = new bootstrap.Modal('#modalCategoria');
 // Constante que almacena el form de búsqueda.
 const FORM_BUSCAR = document.getElementById('formBuscar');
 // Constante para almacenar el modal de eliminar categoría.
@@ -25,6 +25,7 @@ const abrirModal = async (tituloModal, idCategoria) => {
     // Se configura el título del modal.
     TITULO_MODAL.textContent = tituloModal;
 
+    // Si el valor del parámetro es nulo la acción es agregar administrador
     if (idCategoria == null) {
         // Se remueve el antiguo color del botón.
         BOTON_ACCION.classList.remove('btn-success');
@@ -37,7 +38,7 @@ const abrirModal = async (tituloModal, idCategoria) => {
         // Se cambia la imagen por defecto.
         IMG_CATEGORIA.src = "../../api/images/categorias/categoria_imageholder.png";
         // Se abre el modal agregar categoría.
-        MODALCATEGORIA.show();
+        MODAL_CATEGORIA.show();
     }
     else {
         // Se define una constante tipo objeto que almacenará el idCategoria.
@@ -48,8 +49,6 @@ const abrirModal = async (tituloModal, idCategoria) => {
         const DATA = await fetchData(CATEGORIA_API, 'readOne', FORM);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
-            // Se configura el título del modal.
-            TITULO_MODAL.textContent = 'Actualizar categoría';
             // Se remueve el antiguo color del botón.
             BOTON_ACCION.classList.remove('btn-primary');
             // Se configura el nuevo color del botón.
@@ -69,15 +68,19 @@ const abrirModal = async (tituloModal, idCategoria) => {
             // Se define la ruta de la imagen almacenada en la API.
             IMG_CATEGORIA.src = "../../api/images/categorias/" + ROW.imagen_categoria;
             // Se abre el modal editar categoría.
-            MODALCATEGORIA.show();
+            MODAL_CATEGORIA.show();
         } else {
             sweetAlert(2, DATA.error, false);
         }
     }
 }
 
+// Función que verifica cuando el input de búsqueda
+// se encuentra vacío para recargar los registros de la tabla.
 function verificarReset(){
+    // Se valida que el input esté vacío.
     if(document.getElementById('buscarCategoria').value==""){
+        // Se llama a la función para cargar los registros.
         cargarTabla();
     }
 }
@@ -115,8 +118,8 @@ const abrirEliminar = async (idCategoria) => {
     }
 }
 
+// Función asíncrona que elimina una categoría
 const eliminarCategoria = async () => {
-
     // Se define una variable con el valor del input inputIdCategoria.
     var idCategoria = document.getElementById('inputIdCategoria').value;
     // Se define una constante tipo objeto donde se almacenará el idCategoria.
@@ -141,16 +144,16 @@ const eliminarCategoria = async () => {
 
 // Función para cargar la imagen al cargar un archivo en input file.
 function cargarImagen(event) {
-    // Se almacena el archivo cargado.
+    // Se almacena el archivo cargado en la variable archivoSeleccionado.
     var archivoSeleccionado = event.target.files[0];
-    // Se crea una variable tipo objeto.
+    // Se crea el objeto reader.
     var reader = new FileReader();
     // Se define una variable con el mismo valor que la constante IMG_CATEGORIA.
     var imgtag = IMG_CATEGORIA;
-    // Se codifica la cadena de caracteres con la imagen.
+    // El reader lee la cadena de caracteres.
     reader.readAsDataURL(archivoSeleccionado);
-    // Al cargar una imagen en el campo se dispara el evento
-    // que configura la imagen en la etiqueta imgCategoria.
+    // Cuando el reader termina de leer la cadena de caracteres se 
+    // dispara el evento que configura la imagen en la etiqueta imgCategoria.
     reader.onload = function (event) {
         imgtag.src = event.target.result;
     };
@@ -164,22 +167,20 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarTabla();
 });
 
-// Método del evento para cuando se envía el formulario de guardar.
+// Método del evento para cuando se envía el formulario de agregar o editar.
 FORM_CATEGORIA.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
     (ID_CATEGORIA.value) ? action = 'updateRow' : action = 'createRow';
-    console.log(ID_CATEGORIA.value);
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(FORM_CATEGORIA);
     // Petición para guardar los datos del formulario.
     const DATA = await fetchData(CATEGORIA_API, action, FORM);
-    console.log(DATA);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se cierra la caja de diálogo.
-        MODALCATEGORIA.hide();
+        MODAL_CATEGORIA.hide();
         // Se muestra un mensaje de éxito.
         sweetAlert(1, DATA.message, true);
         // Se carga nuevamente la tabla para visualizar los cambios.
@@ -189,6 +190,7 @@ FORM_CATEGORIA.addEventListener('submit', async (event) => {
     }
 });
 
+// Función para cargar los registros de la tabla.
 const cargarTabla = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     FILAS_ENCONTRADAS.textContent = '';
@@ -212,7 +214,7 @@ const cargarTabla = async (form = null) => {
                             <img src="../../resources/img/lapiz.png" alt="lapizEditar" width="30px">
                         </button>
                         <button type="button" class="btn btn-danger" onclick="abrirEliminar(${row.id_categoria})">
-                            <img src="../../resources/img/eliminar.png" alt="lapizEditar" width="30px">
+                            <img src="../../resources/img/eliminar.png" alt="lapizEliminar" width="30px">
                         </button>
                     </td>
                 </tr>

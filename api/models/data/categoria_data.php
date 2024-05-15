@@ -28,7 +28,7 @@ class CategoriaData extends CategoriaHandler
         }
     }
 
-    public function setNombre($value, $min = 2, $max = 50)
+    public function setNombre($value, $min = 2, $max = 20)
     {
         if (!Validator::validateAlphanumeric($value)) {
             $this->data_error = 'El nombre debe ser un valor alfanumérico';
@@ -54,12 +54,12 @@ class CategoriaData extends CategoriaHandler
             $this->imagen = $filename;
             return true;
         } else {
-            $this->imagen = 'default.png';
+            $this->imagen = 'categoria_imageholder.png';
             return true;
         }
     }
 
-    public function setDescripcion($value, $min = 2, $max = 250)
+    public function setDescripcion($value, $min = 2, $max = 100)
     {
         if (!$value) {
             return true;
