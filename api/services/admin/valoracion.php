@@ -15,21 +15,21 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'readAll':
-                if ($result['dataset'] = $valoracion->readAll()) {+
+                if ($result['dataset'] = $valoracion->readAll()) {
                     $result['status'] = 1;
                     $result['message'] = 'Mostrando ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen colores registrados';
+                    $result['error'] = 'No hay valoraciones';
                 }
                 break;
-                case 'readAllasc':
-                    if ($result['dataset'] = $valoracion->readAllAsc()) {+
-                        $result['status'] = 1;
-                        $result['message'] = 'Mostrando ' . count($result['dataset']) . ' registros';
-                    } else {
-                        $result['error'] = 'No existen colores registrados';
-                    }
-                    break;
+            case 'readAllasc':
+                if ($result['dataset'] = $valoracion->readAllAsc()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Mostrando ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No hay valoraciones';
+                }
+                break;
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -39,9 +39,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = $valoracion->getDataError();
                 } elseif ($valoracion->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Color modificado correctamente';
+                    $result['message'] = 'Estado modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el color';
+                    $result['error'] = 'Ocurrió un problema al desactivar el comentario';
                 }
                 break;
             default:

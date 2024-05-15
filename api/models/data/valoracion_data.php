@@ -28,14 +28,13 @@ class ValoracionData extends ValoracionHandler
         }
     }
 
-    //no sé
-    public function setVisibilidad($value, $min = 0, $max = 2)
+    public function setVisibilidad($value)
     {
-        if (Validator::validateNaturalNumber($value)) {
+        if (Validator::validateNaturalNumber($value) or ($value == 0)) {
             $this->visibilidad = $value;
             return true;
         } else {
-            $this->data_error = 'El valor de visibilidad es incorrecto';
+            $this->data_error = 'El valor de la valoracion es incorrecto';
             return false;
         }
     }

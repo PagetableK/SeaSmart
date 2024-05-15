@@ -2,7 +2,7 @@
 // Se incluye la clase para trabajar con la base de datos.
 require_once('../../helpers/database.php');
 /*
- *  Clase para manejar el comportamiento de los datos de la tabla COLOR.
+ *  Clase para manejar el comportamiento de los datos de la tabla CALIFICACIONES.
  */
 class ValoracionHandler
 {
@@ -13,7 +13,7 @@ class ValoracionHandler
     protected $visibilidad = null;
 
     /*
-     *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
+     *  Métodos para realizar operaciones (read, update).
      */
     public function readAll()
     {
@@ -32,7 +32,7 @@ class ValoracionHandler
         $sql = 'UPDATE valoraciones
                 SET estado_comentario = ?
                 WHERE id_valoracion = ?';
-        $params = array($this->nombre, $this->id);
+        $params = array($this->visibilidad, $this->id);
         return Database::executeRow($sql, $params);
     }
 }
