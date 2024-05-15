@@ -17,6 +17,8 @@ const ID_CLIENTE = document.getElementById('idCliente'),
 const CONTENEDOR_ESTADO = document.getElementById('contenedorEstadoCliente');
 // Se almacena el modal para eliminar un cliente.
 const MODAL_ELIMINAR_CLIENTE = new bootstrap.Modal('#borrarModalCliente');
+// Se almacena el form para eliminar un cliente.
+const FORM_ELIMINAR_CLIENTE = document.getElementById('formEliminarCliente');
 
 // Función que retorna el estado en base del resultado de la bd.
 function validarEstado(estadoCliente) {
@@ -180,3 +182,26 @@ const eliminarCliente = async () => {
         MODAL_ELIMINAR_CLIENTE.hide();
     }
 }
+
+// Método del evento para cuando se envía el formulario de eliminar cliente.
+FORM_ELIMINAR_CLIENTE.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Se define una constante tipo objeto donde se almacenará el idCliente.
+    const FORM = new FormData(FORM_ELIMINAR_CLIENTE);
+    // Petición para eliminar el registro seleccionado.
+    const DATA = await fetchData(CLIENTE_API, 'deleteRow', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        //Se oculta el modal.
+        MODAL_ELIMINAR_CLIENTE.hide();
+        // Se muestra un mensaje de éxito.
+        await sweetAlert(1, DATA.message, true);
+        // Se carga nuevamente la tabla para visualizar los cambios.
+        cargarTabla();
+    } else {
+        sweetAlert(2, DATA.error, false);
+        //Se oculta el modal.
+        MODAL_ELIMINAR_CLIENTE.hide();
+    }
+});

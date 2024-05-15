@@ -37,7 +37,8 @@
                     <!--COLOCAMOS LA BARRA DE BUSQUEDA-->
                     <div class="col">
                         <form class="d-flex ps-3" id="formBuscar">
-                            <input class="form-control" type="search" placeholder="Buscar un producto..."
+                            <input class="form-control" type="search"
+                                placeholder="Buscar un producto por nombre, descripción o subcategoría..."
                                 id="buscarProducto" name="buscarProducto" oninput="verificarReset()">
                             <button class="btn" type="enviar"><img src="../../resources/img/lupa.png" class="img-fluid"
                                     width="35px" height="35px" alt="buscarimg"></button>
@@ -46,7 +47,7 @@
                 </div>
             </div>
             <!-- CREAMOS LA FILA DONDE COLOCAMOS LA TABLA DE LOS ELEMENTOS DE "PRODUCTO" -->
-            <div class="table-responsive-md mt-5">
+            <div class="table-responsive-md mt-5" id="contenedorTabla">
                 <table class="table">
                     <!-- CREAMOS LA CABECERA DE LA TABLA DE PRODUCTO -->
                     <thead>
@@ -96,7 +97,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="selectCategoria" class="form-label">Categoría</label>
-                                        <select class="form-select" id="selectCategoria" name="selectCategoria"
+                                        <select class="form-select" id="selectCategoria" name="selectCategoria" size="6"
                                             onchange="cargarSubCategorias()">
                                         </select>
                                     </div>
@@ -104,12 +105,14 @@
                                         <label for="selectSubcategoria" class="form-label">Subcategoría</label>
                                         <!-- Opciones de subcategorías -->
                                         <select class="form-select" id="selectSubcategoria" name="selectSubcategoria"
-                                            onchange="">
+                                            size="6" onchange="">
                                         </select>
                                     </div>
                                     <div class="col-12 col-md-6 d-none" id="contenedorEstadoProducto">
                                         <label for="estadoProducto" class="form-label">Estado del producto</label>
-                                        <select class="form-select" id="estadoProducto">
+                                        <select class="form-select" id="estadoProducto" name="estadoProducto">
+                                            <option value="1">Activo</option>
+                                            <option value="0">Inactivo</option>
                                         </select>
                                     </div>
                                 </div>
@@ -118,6 +121,26 @@
                             <div class="modal-footer d-flex align-items-center justify-content-center">
                                 <button type="submit" class="btn btn-primary close" id="btnAccion">Agregar
                                     producto</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal eliminar -->
+            <div class="modal fade" id="borrarModalProducto">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="formEliminar">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="tituloModalEliminar"></h1>
+                                <input type="number" class="d-none" id="inputIdProducto" name="idProducto">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <button type="submit" class="btn btn-primary"
+                                    onclick="">Eliminar</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                             </div>
                         </form>
                     </div>

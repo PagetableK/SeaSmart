@@ -156,15 +156,17 @@
             <div class="modal fade" id="borrarModalAdministrador">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="tituloModalEliminarAdmin"></h1>
-                            <input type="number" class="d-none" id="inputIdAdministrador" name="idAdministrador">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <button type="button" class="btn btn-primary" onclick="eliminarAdmin()">Eliminar</button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        </div>
+                        <form id="formEliminarAdmin">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="tituloModalEliminarAdmin"></h1>
+                                <input type="number" class="d-none" id="inputIdAdministrador" name="idAdministrador">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <button type="submit" class="btn btn-primary" onclick="">Eliminar</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -258,15 +260,17 @@
             <div class="modal fade" id="borrarModalCliente">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="tituloModalEliminarCliente"></h1>
-                            <input type="number" class="d-none" id="inputIdCliente" name="idCliente">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <button type="button" class="btn btn-primary" onclick="eliminarCliente()">Eliminar</button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        </div>
+                        <form id="formEliminarCliente">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="tituloModalEliminarCliente"></h1>
+                                <input type="number" class="d-none" id="inputIdCliente" name="idCliente">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <button type="submit" class="btn btn-primary" onclick="">Eliminar</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

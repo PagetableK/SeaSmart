@@ -78,17 +78,6 @@ class ProductoData extends ProductoHandler
         }
     }
 
-    public function setFilename()
-    {
-        if ($data = $this->readFilename()) {
-            $this->filename = $data['imagen_producto'];
-            return true;
-        } else {
-            $this->data_error = 'Producto inexistente';
-            return false;
-        }
-    }
-
     /*
      *  Métodos para obtener el valor de los atributos adicionales.
      */

@@ -37,7 +37,8 @@ const BOTON_ACCION_ADMIN = document.getElementById('btnAccionAdmin'),
 const BOTON_AGREGAR = document.getElementById('botonAgregar');
 // Se almacena el input que sirve para filtrar registros.
 const INPUT_BUSQUEDA = document.getElementById('buscarUsuario');
-
+// Se almacena el form para eliminar un administrador (Contiene inputIdAdministrador).
+const FORM_ELIMINAR_ADMIN = document.getElementById('formEliminarAdmin');
 
 // Evento que carga los recursos de barra de navegación y función de rellenar tabla.
 document.addEventListener('DOMContentLoaded', () => {
@@ -57,15 +58,15 @@ const cargarTabla = async (form = null) => {
         document.getElementById('tablaAdmin').classList.remove('d-none');
         // Se oculta la tabla de clientes.
         document.getElementById('tablaClientes').classList.add('d-none');
-        // Se inicializa el contenido de la tabla.
-        FILAS_ADMINISTRADORES.textContent = '';
-        CUERPO_ADMIN.innerHTML = '';
         // Se verifica la acción a realizar.
         (form) ? action = 'searchRows' : action = 'readAll';
         // Petición para obtener los registros disponibles.
         const DATA = await fetchData(ADMINISTRADOR_API, action, form);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
+            // Se inicializa el contenido de la tabla.
+            FILAS_ADMINISTRADORES.textContent = '';
+            CUERPO_ADMIN.innerHTML = '';
             // Se recorre el conjunto de registros fila por fila.
             DATA.dataset.forEach(row => {
                 // Se crean y concatenan las filas de la tabla con los datos de cada registro.
@@ -101,15 +102,15 @@ const cargarTabla = async (form = null) => {
         document.getElementById('tablaClientes').classList.remove('d-none');
         // Se oculta la tabla de administradores.
         document.getElementById('tablaAdmin').classList.add('d-none');
-        // Se inicializa el contenido de la tabla.
-        FILAS_CLIENTES.textContent = '';
-        CUERPO_CLIENTES.innerHTML = '';
         // Se verifica la acción a realizar.
         (form) ? action = 'searchRows' : action = 'readAll';
         // Petición para obtener los registros disponibles.
         const DATA = await fetchData(CLIENTE_API, action, form);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
+            // Se inicializa el contenido de la tabla.
+            FILAS_CLIENTES.textContent = '';
+            CUERPO_CLIENTES.innerHTML = '';
             // Se recorre el conjunto de registros fila por fila.
             DATA.dataset.forEach(row => {
                 //Se valida el estado del cliente para cargarlo en la columna.
@@ -250,12 +251,15 @@ const abrirEliminarAdmin = async (idAdministrador) => {
 
 // Función asíncrona que elimina un administrador
 const eliminarAdmin = async () => {
-    // Se define una variable con el valor del input inputIdAdministrador.
-    var idAdministrador = document.getElementById('inputIdAdministrador').value;
+
+}
+
+// Método del evento para cuando se envía el formulario de eliminar administrador.
+FORM_ELIMINAR_ADMIN.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
     // Se define una constante tipo objeto donde se almacenará el idAdministrador.
-    const FORM = new FormData();
-    // Se almacena el nombre del campo y el valor (idAdministrador).
-    FORM.append('idAdministrador', idAdministrador);
+    const FORM = new FormData(FORM_ELIMINAR_ADMIN);
     // Petición para eliminar el registro seleccionado.
     const DATA = await fetchData(ADMINISTRADOR_API, 'deleteRow', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -271,7 +275,7 @@ const eliminarAdmin = async () => {
         //Se oculta el modal.
         MODAL_ELIMINAR_ADMIN.hide();
     }
-}
+});
 
 // Función para ocultar o mostrar la contraseña en input.
 function mostrarContra(inputContra) {

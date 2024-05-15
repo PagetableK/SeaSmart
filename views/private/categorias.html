@@ -43,7 +43,7 @@
                 </div>
             </div>
             <!-- CREAMOS LA FILA DONDE COLOCAMOS LA TABLA DE LOS ELEMENTOS DE LA CATEGORIA-->
-            <div class="container-fluid table-responsive" id="contenedorTablaCategorias">
+            <div class="container-fluid table-responsive mt-5" id="contenedorTablaCategorias">
                 <table class="table">
                     <!-- CREAMOS LA CABECERA DE LA TABLA DE CATEGORIA -->
                     <thead>
@@ -135,15 +135,17 @@
         <div class="modal fade" id="borrarModalCategoria">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="tituloModalEliminar"></h1>
-                        <input type="number" class="d-none" id="inputIdCategoria" name="idCategoria">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <button type="button" class="btn btn-primary" onclick="eliminarCategoria()">Eliminar</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                    </div>
+                    <form id="formEliminar">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="tituloModalEliminar"></h1>
+                            <input type="number" class="d-none" id="inputIdCategoria" name="idCategoria">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <button type="submit" class="btn btn-primary" onclick="">Eliminar</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
