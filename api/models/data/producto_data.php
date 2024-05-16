@@ -28,7 +28,7 @@ class ProductoData extends ProductoHandler
         }
     }
 
-    public function setNombre($value, $min = 2, $max = 50)
+    public function setNombre($value, $min = 2, $max = 30)
     {
         if (!Validator::validateAlphanumeric($value)) {
             $this->data_error = 'El nombre debe ser un valor alfanumérico';
@@ -42,7 +42,7 @@ class ProductoData extends ProductoHandler
         }
     }
 
-    public function setDescripcion($value, $min = 2, $max = 250)
+    public function setDescripcion($value, $min = 2, $max = 500)
     {
         if (!Validator::validateString($value)) {
             $this->data_error = 'La descripción contiene caracteres prohibidos';
@@ -56,52 +56,13 @@ class ProductoData extends ProductoHandler
         }
     }
 
-    public function setPrecio($value)
-    {
-        if (Validator::validateMoney($value)) {
-            $this->precio = $value;
-            return true;
-        } else {
-            $this->data_error = 'El precio debe ser un número positivo';
-            return false;
-        }
-    }
-
-    public function setExistencias($value)
-    {
-        if (Validator::validateNaturalNumber($value)) {
-            $this->existencias = $value;
-            return true;
-        } else {
-            $this->data_error = 'Las existencias debe ser un número entero positivo';
-            return false;
-        }
-    }
-
-    public function setImagen($file, $filename = null)
-    {
-        if (Validator::validateImageFile($file, 1000)) {
-            $this->imagen = Validator::getFileName();
-            return true;
-        } elseif (Validator::getFileError()) {
-            $this->data_error = Validator::getFileError();
-            return false;
-        } elseif ($filename) {
-            $this->imagen = $filename;
-            return true;
-        } else {
-            $this->imagen = 'default.png';
-            return true;
-        }
-    }
-
     public function setSubcategoria($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->subcategoria = $value;
+            $this->id_subcategoria = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de la categoría es incorrecto';
+            $this->data_error = 'El identificador de la subcategoría es incorrecto';
             return false;
         }
     }
@@ -113,17 +74,6 @@ class ProductoData extends ProductoHandler
             return true;
         } else {
             $this->data_error = 'Estado incorrecto';
-            return false;
-        }
-    }
-
-    public function setFilename()
-    {
-        if ($data = $this->readFilename()) {
-            $this->filename = $data['imagen_producto'];
-            return true;
-        } else {
-            $this->data_error = 'Producto inexistente';
             return false;
         }
     }

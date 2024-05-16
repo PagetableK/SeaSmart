@@ -37,7 +37,12 @@ const BOTON_ACCION_ADMIN = document.getElementById('btnAccionAdmin'),
 const BOTON_AGREGAR = document.getElementById('botonAgregar');
 // Se almacena el input que sirve para filtrar registros.
 const INPUT_BUSQUEDA = document.getElementById('buscarUsuario');
-
+// Se almacena el form para eliminar un administrador (Contiene inputIdAdministrador).
+const FORM_ELIMINAR_ADMIN = document.getElementById('formEliminarAdmin');
+// Se almacena el contenedor con el select estadoAdmin.
+const CONTENEDOR_ESTADO_ADMIN = document.getElementById('contenedorEstadoAdmin');
+// Se almacena el select estadoAdmin.
+const ESTADO_ADMIN = document.getElementById('estadoAdministrador');
 
 // Evento que carga los recursos de barra de navegación y función de rellenar tabla.
 document.addEventListener('DOMContentLoaded', () => {
@@ -57,17 +62,19 @@ const cargarTabla = async (form = null) => {
         document.getElementById('tablaAdmin').classList.remove('d-none');
         // Se oculta la tabla de clientes.
         document.getElementById('tablaClientes').classList.add('d-none');
-        // Se inicializa el contenido de la tabla.
-        FILAS_ADMINISTRADORES.textContent = '';
-        CUERPO_ADMIN.innerHTML = '';
         // Se verifica la acción a realizar.
         (form) ? action = 'searchRows' : action = 'readAll';
         // Petición para obtener los registros disponibles.
         const DATA = await fetchData(ADMINISTRADOR_API, action, form);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
+            // Se inicializa el contenido de la tabla.
+            FILAS_ADMINISTRADORES.textContent = '';
+            CUERPO_ADMIN.innerHTML = '';
             // Se recorre el conjunto de registros fila por fila.
             DATA.dataset.forEach(row => {
+                // Se valida el estado del administrador.
+                estadoCliente = validarEstado(row.estado_administrador);
                 // Se crean y concatenan las filas de la tabla con los datos de cada registro.
                 CUERPO_ADMIN.innerHTML += `
                 <tr>
@@ -75,6 +82,7 @@ const cargarTabla = async (form = null) => {
                     <td>${row.apellido_administrador}</td>
                     <td>${row.correo_administrador}</td>
                     <td>${row.fecha_registro}</td>
+                    <td>${estadoCliente}</td>
                     <td>
                         <button type="button" class="btn btn-success" onclick="abrirModalAdmin('Editar administrador',${row.id_administrador})">
                             <img src="../../resources/img/lapiz.png" alt="lapizEditar" width="30px">
@@ -89,7 +97,20 @@ const cargarTabla = async (form = null) => {
             // Se muestra un mensaje de acuerdo con el resultado.
             FILAS_ADMINISTRADORES.textContent = DATA.message;
         } else {
-            sweetAlert(4, DATA.error, true);
+            // En caso de que no existan clientes registrados o no se encuentren coincidencias de búsqueda. 
+            if (DATA.error == 'No existen administradores registrados' || DATA.error == 'No hay coincidencias') {
+                // Se muestra el mensaje de la API.
+                sweetAlert(4, DATA.error, true);
+                // Se restablece el contenido de la tabla.
+                FILAS_ADMINISTRADORES.textContent = '';
+                CUERPO_ADMIN.innerHTML = '';
+            } else if (DATA.error == 'Ingrese un valor para buscar') {
+                // Se muestra el mensaje de la API.
+                sweetAlert(4, DATA.error, true);
+            } else {
+                // Se muestra el error de la API.
+                sweetAlert(2, DATA.error, true);
+            }
         }
     }
     else {
@@ -101,15 +122,15 @@ const cargarTabla = async (form = null) => {
         document.getElementById('tablaClientes').classList.remove('d-none');
         // Se oculta la tabla de administradores.
         document.getElementById('tablaAdmin').classList.add('d-none');
-        // Se inicializa el contenido de la tabla.
-        FILAS_CLIENTES.textContent = '';
-        CUERPO_CLIENTES.innerHTML = '';
         // Se verifica la acción a realizar.
         (form) ? action = 'searchRows' : action = 'readAll';
         // Petición para obtener los registros disponibles.
         const DATA = await fetchData(CLIENTE_API, action, form);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
+            // Se inicializa el contenido de la tabla.
+            FILAS_CLIENTES.textContent = '';
+            CUERPO_CLIENTES.innerHTML = '';
             // Se recorre el conjunto de registros fila por fila.
             DATA.dataset.forEach(row => {
                 //Se valida el estado del cliente para cargarlo en la columna.
@@ -136,7 +157,20 @@ const cargarTabla = async (form = null) => {
             // Se muestra un mensaje de acuerdo con el resultado.
             FILAS_CLIENTES.textContent = DATA.message;
         } else {
-            sweetAlert(4, DATA.error, true);
+            // En caso de que no existan clientes registrados o no se encuentren coincidencias de búsqueda. 
+            if (DATA.error == 'No existen clientes registrados' || DATA.error == 'No hay coincidencias') {
+                // Se muestra el mensaje de la API.
+                sweetAlert(4, DATA.error, true);
+                // Se restablece el contenido de la tabla.
+                FILAS_CLIENTES.textContent = '';
+                CUERPO_CLIENTES.innerHTML = '';
+            } else if (DATA.error == 'Ingrese un valor para buscar') {
+                // Se muestra el mensaje de la API.
+                sweetAlert(4, DATA.error, true);
+            } else {
+                // Se muestra el error de la API.
+                sweetAlert(2, DATA.error, true);
+            }
         }
     }
 }
@@ -185,6 +219,11 @@ const abrirModalAdmin = async (tituloModal, idAdministrador) => {
         // Se habilitan los campos de contraseña y confirmar contraseña.
         CONTRA_ADMIN.disabled = false;
         CONFIRMAR_CONTRA_ADMIN.disabled = false;
+        // Se restablece el atributo type de los input de contraseña y confirmar contraseña.
+        CONTRA_ADMIN.type = 'password';
+        CONFIRMAR_CONTRA_ADMIN.type = 'password';
+        // Se esconde el contenedor con select estadoAdmin.
+        CONTENEDOR_ESTADO_ADMIN.classList.add('d-none');
         // Se muestra el modal para agregar administradores.
         MODAL_ADMIN.show();
     } else {
@@ -204,8 +243,17 @@ const abrirModalAdmin = async (tituloModal, idAdministrador) => {
             BOTON_ACCION_ADMIN.innerHTML = 'Editar administrador';
             // Se prepara el formulario para cargar los input del administrador.
             FORM_ADMIN.reset();
+            // Se muestra el contenedor con select estadoAdmin.
+            CONTENEDOR_ESTADO_ADMIN.classList.remove('d-none');
             // Se cargan los campos de la base en una variable.
             const ROW = DATA.dataset;
+            // Se valida el estado del administrador.
+            if (ROW.estado_administrador == 0) {
+                // Se carga el estado del administrador en el select estadoAdministrador.
+                ESTADO_ADMIN.selectedIndex = 1;
+            } else {
+                ESTADO_ADMIN.selectedIndex = 0;
+            }
             // Se carga el id de administrador en el input idAdministrador.
             ID_ADMIN.value = ROW.id_administrador;
             // Se carga el nombre del administrador en el input nombreAdministrador.
@@ -248,14 +296,12 @@ const abrirEliminarAdmin = async (idAdministrador) => {
     }
 }
 
-// Función asíncrona que elimina un administrador
-const eliminarAdmin = async () => {
-    // Se define una variable con el valor del input inputIdAdministrador.
-    var idAdministrador = document.getElementById('inputIdAdministrador').value;
+// Método del evento para cuando se envía el formulario de eliminar administrador.
+FORM_ELIMINAR_ADMIN.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
     // Se define una constante tipo objeto donde se almacenará el idAdministrador.
-    const FORM = new FormData();
-    // Se almacena el nombre del campo y el valor (idAdministrador).
-    FORM.append('idAdministrador', idAdministrador);
+    const FORM = new FormData(FORM_ELIMINAR_ADMIN);
     // Petición para eliminar el registro seleccionado.
     const DATA = await fetchData(ADMINISTRADOR_API, 'deleteRow', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -271,7 +317,7 @@ const eliminarAdmin = async () => {
         //Se oculta el modal.
         MODAL_ELIMINAR_ADMIN.hide();
     }
-}
+});
 
 // Función para ocultar o mostrar la contraseña en input.
 function mostrarContra(inputContra) {
@@ -298,9 +344,18 @@ FORM_ADMIN.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (ID_ADMIN.value) ? action = 'updateRow' : action = 'createRow';
+    // (ID_ADMIN.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(FORM_ADMIN);
+    // Se verifica la acción a realizar.
+    if (ID_ADMIN.value) {
+        action = 'updateRow';
+        // Se verifica el valor del select y se guarda en el form
+        (ESTADO_ADMIN.selectedIndex) ? estadoAdministrador = 0 : estadoAdministrador = 1;
+        FORM.append('estadoAdministrador', estadoAdministrador);
+    } else {
+        action = 'createRow';
+    }
     // Petición para guardar los datos del formulario.
     const DATA = await fetchData(ADMINISTRADOR_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.

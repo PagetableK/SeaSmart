@@ -1,20 +1,20 @@
 @media only screen and (min-width: 1920px) {
     #contenedorTablaCategorias{
-        height: 680px; 
+        height: 525px; 
         overflow-y: auto;
     }
 }
 
 @media only screen and (max-width: 1629px) {
     #contenedorTablaCategorias{
-        height: 500px; 
+        height: 460px; 
         overflow-y: auto;
     }
 }
 
 @media only screen and (max-width: 575px) {
     #contenedorTablaCategorias{
-        height: 450px; 
+        height: 400px; 
         overflow-y: auto;
     }
 }
@@ -28,7 +28,7 @@
 @media only screen and (max-width: 431px) {
 
     #contenedorTablaCategorias{
-        height: 480px; 
+        height: 440px; 
         overflow-y: auto;
     }
 }

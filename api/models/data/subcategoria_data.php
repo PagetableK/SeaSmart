@@ -33,7 +33,7 @@ class subCategoriaData extends subCategoriaHandler
             $this->id_categoria = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de la subcategoría es incorrecto';
+            $this->data_error = 'El identificador de la categoría es incorrecto';
             return false;
         }
     }
@@ -55,8 +55,9 @@ class subCategoriaData extends subCategoriaHandler
     public function setDescripcion($value, $min = 2, $max = 200)
     {
         if (!$value) {
-            return true;
-        } elseif (!Validator::validateString($value)) {
+            $this->data_error = 'Asegúrese de ingresar la descripción de la subcategoría';
+            return false;
+        } if (!Validator::validateString($value)) {
             $this->data_error = 'La descripción contiene caracteres no válidos';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {

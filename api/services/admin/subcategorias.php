@@ -47,6 +47,18 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen subcategorías registradas';
                 }
                 break;
+            case 'readWithId':
+                if(
+                    !$subcategoria->setIdCategoria($_POST['selectCategoria'])
+                ){
+                    $result['error'] = $subcategoria->getDataError();
+                } elseif ($result['dataset'] = $subcategoria->readWithId()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Mostrando ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen subcategorías registradas';
+                }
+                break;
             case 'readOne':
                 if (!$subcategoria->setId($_POST['idsubCategoria'])) {
                     $result['error'] = $subcategoria->getDataError();

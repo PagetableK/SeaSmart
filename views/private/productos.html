@@ -28,7 +28,8 @@
             <div class="row mt-5 row-gap-3 px-md-5">
                 <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <!-- Botón para abrir el Modal -->
-                    <button type="button" class="btn btn-primary ms-5" onclick="abrirModal('Agregar producto')">+ Agregar
+                    <button type="button" class="btn btn-primary ms-5" onclick="abrirModal('Agregar producto')">+
+                        Agregar
                         Producto</button>
                 </div>
                 <!-- CREAMOS LA COLUMNA DONDE COLOCAMOS LA "BARRA DE BUSQUEDA"  -->
@@ -36,7 +37,8 @@
                     <!--COLOCAMOS LA BARRA DE BUSQUEDA-->
                     <div class="col">
                         <form class="d-flex ps-3" id="formBuscar">
-                            <input class="form-control" type="search" placeholder="Buscar un producto..."
+                            <input class="form-control" type="search"
+                                placeholder="Buscar un producto por nombre, descripción o subcategoría..."
                                 id="buscarProducto" name="buscarProducto" oninput="verificarReset()">
                             <button class="btn" type="enviar"><img src="../../resources/img/lupa.png" class="img-fluid"
                                     width="35px" height="35px" alt="buscarimg"></button>
@@ -45,7 +47,7 @@
                 </div>
             </div>
             <!-- CREAMOS LA FILA DONDE COLOCAMOS LA TABLA DE LOS ELEMENTOS DE "PRODUCTO" -->
-            <div class="table-responsive-md mt-5">
+            <div class="table-responsive-md mt-5" id="contenedorTabla">
                 <table class="table">
                     <!-- CREAMOS LA CABECERA DE LA TABLA DE PRODUCTO -->
                     <thead>
@@ -79,46 +81,68 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <!-- Cuerpo del modal -->
-                        <div class="modal-body">
-                            <form class="row g-3" id="formProducto">
-                                <div class="col-12">
-                                    <input type="number" class="d-none" id="idCategoria" name="idCategoria">
-                                    <label for="nombreProducto" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombreProducto" name="nombreProducto"
-                                        required>
+                        <form id="formProducto">
+                            <div class="modal-body">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <input type="number" class="d-none" id="idProducto" name="idProducto">
+                                        <label for="nombreProducto" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="nombreProducto"
+                                            name="nombreProducto" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="descripcionProducto" class="form-label">Descripción</label>
+                                        <textarea class="form-control" id="descripcionProducto"
+                                            name="descripcionProducto" rows="3" required></textarea>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="selectCategoria" class="form-label">Categoría</label>
+                                        <select class="form-select" id="selectCategoria" name="selectCategoria" size="6"
+                                            onchange="cargarSubCategorias()">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="selectSubcategoria" class="form-label">Subcategoría</label>
+                                        <!-- Opciones de subcategorías -->
+                                        <select class="form-select" id="selectSubcategoria" name="selectSubcategoria"
+                                            size="6" onchange="">
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-6 d-none" id="contenedorEstadoProducto">
+                                        <label for="estadoProducto" class="form-label">Estado del producto</label>
+                                        <select class="form-select" id="estadoProducto" name="estadoProducto">
+                                            <option value="1">Activo</option>
+                                            <option value="0">Inactivo</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-12">
-                                    <label for="descripcionProducto" class="form-label">Descripción</label>
-                                    <textarea class="form-control" id="descripcionProducto" name="descripcionProducto"
-                                        rows="3"></textarea>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="selectCategoria" class="form-label">Categoría</label>
-                                    <select class="form-select" id="selectCategoria" onchange="alert(options[selectedIndex].id)">
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="selectSubcategoria" class="form-label">Subcategoría</label>
-                                    <!-- Opciones de subcategorías -->
-                                    <select class="form-select" id="selectSubcategoria" onchange="alert(options[selectedIndex].id)">
-                                        <option id="12" selected onselected="alert('a')">Activo</option>
-                                        <option id="33">Dado de baja</option>
-                                    </select>
-                                </div>
-                                <div class="col-12 col-md-6 d-none" id="contenedorEstadoProducto">
-                                    <label for="estadoProducto" class="form-label">Estado del producto</label>
-                                    <select class="form-select" id="estadoProducto">
-                                        <option selected>Activo</option>
-                                        <option value="1">Dado de baja</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- Footer del modal -->
-                        <div class="modal-footer d-flex align-items-center justify-content-center">
-                            <button type="submit" class="btn btn-primary close" id="btnAccion" data-bs-dismiss="modal">Agregar
-                                producto</button>
-                        </div>
+                            </div>
+                            <!-- Footer del modal -->
+                            <div class="modal-footer d-flex align-items-center justify-content-center">
+                                <button type="submit" class="btn btn-primary close" id="btnAccion">Agregar
+                                    producto</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal eliminar -->
+            <div class="modal fade" id="borrarModalProducto">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="formEliminar">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="tituloModalEliminar"></h1>
+                                <input type="number" class="d-none" id="inputIdProducto" name="idProducto">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <button type="submit" class="btn btn-primary"
+                                    onclick="">Eliminar</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -20,6 +20,8 @@ const FORM_CATEGORIA = document.getElementById('formCategoria'),
     DESCRIPCION_CATEGORIA = document.getElementById('descripcionCategoria'),
     IMAGEN_CATEGORIA = document.getElementById('imagenCategoria');
 
+const FORM_ELIMINAR = document.getElementById('formEliminar');
+
 // Función para abrir el modal crear o editar categoría.
 const abrirModal = async (tituloModal, idCategoria) => {
     // Se configura el título del modal.
@@ -77,9 +79,9 @@ const abrirModal = async (tituloModal, idCategoria) => {
 
 // Función que verifica cuando el input de búsqueda
 // se encuentra vacío para recargar los registros de la tabla.
-function verificarReset(){
+function verificarReset() {
     // Se valida que el input esté vacío.
-    if(document.getElementById('buscarCategoria').value==""){
+    if (document.getElementById('buscarCategoria').value == "") {
         // Se llama a la función para cargar los registros.
         cargarTabla();
     }
@@ -118,14 +120,11 @@ const abrirEliminar = async (idCategoria) => {
     }
 }
 
-// Función asíncrona que elimina una categoría
-const eliminarCategoria = async () => {
-    // Se define una variable con el valor del input inputIdCategoria.
-    var idCategoria = document.getElementById('inputIdCategoria').value;
+FORM_ELIMINAR.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
     // Se define una constante tipo objeto donde se almacenará el idCategoria.
-    const FORM = new FormData();
-    // Se almacena el nombre del campo y el valor (idCategoria).
-    FORM.append('idCategoria', idCategoria);
+    const FORM = new FormData(FORM_ELIMINAR);
     // Petición para eliminar el registro seleccionado.
     const DATA = await fetchData(CATEGORIA_API, 'deleteRow', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -137,10 +136,15 @@ const eliminarCategoria = async () => {
         // Se carga nuevamente la tabla para visualizar los cambios.
         cargarTabla();
     } else {
-        sweetAlert(2, DATA.error, false);
+        if (DATA.exception == 'Violación de restricción de integridad') {
+            MODALBCATEGORIA.hide();
+            sweetAlert(2, 'Asegúrese de eliminar las subcategorías correspondientes a esta categoría', false);
+        } else {
+            MODALBCATEGORIA.hide();
+            sweetAlert(2, DATA.error, false);
+        }
     }
-}
-
+});
 
 // Función para cargar la imagen al cargar un archivo en input file.
 function cargarImagen(event) {
@@ -192,24 +196,24 @@ FORM_CATEGORIA.addEventListener('submit', async (event) => {
 
 // Función para cargar los registros de la tabla.
 const cargarTabla = async (form = null) => {
-    // Se inicializa el contenido de la tabla.
-    FILAS_ENCONTRADAS.textContent = '';
-    CUERPO_TABLA.innerHTML = '';
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAll';
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(CATEGORIA_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
+        // Se inicializa el contenido de la tabla.
+        FILAS_ENCONTRADAS.textContent = '';
+        CUERPO_TABLA.innerHTML = '';
         // Se recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             CUERPO_TABLA.innerHTML += `
                 <tr>
-                    <td><img src="${SERVER_URL}images/categorias/${row.imagen_categoria}" height="50"></td>
-                    <td>${row.nombre_categoria}</td>
-                    <td>${row.descripcion_categoria}</td>
-                    <td class="celda-agregar-eliminar">
+                    <td class="text-center"><img src="${SERVER_URL}images/categorias/${row.imagen_categoria}" height="50"></td>
+                    <td class="text-center">${row.nombre_categoria}</td>
+                    <td class="text-center">${row.descripcion_categoria}</td>
+                    <td class="celda-agregar-eliminar text-center">
                         <button type="button" class="btn btn-success" onclick="abrirModal('Editar categoría',${row.id_categoria})">
                             <img src="../../resources/img/lapiz.png" alt="lapizEditar" width="30px">
                         </button>
@@ -223,6 +227,19 @@ const cargarTabla = async (form = null) => {
         // Se muestra un mensaje de acuerdo con el resultado.
         FILAS_ENCONTRADAS.textContent = DATA.message;
     } else {
-        sweetAlert(4, DATA.error, true);
+        // En caso de que no existan categorías registradas o no se encuentren coincidencias de búsqueda. 
+        if (DATA.error == 'No existen categorías registradas' || DATA.error == 'No hay coincidencias') {
+            // Se muestra el mensaje de la API.
+            sweetAlert(4, DATA.error, true);
+            // Se restablece el contenido de la tabla.
+            FILAS_ENCONTRADAS.textContent = '';
+            CUERPO_TABLA.innerHTML = '';
+        } else if(DATA.error == 'Ingrese un valor para buscar'){
+            // Se muestra el mensaje de la API.
+            sweetAlert(4, DATA.error, true);
+        } else {
+            // Se muestra el error de la API.
+            sweetAlert(2, DATA.error, true);
+        }
     }
 }

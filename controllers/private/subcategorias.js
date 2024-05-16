@@ -75,8 +75,8 @@ const abrirModal = async (tituloModal, idsubCategoria) => {
     }
 }
 
-function verificarReset(){
-    if(document.getElementById('buscarsubCategoria').value==""){
+function verificarReset() {
+    if (document.getElementById('buscarsubCategoria').value == "") {
         cargarTabla();
     }
 }
@@ -133,7 +133,13 @@ const eliminarsubCategoria = async () => {
         // Se carga nuevamente la tabla para visualizar los cambios.
         cargarTabla();
     } else {
-        sweetAlert(2, DATA.error, false);
+        if (DATA.exception == 'Violación de restricción de integridad') {
+            MODALBSUBCATEGORIA.hide();
+            sweetAlert(2, 'Asegúrese de eliminar los productos con la subcategoría correspondiente', false);
+        } else {
+            MODALBSUBCATEGORIA.hide();
+            sweetAlert(2, DATA.error, false);
+        }
     }
 }
 
@@ -141,7 +147,7 @@ const eliminarsubCategoria = async () => {
 // Evento que carga los recursos de barra de navegación y función de rellenar tabla.
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
-    //cargarPlantilla();
+    cargarPlantilla();
     //Llamar la función para cargar los datos de la tabla.
     cargarTabla();
 });
@@ -150,47 +156,49 @@ document.addEventListener('DOMContentLoaded', () => {
 FORM_SUBCATEGORIA.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Se verifica la acción a realizar.
-    (ID_SUBCATEGORIA.value) ? action = 'updateRow' : action = 'createRow';
-    console.log(ID_SUBCATEGORIA.value);
-    console.log(action);
-    // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(FORM_SUBCATEGORIA);
-    // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(SUBCATEGORIA_API, action, FORM);
-    console.log(DATA);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se cierra la caja de diálogo.
-        MODALSUBCATEGORIA.hide();
-        // Se muestra un mensaje de éxito.
-        sweetAlert(1, DATA.message, true);
-        // Se carga nuevamente la tabla para visualizar los cambios.
-        cargarTabla();
+    // Se valida que se haya seleccionado un item del select categoría.
+    if (ID_CATEGORIA.value) {
+        // Se verifica la acción a realizar.
+        (ID_SUBCATEGORIA.value) ? action = 'updateRow' : action = 'createRow';
+        // Constante tipo objeto con los datos del formulario.
+        const FORM = new FormData(FORM_SUBCATEGORIA);
+        // Petición para guardar los datos del formulario.
+        const DATA = await fetchData(SUBCATEGORIA_API, action, FORM);
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se cierra la caja de diálogo.
+            MODALSUBCATEGORIA.hide();
+            // Se muestra un mensaje de éxito.
+            sweetAlert(1, DATA.message, true);
+            // Se carga nuevamente la tabla para visualizar los cambios.
+            cargarTabla();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
     } else {
-        sweetAlert(2, DATA.error, false);
+        sweetAlert(3, 'Asegúrese de seleccionar una categoría', false);
     }
 });
 
 
 const cargarTabla = async (form = null) => {
-    // Se inicializa el contenido de la tabla.
-    FILAS_ENCONTRADAS.textContent = '';
-    CUERPO_TABLA.innerHTML = '';
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAll';
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(SUBCATEGORIA_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
+        // Se inicializa el contenido de la tabla.
+        FILAS_ENCONTRADAS.textContent = '';
+        CUERPO_TABLA.innerHTML = '';
         // Se recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             CUERPO_TABLA.innerHTML += `
                 <tr>
-                    <td>${row.nombre_sub_categoria}</td>
-                    <td>${row.descripcion_sub_categoria}</td>
-                    <td class="celda-agregar-eliminar">
+                    <td class="text-center">${row.nombre_sub_categoria}</td>
+                    <td class="text-center">${row.descripcion_sub_categoria}</td>
+                    <td class="celda-agregar-eliminar text-center">
                         <button type="button" class="btn btn-success" onclick="abrirModal('Editar subcategoría',${row.id_sub_categoria})">
                             <img src="../../resources/img/lapiz.png" alt="lapizEditar" width="30px">
                         </button>
@@ -200,11 +208,23 @@ const cargarTabla = async (form = null) => {
                     </td>
                 </tr>
             `;
-            console.log(row.id_sub_categoria);
         });
         // Se muestra un mensaje de acuerdo con el resultado.
         FILAS_ENCONTRADAS.textContent = DATA.message;
     } else {
-        sweetAlert(4, DATA.error, true);
+        // En caso de que no existan subcategorías registradas o no se encuentren coincidencias de búsqeuda. 
+        if (DATA.error == 'No existen subcategorías registradas' || DATA.error == 'No hay coincidencias') {
+            // Se muestra el mensaje de la API.
+            sweetAlert(4, DATA.error, true);
+            // Se restablece el contenido de la tabla.
+            FILAS_ENCONTRADAS.textContent = '';
+            CUERPO_TABLA.innerHTML = '';
+        } else if (DATA.error == 'Ingrese un valor para buscar') {
+            // Se muestra el mensaje de la API.
+            sweetAlert(4, DATA.error, true);
+        } else {
+            // Se muestra el error de la API.
+            sweetAlert(2, DATA.error, true);
+        }
     }
 }

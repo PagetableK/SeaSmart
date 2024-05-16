@@ -43,7 +43,7 @@
                 </div>
             </div>
             <!-- CREAMOS LA FILA DONDE COLOCAMOS LA TABLA DE LOS ELEMENTOS DE LA CATEGORIA-->
-            <div class="container-fluid table-responsive" id="contenedorTablaCategorias">
+            <div class="container-fluid table-responsive mt-5" id="contenedorTablaCategorias">
                 <table class="table">
                     <!-- CREAMOS LA CABECERA DE LA TABLA DE CATEGORIA -->
                     <thead>
@@ -59,13 +59,6 @@
                     </thead>
                     <!-- CREAMOS EL INTERIOR DE LA TABLA (LAS FILAS Y COLUMNAS DE CADA CATEGORIA)-->
                     <tbody id="cuerpoTabla">
-                        <!-- FILA 1 -->
-                        <tr>
-                            <td id="" class="text-center"><img src="../../resources/img/mujer_traje.jpg"></td>
-                            <td class="text-center">Mujeres</td>
-                            <td class="text-center">Descripción...</td>
-                            <td id="celda-agregar-eliminar" class="text-center"></td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -91,7 +84,7 @@
                                             <label for="nombreCategoria" class="col-form-label">Nombre de la
                                                 categoría:</label>
                                             <input type="text" class="form-control" id="nombreCategoria"
-                                                name="nombreCategoria">
+                                                name="nombreCategoria" required>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -99,7 +92,7 @@
                                             <label for="descripcionCategoria"
                                                 class="col-form-label">Descripción:</label>
                                             <textarea class="form-control" id="descripcionCategoria"
-                                                name="descripcionCategoria"></textarea>
+                                                name="descripcionCategoria" required></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -135,15 +128,17 @@
         <div class="modal fade" id="borrarModalCategoria">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="tituloModalEliminar"></h1>
-                        <input type="number" class="d-none" id="inputIdCategoria" name="idCategoria">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <button type="button" class="btn btn-primary" onclick="eliminarCategoria()">Eliminar</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                    </div>
+                    <form id="formEliminar">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="tituloModalEliminar"></h1>
+                            <input type="number" class="d-none" id="inputIdCategoria" name="idCategoria">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <button type="submit" class="btn btn-primary" onclick="">Eliminar</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

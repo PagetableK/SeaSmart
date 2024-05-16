@@ -76,6 +76,17 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
+    public function setEstado($value)
+    {
+        if (Validator::validateBoolean($value)) {
+            $this->estado = $value;
+            return true;
+        } else {
+            $this->info_error = 'Estado incorrecto';
+            return false;
+        }
+    }
+
     public function setContra($valor)
     {
         if (Validator::validatePassword($valor)) {

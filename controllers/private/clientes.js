@@ -17,6 +17,8 @@ const ID_CLIENTE = document.getElementById('idCliente'),
 const CONTENEDOR_ESTADO = document.getElementById('contenedorEstadoCliente');
 // Se almacena el modal para eliminar un cliente.
 const MODAL_ELIMINAR_CLIENTE = new bootstrap.Modal('#borrarModalCliente');
+// Se almacena el form para eliminar un cliente.
+const FORM_ELIMINAR_CLIENTE = document.getElementById('formEliminarCliente');
 
 // Función que retorna el estado en base del resultado de la bd.
 function validarEstado(estadoCliente) {
@@ -47,6 +49,9 @@ const abrirModalCliente = async (tituloModal, idCliente) => {
         // Se habilitan los campos de contraseña y confirmar contraseña.
         CONTRA_CLIENTE.disabled = false;
         CONFIRMAR_CONTRA_CLIENTE.disabled = false;
+        // Se restablece el atributo type de los input de contraseña y confirmar contraseña.
+        CONTRA_CLIENTE.type = 'password';
+        CONFIRMAR_CONTRA_CLIENTE.type = 'password'; 
         // Se muestra el modal para agregar clientes.
         MODAL_CLIENTE.show();
     } else {
@@ -156,14 +161,12 @@ const abrirEliminarCliente = async (idCliente) => {
     }
 }
 
-// Función asíncrona que elimina un cliente.
-const eliminarCliente = async () => {
-    // Se define una variable con el valor del input inputIdCliente.
-    var idCliente = document.getElementById('inputIdCliente').value;
+// Método del evento para cuando se envía el formulario de eliminar cliente.
+FORM_ELIMINAR_CLIENTE.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
     // Se define una constante tipo objeto donde se almacenará el idCliente.
-    const FORM = new FormData();
-    // Se almacena el nombre del campo y el valor (idCliente).
-    FORM.append('idCliente', idCliente);
+    const FORM = new FormData(FORM_ELIMINAR_CLIENTE);
     // Petición para eliminar el registro seleccionado.
     const DATA = await fetchData(CLIENTE_API, 'deleteRow', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -175,8 +178,12 @@ const eliminarCliente = async () => {
         // Se carga nuevamente la tabla para visualizar los cambios.
         cargarTabla();
     } else {
-        sweetAlert(2, DATA.error, false);
-        //Se oculta el modal.
-        MODAL_ELIMINAR_CLIENTE.hide();
+        if (DATA.exception == 'Violación de restricción de integridad') {
+            MODAL_ELIMINAR_CLIENTE.hide();
+            sweetAlert(2, 'El cliente está involucrado en un pedido', false);
+        } else {
+            MODAL_ELIMINAR_CLIENTE.hide();
+            sweetAlert(2, DATA.error, false);
+        }
     }
-}
+});
