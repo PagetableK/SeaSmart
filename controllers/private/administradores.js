@@ -90,7 +90,20 @@ const cargarTabla = async (form = null) => {
             // Se muestra un mensaje de acuerdo con el resultado.
             FILAS_ADMINISTRADORES.textContent = DATA.message;
         } else {
-            sweetAlert(4, DATA.error, true);
+            // En caso de que no existan clientes registrados o no se encuentren coincidencias de búsqueda. 
+            if (DATA.error == 'No existen administradores registrados' || DATA.error == 'No hay coincidencias') {
+                // Se muestra el mensaje de la API.
+                sweetAlert(4, DATA.error, true);
+                // Se restablece el contenido de la tabla.
+                FILAS_ADMINISTRADORES.textContent = '';
+                CUERPO_ADMIN.innerHTML = '';
+            } else if(DATA.error == 'Ingrese un valor para buscar'){
+                // Se muestra el mensaje de la API.
+                sweetAlert(4, DATA.error, true);
+            } else {
+                // Se muestra el error de la API.
+                sweetAlert(2, DATA.error, true);
+            }
         }
     }
     else {
@@ -137,7 +150,20 @@ const cargarTabla = async (form = null) => {
             // Se muestra un mensaje de acuerdo con el resultado.
             FILAS_CLIENTES.textContent = DATA.message;
         } else {
-            sweetAlert(4, DATA.error, true);
+            // En caso de que no existan clientes registrados o no se encuentren coincidencias de búsqueda. 
+            if (DATA.error == 'No existen clientes registrados' || DATA.error == 'No hay coincidencias') {
+                // Se muestra el mensaje de la API.
+                sweetAlert(4, DATA.error, true);
+                // Se restablece el contenido de la tabla.
+                FILAS_CLIENTES.textContent = '';
+                CUERPO_CLIENTES.innerHTML = '';
+            } else if(DATA.error == 'Ingrese un valor para buscar'){
+                // Se muestra el mensaje de la API.
+                sweetAlert(4, DATA.error, true);
+            } else {
+                // Se muestra el error de la API.
+                sweetAlert(2, DATA.error, true);
+            }
         }
     }
 }
@@ -186,6 +212,9 @@ const abrirModalAdmin = async (tituloModal, idAdministrador) => {
         // Se habilitan los campos de contraseña y confirmar contraseña.
         CONTRA_ADMIN.disabled = false;
         CONFIRMAR_CONTRA_ADMIN.disabled = false;
+        // Se restablece el atributo type de los input de contraseña y confirmar contraseña.
+        CONTRA_ADMIN.type = 'password';
+        CONFIRMAR_CONTRA_ADMIN.type = 'password';
         // Se muestra el modal para agregar administradores.
         MODAL_ADMIN.show();
     } else {
@@ -247,11 +276,6 @@ const abrirEliminarAdmin = async (idAdministrador) => {
     } else {
         sweetAlert(2, DATA.error, false);
     }
-}
-
-// Función asíncrona que elimina un administrador
-const eliminarAdmin = async () => {
-
 }
 
 // Método del evento para cuando se envía el formulario de eliminar administrador.

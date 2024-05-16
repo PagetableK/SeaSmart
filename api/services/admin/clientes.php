@@ -28,11 +28,11 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$clientes->setNombre($_POST['nombreCliente'], 0) or
-                    !$clientes->setApellido($_POST['apellidoCliente'], 0) or
-                    !$clientes->setCorreo($_POST['correoCliente'], 0) or
-                    !$clientes->setContra($_POST['contraCliente'], 0) or
+                    !$clientes->setNombre($_POST['nombreCliente']) or
+                    !$clientes->setApellido($_POST['apellidoCliente']) or
                     !$clientes->setDUI($_POST['duiCliente'], 0) or
+                    !$clientes->setCorreo($_POST['correoCliente'], 0) or
+                    !$clientes->setContra($_POST['contraCliente']) or
                     !$clientes->setTelefono($_POST['telefonoCliente'], 0) or
                     !$clientes->setTelefonoFijo($_POST['telefonoFijoCliente'], 0)
                 ) {

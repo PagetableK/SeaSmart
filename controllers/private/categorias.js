@@ -121,6 +121,7 @@ const abrirEliminar = async (idCategoria) => {
 }
 
 FORM_ELIMINAR.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se define una constante tipo objeto donde se almacenará el idCategoria.
     const FORM = new FormData(FORM_ELIMINAR);
@@ -226,6 +227,19 @@ const cargarTabla = async (form = null) => {
         // Se muestra un mensaje de acuerdo con el resultado.
         FILAS_ENCONTRADAS.textContent = DATA.message;
     } else {
-        sweetAlert(4, DATA.error, true);
+        // En caso de que no existan categorías registradas o no se encuentren coincidencias de búsqueda. 
+        if (DATA.error == 'No existen categorías registradas' || DATA.error == 'No hay coincidencias') {
+            // Se muestra el mensaje de la API.
+            sweetAlert(4, DATA.error, true);
+            // Se restablece el contenido de la tabla.
+            FILAS_ENCONTRADAS.textContent = '';
+            CUERPO_TABLA.innerHTML = '';
+        } else if(DATA.error == 'Ingrese un valor para buscar'){
+            // Se muestra el mensaje de la API.
+            sweetAlert(4, DATA.error, true);
+        } else {
+            // Se muestra el error de la API.
+            sweetAlert(2, DATA.error, true);
+        }
     }
 }

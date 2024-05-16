@@ -49,6 +49,9 @@ const abrirModalCliente = async (tituloModal, idCliente) => {
         // Se habilitan los campos de contraseña y confirmar contraseña.
         CONTRA_CLIENTE.disabled = false;
         CONFIRMAR_CONTRA_CLIENTE.disabled = false;
+        // Se restablece el atributo type de los input de contraseña y confirmar contraseña.
+        CONTRA_CLIENTE.type = 'password';
+        CONFIRMAR_CONTRA_CLIENTE.type = 'password'; 
         // Se muestra el modal para agregar clientes.
         MODAL_CLIENTE.show();
     } else {
@@ -158,31 +161,6 @@ const abrirEliminarCliente = async (idCliente) => {
     }
 }
 
-// Función asíncrona que elimina un cliente.
-const eliminarCliente = async () => {
-    // Se define una variable con el valor del input inputIdCliente.
-    var idCliente = document.getElementById('inputIdCliente').value;
-    // Se define una constante tipo objeto donde se almacenará el idCliente.
-    const FORM = new FormData();
-    // Se almacena el nombre del campo y el valor (idCliente).
-    FORM.append('idCliente', idCliente);
-    // Petición para eliminar el registro seleccionado.
-    const DATA = await fetchData(CLIENTE_API, 'deleteRow', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        //Se oculta el modal.
-        MODAL_ELIMINAR_CLIENTE.hide();
-        // Se muestra un mensaje de éxito.
-        await sweetAlert(1, DATA.message, true);
-        // Se carga nuevamente la tabla para visualizar los cambios.
-        cargarTabla();
-    } else {
-        sweetAlert(2, DATA.error, false);
-        //Se oculta el modal.
-        MODAL_ELIMINAR_CLIENTE.hide();
-    }
-}
-
 // Método del evento para cuando se envía el formulario de eliminar cliente.
 FORM_ELIMINAR_CLIENTE.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
@@ -200,8 +178,12 @@ FORM_ELIMINAR_CLIENTE.addEventListener('submit', async (event) => {
         // Se carga nuevamente la tabla para visualizar los cambios.
         cargarTabla();
     } else {
-        sweetAlert(2, DATA.error, false);
-        //Se oculta el modal.
-        MODAL_ELIMINAR_CLIENTE.hide();
+        if (DATA.exception == 'Violación de restricción de integridad') {
+            MODAL_ELIMINAR_CLIENTE.hide();
+            sweetAlert(2, 'El cliente está involucrado en un pedido', false);
+        } else {
+            MODAL_ELIMINAR_CLIENTE.hide();
+            sweetAlert(2, DATA.error, false);
+        }
     }
 });

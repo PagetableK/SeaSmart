@@ -102,10 +102,20 @@ const cargarTabla = async (form = null) => {
         // Se muestra un mensaje de acuerdo con el resultado.
         FILAS_ENCONTRADAS.textContent = DATA.message;
     } else {
-        sweetAlert(4, DATA.error, true);
-        // Se vacía el contenido de la tabla y el conteo de filas.
-        FILAS_ENCONTRADAS.textContent = '';
-        CUERPO_TABLA.innerHTML = '';
+        // En caso de que no existan productos registrados o no se encuentren coincidencias de búsqeuda. 
+        if (DATA.error == 'No existen productos registrados' || DATA.error == 'No hay coincidencias') {
+            // Se muestra el mensaje de la API.
+            sweetAlert(4, DATA.error, true);
+            // Se restablece el contenido de la tabla.
+            FILAS_ENCONTRADAS.textContent = '';
+            CUERPO_TABLA.innerHTML = '';
+        } else if(DATA.error == 'Ingrese un valor para buscar'){
+            // Se muestra el mensaje de la API.
+            sweetAlert(4, DATA.error, true);
+        } else {
+            // Se muestra el error de la API.
+            sweetAlert(2, DATA.error, true);
+        }
     }
 }
 
