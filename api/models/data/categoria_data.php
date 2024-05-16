@@ -54,24 +54,21 @@ class CategoriaData extends CategoriaHandler
             $this->imagen = $filename;
             return true;
         } else {
-            $this->imagen = 'default.png';
+            $this->imagen = 'categoria_imageholder.png';
             return true;
         }
     }
 
     public function setDescripcion($value, $min = 2, $max = 100)
     {
-        if (!$value) {
-            return true;
+        if (!Validator::validateLength($value, $min, $max)) {
+            $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
         } elseif (!Validator::validateString($value)) {
             $this->data_error = 'La descripción contiene caracteres no válidos';
             return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->descripcion = $value;
+        } else {$this->descripcion = $value;
             return true;
-        } else {
-            $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
         }
     }
 

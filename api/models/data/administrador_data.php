@@ -42,7 +42,7 @@ class AdministradorData extends AdministradorHandler
     }
 
     
-    public function setApellido($valor, $min = 4, $max = 50)
+    public function setApellido($valor, $min = 4, $max = 20)
     {
         if (!Validator::validateAlphabetic($valor)) {
             $this->info_error = 'El apellido debe ser un valor alfabético';
@@ -56,16 +56,33 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
-    public function setCorreo($valor, $min = 8, $max = 100)
+    public function setCorreo($valor, $boolean, $min = 8, $max = 100)
     {
         if (!Validator::validateEmail($valor)) {
             $this->info_error = 'El correo no es válido';
+            return false;
+        } else if($boolean and !$this->checkDuplicateWithId($valor)){
+            $this->correo = $valor;
+            return true;
+        } else if($this->searchEmail($valor)){
+            $this->info_error = 'El correo ya está siendo usado por otro administrador';
             return false;
         } elseif (Validator::validateLength($valor, $min, $max)) {
             $this->correo = $valor;
             return true;
         } else {
             $this->info_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setEstado($value)
+    {
+        if (Validator::validateBoolean($value)) {
+            $this->estado = $value;
+            return true;
+        } else {
+            $this->info_error = 'Estado incorrecto';
             return false;
         }
     }

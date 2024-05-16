@@ -102,7 +102,7 @@ const fillSelect = async (filename, action, select, selected = null) => {
             }
         });
     } else {
-        content += '<option>No hay opciones disponibles</option>';
+        content += '<option value="">No hay opciones disponibles</option>';
     }
     // Se agregan las opciones a la etiqueta select mediante el id.
     document.getElementById(select).innerHTML = content;

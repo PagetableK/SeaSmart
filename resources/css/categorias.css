@@ -1,26 +1,33 @@
 @media only screen and (min-width: 1920px) {
-    #contenedorTabla{
-        height: 635px; 
+    #contenedorTablaCategorias{
+        height: 620px; 
         overflow-y: auto;
     }
 }
 
 @media only screen and (max-width: 1629px) {
-    #contenedorTabla{
+    #contenedorTablaCategorias{
         height: 460px; 
         overflow-y: auto;
     }
 }
 
 @media only screen and (max-width: 575px) {
-    #contenedorTabla{
+    #contenedorTablaCategorias{
         height: 400px; 
         overflow-y: auto;
     }
 }
 
+@media only screen and (max-width: 500px) {
+    #contenedorSeaSmart{
+        display: none;
+    }
+}
+
 @media only screen and (max-width: 431px) {
-    #contenedorTabla{
+
+    #contenedorTablaCategorias{
         height: 440px; 
         overflow-y: auto;
     }

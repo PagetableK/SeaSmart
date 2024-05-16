@@ -134,14 +134,14 @@ const cargarPlantilla = async () => {
             MAIN.insertAdjacentHTML('afterend', `
                 <footer class="fixed-bottom">
                     <nav class="navbar">
-                        <div class="container">
-                            <div>
+                        <div class="container-fluid mx-5">
+                            <div class="col" id="contenedorSeaSmart">
                                 <img src="../../resources/img/logo.png" alt="logo">
                                 <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
                             </div>
-                            <div>
-                                <h6>Nuestras redes</h6>
-                                <div>
+                            <div class="col d-flex flex-column">
+                                <h6 class="text-end">Nuestras redes</h6>
+                                <div class="d-flex gap-2 justify-content-end">
                                     <a href="https://facebook.com" target="_blank"><img src="../../resources/img/facebook.png" alt="facebook"></a>
                                     <a href="https://instagram.com/sea__smart/" target="_blank"><img src="../../resources/img/instagram.png" alt="instagram"></a>
                                     <a href="https://web.whatsapp.com/" target="_blank"><img src="../../resources/img/whatsapp.png" alt="whatsapp"></a>
@@ -170,7 +170,7 @@ const cargarPlantilla = async () => {
             }
         }
         else {
-            console.log('La sesión ha terminado');
+            sweetAlert(3, DATA.error, false, 'index.html');
         }
     }
     else {
