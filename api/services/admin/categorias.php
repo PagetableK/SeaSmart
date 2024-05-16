@@ -29,7 +29,7 @@ if (isset($_GET['action'])) {
                 if (
                     !$categoria->setNombre($_POST['nombreCategoria']) or
                     !$categoria->setDescripcion($_POST['descripcionCategoria']) or
-                    !$categoria->setImagen($_FILES['imagenCategoria'])
+                    !$categoria->setImagen($_FILES['imagenCategoria'], 1)
                 ) {
                     $result['error'] = $categoria->getDataError();
                 } elseif ($categoria->createRow()) {
@@ -74,7 +74,7 @@ if (isset($_GET['action'])) {
                     !$categoria->setFilename() or
                     !$categoria->setNombre($_POST['nombreCategoria']) or
                     !$categoria->setDescripcion($_POST['descripcionCategoria']) or
-                    !$categoria->setImagen($_FILES['imagenCategoria'], $categoria->getFilename())
+                    !$categoria->setImagen($_FILES['imagenCategoria'], $_POST['estadoImagen'], $categoria->getFilename())
                 ) {
                     $result['error'] = $categoria->getDataError();
                 } elseif ($categoria->updateRow()) {

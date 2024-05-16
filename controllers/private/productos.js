@@ -109,7 +109,7 @@ const cargarTabla = async (form = null) => {
             // Se restablece el contenido de la tabla.
             FILAS_ENCONTRADAS.textContent = '';
             CUERPO_TABLA.innerHTML = '';
-        } else if(DATA.error == 'Ingrese un valor para buscar'){
+        } else if (DATA.error == 'Ingrese un valor para buscar') {
             // Se muestra el mensaje de la API.
             sweetAlert(4, DATA.error, true);
         } else {
@@ -269,7 +269,11 @@ FORM_PRODUCTO.addEventListener('submit', async (event) => {
             // Se carga nuevamente la tabla para visualizar los cambios.
             cargarTabla();
         } else {
-            sweetAlert(2, DATA.error, false);
+            if (DATA.exception == 'Violación de restricción de integridad') {
+                sweetAlert(2, 'El producto ya ha sido agregado', false);
+            } else {
+                sweetAlert(2, DATA.error, false);
+            }
         }
     } else {
         sweetAlert(3, 'Asegúrese de seleccionar una subcategoría', false);
