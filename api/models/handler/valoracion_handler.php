@@ -17,13 +17,13 @@ class ValoracionHandler
      */
     public function readAll()
     {
-        $sql = 'SELECT * FROM view_valoraciones ORDER BY fecha_valoracion DESC;';
+        $sql = 'SELECT * FROM view_valoraciones ORDER BY fecha_valoracion ASC;';
         return Database::getRows($sql);
     }
 
     public function readAllAsc()
     {
-        $sql = 'SELECT * FROM view_valoraciones;';
+        $sql = 'SELECT * FROM view_valoraciones ORDER BY fecha_valoracion DESC;';
         return Database::getRows($sql);
     }
 
