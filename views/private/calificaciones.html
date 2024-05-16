@@ -13,6 +13,8 @@
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Mandar a llamar css del navbar -->
     <link href="../../resources/css/navbar_privado.css" rel="stylesheet">
+    <!-- Css para la tabla responsive -->
+    <link href="../../resources/css/tabla_responsive.css" rel="stylesheet">
 </head>
 
 <!-- Cuerpo de la página -->
@@ -41,9 +43,9 @@
                     </div>
                     <div class="col-md-2">
                         <div class="dropdown">
-                            <select class="form-select form-select-sm">
-                                <option value="1">Más antiguo</option>
-                                <option value="2">Más reciente</option>
+                            <select class="form-select form-select-sm" id="selectedFiltro">
+                                <option value=0>Más antiguo</option>
+                                <option value=1>Más reciente</option>
                             </select>
                         </div>
                     </div>
@@ -51,41 +53,21 @@
             </div>
         </div>
         <!-- Tabla de datos responsiva -->
-        <div class="table-responsive-md mt-5 px-md-5">
+        <div class="table-responsive-md mt-5 px-md-5" id="contenedorTabla">
             <table class="table table-hover">
                 <!-- Cabecera de la tabla -->
                 <thead>
                     <tr>
-                        <th scope="col">Nombre del cliente</th>
-                        <th scope="col">Teléfono del cliente</th>
-                        <th scope="col">Fecha de calificación</th>
-                        <th scope="col">Calificación</th>
-                        <th scope="col">Comentario</th>
-                        <th scope="col">Visibilidad</th>
+                        <th class="text-center">Nombre del cliente</th>
+                        <th class="text-center">Producto</th>
+                        <th class="text-center">Fecha de calificación</th>
+                        <th class="text-center">Calificación</th>
+                        <th class="text-center">Comentario</th>
+                        <th class="text-center">Visibilidad</th>
                     </tr>
                 </thead>
                 <!-- Cuerpo de la tabla -->
-                <tbody>
-                    <!-- Registro 1 -->
-                    <tr>
-                        <td>Exequiel Brayan</td>
-                        <td>12345678</td>
-                        <td>26/02/2024</td>
-                        <td>1/5</td>
-                        <td>Excelentisimo</td>
-                        <td><img src="../../resources/img/ojo_cerrado.jpg" class="rounded float-start" alt="...">
-                        </td>
-                    </tr>
-                    <!-- Registro 2 -->
-                    <tr>
-                        <td>Guinea Josué</td>
-                        <td>87654321</td>
-                        <td>26/02/2024</td>
-                        <td>3/5</td>
-                        <td>Muy bueno</td>
-                        <td class="text-center"><img src="../../resources/img/ojo_abierto.jpg"
-                                class="rounded float-start" alt="..."></td>
-                    </tr>
+                <tbody id="cuerpoTabla">
                 </tbody>
             </table>
         </div>
