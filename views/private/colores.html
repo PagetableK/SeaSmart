@@ -14,6 +14,8 @@
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Mandar a llamar css del navbar -->
     <link href="../../resources/css/navbar_privado.css" rel="stylesheet">
+    <!-- Css para la tabla responsive -->
+    <link href="../../resources/css/tabla_responsive.css" rel="stylesheet">
 </head>
 
 <!-- Cuerpo de la página web -->
@@ -41,7 +43,7 @@
                 </div>
             </div>
             <!-- CREAMOS LA FILA DONDE COLOCAMOS LA TABLA DE LOS ELEMENTOS -->
-            <div class="table-responsive-md mt-5">
+            <div class="table-responsive-md mt-5" id="contenedorTabla">
                 <table class="table">
                     <!-- CREAMOS LA CABECERA DE LA TABLA COLORES -->
                     <thead>
@@ -103,17 +105,19 @@
         <!-- Modal eliminar -->
         <div class="modal fade" id="borrarModalColor">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="tituloModalEliminar"></h1>
-                        <input type="number" class="d-none" id="inputIdColor" name="idColor">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <form id="formEliminar">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="tituloModalEliminar"></h1>
+                            <input type="number" class="d-none" id="inputIdColor" name="idColor">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-primary" onclick="eliminarColor()">Eliminar</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <button type="button" class="btn btn-primary" onclick="eliminarColor()">Eliminar</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
 
