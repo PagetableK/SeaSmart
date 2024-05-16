@@ -13,6 +13,8 @@
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Mandar a llamar css del navbar -->
     <link href="../../resources/css/navbar_privado.css" rel="stylesheet">
+    <!-- Css para la tabla responsive -->
+    <link href="../../resources/css/tabla_responsive.css" rel="stylesheet">
 </head>
 
 <!-- Cuerpo de la página web -->
@@ -39,12 +41,12 @@
                 </div>
             </div>
             <!-- CREAMOS LA FILA DONDE COLOCAMOS LA TABLA DE LOS ELEMENTOS DE LA SUBCATEGORIA-->
-            <div class="table-responsive-md mt-5">
+            <div class="table-responsive-md mt-5" id="contenedorTabla">
                 <table class="table">
                     <!-- CREAMOS LA CABECERA DE LA TABLA DE SUBCATEGORIA -->
                     <thead>
                         <tr>
-                            <td colspan="2" id="filasEncontradas"></td>
+                            <td colspan="3" id="filasEncontradas"></td>
                         </tr>
                         <tr>
                             <th class="text-center">Nombre</th>
@@ -81,25 +83,24 @@
                                 <div class="col-md">
                                     <div class="row">
                                         <div class="mb-3">
-                                            <label for="categoriaSelect" class="col-form-label">Categoría:</label>
+                                            <label for="categoriaSelect" class="col-form-label">Categoría</label>
                                             <select class="form-select" id="categoriaSelect" name="categoriaSelect"></select>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="mb-md">
                                             <input type="number" class="d-none" id="idsubCategoria" name="idsubCategoria">
-                                            <label for="nombreCategoria" class="col-form-label">Nombre de la
-                                                subcategoría:</label>
+                                            <label for="nombresubCategoria" class="col-form-label">Nombre</label>
                                             <input type="text" class="form-control" id="nombresubCategoria"
-                                                name="nombresubCategoria">
+                                                name="nombresubCategoria" required>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="mb-3">
                                             <label for="descripcionsubCategoria"
-                                                class="col-form-label">Descripción:</label>
+                                                class="col-form-label">Descripción</label>
                                             <textarea class="form-control" id="descripcionsubCategoria"
-                                                name="descripcionsubCategoria"></textarea>
+                                                name="descripcionsubCategoria" required></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -142,8 +143,6 @@
     <script type="text/javascript" src="../../controllers/utils/componentes.js"></script>
     <!-- Mandar a llamar el controlador de la página privada -->
     <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
-    <!-- Controlador para los botones de agregar y eliminar -->
-    <script type="text/javascript" src="../../controllers/utils/agregar_eliminar.js"></script>
     <!-- Controlador js de subcategorias -->
     <script type="text/javascript" src="../../controllers/private/subcategorias.js"></script>
 </body>

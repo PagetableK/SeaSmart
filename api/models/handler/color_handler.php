@@ -22,7 +22,7 @@ class ColorHandler
         FROM productos_colores
         WHERE color_producto LIKE ?
         ORDER BY color_producto';
-        $params = array($value, $value);
+        $params = array($value);
         return Database::getRows($sql, $params);
     }
 

@@ -1,10 +1,10 @@
 @media only screen and (min-width: 1920px) {
     #tablaAdmin{
-        height: 610px; 
+        height: 505px; 
         overflow-y: auto;
     }
     #tablaClientes{
-        height: 610px; 
+        height: 505px; 
         overflow-y: auto;
     }
 }

@@ -1,13 +1,13 @@
 @media only screen and (min-width: 1920px) {
     #contenedorTabla{
-        height: 525px; 
+        height: 475px; 
         overflow-y: auto;
     }
 }
 
 @media only screen and (max-width: 1629px) {
     #contenedorTabla{
-        height: 460px; 
+        height: 400px; 
         overflow-y: auto;
     }
 }
