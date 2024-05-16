@@ -52,13 +52,14 @@
                         <!-- Cabecera de la tabla -->
                         <thead>
                             <tr>
-                                <td colspan="5" id="filasAdministradores"></td>
+                                <td colspan="6" id="filasAdministradores"></td>
                             </tr>
                             <tr>
                                 <th class="text-center">Nombre</th>
                                 <th class="text-center">Apellido</th>
                                 <th class="text-center">Correo</th>
                                 <th class="text-center">Fecha de registro</th>
+                                <th class="text-center">Estado</th>
                                 <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
@@ -141,6 +142,13 @@
                                                     width="25px" height="25px" alt="mostrarImg">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 d-none" id="contenedorEstadoAdmin">
+                                        <label for="estadoAdministrador" class="form-label">Estado del administrador</label>
+                                        <select class="form-select" id="estadoAdministrador">
+                                            <option selected>Activo</option>
+                                            <option value="1">Dado de baja</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -241,7 +249,7 @@
                                             placeholder="0000-0000" class="form-control">
                                     </div>
                                     <div class="col-12 col-md-6 d-none" id="contenedorEstadoCliente">
-                                        <label for="telefonoFijoCliente" class="form-label">Estado del cliente</label>
+                                        <label for="estadoCliente" class="form-label">Estado del cliente</label>
                                         <select class="form-select" id="estadoCliente">
                                             <option selected>Activo</option>
                                             <option value="1">Dado de baja</option>

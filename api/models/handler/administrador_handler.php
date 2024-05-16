@@ -15,21 +15,36 @@ class AdministradorHandler
     protected $correo = null;
     protected $contra = null;
     protected $fecha_registro = null;
+    protected $estado = null;
 
     /*
      *  Métodos para gestionar la cuenta del administrador.
      */
     public function checkUser($correo, $contra)
     {
-        $sql = 'SELECT id_administrador, nombre_administrador, contra_administrador
+        $sql = 'SELECT id_administrador, nombre_administrador, contra_administrador, estado_administrador
                 FROM administradores
                 WHERE correo_administrador = ?';
         $params = array($correo);
         $data = Database::getRow($sql, $params);
-        if (password_verify($contra, $data['contra_administrador'])) {
-            $_SESSION['idAdministrador'] = $data['id_administrador'];
-            $_SESSION['correoAdministrador'] = $correo;
-            return true;
+
+        // Se valida que el query retorne un registro de la tabla.
+        if ($data) {
+            // Se valida que la contraseña ingresada en el campo de login convertida a hash
+            // sea igual a la contraseña almacenada en la bd.
+            if (password_verify($contra, $data['contra_administrador'])) {
+                // Se valida el estado del administrador.
+                if ($data['estado_administrador'] == '0') {
+                    // Si estado_administrador = 0 el estado es inactivo: Se devuelve el string.
+                    return 'Estado inactivo';
+                } else {
+                    // Si estado_administrador = 1 el estado es activo: Se devuelve el array.
+                    return array($data['id_administrador'], $correo);
+                }
+            } else {
+                // Si la contraseña no es correcta se devuelve false.
+                return false;
+            }
         } else {
             return false;
         }
@@ -83,7 +98,7 @@ class AdministradorHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador
+        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador, estado_administrador
                 FROM administradores
                 WHERE apellido_administrador LIKE ? OR nombre_administrador LIKE ? OR correo_administrador LIKE ?
                 ORDER BY apellido_administrador';
@@ -102,7 +117,7 @@ class AdministradorHandler
 
     public function readAll()
     {
-        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador, fecha_registro
+        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador, fecha_registro, estado_administrador
                 FROM administradores
                 ORDER BY apellido_administrador';
         return Database::getRows($sql);
@@ -110,7 +125,7 @@ class AdministradorHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador
+        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador, estado_administrador
                 FROM administradores
                 WHERE id_administrador = ?';
         $params = array($this->id);
@@ -120,9 +135,9 @@ class AdministradorHandler
     public function updateRow()
     {
         $sql = 'UPDATE administradores
-                SET nombre_administrador = ?, apellido_administrador = ?, correo_administrador = ?
+                SET nombre_administrador = ?, apellido_administrador = ?, correo_administrador = ?, estado_administrador = ?
                 WHERE id_administrador = ?';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->id);
+        $params = array($this->nombre, $this->apellido, $this->correo, $this->estado, $this->id);
         return Database::executeRow($sql, $params);
     }
 
@@ -134,7 +149,8 @@ class AdministradorHandler
         return Database::executeRow($sql, $params);
     }
 
-    public function searchEmail($correo){
+    public function searchEmail($correo)
+    {
         $sql = 'SELECT nombre_administrador FROM administradores
                 WHERE correo_administrador = ?';
         $params = array($correo);
