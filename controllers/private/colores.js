@@ -67,8 +67,8 @@ const abrirModal = async (tituloModal, idColor) => {
     }
 }
 
-function verificarReset(){
-    if(document.getElementById('buscarColor').value==""){
+function verificarReset() {
+    if (document.getElementById('buscarColor').value == "") {
         cargarTabla();
     }
 }
@@ -133,7 +133,7 @@ const eliminarColor = async () => {
 // Evento que carga los recursos de barra de navegación y función de rellenar tabla.
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
-    //cargarPlantilla();
+    cargarPlantilla();
     //Llamar la función para cargar los datos de la tabla.
     cargarTabla();
 });
@@ -165,38 +165,48 @@ FORM_COLOR.addEventListener('submit', async (event) => {
 });
 
 const cargarTabla = async (form = null) => {
-    // Se inicializa el contenido de la tabla.
-    FILAS_ENCONTRADAS.textContent = '';
-    CUERPO_TABLA.innerHTML = '';
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAll';
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(COLOR_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
+        // Se inicializa el contenido de la tabla.
+        FILAS_ENCONTRADAS.textContent = '';
+        CUERPO_TABLA.innerHTML = '';
         // Se recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             CUERPO_TABLA.innerHTML += `
                 <tr>
-                    <td>${row.color_producto}</td>
-                    <td class="celda-agregar-eliminar text-right">
-                    <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-success" onclick="abrirModal('Editar color',${row.id_producto_color})">
+                    <td class="text-center">${row.color_producto}</td>
+                    <td class="celda-agregar-eliminar text-right text-center">
+                        <button type="button" class="btn btn-success text-center" onclick="abrirModal('Editar color',${row.id_producto_color})">
                             <img src="../../resources/img/lapiz.png" alt="lapizEditar" width="30px">
                         </button>
-                        <button type="button" class="btn btn-danger" onclick="abrirEliminar(${row.id_producto_color})">
+                        <button type="button" class="btn btn-danger text-center" onclick="abrirEliminar(${row.id_producto_color})">
                             <img src="../../resources/img/eliminar.png" alt="lapizEditar" width="30px">
                         </button>
-                        </td>
-                    </div>
+                    </td>
                 </tr>
             `;
-            console.log(row.id_producto_color);
         });
         // Se muestra un mensaje de acuerdo con el resultado.
         FILAS_ENCONTRADAS.textContent = DATA.message;
     } else {
-        sweetAlert(4, DATA.error, true);
+        // En caso de que no existan colores registrados o no se encuentren coincidencias de búsqeuda. 
+        if (DATA.error == 'No existen colores registrados' || DATA.error == 'No hay coincidencias') {
+            // Se muestra el mensaje de la API.
+            sweetAlert(4, DATA.error, true);
+            // Se restablece el contenido de la tabla.
+            FILAS_ENCONTRADAS.textContent = '';
+            CUERPO_TABLA.innerHTML = '';
+        } else if (DATA.error == 'Ingrese un valor para buscar') {
+            // Se muestra el mensaje de la API.
+            sweetAlert(4, DATA.error, true);
+        } else {
+            // Se muestra el error de la API.
+            sweetAlert(2, DATA.error, true);
+        }
     }
 }
