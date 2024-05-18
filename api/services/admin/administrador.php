@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase del modelo.
-require_once ('../../models/data/administrador_data.php');
+require_once('../../models/data/administrador_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -12,9 +12,11 @@ if (isset($_GET['action'])) {
     $result = array('status' => 0, 'session' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'correoAdmin' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['idAdministrador'])) {
+        // Se cambia el valor de la session, 1 = sesión iniciada.
         $result['session'] = 1;
-
+        // Se verifica la acción a realizar.
         switch ($_GET['action']) {
+                // La acción searchRows permite buscar administradores por su nombre, apellido o correo.
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['buscarUsuario'])) {
                     $result['error'] = Validator::getSearchError();
@@ -25,13 +27,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
+                // La acción createRow permite crear un nuevo administrador.
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$administrador->setNombre($_POST['nombreAdministrador']) or
                     !$administrador->setApellido($_POST['apellidoAdministrador']) or
                     !$administrador->setCorreo($_POST['correoAdministrador'], 0) or
-                    !$administrador->setContra($_POST['contraAdministrador']) 
+                    !$administrador->setContra($_POST['contraAdministrador'])
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($_POST['contraAdministrador'] != $_POST['confirmarContraAdmin']) {
@@ -43,6 +46,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al crear el administrador';
                 }
                 break;
+                // La acción readAll permite seleccionar todos los administradores registrados.
             case 'readAll':
                 if ($result['dataset'] = $administrador->readAll()) {
                     $result['status'] = 1;
@@ -51,6 +55,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen administradores registrados';
                 }
                 break;
+                // La acción readOne permite seleccionar la información de un administrador específico.
             case 'readOne':
                 if (!$administrador->setId($_POST['idAdministrador'])) {
                     $result['error'] = 'Administrador incorrecto';
@@ -60,9 +65,10 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Administrador inexistente';
                 }
                 break;
+                // La acción updateRow permite editar la información de un registro específico.
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
-                if(($_SESSION['idAdministrador'] == $_POST['idAdministrador']) and $_POST['estadoAdministrador'] == 0){
+                if (($_SESSION['idAdministrador'] == $_POST['idAdministrador']) and $_POST['estadoAdministrador'] == 0) {
                     $result['error'] = 'No se puede cambiar el estado de su cuenta';
                 } elseif (
                     !$administrador->setId($_POST['idAdministrador']) or
@@ -79,6 +85,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al modificar el administrador';
                 }
                 break;
+                // La acción deleteRow permite eliminar un administrador.
             case 'deleteRow':
                 if ($_POST['idAdministrador'] == $_SESSION['idAdministrador']) {
                     $result['error'] = 'No se puede eliminar a sí mismo';
@@ -91,6 +98,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el administrador';
                 }
                 break;
+                // La acción getUser valida que se haya iniciado sesión.
             case 'getUser':
                 if (isset($_SESSION['correoAdministrador'])) {
                     $result['status'] = 1;
@@ -99,6 +107,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Correo no definido';
                 }
                 break;
+                // La acción logOut permite cerrar la sesión de administrador.
             case 'logOut':
                 if (session_destroy()) {
                     $result['status'] = 1;
@@ -107,11 +116,12 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al cerrar la sesión';
                 }
                 break;
-            $result['error'] = 'Acción no disponible dentro de la sesión';
+                $result['error'] = 'Acción no disponible dentro de la sesión';
         }
     } else {
-        // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
+        // Se compara la acción a realizar cuando un administrador no ha iniciado sesión.
         switch ($_GET['action']) {
+                // Se leen todos los registros para verificar que exista un administrador registrado.
             case 'readUsers':
                 if ($administrador->readAll()) {
                     $result['status'] = 1;
@@ -120,6 +130,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Debe crear un administrador para comenzar';
                 }
                 break;
+                // La acción signUp valida la información del usuario y agrega el primer registro a la tabla administradores.
             case 'signUp':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -141,11 +152,12 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al registrar el administrador';
                 }
                 break;
+                // La acción logIn verifica las credenciales del administrador para poder ingresar al programa.
             case 'logIn':
                 // Se validan los campos del form que se encuentran en el array $_POST.
                 $_POST = Validator::validateForm($_POST);
                 // Se valida el estado del administrador.
-                if($administrador->checkUser($_POST['CorreoAdmin'], $_POST['ContraAdmin']) == 'Estado inactivo') {
+                if ($administrador->checkUser($_POST['CorreoAdmin'], $_POST['ContraAdmin']) == 'Estado inactivo') {
                     // Si el estado del administrador es inactivo se muestra un mensaje con el error.
                     $result['error'] = 'Su cuenta ha sido desactivada por un administrador';
                 } elseif ($administrador->checkUser($_POST['CorreoAdmin'], $_POST['ContraAdmin'])) {
@@ -164,18 +176,18 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Credenciales incorrectas';
                 }
                 break;
+                // Si el usuario no ha iniciado sesión no permite realizar las acciones updateRow, createRow,
+                // deleteRow (Acciones que si están permitidas cuando el usuario ha iniciado sesión).
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }
     }
-
     // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
     $result['exception'] = Database::getException();
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('Content-type: application/json; charset=utf-8');
     // Se imprime el resultado en formato JSON y se retorna al controlador.
-
-    print (json_encode($result));
+    print(json_encode($result));
 } else {
-    print (json_encode('Recurso no disponible'));
+    print(json_encode('Recurso no disponible'));
 }

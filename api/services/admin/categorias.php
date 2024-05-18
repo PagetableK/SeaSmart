@@ -14,6 +14,7 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idAdministrador'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+            // La acción searchRows permite buscar una categoría por nombre o descripción.
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['buscarCategoria'])) {
                     $result['error'] = Validator::getSearchError();
@@ -24,6 +25,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
+            // La acción createRow permite crear una nueva categoría.
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -41,6 +43,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al crear la categoría';
                 }
                 break;
+            // La acción readAll retorna todos los registros de categorías.
             case 'readAll':
                 if ($result['dataset'] = $categoria->readAll()) {
                     $result['status'] = 1;
@@ -57,6 +60,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen categorías registradas';
                 }
                 break;
+            // La acción readOne retorna la información de 1 registro específico.
             case 'readOne':
                 if (!$categoria->setId($_POST['idCategoria'])) {
                     $result['error'] = $categoria->getDataError();
@@ -66,7 +70,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Categoría inexistente';
                 }
                 break;
-
+            // La acción updateRow permite editar la información de una categoría.
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -86,6 +90,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al modificar la categoría';
                 }
                 break;
+            // La acción deleteRow permite eliminar una categoría.
             case 'deleteRow':
                 if (
                     !$categoria->setId($_POST['idCategoria']) or
@@ -101,6 +106,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar la categoría';
                 }
                 break;
+            // Si no se encuentra la acción a realizar se muestra el error.
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
