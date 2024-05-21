@@ -22,32 +22,43 @@
             <div class="row justify-content-center">
                 <!-- Formulario de registro -->
                 <div class="col-lg-6 col-md-8 col-sm-10">
-                    <form class="border border-secondary rounded-5">
+                    <form class="border border-secondary rounded-5" id="formRegistro">
                         <!-- Div donde estan los input para registrarse por primera vez -->
                         <div class="me-4 ms-4 mt-5 mb-5">
                             <h4>Regístrate</h4>
                             <h6 class="mb-4">Ingresa tu información para crear una cuenta</h6>
                             <div class="mb-4">
-                                <label for="nombres" class="form-label">Nombres</label>
-                                <input type="text" class="form-control" id="nombres" placeholder="Juana José"
+                                <label for="nombreCliente" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombreCliente" placeholder="Juana José"
                                     onkeypress="return /[A-Za-z ]/i.test(event.key)" required>
                             </div>
                             <div class="mb-4">
-                                <label for="apellidos" class="form-label">Apellidos</label>
-                                <input type="text" class="form-control" id="apellidos" placeholder="Carmen del Paz"
+                                <label for="apellidoCliente" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="apellidoCliente" placeholder="Carmen del Paz"
                                     onkeypress="return /[A-Za-z ]/i.test(event.key)" required>
                             </div>
                             <div class="mb-4">
-                                <label for="dui" class="form-label">DUI</label>
+                                <label for="telefonoCliente" class="form-label">Número de teléfono</label>
+                                <input type="text" class="form-control" id="telefonoCliente" required
+                                    placeholder="Ejemplo: 75854595" oninput="numeroNacional(event)">
+                            </div>
+                            <div class="mb-4">
+                                <label for="telefonoSecundarioCliente" class="form-label">Teléfono secundario / Teléfono de
+                                    emergencia</label>
+                                <input type="text" class="form-control" id="telefonoSecundarioCliente" required
+                                    placeholder="Ejemplo: 25452547" oninput="numeroNacional(event)">
+                            </div>
+                            <div class="mb-4">
+                                <label for="duiCliente" class="form-label">DUI</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend2">#</span>
-                                    <input type="text" class="form-control" id="dui" placeholder="00000000-0"
+                                    <input type="text" class="form-control" id="duiCliente" placeholder="00000000-0"
                                         onkeypress="return /[0-9]/i.test(event.key)" required>
                                 </div>
                             </div>
                             <div class="mb-4">
-                                <label for="correo" class="form-label">Correo electrónico</label>
-                                <input type="email" class="form-control" id="correo" required
+                                <label for="correoCliente" class="form-label">Correo electrónico</label>
+                                <input type="email" class="form-control" id="correoCliente" required
                                     placeholder="juanadelcarmen@gmail.com">
                             </div>
                             <div class="mb-4">
@@ -85,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="d-grid">
-                                <button class="btn btn-dark btn-xl d-grid rounded-pill" type="submit"><a href="casi_terminamos.html" >Continuar</a></button>
+                                <button class="btn btn-dark btn-xl d-grid rounded-pill" type="submit">Registrarse</a></button>
                             </div>
                         </div>
                     </form>
@@ -98,6 +109,10 @@
     <script src="../../resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <!-- Mandar a llamar el navbar -->
     <script type="text/javascript" src="../../controllers/utils/publico.js"></script>
+    <!-- Validar número de teléfono -->
+    <script src="../../resources/js/validar_telefono.js"></script>
+    <!-- Controlador del registro -->
+    <script src="../../controllers/public/registro.js"></script>
 </body>
 
 </html>

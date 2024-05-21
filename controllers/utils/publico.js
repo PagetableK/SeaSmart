@@ -402,31 +402,6 @@ else if(titulo == "Registro")
 
     validacionElemento_Cerrar = false;
 }
-else if(titulo == "Casi terminamos")
-{
-    MAIN.insertAdjacentHTML('beforebegin', `
-    <header>
-        <nav class="navbar navbar-expand-lg" style="background-color: #BCE7FD;">
-            <div class="container-fluid">
-                <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
-                    <div class="row">
-                        <div class="col-12 d-flex align-items-center justify-content-center">
-                            <img src="../../resources/img/Logo1.png" width="55px" height="55px">
-                        </div>
-                        <div class="col-12 d-flex align-items-center justify-content-center">
-                            <p style="font-weight: 500; font-size: x-large;">S<span
-                                    style="color: #3E88DE;">ea</span>S<span style="color: #3E88DE;">mart</span></p>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-    `);
-
-    validacionElemento_Cerrar = false;
-}
 else if(titulo == "¿Quiénes somos?"){
     MAIN.insertAdjacentHTML('beforebegin', `
     <header>
