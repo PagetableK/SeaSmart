@@ -14,6 +14,17 @@ if (isset($_GET['action'])) {
     //if (isset($_SESSION['idAdministrador'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+            //Buscar valoracion sea por nombre de cliente o producto
+            case 'searchRows':
+                if (!Validator::validateSearch($_POST['buscarValoracion'])) {
+                    $result['error'] = Validator::getSearchError();
+                } elseif ($result['dataset'] = $color->searchRows()) {
+                    $result['status'] = 1;
+                    $result['message'] = count($result['dataset']) . ' coincidencias';
+                } else {
+                    $result['error'] = 'No hay coincidencias';
+                }
+                break;
             case 'readAll':
                 if ($result['dataset'] = $valoracion->readAll()) {
                     $result['status'] = 1;
