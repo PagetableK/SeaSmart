@@ -1,3 +1,7 @@
+html{
+    height: 100vh;
+}
+
 .dropdown-menu{
     --bs-dropdown-link-active-bg:#BCE7FD;
     --bs-dropdown-link-active-color:black;
@@ -13,17 +17,25 @@
     border: 2px solid #4285F4;
 }
 
-#btnRegistro_d{
-    background-color: #4285F4;
-    color: white;
-}
-
 .botonAbajo{
     margin-top: 8px;
+    background-color: #4285F4;
+    color: white;
+    --bs-dropdown-link-hover-bg: #4285F4;
+    --bs-dropdown-link-hover-color: #ffffff;
 }
 
 a{
     text-decoration: none;
+}
+
+.parrafoSeaSmart{
+    font-weight: 500;
+    font-size: x-large;
+}
+
+.spanSeaSmart{
+    color: #3E88DE;
 }
 
 #btnCerrarSesion_d{

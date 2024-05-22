@@ -28,7 +28,7 @@ class CategoriaData extends CategoriaHandler
         }
     }
 
-    public function setNombre($value, $min = 2, $max = 50)
+    public function setNombre($value, $min = 2, $max = 20)
     {
         if (!Validator::validateAlphanumeric($value)) {
             $this->data_error = 'El nombre debe ser un valor alfanumérico';
@@ -42,36 +42,33 @@ class CategoriaData extends CategoriaHandler
         }
     }
 
-    public function setImagen($file, $filename = null)
+    public function setImagen($file, $estado, $filename = null)
     {
-        if (Validator::validateImageFile($file, 1000)) {
+        if (Validator::validateImageFile($file, 1000) and $estado == 1) {
             $this->imagen = Validator::getFilename();
             return true;
         } elseif (Validator::getFileError()) {
             $this->data_error = Validator::getFileError();
             return false;
-        } elseif ($filename) {
+        } elseif ($filename and $estado == 0) {
             $this->imagen = $filename;
             return true;
         } else {
-            $this->imagen = 'default.png';
+            $this->imagen = 'categoria_imageholder.png';
             return true;
         }
     }
 
-    public function setDescripcion($value, $min = 2, $max = 250)
+    public function setDescripcion($value, $min = 2, $max = 100)
     {
-        if (!$value) {
-            return true;
+        if (!Validator::validateLength($value, $min, $max)) {
+            $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
         } elseif (!Validator::validateString($value)) {
             $this->data_error = 'La descripción contiene caracteres no válidos';
             return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->descripcion = $value;
+        } else {$this->descripcion = $value;
             return true;
-        } else {
-            $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
         }
     }
 

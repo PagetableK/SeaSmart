@@ -18,6 +18,7 @@
 </head>
 
 <!-- Cuerpo de la página web -->
+
 <body>
     <main>
         <!-- CREAMOS FILAS Y COLUMNAS (ROW = FILAS, COL = COLUMNAS) -->
@@ -27,15 +28,18 @@
             <div class="row mt-5 row-gap-3 px-md-5">
                 <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <!-- Botón para abrir el Modal -->
-                    <button type="button" class="btn btn-primary ms-5" onclick="abrirCrear()">Agregar Producto +</button>
+                    <button type="button" class="btn btn-primary ms-5" onclick="abrirModal('Agregar producto')">+
+                        Agregar
+                        Producto</button>
                 </div>
                 <!-- CREAMOS LA COLUMNA DONDE COLOCAMOS LA "BARRA DE BUSQUEDA"  -->
                 <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6 d-flex px-4 px-sm-0">
                     <!--COLOCAMOS LA BARRA DE BUSQUEDA-->
                     <div class="col">
-                        <form class="d-flex ps-3">
-                            <input class="form-control" type="search" placeholder="Buscar un producto..."
-                                aria-label="Search">
+                        <form class="d-flex ps-3" id="formBuscar">
+                            <input class="form-control" type="search"
+                                placeholder="Buscar un producto por nombre, descripción o subcategoría..."
+                                id="buscarProducto" name="buscarProducto" oninput="verificarReset()">
                             <button class="btn" type="enviar"><img src="../../resources/img/lupa.png" class="img-fluid"
                                     width="35px" height="35px" alt="buscarimg"></button>
                         </form>
@@ -43,81 +47,115 @@
                 </div>
             </div>
             <!-- CREAMOS LA FILA DONDE COLOCAMOS LA TABLA DE LOS ELEMENTOS DE "PRODUCTO" -->
-            <div class="table-responsive-md mt-5">
+            <div class="table-responsive-md mt-5" id="contenedorTabla">
                 <table class="table">
                     <!-- CREAMOS LA CABECERA DE LA TABLA DE PRODUCTO -->
                     <thead>
                         <tr>
-                            <th class="text-center">Imagen</th>
+                            <td colspan="6" id="filasEncontradas"></td>
+                        </tr>
+                        <tr>
                             <th class="text-center">Nombre</th>
-                            <th class="text-center">Precio</th>
-                            <th class="text-center">subcategoría</th>
-                            <th class="text-center">Existencias</th>
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Sub-categoría</th>
                             <th class="text-center">Estado</th>
-
+                            <th class="text-center">Agregado por</th>
+                            <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <!-- CREAMOS EL INTERIOR DE LA TABLA (LAS FILAS Y COLUMNAS DE CADA CATEGORIA)-->
-                    <tbody>
+                    <tbody id="cuerpoTabla">
                         <!-- FILA 1 -->
                         <tr id="fila-producto" onclick="abrirInfoProducto()">
-                            <td class="text-center">
-                                <img src="../../resources/img/traje_mujer1.png" width="130px" height="170px">
-                            </td>
-                            <td class="text-center">Traje de dos piezas</td>
-                            <td class="text-center">$56.00</td>
-                            <td class="text-center">Bikinis</td>
-                            <td class="text-center">3</td>
-                            <td class="text-center">Disponible</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <!-- Modal agregar -->
-            <div class="modal fade" id="crearModal_producto">
+
+            <!-- Modal agregar/editar -->
+            <div class="modal fade" id="modalProducto">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header text-center">
-                            <h5 class="modal-title w-100 font-weight-bold">Agregar producto</h5>
-                            <button type="button" class="btn" onclick="abrirCrear()"></button>
+                            <h1 class="modal-title fs-5" id="tituloModal"></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <!-- Cuerpo del modal -->
-                        <div class="modal-body">
-                            <form class="row g-3 needs-validation" novalidate>
-                                <div class="col-md-6">
-                                    <label for="categoria" class="form-label">Categoría:</label>
-                                    <input type="text" class="form-control" id="categoria" value="Hombres" readonly>
+                        <form id="formProducto">
+                            <div class="modal-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <input type="number" class="d-none" id="idProducto" name="idProducto">
+                                        <label for="nombreProducto" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="nombreProducto"
+                                            name="nombreProducto" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="precioProducto" class="form-label">Precio</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" id="precioProducto" name="precioProducto"
+                                                class="form-control" min="1" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="descripcionProducto" class="form-label">Descripción</label>
+                                        <textarea class="form-control" id="descripcionProducto"
+                                            name="descripcionProducto" rows="3" required></textarea>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="selectCategoria" class="form-label">Categoría</label>
+                                        <select class="form-select" id="selectCategoria" name="selectCategoria" size="6"
+                                            onchange="cargarSubCategorias()">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="selectSubcategoria" class="form-label">Subcategoría</label>
+                                        <!-- Opciones de subcategorías -->
+                                        <select class="form-select" id="selectSubcategoria" name="selectSubcategoria"
+                                            size="6" onchange="">
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-6 d-none" id="contenedorEstadoProducto">
+                                        <label for="estadoProducto" class="form-label">Estado del producto</label>
+                                        <select class="form-select" id="estadoProducto" name="estadoProducto">
+                                            <option value="1">Activo</option>
+                                            <option value="0">Inactivo</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="subcategoria" class="form-label">Sub-categoría:</label>
-                                    <!-- Opciones de subcategorías -->
-                                    <select class="form-select" id="subcategoria">
-                                        <option selected>Licras</option>
-                                        <option selected>Shorts</option>
-                                        <option selected>Sunga</option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <label for="nombreProducto" class="form-label">Nombre del producto:</label>
-                                    <input type="text" class="form-control" id="nombreProducto" required>
-                                </div>
-                                <div class="col-12">
-                                    <label for="descripcion" class="form-label">Descripción:</label>
-                                    <textarea class="form-control" id="descripcion" rows="3"></textarea>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- Footer del modal -->
-                        <div class="modal-footer d-flex align-items-center justify-content-center">
-                            <button type="button" class="btn btn-primary close" data-bs-dismiss="modal">Agregar
-                                producto</button>
-                        </div>
+                            </div>
+                            <!-- Footer del modal -->
+                            <div class="modal-footer d-flex align-items-center justify-content-center">
+                                <button type="submit" class="btn btn-primary close" id="btnAccion">Agregar
+                                    producto</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal eliminar -->
+            <div class="modal fade" id="borrarModalProducto">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="formEliminar">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="tituloModalEliminar"></h1>
+                                <input type="number" class="d-none" id="inputIdProducto" name="idProducto">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <button type="submit" class="btn btn-primary" onclick="">Eliminar</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
             <!-- Modal de existencias -->
-            <div class="modal fade" id="infoModal_producto">
+            <div class="modal fade" id="infoModalProducto">
                 <div class="modal-dialog modal-fullscreen">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -127,92 +165,81 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <div class="col-lg-12">
-                                            <p class="fs-4 fw-semibold">Existencias</p>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <img src="../../resources/img/filtro2.png" alt="">
-                                        </div>
-                                        <div class="col d-flex justify-content-start mt-2">
-                                            <div class="col d-flex justify-content-start">
-                                                <p class="m-2">Color:</p>
-                                                <div class="dropdown">
-                                                    <button class="btn dropdown-toggle btn-primary" id="colores"
-                                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Colores
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Azul</a></li>
-                                                        <li><a class="dropdown-item" href="#">Rojo</a></li>
-                                                    </ul>
+                                        <div class="row row-gap-3">
+                                            <div class="col-lg-12">
+                                                <p class="fs-4 fw-semibold">Existencias</p>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <img src="../../resources/img/filtro2.png" alt="">
+                                            </div>
+                                            <div class="col mt-2">
+                                                <form id="filtroDetalles" class="d-flex flex-column gap-2">
+                                                    <input type="number" id="idProductoDetalles" name="idProducto" class="d-none">
+                                                    <div class="row gap-0 row-gap-2">
+                                                        <div class="col-12 col-sm-6 d-flex gap-3">
+                                                            <p class="m-2">Color:</p>
+                                                            <select class="form-select w-100" id="selectColor"
+                                                                name="selectColor">
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-12 col-sm-6 d-flex gap-3">
+                                                            <p class="m-2">Talla:</p>
+                                                            <select class="form-select w-100" id="selectTalla"
+                                                                name="selectTalla" onchange="">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12 d-flex justify-content-end gap-1">
+                                                            <button type="reset" class="btn btn-info">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bootstrap-reboot" viewBox="0 0 16 16">
+                                                                    <path d="M1.161 8a6.84 6.84 0 1 0 6.842-6.84.58.58 0 1 1 0-1.16 8 8 0 1 1-6.556 3.412l-.663-.577a.58.58 0 0 1 .227-.997l2.52-.69a.58.58 0 0 1 .728.633l-.332 2.592a.58.58 0 0 1-.956.364l-.643-.56A6.8 6.8 0 0 0 1.16 8z"/>
+                                                                    <path d="M6.641 11.671V8.843h1.57l1.498 2.828h1.314L9.377 8.665c.897-.3 1.427-1.106 1.427-2.1 0-1.37-.943-2.246-2.456-2.246H5.5v7.352zm0-3.75V5.277h1.57c.881 0 1.416.499 1.416 1.32 0 .84-.504 1.324-1.386 1.324z"/>
+                                                                  </svg>
+                                                            </button>
+                                                            <button class="btn btn-primary" type="submit">
+                                                                Buscar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="col-lg-12 d-flex justify-content-start align-items-center">
+                                                <div class="container-fluid table-responsive-md" id="contenedorTablaExistencia">
+                                                    <!-- Tabla con los datos -->
+                                                    <table class="table" id="tablaExistencias">
+                                                        <!-- Cabeceras de la tabla -->
+                                                        <thead>
+                                                            <tr>
+                                                                <td id="filasEncontradasDetalles" colspan="5"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="text-center">Imagen</th>
+                                                                <th class="text-center">Color</th>
+                                                                <th class="text-center">Talla</th>
+                                                                <th class="text-center">Existencias</th>
+                                                                <th class="text-center">Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <!-- Cuerpo de la tabla con existencias del producto -->
+                                                        <tbody id="cuerpoTablaDetalles">
+
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
-                                            <div class="col d-flex justify-content-start">
-                                                <p class="m-2">Talla:</p>
-                                                <div class="dropdown">
-                                                    <button class="btn dropdown-toggle btn-primary" id="tallas"
-                                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Tallas
+                                            <div class="col">
+                                                <div class="col gap-1 d-flex justify-content-center">
+                                                    <button class="btn p-3 rounded-pill fw-bold text-light bg-primary"
+                                                        id="btnAgregarExistencia">Agregar existencia +
                                                     </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">S</a></li>
-                                                        <li><a class="dropdown-item" href="#">M</a></li>
-                                                        <li><a class="dropdown-item" href="#">L</a></li>
-                                                        <li><a class="dropdown-item" href="#">XL</a></li>
-                                                        <li><a class="dropdown-item" href="#">XXL</a></li>
-                                                    </ul>
+                                                    <button class="btn p-3 rounded-pill fw-bold text-light bg-primary"
+                                                        id="btnAsignacion">
+                                                        Asignación rápida
+                                                        <img src="../../resources/img/llave_inglesa.png"
+                                                            alt="llave-inglesa">
+                                                    </button>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 d-flex justify-content-start align-items-center mt-4">
-                                            <div class="container-fluid table-responsive" id="contenedor-tabla-existencias">
-                                                <!-- Tabla con los datos -->
-                                                <table class="table" id="tabla-existencias">
-                                                    <!-- Cabeceras de la tabla -->
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Color</th>
-                                                            <th scope="col">Talla</th>
-                                                            <th scope="col">Existencias</th>
-                                                            <th scope="col">Acciones</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <!-- Cuerpo de la tabla con la información -->
-                                                    <tbody>
-                                                        <!-- Fila 1 -->
-                                                        <tr>
-                                                            <td>Rojo</td>
-                                                            <td>S</td>
-                                                            <td>5</td>
-                                                            <td colspan="2">
-                                                                <button type="button" class="btn btn-success">
-                                                                    <img src="../../resources/img/lapiz.png"
-                                                                        alt="lapizEditar" width="25px">
-                                                                </button>
-                                                                <button type="button" class="btn btn-danger">
-                                                                    <img src="../../resources/img/eliminar.png"
-                                                                        alt="lapizEditar" width="25px">
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 d-flex align-items-center justify-content-center">
-                                            <div class="p-2">
-                                                <button class="btn p-3 rounded-pill fw-bold text-light bg-primary"
-                                                    id="btnAgregarExistencia">Agregar existencia +
-                                                    
-                                                </button>
-                                            </div>
-                                            <div class="p-2">
-                                                <button class="btn p-3 rounded-pill fw-bold text-light bg-primary"
-                                                    id="btnAsignacion">
-                                                    Asignación rápida
-                                                    <img src="../../resources/img/llave_inglesa.png"
-                                                        alt="llave-inglesa">
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -231,72 +258,49 @@
                                             </div>
                                         </div>
                                         <div class="row d-flex align-items-start justify-content-start">
-                                            <div class="col-12 col-sm-2 col-md-2 col-lg-2 pe-2 text-center" id="imagen-producto">
-                                                <img src="../../resources/img/short_rojo.png" alt="short-rojo"
-                                                    class="img-fluid">
-                                            </div>
                                             <div class="col">
                                                 <div class="col-12 d-flex align-items-start justify-content-start">
                                                     <div class="row">
-                                                        <p class="me-2">Agregado por</p>
-                                                        <p class="fw-bold" id="admin-agregado">Susan Castillo</p>
-                                                    </div>
-                                                    <div class="row">
                                                         <div class="row">
                                                             <div class="col d-flex">
-                                                                <p class="fw-bold">Categoría:</p>
-                                                                <p id="categoria-texto" class="ms-1"> Hombres</p>
+                                                                <p class="fw-bold fs-5">Agregado por:</p>
+                                                                <p class="ms-1 fs-5" id="adminProducto"></p>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col d-flex">
-                                                                <p class="fw-bold">Subcategoria:</p>
-                                                                <p id="subcategoria-texto" class="ms-1">Shorts</p>
+                                                                <p class="fw-bold fs-5">Categoría:</p>
+                                                                <p id="categoriaProducto" class="ms-1 fs-5"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col d-flex">
+                                                                <p class="fw-bold fs-5">Subcategoria:</p>
+                                                                <p id="subcategoriaProducto" class="ms-1 fs-5"></p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
-                                                    <p class="fs-2" id="nombre-producto">Shorts para nadar elásticos</p>
+                                                    <p class="fs-2" id="nombreProductoDetalle"></p>
                                                 </div>
                                                 <div class="col-lg-12">
-                                                    <p class="fs-2" id="estado-producto">Disponible</p>
+                                                    <p class="fs-2" id="estadoProductoDetalle"></p>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <hr>
-                                                    <p class="fs-2" id="precio-producto">$20.00</p>
+                                                    <p class="fs-2" id="precioProductoDetalle"></p>
                                                     <hr>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <p class="fs-4">This Essentials watershort in bright red offers a
-                                                    playful
-                                                    swim style you know you can rely on.
-                                                    A side pocket drainage system ensures they stay comfortable, even
-                                                    when wet, whilst a drawstring waist provides extra comfort
-                                                    and security. Our new 100% Recycled Nylon fabric is lightweight
-                                                    and comfortable as well as good for the environment,
-                                                    making this short the ideal choice for the pool or beach.</p>
+                                                <p class="fs-4" id="descripcionProductoDetalle"></p>
                                             </div>
                                         </div>
                                         <div class="row mt-5 d-flex align-items-center justify-content-center gap-3">
-                                            <div class="col-12 col-sm-3 col-md-3 col-lg-3 d-flex align-items-center justify-content-center">
-                                                <button class="btn p-3 btn-success rounded-pill" id="EditarProducto">
-                                                    Editar producto
-                                                    <img src="../../resources/img/lapiz.png" alt="editarProducto"
-                                                        class="ms-2" height="20px">
-                                                </button>
-                                            </div>
-                                            <div class="col-12 col-sm-3 col-md-3 col-lg-3 d-flex align-items-center justify-content-center">
-                                                <button class="btn p-3 btn-danger rounded-pill" id="DesactivarProducto">
-                                                    Desactivar producto
-                                                    <img src="../../resources/img/eliminar.png" alt="desactivarProducto"
-                                                        class="ms-2" height="20px">
-                                                </button>
-                                            </div>
-                                            <div class="col-12 col-sm-3 col-md-3 col-lg-3 d-flex align-items-center justify-content-center">
+                                            <div class="col-12 d-flex align-items-center justify-content-center">
                                                 <button class="btn p-3 rounded-pill text-light"
                                                     style="background-color: #E0BD00;" id="VerComentarios">
                                                     Ver comentarios
@@ -309,6 +313,69 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal agregar/editar -->
+            <div class="modal fade" id="modalDetalleProducto">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h1 class="modal-title fs-5" id="tituloModalDetalle"></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <!-- Cuerpo del modal -->
+                        <form id="formDetalleProducto">
+                            <div class="modal-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <input type="number" class="d-none" id="idProductoDetalle" name="idProductoDetalle">
+                                        <label for="nombreProducto" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="nombreProducto"
+                                            name="nombreProducto" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="precioProducto" class="form-label">Precio</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" id="precioProducto" name="precioProducto"
+                                                class="form-control" min="1" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="descripcionProducto" class="form-label">Descripción</label>
+                                        <textarea class="form-control" id="descripcionProducto"
+                                            name="descripcionProducto" rows="3" required></textarea>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="selectCategoria" class="form-label">Categoría</label>
+                                        <select class="form-select" id="selectCategoria" name="selectCategoria" size="6"
+                                            onchange="cargarSubCategorias()">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="selectSubcategoria" class="form-label">Subcategoría</label>
+                                        <!-- Opciones de subcategorías -->
+                                        <select class="form-select" id="selectSubcategoria" name="selectSubcategoria"
+                                            size="6" onchange="">
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-6 d-none" id="contenedorEstadoProducto">
+                                        <label for="estadoProducto" class="form-label">Estado del producto</label>
+                                        <select class="form-select" id="estadoProducto" name="estadoProducto">
+                                            <option value="1">Activo</option>
+                                            <option value="0">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Footer del modal -->
+                            <div class="modal-footer d-flex align-items-center justify-content-center">
+                                <button type="submit" class="btn btn-primary close" id="btnAccion">Agregar
+                                    producto</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -326,6 +393,8 @@
     <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
     <!-- Controlador js de productos -->
     <script type="text/javascript" src="../../controllers/private/productos.js"></script>
+    <!-- Controlador js de detalles de producto -->
+    <script type="text/javascript" src="../../controllers/private/detalles_productos.js"></script>
 </body>
 
 </html>

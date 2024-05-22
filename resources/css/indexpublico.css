@@ -1,5 +1,4 @@
 #form-buscarCategoria{
-    background-color: #BCE7FD;
     border-width: 1px;
     border-style: solid;
     border-color: #79747E;
@@ -26,15 +25,6 @@ span{
 
 #buscarCategoria{
     font-size: 15px;
-}
-
-#cuenta{
-    width: 25px;
-}
-
-#carrito{
-    width: 25px;
-    --bs-btn-border-width:none;
 }
 
 .card{
