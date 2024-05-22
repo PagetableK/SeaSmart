@@ -1,3 +1,7 @@
+html{
+    height: 100vh;
+}
+
 .btn-primary{
     width: 235px;
 }

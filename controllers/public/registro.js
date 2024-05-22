@@ -12,20 +12,20 @@ const BTNCONTINUAR = document.getElementById('btnContinuar');
 // Constante para establecer el formulario de registrar cliente.
 const FORM_REGISTRO = document.getElementById('formRegistro');
 // Llamada a la función para establecer la mascara del campo teléfono.
-vanillaTextMask.maskInput({
-    inputElement: document.getElementById('telefonoCliente'),
-    mask: [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
-});
+// vanillaTextMask.maskInput({
+//     inputElement: document.getElementById('telefonoCliente'),
+//     mask: [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+// });
 // Llamada a la función para establecer la mascara del campo DUI.
-vanillaTextMask.maskInput({
-    inputElement: document.getElementById('duiCliente'),
-    mask: [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/]
-});
+// vanillaTextMask.maskInput({
+//     inputElement: document.getElementById('duiCliente'),
+//     mask: [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/]
+// });
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
-    loadTemplate();
+    cargarPlantilla(2);
     // Se asigna como título la categoría de los productos.
     MAIN_TITLE.textContent = 'Crear cuenta';
     // LLamada a la función para asignar el token del reCAPTCHA al formulario.

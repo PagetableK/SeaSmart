@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase del modelo.
-require_once ('../../models/data/cliente_data.php');
+require_once('../../models/data/cliente_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -12,9 +12,9 @@ if (isset($_GET['action'])) {
     $result = array('status' => 0, 'session' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'correoCliente' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['idAdministrador'])) {
-        $result['session'] = 1;
-
+        // Se verifica la acción a realizar.
         switch ($_GET['action']) {
+                // La acción searchRows permite buscar clientes por su nombre, apellido o correo.
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['buscarUsuario'])) {
                     $result['error'] = Validator::getSearchError();
@@ -25,6 +25,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
+                // La acción createRow permite crear un nuevo cliente.
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -48,6 +49,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al crear el cliente';
                 }
                 break;
+                // La acción readAll permite seleccionar todos los clientes registrados.
             case 'readAll':
                 if ($result['dataset'] = $clientes->readAll()) {
                     $result['status'] = 1;
@@ -56,6 +58,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen clientes registrados';
                 }
                 break;
+                // La acción readOne permite seleccionar la información de un cliente específico.
             case 'readOne':
                 if (!$clientes->setId($_POST['idCliente'])) {
                     $result['error'] = 'Cliente incorrecto';
@@ -65,6 +68,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Cliente inexistente';
                 }
                 break;
+                // La acción updateRow permite editar la información de un registro específico.
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -78,6 +82,8 @@ if (isset($_GET['action'])) {
                     !$clientes->setEstado($_POST['estadoCliente'])
                 ) {
                     $result['error'] = $clientes->getDataError();
+                } elseif ($_POST['telefonoCliente'] == $_POST['telefonoFijoCliente']) {
+                    $result['error'] = 'El teléfono fijo no puede ser el mismo que el teléfono móvil';
                 } elseif ($clientes->updateRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Cliente modificado correctamente';
@@ -85,6 +91,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al modificar el cliente';
                 }
                 break;
+                // La acción deleteRow permite eliminar un cliente.
             case 'deleteRow':
                 if (!$clientes->setId($_POST['idCliente'])) {
                     $result['error'] = $clientes->getDataError();
@@ -95,20 +102,19 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el cliente';
                 }
                 break;
+                // Si no se encuentra la acción a realizar se muestra el error.
             default:
-            $result['error'] = 'Acción no disponible dentro de la sesión';
+                $result['error'] = 'Acción no disponible dentro de la sesión';
         }
+        // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
+        $result['exception'] = Database::getException();
+        // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
+        header('Content-type: application/json; charset=utf-8');
+        // Se imprime el resultado en formato JSON y se retorna al controlador. 
+        print(json_encode($result));
     } else {
-        print(json_encode('Acceso denegado'));
+        print (json_encode('Acceso denegado'));
     }
-
-    // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
-    $result['exception'] = Database::getException();
-    // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
-    header('Content-type: application/json; charset=utf-8');
-    // Se imprime el resultado en formato JSON y se retorna al controlador.
-
-    print (json_encode($result));
 } else {
-    print (json_encode('Recurso no disponible'));
+    print(json_encode('Recurso no disponible'));
 }

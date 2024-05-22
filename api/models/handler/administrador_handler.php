@@ -98,7 +98,7 @@ class AdministradorHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador, estado_administrador
+        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador, estado_administrador, fecha_registro
                 FROM administradores
                 WHERE apellido_administrador LIKE ? OR nombre_administrador LIKE ? OR correo_administrador LIKE ?
                 ORDER BY apellido_administrador';

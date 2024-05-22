@@ -14,6 +14,7 @@ class ProductoHandler
     protected $descripcion = null;
     protected $id_subcategoria = null;
     protected $estado = null;
+    protected $precio = null;
 
     // Constante para establecer la ruta de las imágenes.
     const RUTA_IMAGEN = '../../images/productos/';
@@ -36,9 +37,9 @@ class ProductoHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO productos(nombre_producto, descripcion_producto, id_sub_categoria, id_administrador)
-                VALUES(?, ?, ?, ?)';
-        $params = array($this->nombre, $this->descripcion, $this->id_subcategoria, $_SESSION['idAdministrador']);
+        $sql = 'INSERT INTO productos(nombre_producto, descripcion_producto, id_sub_categoria, precio_producto, id_administrador)
+                VALUES(?, ?, ?, ?, ?)';
+        $params = array($this->nombre, $this->descripcion, $this->id_subcategoria, $this->precio, $_SESSION['idAdministrador']);
         return Database::executeRow($sql, $params);
     }
 
@@ -55,11 +56,12 @@ class ProductoHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, categorias.id_categoria, sub_categorias.id_sub_categoria, estado_producto
-                FROM productos, sub_categorias, categorias
+        $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, categorias.id_categoria, sub_categorias.id_sub_categoria, estado_producto, precio_producto, nombre_administrador, nombre_categoria, nombre_sub_categoria
+                FROM productos, sub_categorias, categorias, administradores
                 WHERE id_producto = ? AND
                 categorias.id_categoria = sub_categorias.id_categoria AND
-                sub_categorias.id_sub_categoria = productos.id_sub_categoria';
+                sub_categorias.id_sub_categoria = productos.id_sub_categoria AND
+                administradores.id_administrador = productos.id_administrador';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
@@ -67,9 +69,9 @@ class ProductoHandler
     public function updateRow()
     {
         $sql = 'UPDATE productos
-                SET nombre_producto = ?, descripcion_producto = ?, estado_producto = ?, id_sub_categoria = ?
+                SET nombre_producto = ?, descripcion_producto = ?, estado_producto = ?, id_sub_categoria = ?, precio_producto = ?
                 WHERE id_producto = ?';
-        $params = array($this->nombre, $this->descripcion, $this->estado, $this->id_subcategoria, $this->id);
+        $params = array($this->nombre, $this->descripcion, $this->estado, $this->id_subcategoria, $this->precio, $this->id);
         return Database::executeRow($sql, $params);
     }
 

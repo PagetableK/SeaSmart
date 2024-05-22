@@ -42,15 +42,15 @@ class CategoriaData extends CategoriaHandler
         }
     }
 
-    public function setImagen($file, $filename = null)
+    public function setImagen($file, $estado, $filename = null)
     {
-        if (Validator::validateImageFile($file, 1000)) {
+        if (Validator::validateImageFile($file, 1000) and $estado == 1) {
             $this->imagen = Validator::getFilename();
             return true;
         } elseif (Validator::getFileError()) {
             $this->data_error = Validator::getFileError();
             return false;
-        } elseif ($filename) {
+        } elseif ($filename and $estado == 0) {
             $this->imagen = $filename;
             return true;
         } else {
