@@ -11,7 +11,7 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'session' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'correoCliente' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
-    if (isset($_SESSION['idCliente'])) {
+    if (isset($_SESSION['idAdministrador'])) {
         // Se verifica la acción a realizar.
         switch ($_GET['action']) {
                 // La acción searchRows permite buscar clientes por su nombre, apellido o correo.
@@ -106,65 +106,15 @@ if (isset($_GET['action'])) {
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
+        // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
+        $result['exception'] = Database::getException();
+        // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
+        header('Content-type: application/json; charset=utf-8');
+        // Se imprime el resultado en formato JSON y se retorna al controlador. 
+        print(json_encode($result));
     } else {
-        // La acción signUp valida la información del usuario y agrega el primer registro a la tabla administradores.
-        case 'signUp':
-            $_POST = Validator::validateForm($_POST);
-            if (
-                !$administrador->setNombre($_POST['NombreAdmin'])
-                or
-                !$administrador->setApellido($_POST['ApellidoAdmin'])
-                or
-                !$administrador->setCorreo($_POST['CorreoAdmin'], 0)
-                or
-                !$administrador->setContra($_POST['ContraAdmin'])
-            ) {
-                $result['error'] = $administrador->getDataError();
-            } else if ($_POST['ContraAdmin'] != $_POST['ConfirmarContra']) {
-                $result['error'] = 'Las contraseñas son diferentes';
-            } elseif ($administrador->createRow()) {
-                $result['status'] = 1;
-                $result['message'] = 'Administrador registrado correctamente';
-            } else {
-                $result['error'] = 'Ocurrió un problema al registrar el administrador';
-            }
-            break;
-            // La acción logIn verifica las credenciales del administrador para poder ingresar al programa.
-        case 'logIn':
-            // Se validan los campos del form que se encuentran en el array $_POST.
-            $_POST = Validator::validateForm($_POST);
-            // Se valida el estado del administrador.
-            if ($administrador->checkUser($_POST['CorreoAdmin'], $_POST['ContraAdmin']) == 'Estado inactivo') {
-                // Si el estado del administrador es inactivo se muestra un mensaje con el error.
-                $result['error'] = 'Su cuenta ha sido desactivada por un administrador';
-            } elseif ($administrador->checkUser($_POST['CorreoAdmin'], $_POST['ContraAdmin'])) {
-                // Si el estado del administrador es activo se ejecuta el código.
-                // Se asigna el valor de status.
-                $result['status'] = 1;
-                // Se asigna el id del administrador proveniente de la función checkUser()
-                // dentro del array de la sesión $_SESSION.
-                $_SESSION['idCliente'] = $administrador->checkUser($_POST['CorreoAdmin'], $_POST['ContraAdmin'])[0];
-                // Se asigna el correo del administrador proveniente de la función checkUser()
-                // dentro del array de la sesión $_SESSION.
-                $_SESSION['correoAdministrador'] = $administrador->checkUser($_POST['CorreoAdmin'], $_POST['ContraAdmin'])[1];
-                // Se devuelve el mensaje del resultado de la acción logIn.
-                $result['message'] = 'Autenticación correcta';
-            } else {
-                $result['error'] = 'Credenciales incorrectas';
-            }
-            break;
-            // Si el usuario no ha iniciado sesión no permite realizar las acciones updateRow, createRow,
-            // deleteRow (Acciones que si están permitidas cuando el usuario ha iniciado sesión).
-        default:
-            $result['error'] = 'Acción no disponible fuera de la sesión';
+        print (json_encode('Acceso denegado'));
     }
-
-    // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
-    $result['exception'] = Database::getException();
-    // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
-    header('Content-type: application/json; charset=utf-8');
-    // Se imprime el resultado en formato JSON y se retorna al controlador. 
-    print(json_encode($result));
 } else {
     print(json_encode('Recurso no disponible'));
 }
