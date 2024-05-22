@@ -25,7 +25,7 @@ const FORM_REGISTRO = document.getElementById('formRegistro');
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
-    cargarPlantilla();
+    cargarPlantilla(2);
     // Se asigna como título la categoría de los productos.
     MAIN_TITLE.textContent = 'Crear cuenta';
     // LLamada a la función para asignar el token del reCAPTCHA al formulario.

@@ -17,17 +17,23 @@ html{
     border: 2px solid #4285F4;
 }
 
-#btnRegistro_d{
+.botonAbajo{
+    margin-top: 8px;
     background-color: #4285F4;
     color: white;
 }
 
-.botonAbajo{
-    margin-top: 8px;
-}
-
 a{
     text-decoration: none;
+}
+
+.parrafoSeaSmart{
+    font-weight: 500;
+    font-size: x-large;
+}
+
+.spanSeaSmart{
+    color: #3E88DE;
 }
 
 #btnCerrarSesion_d{
