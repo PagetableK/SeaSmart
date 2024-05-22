@@ -32,9 +32,12 @@ if (isset($_GET['action'])) {
                 if (
                     !$producto->setNombre($_POST['nombreProducto']) or
                     !$producto->setDescripcion($_POST['descripcionProducto']) or
-                    !$producto->setSubcategoria($_POST['selectSubcategoria'])
+                    !$producto->setSubcategoria($_POST['selectSubcategoria']) or
+                    !$producto->setPrecio($_POST['precioProducto'])
                 ) {
                     $result['error'] = $producto->getDataError();
+                } elseif($_POST['precioProducto'] == 0){
+                    $result['error'] = 'El precio del producto no puede ser cero';
                 } elseif ($producto->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Producto creado correctamente';
@@ -69,9 +72,12 @@ if (isset($_GET['action'])) {
                     !$producto->setNombre($_POST['nombreProducto']) or
                     !$producto->setDescripcion($_POST['descripcionProducto']) or
                     !$producto->setSubcategoria($_POST['selectSubcategoria']) or
-                    !$producto->setEstado($_POST['estadoProducto'])
+                    !$producto->setEstado($_POST['estadoProducto']) or
+                    !$producto->setPrecio($_POST['precioProducto'])
                 ) {
                     $result['error'] = $producto->getDataError();
+                } elseif($_POST['precioProducto'] === 0){
+                    $result['error'] = 'El precio del producto no puede ser cero';
                 } elseif ($producto->updateRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Producto modificado correctamente';

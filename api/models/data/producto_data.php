@@ -78,6 +78,17 @@ class ProductoData extends ProductoHandler
         }
     }
 
+    public function setPrecio($value)
+    {
+        if (Validator::validateMoney($value)) {
+            $this->precio = $value;
+            return true;
+        } else {
+            $this->data_error = 'El precio debe ser un número positivo';
+            return false;
+        }
+    }
+
     /*
      *  Métodos para obtener el valor de los atributos adicionales.
      */
