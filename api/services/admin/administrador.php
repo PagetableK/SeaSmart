@@ -116,6 +116,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al cerrar la sesión';
                 }
                 break;
+            default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
     } else {

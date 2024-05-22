@@ -1,3 +1,5 @@
+// Constante que almacena el form de búsqueda.
+const FORM_BUSCAR = document.getElementById('formBuscar');
 // Constante para completar la ruta de la API.
 const CALIFICACION_API = 'services/admin/valoracion.php';
 // Constantes para cargar los elementos de la tabla.
@@ -6,6 +8,12 @@ const FILAS_ENCONTRADAS = document.getElementById('filasEncontradas'),
 
 const FILTRO = document.getElementById('selectedFiltro');
 
+//Buscador para buscar por nombre de cliente o producto
+function verificarReset() {
+    if (document.getElementById('buscarValoracion').value == "") {
+        cargarTabla();
+    }
+}
 
 // Evento que carga los recursos de barra de navegación y función de rellenar tabla.
 document.addEventListener('DOMContentLoaded', () => {

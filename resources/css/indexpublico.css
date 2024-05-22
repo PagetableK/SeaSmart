@@ -27,15 +27,6 @@ span{
     font-size: 15px;
 }
 
-#cuenta{
-    width: 25px;
-}
-
-#carrito{
-    width: 25px;
-    --bs-btn-border-width:none;
-}
-
 .card{
     width: 18rem;
 }

@@ -13,8 +13,21 @@ class ValoracionHandler
     protected $visibilidad = null;
 
     /*
-     *  Métodos para realizar operaciones (read, update).
+     *  Métodos para realizar operaciones (search, read, update).
      */
+
+     //Buscador de valoraciones
+    public function searchRows()
+    {
+        $value = '%' . Validator::getSearchValue() . '%';
+        $sql = 'SELECT id_producto, nombre_producto, nombre_cliente
+        FROM productos
+        WHERE nombre_producto LIKE ? OR nombre_cliente LIKE ?
+        ORDER BY nombre_producto';
+        $params = array($value, $value);
+        return Database::getRows($sql, $params);
+    }
+
     public function readAll()
     {
         $sql = 'SELECT * FROM view_valoraciones ORDER BY fecha_valoracion ASC;';

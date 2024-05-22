@@ -106,17 +106,15 @@ if (isset($_GET['action'])) {
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
+        // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
+        $result['exception'] = Database::getException();
+        // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
+        header('Content-type: application/json; charset=utf-8');
+        // Se imprime el resultado en formato JSON y se retorna al controlador. 
+        print(json_encode($result));
     } else {
-        // Si el usuario no ha iniciado sesión no se permite realizar la acción y se muestra el mensaje.
-        print(json_encode('Acceso denegado'));
+        print (json_encode('Acceso denegado'));
     }
-
-    // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
-    $result['exception'] = Database::getException();
-    // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
-    header('Content-type: application/json; charset=utf-8');
-    // Se imprime el resultado en formato JSON y se retorna al controlador. 
-    print(json_encode($result));
 } else {
     print(json_encode('Recurso no disponible'));
 }
