@@ -1,3 +1,7 @@
+html{
+    height: 100vh;
+}
+
 .dropdown-menu{
     --bs-dropdown-link-active-bg:#BCE7FD;
     --bs-dropdown-link-active-color:black;

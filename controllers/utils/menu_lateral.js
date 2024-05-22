@@ -2,6 +2,7 @@ const MENU_CUENTA = document.getElementById('menu_cuenta');
 
 MENU_CUENTA.insertAdjacentHTML('afterbegin', `
     <!-- Título de menú -->
+    <div class="container-fluid px-lg-5">
     <div class="row d-flex align-items-center justify-content-center gap-2">
         <!-- Ícono de menú -->
         <div class="col-auto d-flex">
@@ -37,6 +38,7 @@ MENU_CUENTA.insertAdjacentHTML('afterbegin', `
             <a href="index.html"><button class="btn btn-primary rounded-pill fw-semibold" type="button">Cerrar sesión
                 <img src="../../resources/img/logout.png" alt="Cerrar Sesion" width="20px"></button></a>
         </div>
+    </div>
     </div>
     `
 );
