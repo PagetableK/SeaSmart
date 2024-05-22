@@ -6,7 +6,7 @@ require_once('../../models/handler/tallas_handler.php');
 /*
  *  Clase para manejar el encapsulamiento de los datos de la tabla CATEGORIA.
  */
-class TallasData extends TallasHandler
+class TallaData extends TallaHandler
 {
     /*
      *  Atributos adicionales.
@@ -23,36 +23,33 @@ class TallasData extends TallasHandler
             $this->id = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de la categoría es incorrecto';
+            $this->data_error = 'El identificador de la talla es incorrecto';
             return false;
         }
     }
 
-    public function setTalla($value, $min = 2, $max = 250)
+    public function setTalla($value, $min = 2, $max = 30)
     {
         if (!$value) {
             return true;
         } elseif (!Validator::validateString($value)) {
-            $this->data_error = 'La descripción contiene caracteres prohibidos';
+            $this->data_error = 'La talla contiene caracteres prohibidos';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
             $this->descripcion = $value;
             return true;
         } else {
-            $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
+            $this->data_error = 'La talla debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
         }
     }
+
+
     /*
      *  Métodos para obtener el valor de los atributos adicionales.
      */
     public function getDataError()
     {
         return $this->data_error;
-    }
-
-    public function getFilename()
-    {
-        return $this->filename;
     }
 }

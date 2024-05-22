@@ -12,8 +12,7 @@ class PedidoHandler
     protected $id = null;
     protected $fecha = null;
     protected $estado = null;
-    protected $direccion = null;
-    protected $cliente = null;
+    
 
     /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
@@ -24,7 +23,7 @@ class PedidoHandler
         $sql = 'SELECT id_pedido, fecha_pedido, estado_pedido,
                 FROM pedidos
                 INNER JOIN pedidos USING(id_pedido)
-                WHERE id_pedido LIKE ? OR id_detalle_pedido LIKE ?
+                WHERE id_pedido LIKE ? OR estado_pedido LIKE ?
                 ORDER BY id_pedido';
         $params = array($value, $value);
         return Database::getRows($sql, $params);
@@ -32,9 +31,9 @@ class PedidoHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO pedidos(id_pedido, fecha_pedido, estado_pedido, id_direccion, id_cliente)
+        $sql = 'INSERT INTO producto(nombre_producto, descripcion_producto, precio_producto, existencias_producto, imagen_producto, estado_producto, id_categoria, id_administrador)
                 VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->fecha, $this->estado, $_SESSION['idAdministrador']);
+        $params = array($this->precio, $this->estado, $this->pedido, $_SESSION['idAdministrador']);
         return Database::executeRow($sql, $params);
     }
 
@@ -42,7 +41,7 @@ class PedidoHandler
     {
         $sql = 'SELECT id_pedido, fecha_pedido, estado_pedido
                 FROM pedidos
-                INNER JOIN pedido USING(id_pedido)
+                INNER JOIN pedidos USING(id_pedido)
                 ORDER BY id_pedido';
         return Database::getRows($sql);
     }
@@ -56,6 +55,16 @@ class PedidoHandler
         return Database::getRow($sql, $params);
     }
 
+
+    public function updateRow()
+    {
+        $sql = 'UPDATE pedido
+                SET id_pedido = ?, fecha_pedido = ?, estado_pedido = ?
+                WHERE id_producto = ?';
+        $params = array($this->fecha, $this->estado, $this->id);
+        return Database::executeRow($sql, $params);
+    }
+
     public function deleteRow()
     {
         $sql = 'DELETE FROM pedido
@@ -64,14 +73,14 @@ class PedidoHandler
         return Database::executeRow($sql, $params);
     }
 
-    public function readPedidos()
+    public function readDetallesPedido()
     {
-        $sql = 'SELECT id_pedido, fecha_pedido, estado_pedido
+        $sql = 'SELECT id_detalle_pedido, cantidad_producto, precio_producto, 
                 FROM pedidos
                 INNER JOIN pedidos USING(id_pedido)
                 WHERE id_pedido = ? AND estado_pedido = true
                 ORDER BY id_pedido';
-        $params = array($this->categoria);
+        $params = array($this->pedido);
         return Database::getRows($sql, $params);
     }
-
+}

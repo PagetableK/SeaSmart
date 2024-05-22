@@ -1,4 +1,5 @@
 const IMGFILTRO = document.getElementById('contenedor-img-filtro');
+const PEDIDO_API = 'services/admin/pedido.php';
 const FILAS_ENCONTRADAS = document.getElementById('filasEncontradas'),
     CUERPO_TABLA = document.getElementById('cuerpoTabla');
 const FORM_BUSCAR = document.getElementById('formBuscar')
@@ -17,14 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function verificarReset(){
     if(document.getElementById('buscarPedido').value==""){
-        cargarTabla();
+        cargarTabla();  
     }
 }
 
 document.addEventListener('submit', (event) => {
     event.preventDefault();
     const FORM = new FormData(FORM_BUSCAR);
-    cargarTabla(FORM);
+    cargarPlantilla();
+
+    cargarTabla();
 });
 
 
@@ -35,8 +38,9 @@ const cargarTabla = async (form = null) => {
     (form) ? action = 'searchRows' : action = 'readAll';
 
     const DATA = await fetchData(PEDIDO_API, action, form);
+
     if (DATA.status) {
-        DATA.dataset.foreach(row => {
+        DATA.dataset.forEach(row => {
             CUERPO_TABLA.innerHTML += `
             <tr>
             <td>${row.talla}</td>

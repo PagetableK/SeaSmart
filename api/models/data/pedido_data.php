@@ -6,7 +6,7 @@ require_once('../../models/handler/pedido_handler.php');
 /*
  *	Clase para manejar el encapsulamiento de los datos de la tabla PRODUCTO.
  */
-class ProductoData extends PedidoHandler
+class PedidoData extends PedidoHandler
 {
     /*
      *  Atributos adicionales.
@@ -23,12 +23,26 @@ class ProductoData extends PedidoHandler
             $this->id = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador del pedido es incorrecto';
+            $this->data_error = 'El identificador del producto es incorrecto';
             return false;
         }
     }
 
-    public function setDetallePedido($value, $min = 2, $max = 250)
+    public function setNombre($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->nombre = $value;
+            return true;
+        } else {
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setDescripcion($value, $min = 2, $max = 250)
     {
         if (!Validator::validateString($value)) {
             $this->data_error = 'La descripción contiene caracteres prohibidos';
@@ -42,7 +56,7 @@ class ProductoData extends PedidoHandler
         }
     }
 
-    public function setPrecioProducto($value)
+    public function setPrecio($value)
     {
         if (Validator::validateMoney($value)) {
             $this->precio = $value;
@@ -53,13 +67,41 @@ class ProductoData extends PedidoHandler
         }
     }
 
-    public function setPedidos($value)
+    public function setExistencias($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->existencias = $value;
+            return true;
+        } else {
+            $this->data_error = 'Las existencias debe ser un número entero positivo';
+            return false;
+        }
+    }
+
+    public function setImagen($file, $filename = null)
+    {
+        if (Validator::validateImageFile($file, 1000)) {
+            $this->imagen = Validator::getFileName();
+            return true;
+        } elseif (Validator::getFileError()) {
+            $this->data_error = Validator::getFileError();
+            return false;
+        } elseif ($filename) {
+            $this->imagen = $filename;
+            return true;
+        } else {
+            $this->imagen = 'default.png';
+            return true;
+        }
+    }
+
+    public function setCategoria($value)
     {
         if (Validator::validateNaturalNumber($value)) {
             $this->categoria = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador del pedido es incorrecto';
+            $this->data_error = 'El identificador de la categoría es incorrecto';
             return false;
         }
     }
@@ -75,6 +117,18 @@ class ProductoData extends PedidoHandler
         }
     }
 
+    public function setFilename()
+    {
+        if ($data = $this->readFilename()) {
+            $this->filename = $data['imagen_producto'];
+            return true;
+        } else {
+            $this->data_error = 'Producto inexistente';
+            return false;
+        }
+    }
+
+    /*
      *  Métodos para obtener el valor de los atributos adicionales.
      */
     public function getDataError()
