@@ -39,10 +39,14 @@ const abrirModal = async (tituloModal, idCategoria) => {
         FORM_CATEGORIA.reset();
         // Se cambia la imagen por defecto.
         IMG_CATEGORIA.src = "../../api/images/categorias/categoria_imageholder.png";
+        // Se activa el atributo required del input imagenCategoria.
+        IMAGEN_CATEGORIA.required = true;
         // Se abre el modal agregar categoría.
         MODAL_CATEGORIA.show();
     }
     else {
+        // Se desactiva el atributo required del input imagenCategoria.
+        IMAGEN_CATEGORIA.required = false;
         // Se define una constante tipo objeto que almacenará el idCategoria.
         const FORM = new FormData();
         // Se almacena el nombre del campo y el valor (idCategoria) en el formulario.
@@ -175,10 +179,26 @@ document.addEventListener('DOMContentLoaded', () => {
 FORM_CATEGORIA.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Se verifica la acción a realizar.
-    (ID_CATEGORIA.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(FORM_CATEGORIA);
+    // Se valida el valor del input idCategoria para definir la acción a realizar.
+    if(ID_CATEGORIA.value){
+        // Se configura la acción.
+        action = 'updateRow';
+        // En caso de que se agregó una nueva imagen.
+        if(IMAGEN_CATEGORIA.value){
+            // El estado de la imagen tiene el valor de 1.
+            estadoImagen = 1;
+        } else{
+            // El estado de la imagen tiene el valor de 0.
+            estadoImagen = 0;
+        }
+        // Se agrega el estado de la imagen al form.
+        FORM.append('estadoImagen', estadoImagen);
+    } else{
+        // Se configura la acción.
+        action = 'createRow';
+    }
     // Petición para guardar los datos del formulario.
     const DATA = await fetchData(CATEGORIA_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -190,7 +210,11 @@ FORM_CATEGORIA.addEventListener('submit', async (event) => {
         // Se carga nuevamente la tabla para visualizar los cambios.
         cargarTabla();
     } else {
-        sweetAlert(2, DATA.error, false);
+        if(DATA.exception == 'Violación de restricción de integridad'){
+            sweetAlert(2, 'La categoría ya ha sido ingresada', false);
+        } else{
+            sweetAlert(2, DATA.error, false);
+        }
     }
 });
 

@@ -43,7 +43,7 @@ if (titulo == "SeaSmart") {
                                 </li>
                                 <li id="elemento-registro">
                                     <a href="registro.html" id="btnRegistro_e">Registrarse</a>
-                                </li>
+                                </li>compras
                                 <li id="elemento-carrito">
                                 <a href="carrito.html" id="btnCarrito_e">Mi carrito</a>
                                 </li>
@@ -259,7 +259,7 @@ else if(titulo == "Mis pedidos")
                         </ul>
                     </div>
                     <div class="btn" type="button" id="carrito" onclick="abrirCarro()">
-                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px">
+                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px">
                     </div>
                 </div>
             </div>
@@ -332,7 +332,7 @@ else if(titulo == "Mi información")
                         </ul>
                     </div>
                     <div class="btn" type="button" id="carrito" onclick="abrirCarro()">
-                        <img src="../../resources/img/carrito-de-compras.png" alt="carrito" height="25px" width="25px">
+                        <img src="../../resources/img/carrito_de_compras.png" alt="carrito" height="25px" width="25px">
                     </div>
                 </div>
             </div>

@@ -14,6 +14,8 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idAdministrador'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+                // La acción searchRows permite buscar productos por su nombre, descripción, nombre de administrador que agregó el registro
+                // o nombre de subcategoría a la que corresponde/n la búsqueda.
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['buscarProducto'])) {
                     $result['error'] = Validator::getSearchError();
@@ -24,14 +26,18 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
+                // La acción createRow permite crear un nuevo registro de producto.
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$producto->setNombre($_POST['nombreProducto']) or
                     !$producto->setDescripcion($_POST['descripcionProducto']) or
-                    !$producto->setSubcategoria($_POST['selectSubcategoria']) 
+                    !$producto->setSubcategoria($_POST['selectSubcategoria']) or
+                    !$producto->setPrecio($_POST['precioProducto'])
                 ) {
                     $result['error'] = $producto->getDataError();
+                } elseif($_POST['precioProducto'] == 0){
+                    $result['error'] = 'El precio del producto no puede ser cero';
                 } elseif ($producto->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Producto creado correctamente';
@@ -39,6 +45,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al crear el producto';
                 }
                 break;
+                // La acción readAll retorna todos los productos registrados.
             case 'readAll':
                 if ($result['dataset'] = $producto->readAll()) {
                     $result['status'] = 1;
@@ -47,6 +54,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen productos registrados';
                 }
                 break;
+                // La acción readOne retorna la información de un producto específico.
             case 'readOne':
                 if (!$producto->setId($_POST['idProducto'])) {
                     $result['error'] = $producto->getDataError();
@@ -56,6 +64,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Producto inexistente';
                 }
                 break;
+                // La acción updateRow permite editar la información de un producto específico.
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -63,9 +72,12 @@ if (isset($_GET['action'])) {
                     !$producto->setNombre($_POST['nombreProducto']) or
                     !$producto->setDescripcion($_POST['descripcionProducto']) or
                     !$producto->setSubcategoria($_POST['selectSubcategoria']) or
-                    !$producto->setEstado($_POST['estadoProducto'])
+                    !$producto->setEstado($_POST['estadoProducto']) or
+                    !$producto->setPrecio($_POST['precioProducto'])
                 ) {
                     $result['error'] = $producto->getDataError();
+                } elseif($_POST['precioProducto'] === 0){
+                    $result['error'] = 'El precio del producto no puede ser cero';
                 } elseif ($producto->updateRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Producto modificado correctamente';
@@ -73,6 +85,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al modificar el producto';
                 }
                 break;
+                // La acción deleteRow permite eliminar un producto específico.
             case 'deleteRow':
                 if (
                     !$producto->setId($_POST['idProducto'])
@@ -85,6 +98,8 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el producto';
                 }
                 break;
+                // Si no se encuentra la acción se muestra el mensaje.
+            default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.

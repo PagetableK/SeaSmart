@@ -28,7 +28,8 @@ const FORM_PRODUCTO = document.getElementById('formProducto'),
     ID_PRODUCTO = document.getElementById('idProducto'),
     NOMBRE_PRODUCTO = document.getElementById('nombreProducto'),
     DESCRIPCION_PRODUCTO = document.getElementById('descripcionProducto'),
-    ESTADO_PRODUCTO = document.getElementById('estadoProducto');
+    ESTADO_PRODUCTO = document.getElementById('estadoProducto'),
+    PRECIO_PRODUCTO = document.getElementById('precioProducto');
 // Constante que almacena los selecet de categorías y subcategorías que se encuentran en el modal.
 const SELECT_CATEGORIA = document.getElementById('selectCategoria'),
     SELECT_SUBCATEGORIA = document.getElementById('selectSubcategoria');
@@ -36,10 +37,6 @@ const SELECT_CATEGORIA = document.getElementById('selectCategoria'),
 const CONTENEDOR_ESTADO = document.getElementById('contenedorEstadoProducto');
 // Constante que almacena el form para eliminar un producto.
 const FORM_ELIMINAR = document.getElementById('formEliminar');
-
-function abrirInfoProducto(idProducto) {
-    MODALIPRODUCTO.show();
-}
 
 if (window.screen.width <= 430) {
     SEPARADORV.remove();
@@ -99,6 +96,7 @@ const cargarTabla = async (form = null) => {
                 </tr>
             `;
         });
+        console.log(DATA)
         // Se muestra un mensaje de acuerdo con el resultado.
         FILAS_ENCONTRADAS.textContent = DATA.message;
     } else {
@@ -109,7 +107,7 @@ const cargarTabla = async (form = null) => {
             // Se restablece el contenido de la tabla.
             FILAS_ENCONTRADAS.textContent = '';
             CUERPO_TABLA.innerHTML = '';
-        } else if(DATA.error == 'Ingrese un valor para buscar'){
+        } else if (DATA.error == 'Ingrese un valor para buscar') {
             // Se muestra el mensaje de la API.
             sweetAlert(4, DATA.error, true);
         } else {
@@ -208,6 +206,8 @@ const abrirModal = async (tituloModal, idProducto) => {
             SELECT_SUBCATEGORIA.value = ROW.id_sub_categoria;
             // Se carga el estado del producto en el select estadoProducto.
             ESTADO_PRODUCTO.value = ROW.estado_producto;
+            // Se carga el precio del producto en el input precioProducto.
+            PRECIO_PRODUCTO.value = ROW.precio_producto;
             // Se abre el modal editar categoría.
             MODAL_PRODUCTO.show();
         } else {
@@ -223,7 +223,7 @@ const cargarSubCategorias = async () => {
         SELECT_SUBCATEGORIA.innerHTML = '';
         // Se almacena el campo con el valor del id_categoria.
         const FORM = new FormData(FORM_PRODUCTO);
-        // Petición para obtener los registros de la tabla subcategorías.1
+        // Petición para obtener registros específicos de la tabla subcategorías.
         const DATA = await fetchData(SUBCATEGORIA_API, 'readWithId', FORM);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
@@ -232,8 +232,7 @@ const cargarSubCategorias = async () => {
             DATA.dataset.forEach(row => {
                 // Se crean y concatenan las etiquetas option con los datos de cada registro.
                 SELECT_SUBCATEGORIA.innerHTML += `
-            <option value="${row.id_sub_categoria}">${row.nombre_sub_categoria}</option>
-        `;
+                <option value="${row.id_sub_categoria}">${row.nombre_sub_categoria}</option>`;
             });
         } else {
             if (DATA.error == 'No existen subcategorías registradas') {
@@ -269,7 +268,13 @@ FORM_PRODUCTO.addEventListener('submit', async (event) => {
             // Se carga nuevamente la tabla para visualizar los cambios.
             cargarTabla();
         } else {
-            sweetAlert(2, DATA.error, false);
+            if (DATA.error == 'El precio del producto no puede ser cero') {
+                sweetAlert(3, DATA.error, false);
+            } else if (DATA.exception == 'Violación de restricción de integridad') {
+                sweetAlert(2, 'El producto ya ha sido agregado', false);
+            } else {
+                sweetAlert(2, DATA.error, false);
+            }
         }
     } else {
         sweetAlert(3, 'Asegúrese de seleccionar una subcategoría', false);
