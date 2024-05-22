@@ -343,8 +343,6 @@ function mostrarContra(inputContra) {
 FORM_ADMIN.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Se verifica la acción a realizar.
-    // (ID_ADMIN.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(FORM_ADMIN);
     // Se verifica la acción a realizar.

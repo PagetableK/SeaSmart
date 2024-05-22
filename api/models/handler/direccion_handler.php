@@ -1,0 +1,39 @@
+<?php
+// Se incluye la clase para trabajar con la base de datos.
+require_once('../../helpers/database.php');
+/*
+ *  Clase para manejar el comportamiento de los datos de la tabla DIRECCIONES.
+ */
+class DireccionHandler
+{
+    /*
+     *  Declaración de atributos para el manejo de datos.
+     */
+    protected $id = null;
+    protected $direccion = null;
+    protected $id_cliente = null;
+
+    /*
+     *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
+     */
+    public function readAll()
+    {
+        $sql = 'SELECT direccion, id_direccion FROM direcciones WHERE id_cliente = ?;';
+        $params = array($_SESSION['idCliente']);
+        return Database::getRows($sql, $params);
+    }
+
+    public function validarDireccion()
+    {
+        $sql = 'SELECT id_direccion, direccion, id_cliente FROM direcciones WHERE direccion = ?;';
+        $params = array($this->direccion);
+        return Database::getRows($sql, $params);
+    }
+
+    public function createRow()
+    {
+        $sql = 'INSERT INTO direcciones (direccion, id_cliente) VALUES(?, ?);';
+        $params = array($this->direccion, $_SESSION['idCliente']);
+        return Database::executeRow($sql, $params);
+    }
+}
