@@ -1,20 +1,33 @@
-var carouselWidth = $('.carousel-inner')[0].scrollWidth;
-var cardWidth = $(".carousel-item").width();
-var scrollPosition = 0;
+var swiper = new Swiper('.swiper-container', {
+  navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+  },
+  slidesPerView: 1,
+  spaceBetween: 10,
+  // init: false,
+  pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+  },
 
-$(".carousel-control-next").on("click", function () {
-    if (scrollPosition < (carouselWidth - cardWidth * 4)) { //check if you can go any further
-      scrollPosition += cardWidth;  //update scroll position
-      $(".carousel-inner").animate({ scrollLeft: scrollPosition },600); //scroll left
-    }
-  });
 
-  $(".carousel-control-prev").on("click", function () {
-    if (scrollPosition > 0) {
-      scrollPosition -= cardWidth;
-      $(".carousel-inner").animate(
-        { scrollLeft: scrollPosition },
-        600
-      );
-    }
-  });
+  breakpoints: {
+      620: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+      },
+      680: {
+          slidesPerView: 2,
+          spaceBetween: 40,
+      },
+      920: {
+          slidesPerView: 3,
+          spaceBetween: 40,
+      },
+      1240: {
+          slidesPerView: 4,
+          spaceBetween: 50,
+      },
+  }
+});
