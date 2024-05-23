@@ -26,9 +26,6 @@ const FORM_REGISTRO = document.getElementById('formRegistro');
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
     cargarPlantilla(2);
-    // Se asigna como título la categoría de los productos.
-    MAIN_TITLE.textContent = 'Crear cuenta';
-    
 });
 
 // Método del evento para cuando se envía el formulario de registrar cliente.
