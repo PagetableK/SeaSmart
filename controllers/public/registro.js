@@ -1,4 +1,4 @@
-const ADMINISTRADOR_API = 'services/admin/administrador.php';
+const CLIENTES_API = 'services/public/clientes.php';
 const BTNMOSTRAR = document.getElementById('btnMostrar');
 const BTNOCULTAR = document.getElementById('btnOcultar');
 const TXTCONTRA = document.getElementById('contraRegistro');
@@ -28,8 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarPlantilla(2);
     // Se asigna como título la categoría de los productos.
     MAIN_TITLE.textContent = 'Crear cuenta';
-    // LLamada a la función para asignar el token del reCAPTCHA al formulario.
-    reCAPTCHA();
+    
 });
 
 // Método del evento para cuando se envía el formulario de registrar cliente.
@@ -39,36 +38,14 @@ FORM_REGISTRO.addEventListener('submit', async (event) => {
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(FORM_REGISTRO);
     // Petición para registrar un cliente.
-    const DATA = await fetchData(USER_API, 'signUp', FORM);
+    const DATA = await fetchData(CLIENTES_API, 'signUp', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         sweetAlert(1, DATA.message, true, 'inicio_sesion.html');
-    } else if (DATA.recaptcha) {
-        sweetAlert(2, DATA.error, false, 'index.html');
     } else {
         sweetAlert(2, DATA.error, false);
-        // Se genera un nuevo token cuando ocurre un problema.
-        reCAPTCHA();
     }
 });
-
-/*
-*   Función para obtener un token del reCAPTCHA y asignarlo al formulario.
-*   Parámetros: ninguno.
-*   Retorno: ninguno.
-*/
-function reCAPTCHA() {
-    // Método para generar el token del reCAPTCHA.
-    grecaptcha.ready(() => {
-        // Constante para establecer la llave pública del reCAPTCHA.
-        const PUBLIC_KEY = '6LdBzLQUAAAAAJvH-aCUUJgliLOjLcmrHN06RFXT';
-        // Se obtiene un token para la página web mediante la llave pública.
-        grecaptcha.execute(PUBLIC_KEY, { action: 'homepage' }).then((token) => {
-            // Se asigna el valor del token al campo oculto del formulario
-            document.getElementById('gRecaptchaResponse').value = token;
-        });
-    });
-}
 
 
 //Esto ya estaba
@@ -98,17 +75,3 @@ function OcultarContra1(){
 
 BTNOCULTAR.remove();
 BTNOCULTAR1.remove();
-
-function ValidarCampos(asyn){
-    location.href='registro_finalizar.html';
-}
-
-BTNCONTINUAR.addEventListener('submit', async(event) => {
-    event.preventDefault();
-    const FORM = new FormData(SAVE_FORM);
-    const DATA = await fetchData(ADMINISTRADOR_API, FORM);
-    if(DATA.status)
-    {
-        alert('a');
-    }
-});

@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
     $cliente = new ClienteData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'error' => null, 'exception' => null, 'username' => null);
+    $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'error' => null, 'exception' => null, 'username' => null, 'debug' => null );
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
     if (isset($_SESSION['idCliente'])) {
         $result['session'] = 1;
@@ -34,42 +34,18 @@ if (isset($_GET['action'])) {
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
-    } else {
+    }  else {
         // Se compara la acción a realizar cuando el cliente no ha iniciado sesión.
         switch ($_GET['action']) {
             case 'signUp':
-                $_POST = Validator::validateForm($_POST);
-                // Se establece la clave secreta para el reCAPTCHA de acuerdo con la cuenta de Google.
-                $secretKey = '6LdBzLQUAAAAAL6oP4xpgMao-SmEkmRCpoLBLri-';
-                // Se establece la dirección IP del servidor.
-                $ip = $_SERVER['REMOTE_ADDR'];
-                // Se establecen los datos del raCAPTCHA.
-                $data = array('secret' => $secretKey, 'response' => $_POST['gRecaptchaResponse'], 'remoteip' => $ip);
-                // Se establecen las opciones del reCAPTCHA.
-                $options = array(
-                    'http' => array('header' => 'Content-type: application/x-www-form-urlencoded\r\n', 'method' => 'POST', 'content' => http_build_query($data)),
-                    'ssl' => array('verify_peer' => false, 'verify_peer_name' => false)
-                );
-
-                $url = 'https://www.google.com/recaptcha/api/siteverify';
-                $context = stream_context_create($options);
-                $response = file_get_contents($url, false, $context);
-                $captcha = json_decode($response, true);
-
-                if (!$captcha['success']) {
-                    $result['recaptcha'] = 1;
-                    $result['error'] = 'No eres humano';
-                } elseif(!isset($_POST['condicion'])) {
-                    $result['error'] = 'Debe marcar la aceptación de términos y condiciones';
-                } elseif (
+                if (
                     !$cliente->setNombre($_POST['nombreCliente']) or
                     !$cliente->setApellido($_POST['apellidoCliente']) or
                     !$cliente->setCorreo($_POST['correoCliente']) or
-                    !$cliente->setDireccion($_POST['direccionCliente']) or
                     !$cliente->setDUI($_POST['duiCliente']) or
-                    !$cliente->setNacimiento($_POST['nacimientoCliente']) or
-                    !$cliente->setTelefono($_POST['telefonoCliente']) or
-                    !$cliente->setClave($_POST['claveCliente'])
+                    !$cliente->setTelefono($_POST['telefonoMovil']) or
+                    !$cliente->setTelefonoFijo($_POST['telefonoFijo']) or
+                    !$cliente->setContra($_POST['claveCliente'])
                 ) {
                     $result['error'] = $cliente->getDataError();
                 } elseif ($_POST['claveCliente'] != $_POST['confirmarClave']) {
@@ -81,17 +57,26 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al registrar la cuenta';
                 }
                 break;
+                
             case 'logIn':
+                // Se validan los campos del form que se encuentran en el array $_POST.
                 $_POST = Validator::validateForm($_POST);
-                if (!$cliente->checkUser($_POST['correo'], $_POST['clave'])) {
-                    $result['error'] = 'Datos incorrectos';
-                } elseif ($cliente->checkStatus()) {
+                $loginData = $cliente->checkUser($_POST['correo'], $_POST['contra']);
+                if ($loginData) {
+                    // Si el estado del administrador es activo se ejecuta el código.
+                    // Se asigna el valor de status.
                     $result['status'] = 1;
+                    // Se asignan los valores de sesión obtenidos de la función checkUser().
+                    $_SESSION['idCliente'] = $loginData[0];
+                    $_SESSION['correoCliente'] = $loginData[1];
+                    // Se devuelve el mensaje del resultado de la acción logIn.
                     $result['message'] = 'Autenticación correcta';
+                    $result['username'] = $_SESSION['correoCliente'];
                 } else {
-                    $result['error'] = 'La cuenta ha sido desactivada';
+                    $result['error'] = 'Credenciales incorrectas';
                 }
                 break;
+                
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }
@@ -105,3 +90,4 @@ if (isset($_GET['action'])) {
 } else {
     print(json_encode('Recurso no disponible'));
 }
+?>

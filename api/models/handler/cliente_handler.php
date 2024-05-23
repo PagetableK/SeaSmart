@@ -22,22 +22,6 @@ class ClienteHandler
     /*
     *   Métodos para gestionar la cuenta del cliente.
     */
-    public function checkUser($mail, $password)
-    {
-        $sql = 'SELECT id_cliente, correo_cliente, contra_cliente, estado_cliente
-                FROM clientes
-                WHERE correo_cliente = ?';
-        $params = array($mail);
-        $data = Database::getRow($sql, $params);
-        if (password_verify($password, $data['contra_cliente'])) {
-            $this->id = $data['id_cliente'];
-            $this->correo = $data['correo_cliente'];
-            $this->estado = $data['estado_cliente'];
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public function checkStatus()
     {
@@ -150,4 +134,29 @@ class ClienteHandler
         $params = array($value, $value, $value, $value, $this->id);
         return Database::getRow($sql, $params);
     }
+
+    public function checkUser($correo, $contra)
+    {
+        $sql = 'SELECT id_cliente, contra_cliente, correo_cliente
+                FROM clientes
+                WHERE correo_cliente = ?';
+        $params = array($correo);
+        $data = Database::getRow($sql, $params);
+
+        // Se valida que el query retorne un registro de la tabla.
+        if ($data) {
+            // Se valida que la contraseña ingresada en el campo de login convertida a hash
+            // sea igual a la contraseña almacenada en la bd.
+            if (password_verify($contra, $data['contra_cliente'])) {
+                return array($data['id_cliente'], $data['correo_cliente']);
+            } else {
+                // Si la contraseña no es correcta se devuelve false.
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+
 }
