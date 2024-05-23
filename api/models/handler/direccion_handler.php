@@ -18,8 +18,13 @@ class DireccionHandler
      */
     public function readAll()
     {
-        $sql = 'SELECT direccion, id_direccion FROM direcciones WHERE id_cliente = ?;';
-        $params = array($_SESSION['idCliente']);
+        $sql = 'SELECT direccion, id_direccion, nombre_cliente, apellido_cliente FROM direcciones, clientes WHERE direcciones.id_cliente = ? AND clientes.id_cliente = direcciones.id_cliente;';
+
+        if($this->id_cliente){
+            $params = array($this->id_cliente);
+        } else{
+            $params = array($_SESSION['idCliente']);
+        }
         return Database::getRows($sql, $params);
     }
 

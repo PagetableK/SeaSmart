@@ -11,8 +11,7 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'username' => null);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
-    // if (isset($_SESSION['idCliente'])) {
-        $_SESSION['idCliente'] = 1;
+    if (isset($_SESSION['idCliente'])) {
         $result['session'] = 1;
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
@@ -84,9 +83,9 @@ if (isset($_GET['action'])) {
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
-    // } else {
-    //     print (json_encode('Acceso denegado'));
-    // }
+    } else {
+        print (json_encode('Acceso denegado'));
+    }
     // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
     $result['exception'] = Database::getException();
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.

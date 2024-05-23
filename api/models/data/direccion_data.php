@@ -27,6 +27,17 @@ class DireccionData extends DireccionHandler
             return false;
         }
     }
+
+    public function setIdCliente($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_cliente = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de el cliente es incorrecto';
+            return false;
+        }
+    }
     
     public function setDireccion($value, $min = 10, $max = 100)
     {

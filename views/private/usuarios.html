@@ -16,6 +16,7 @@
 </head>
 
 <!-- Cuerpo de la página -->
+
 <body>
     <!-- Contenido principal de la página -->
     <main>
@@ -144,7 +145,8 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 d-none" id="contenedorEstadoAdmin">
-                                        <label for="estadoAdministrador" class="form-label">Estado del administrador</label>
+                                        <label for="estadoAdministrador" class="form-label">Estado del
+                                            administrador</label>
                                         <select class="form-select" id="estadoAdministrador">
                                             <option selected>Activo</option>
                                             <option value="1">Dado de baja</option>
@@ -264,6 +266,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Modal eliminar cliente -->
             <div class="modal fade" id="borrarModalCliente">
                 <div class="modal-dialog">
@@ -282,6 +285,21 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Modal direcciones de cliente -->
+            <div class="modal fade" id="modalDireccionesCliente">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="tituloModalDirecciones"></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body px-5" id="contenedorDirecciones">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
     <!-- IMPORTANDO ARCHIVOS JAVASCRIPT -->
