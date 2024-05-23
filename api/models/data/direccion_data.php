@@ -23,11 +23,11 @@ class DireccionData extends DireccionHandler
             $this->id = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de la categoría es incorrecto';
+            $this->data_error = 'El identificador de la dirección es incorrecto';
             return false;
         }
     }
-
+    
     public function setDireccion($value, $min = 10, $max = 100)
     {
         if (!Validator::validateAlphanumeric($value)) {

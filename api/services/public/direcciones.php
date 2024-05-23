@@ -40,6 +40,47 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No se han agregado direcciones';
                 }
                 break;
+                // La acción updateRow edita una dirección existente.
+            case 'updateRow':
+                if(
+                    !$direccion->setDireccion($_POST['inputDireccion']) or
+                    !$direccion->setId($_POST['idDireccion'])
+                ){
+                    $result['error'] = $direccion->getDataError();
+                } elseif($direccion->validarDireccion()){
+                    $result['error'] = 'La dirección ya ha sido agregada';
+                } elseif($direccion->updateRow()){
+                    $result['status'] = 1;
+                    $result['message'] = 'Dirección editada correctamente';
+                } else{
+                    $result['error'] = 'No se han agregado direcciones';
+                }
+                break;
+                // La acción deleteRow elimina una dirección específica.
+            case 'deleteRow':
+                if(
+                    !$direccion->setId($_POST['idDireccion'])
+                ){
+                    $result['error'] = $direccion->getDataError();
+                } elseif($direccion->deleteRow()){
+                    $result['status'] = 1;
+                    $result['message'] = 'Dirección eliminada correctamente';
+                } else{
+                    $result['error'] = 'No se pudo eliminar la dirección';
+                }
+                break;
+                // La acción readOne permite seleccionar una dirección específica de un cliente específico.
+            case 'readOne':
+                if (
+                    !$direccion->setId($_POST['idDireccion'])
+                ) {
+                    $result['error'] = 'Dirección incorrecta';
+                } elseif ($result['dataset'] = $direccion->readOne()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Dirección inexistente';
+                }
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

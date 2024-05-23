@@ -29,36 +29,37 @@
                 <div class="col d-flex flex-column" id="menu_cuenta">
 
                 </div>
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-xl-8">
                     <form class="">
                         <fieldset class="row d-flex" id="contenedorInfo">
                             <div class="row d-flex">
                                 <p class="fw-bold fs-5">Información de contacto</p>
                                 <div class="col-10 col-sm-5 col-lg-5 mb-3">
                                     <label for="txtTelefono_movil" class="form-label">Teléfono móvil</label>
-                                    <input type="text" class="form-control" placeholder="7845 9067" id="txtTelefono_movil"
-                                        disabled>
+                                    <input type="text" class="form-control" placeholder="7845 9067"
+                                        id="txtTelefono_movil" disabled>
                                 </div>
                                 <div class="col-1 mb-3 d-flex align-items-end">
                                     <div class="btn btn-success">
-                                        <img src="../../resources/img/editar.png" height="20px" width="20px" alt="editar"
-                                            id="btnEditarTelefono">
+                                        <img src="../../resources/img/editar.png" height="20px" width="20px"
+                                            alt="editar" id="btnEditarTelefono">
                                     </div>
                                 </div>
                                 <div class="col-10 col-sm-5 mb-3">
                                     <label for="txtTelefono_fijo" class="form-label">Teléfono fijo</label>
-                                    <input type="text" class="form-control" placeholder="2375 1265" id="txtTelefono_fijo"
-                                        disabled>
+                                    <input type="text" class="form-control" placeholder="2375 1265"
+                                        id="txtTelefono_fijo" disabled>
                                 </div>
                                 <div class="col-1 mb-3 d-flex align-items-end">
                                     <div class="btn btn-success">
-                                        <img src="../../resources/img/editar.png" height="20px" width="20px" alt="editar"
-                                            id="btnEditarTelefonoFijo">
+                                        <img src="../../resources/img/editar.png" height="20px" width="20px"
+                                            alt="editar" id="btnEditarTelefonoFijo">
                                     </div>
                                 </div>
                             </div>
                             <p class="fw-bold fs-5 mt-5">Mis direcciones de envío</p>
-                            <div class="row d-flex" id="contenedorDirecciones">
+                            <div class="row d-flex row-gap-2 column-gap-5 pb-5 justify-content-center justify-content-md-start"
+                                id="contenedorDirecciones">
                             </div>
                         </fieldset>
                     </form>
@@ -67,7 +68,7 @@
         </div>
     </main>
 
-    <!-- Modal agregar -->
+    <!-- Modal de direcciones -->
     <div class="modal fade" id="modalDireccion">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -85,8 +86,8 @@
                                     <div class="mb-3">
                                         <input type="number" class="d-none" id="idDireccion" name="idDireccion">
                                         <label for="inputDireccion" class="col-form-label">Dirección</label>
-                                        <textarea class="form-control" id="inputDireccion"
-                                            name="inputDireccion" required></textarea>
+                                        <textarea class="form-control" id="inputDireccion" name="inputDireccion"
+                                            required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -96,6 +97,25 @@
                     <!-- Footer del modal -->
                     <div class="modal-footer d-flex justify-content-center">
                         <button type="submit" class="btn" id="btnAccion"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal eliminar -->
+    <div class="modal fade" id="modalBorrarDireccion">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="formEliminar">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="tituloModalEliminar"></h1>
+                        <input type="number" class="d-none" id="idDireccionEliminar" name="idDireccion">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
             </div>
