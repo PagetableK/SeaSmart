@@ -82,11 +82,11 @@
                 <!-- Creamos el contenedor del texto -->
                 <div class="col-12 col-md-5 col-lg-5">
                     <b>
-                        <p class="fs-2" id="nombreProducto">Traje de baño de una pieza</p>
+                        <p class="fs-2" id="nombreProducto"></p>
                     </b>
                     <div class="col-9 d-flex flex-row mb-3 d-grid gap-5">
-                        <p class="text-start" id="estadoProducto">Disponible</p>
-                        <p class="text-end" id="existenciasProducto">4 restantes en stock</p>
+                        <p class="text-start" id="estadoProducto"></p>
+                        <p class="text-end" id="existenciasProducto"></p>
                     </div>
 
                     <!-- Creamos la calificación de estrellas -->
@@ -107,31 +107,19 @@
                     <p id="precioProducto" class="fw-bold fs-4"></p>
                     <hr>
                     <b>
-                        <p>Tallas disponibles:</p>
+                        <p id="tituloTallas">Tallas disponibles:</p>
                     </b>
                     <!-- Botones de las tallas -->
                     <div class="col-12 mb-5" id="contenedorTallas">
-                        <button type="button" class="btn btn-outline-dark">XS</button>
-                        <button type="button" class="btn btn-outline-dark">S</button>
-                        <button type="button" class="btn btn-outline-dark">M</button>
-                        <button type="button" class="btn btn-outline-dark">L</button>
-                        <button type="button" class="btn btn-outline-dark">XL</button>
-                        <button type="button" class="btn btn-outline-dark">XXL</button>
                     </div>
                     <b>
-                        <p>Colores disponibles:</p>
+                        <p id="tituloColores">Colores disponibles:</p>
                     </b>
                     <!-- Botones de las tallas -->
                     <div class="col-12 mb-5 d-flex column-gap-1" id="contenedorColores">
-                        <button type="button" class="btn btn-outline-dark">Rojo</button>
-                        <button type="button" class="btn btn-outline-dark">Azul</button>
-                        <button type="button" class="btn btn-outline-dark">Verde</button>
-                        <button type="button" class="btn btn-outline-dark">Naranja</button>
-                        <button type="button" class="btn btn-outline-dark">Rosado</button>
-                        <button type="button" class="btn btn-outline-dark">Magenta</button>
                     </div>
 
-                    <div class="col-12 d flex align-items-center d-flex flex-column mt-5">
+                    <div class="col-12 d-flex align-items-center justify-content-center mt-5" id="contenedorBotonComprar">
                         <button type="button" class="btn rounded-pill btn-primary p-2 fw-bold text-light">Comprar ahora</button>
                     </div>
                 </div>
@@ -332,7 +320,7 @@
     <!-- Mandar a llamar el navbar -->
     <script type="text/javascript" src="../../controllers/utils/publico.js"></script>
     <!-- Controlador de la interfaz -->
-    <script type="text/javascript" src="../../resources/js/ver_informacion.js"></script>
+    <script type="text/javascript" src="../../controllers/public/ver_informacion.js"></script>
 </body>
 
 </html>
