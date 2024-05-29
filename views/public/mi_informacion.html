@@ -32,30 +32,72 @@
                 <div class="col-12 col-lg-8">
                     <form class="">
                         <fieldset class="row d-flex" id="contenedorInfo">
-                            <div class="row d-flex">
-                                <p class="fw-bold fs-5">Información de contacto</p>
-                                <div class="col-10 col-sm-5 col-lg-5 mb-3">
-                                    <label for="txtTelefono_movil" class="form-label">Teléfono móvil</label>
-                                    <input type="text" class="form-control" placeholder="7845 9067" id="txtTelefono_movil"
-                                        disabled>
-                                </div>
-                                <div class="col-1 mb-3 d-flex align-items-end">
-                                    <div class="btn btn-success">
-                                        <img src="../../resources/img/editar.png" height="20px" width="20px" alt="editar"
-                                            id="btnEditarTelefono">
+
+                            <div class="row d-flex" id="contenedorCliente">
+
+                                <div class="row d-flex">
+                                    <p class="fw-bold fs-5">Información de contacto</p>
+
+                                    <div class="col-10 col-sm-5 col-lg-5 mb-3">
+                                        <label for="txtTelefono_movil" class="form-label">Nombres</label>
+                                        <input type="text" class="form-control" placeholder="Hazel Nicole"
+                                            id="txtNombres" disabled>
+                                    </div>
+                                    <div class="col-1 mb-3 d-flex align-items-end">
+
+                                    </div>
+
+                                    <div class="col-10 col-sm-5 mb-3">
+                                        <label for="txtTelefono_fijo" class="form-label">Apellidos</label>
+                                        <input type="text" class="form-control" placeholder="García Hernández"
+                                            id="txtApellidos" disabled>
+                                    </div>
+                                    <div class="col-1 mb-3 d-flex align-items-end">
+
+                                    </div>
+
+                                    <div class="col-10 col-sm-5 col-lg-5 mb-3">
+                                        <label for="txtTelefono_movil" class="form-label">DUI (Documento único de
+                                            identidad)</label>
+                                        <input type="text" class="form-control" placeholder="00000000-1" id="txtDUI"
+                                            disabled>
+                                    </div>
+                                    <div class="col-1 mb-3 d-flex align-items-end">
+
+                                    </div>
+
+                                    <div class="col-10 col-sm-5 mb-3">
+                                        <label for="txtTelefono_fijo" class="form-label">Correo Electronico</label>
+                                        <input type="text" class="form-control" placeholder="hazel@gamil.com"
+                                            id="txtCorreo" disabled>
+                                    </div>
+                                    <div class="col-1 mb-3 d-flex align-items-end">
+
+                                    </div>
+
+                                    <div class="col-10 col-sm-5 col-lg-5 mb-3">
+                                        <label for="txtTelefono_movil" class="form-label">Teléfono móvil</label>
+                                        <input type="text" class="form-control" placeholder="7845 9067"
+                                            id="txtTelefono_movil" disabled>
+                                    </div>
+                                    <div class="col-1 mb-3 d-flex align-items-end">
+
+                                    </div>
+                                    <div class="col-10 col-sm-5 mb-3">
+                                        <label for="txtTelefono_fijo" class="form-label">Teléfono fijo</label>
+                                        <input type="text" class="form-control" placeholder="2375 1265"
+                                            id="txtTelefono_fijo" disabled>
+                                    </div>
+                                    <div class="col-1 mb-3 d-flex align-items-end">
+
                                     </div>
                                 </div>
-                                <div class="col-10 col-sm-5 mb-3">
-                                    <label for="txtTelefono_fijo" class="form-label">Teléfono fijo</label>
-                                    <input type="text" class="form-control" placeholder="2375 1265" id="txtTelefono_fijo"
-                                        disabled>
-                                </div>
-                                <div class="col-1 mb-3 d-flex align-items-end">
-                                    <div class="btn btn-success">
-                                        <img src="../../resources/img/editar.png" height="20px" width="20px" alt="editar"
-                                            id="btnEditarTelefonoFijo">
-                                    </div>
-                                </div>
+                            </div>
+                            <!-- Creamos el boton que servira para abrir el modal de editar información -->
+                            <div class="col-3 mb-2 d-flex align-items-end">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formModal">
+                                    Editar información
+                                </button>
                             </div>
                             <p class="fw-bold fs-5 mt-5">Mis direcciones de envío</p>
                             <div class="row d-flex" id="contenedorDirecciones">
@@ -85,19 +127,69 @@
                                     <div class="mb-3">
                                         <input type="number" class="d-none" id="idDireccion" name="idDireccion">
                                         <label for="inputDireccion" class="col-form-label">Dirección</label>
-                                        <textarea class="form-control" id="inputDireccion"
-                                            name="inputDireccion" required></textarea>
+                                        <textarea class="form-control" id="inputDireccion" name="inputDireccion"
+                                            required></textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <!-- Footer del modal -->
                     <div class="modal-footer d-flex justify-content-center">
                         <button type="submit" class="btn" id="btnAccion"></button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal editar -->
+    <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModalLabel">Formulario de Información</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="nombres">Nombres</label>
+                            <input type="text" class="form-control" id="nombres" placeholder="Ingrese sus nombres">
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidos">Apellidos</label>
+                            <input type="text" class="form-control" id="apellidos" placeholder="Ingrese sus apellidos">
+                        </div>
+                        <div class="form-group">
+                            <label for="documento">DUI Documento de Identificación</label>
+                            <input type="text" class="form-control" id="documento"
+                                placeholder="Ingrese su documento de identificación">
+                        </div>
+                        <div class="form-group">
+                            <label for="correo">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correo"
+                                placeholder="Ingrese su correo electrónico">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono-movil">Teléfono Móvil</label>
+                            <input type="text" class="form-control" id="telefono-movil"
+                                placeholder="Ingrese su teléfono móvil">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono-fijo">Teléfono Fijo</label>
+                            <input type="text" class="form-control" id="telefono-fijo"
+                                placeholder="Ingrese su teléfono fijo">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                </div>
             </div>
         </div>
     </div>
@@ -116,6 +208,13 @@
     <script type="text/javascript" src="../../controllers/public/mi_informacion.js"></script>
     <!-- Mandar a llamar el controlador de direcciones -->
     <script type="text/javascript" src="../../controllers/public/direcciones.js"></script>
+    <!-- Mandar a llamar el controlador de clientes -->
+    <script type="text/javascript" src="../../controllers/public/clientes.js"></script>
+
+    <!-- Enlazar con el JavaScript de Bootstrap y jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -46,7 +46,7 @@ const cargarDirecciones = async () => {
         `;
     } else {
         if (DATA.error == 'No se han agregado direcciones') {
-            sweetAlert(3, DATA.error, false);
+            // sweetAlert(3, DATA.error, false);
         } else {
             sweetAlert(2, DATA.error, false);
         }
