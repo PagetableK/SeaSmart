@@ -151,7 +151,8 @@ class DetallesProductosHandler
     {
         $sql = 'SELECT imagen_producto 
                 FROM detalles_productos
-                WHERE id_producto = ?;';
+                WHERE id_producto = ?
+                AND imagen_producto IS NOT NULL;';
         $params = array($this->id_producto);
         return Database::getRows($sql, $params);
     }

@@ -25,3 +25,16 @@
     border:1px solid black;
     --bs-btn-hover-border-color: black;
 }
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 40px;
+  color: black;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 40px;
+  color: black;
+}
