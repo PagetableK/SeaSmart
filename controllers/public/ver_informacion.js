@@ -16,8 +16,6 @@ const CONTENEDOR_BOTON_COMPRAR = document.getElementById('contenedorBotonComprar
 
 const CARRUSEL_EXISTENCIAS = document.getElementById('carruselExistencias');
 
-const CARRUSEL_INDICADORES = document.getElementById('indicadorCarrusel');
-
 const CONTENEDOR_COMENTARIOS = document.getElementById('contenedorComentarios');
 
 const TITULO_COLORES = document.getElementById('tituloColores'),
@@ -142,36 +140,21 @@ const cargarProducto = async () => {
     if (DATA_IMAGES.status) {
         // Por cada registro se carga la imágen dentro del carrusel.
         DATA_IMAGES.dataset.forEach((row, index) => {
-            // Se agrega el indicador de una nueva imágen (Los indicadores permiten navegar entre imágenes del carrusel).
-            CARRUSEL_INDICADORES.innerHTML += `
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="${index}"
-                            id="indicador${index}"></button>
-                    `;
             // Se agrega la imágen dentro del carrusel.
             CARRUSEL_EXISTENCIAS.innerHTML += `  
-                    <div class="carousel-item d-flex justify-content-center" id="imagen${index}">
+                    <div class="carousel-item" id="imagen${index}">
+                        <div class="d-flex justify-content-center">
                         <img src="${SERVER_URL}images/detalles_productos/${row.imagen_producto}" class="d-block w-50">
+                        </div>
                     </div>
                     `;
         });
         // Se establece la primera imágen agregada al carrusel como la imágen activa del carrusel.
         document.getElementById('imagen0').classList.add('active');
-        // Se almacena el primer indicador agregado al carrusel.
-        const INDICADOR = document.getElementById('indicador0');
-        // Se establece el indicador como activo.
-        INDICADOR.classList.add('active')
-        // Se establece el indicador como el actual (El indicador que está activo/en uso).
-        INDICADOR.setAttribute('aria-current', 'true');
     } else if (DATA_IMAGES.error == 'No hay existencias registradas') {
-        // Si no se encuentran existencias (O no se hayan existencias con imágenes) se ejecuta el código.
-        // Se agrega el indicador de una nueva imágen (Los indicadores permiten navegar entre imágenes del carrusel).
-        CARRUSEL_INDICADORES.innerHTML = `
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
-                            id="indicador0" class="active" aria-current="true"></button>
-                `;
         // Se agrega la imágen dentro del carrusel.
         CARRUSEL_EXISTENCIAS.innerHTML = `  
-                    <div class="carousel-item d-flex justify-content-center active" id="imagen0">
+                    <div class="carousel-item active" id="imagen0">
                         <img src="${SERVER_URL}images/detalles_productos/imageholder.png" class="d-block w-50">
                     </div>
                 `;
