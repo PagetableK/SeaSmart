@@ -62,6 +62,8 @@ const cargarProducto = async () => {
     // Se realiza una petición para obtener las imágenes de los detalles de producto.
     const DATA_IMAGES = await fetchData(DETALLES_PRODUCTOS_API, 'readImages', FORM);
 
+    const DATA_PEDIDOS = await fetchData();
+
     // Si la respuesta es satisfactoria se ejecuta el código.
     if (DATA_COMENTARIOS.status) {
         // Se inicializa el contenedor de comentarios.
@@ -144,7 +146,7 @@ const cargarProducto = async () => {
             CARRUSEL_EXISTENCIAS.innerHTML += `  
                     <div class="carousel-item" id="imagen${index}">
                         <div class="d-flex justify-content-center">
-                        <img src="${SERVER_URL}images/detalles_productos/${row.imagen_producto}" class="d-block w-50">
+                        <img src="${SERVER_URL}images/detalles_productos/${row.imagen_producto}" class="imagen-carrusel">
                         </div>
                     </div>
                     `;
@@ -155,7 +157,7 @@ const cargarProducto = async () => {
         // Se agrega la imágen dentro del carrusel.
         CARRUSEL_EXISTENCIAS.innerHTML = `  
                     <div class="carousel-item active" id="imagen0">
-                        <img src="${SERVER_URL}images/detalles_productos/imageholder.png" class="d-block w-50">
+                        <img src="${SERVER_URL}images/detalles_productos/imageholder.png" class="d-block imagen-carrusel">
                     </div>
                 `;
     } else {
