@@ -67,7 +67,7 @@ if (isset($_GET['action'])) {
                     // Se asigna el valor de status.
                     $result['status'] = 1;
                     // Se asignan los valores de sesión obtenidos de la función checkUser().
-                    $_SESSION['idCliente'] = $loginData[0];
+
                     $_SESSION['correoCliente'] = $loginData[1];
                     // Se devuelve el mensaje del resultado de la acción logIn.
                     $result['message'] = 'Autenticación correcta';

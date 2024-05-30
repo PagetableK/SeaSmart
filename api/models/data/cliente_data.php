@@ -22,7 +22,7 @@ class ClienteData extends ClienteHandler
             return true;
         }
         else{
-            $this->info_error = 'El identificador del administrador es correcto';
+            $this->info_error = 'El identificador del cliente es correcto';
             return false;
         }
     }
@@ -58,16 +58,25 @@ class ClienteData extends ClienteHandler
 
     public function setCorreo($valor, $min = 8, $max = 100)
     {
-        if (!Validator::validateEmail($valor)) {
-            $this->info_error = 'El correo no es válido';
+    if (!Validator::validateEmail($valor)) {
+        $this->info_error = 'El correo no es válido';
+        return false;
+    }
+    elseif (Validator::validateLength($valor, $min, $max)) {
+        // Verifica si el correo ya existe en la base de datos
+        if ($this->checkDuplicate($valor)) {
+            $this->info_error = 'El correo ingresado ya existe';
             return false;
-        } elseif (Validator::validateLength($valor, $min, $max)) {
+        } else {
+            // Si todas las validaciones pasan, establece el correo
             $this->correo = $valor;
             return true;
-        } else {
-            $this->info_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
         }
+    }
+    else {
+        $this->info_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
+        return false;
+    }
     }
 
     public function setContra($valor)

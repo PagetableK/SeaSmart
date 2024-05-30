@@ -38,7 +38,7 @@ MENU_CUENTA.insertAdjacentHTML('afterbegin', `
                     <a href="index.html">
                         <button class="btn btn-primary rounded-pill fw-semibold" type="button">
                             Cerrar sesión
-                            <img src="../../resources/img/logout.png" alt="Cerrar Sesion" width="20px">
+                            <img src="../../resources/img/logout.png" onclick="logOut()" alt="Cerrar Sesion" width="20px">
                         </button>
                     </a>
             </div>

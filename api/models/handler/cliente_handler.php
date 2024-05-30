@@ -148,6 +148,8 @@ class ClienteHandler
             // Se valida que la contraseña ingresada en el campo de login convertida a hash
             // sea igual a la contraseña almacenada en la bd.
             if (password_verify($contra, $data['contra_cliente'])) {
+                $this->id = $data['id_cliente'];
+                $_SESSION['idCliente'] = $this->id;
                 return array($data['id_cliente'], $data['correo_cliente']);
             } else {
                 // Si la contraseña no es correcta se devuelve false.
