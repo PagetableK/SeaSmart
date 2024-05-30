@@ -14,6 +14,7 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idCliente'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
+                // La acción readComments retorna los comentarios habilitados de un producto.
             case 'readComments':
                 if ($result['dataset'] = $valoracion->readComments($_POST['idProducto'])) {
                     $result['status'] = 1;
@@ -22,12 +23,36 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen comentarios del producto';
                 }
                 break;
+                // La acción readOne retorna una reseña/comentario específico.
+            case 'readOne':
+                if(!$valoracion->readOne($_POST['idProducto'])){
+                    $result['status'] = 1;
+                } else{
+                    $result['error'] = 'No se puede agregar más de 1 reseña por producto';
+                }
+                break;
+                // La acción makeComment permite agregar un registro con la reseña/comentario del cliente.
+            case 'makeComment':
+                if (
+                    !$valoracion->setComentario($_POST['comentarioProducto']) or
+                    !$valoracion->setCalificacion($_POST['calificacionProducto']) or
+                    !$valoracion->setIdDetallePedido($_POST['idDetallePedido'])
+                ) {
+                    $result['error'] = $valoracion->getDataError();
+                } elseif ($valoracion->makeComment()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Reseña agregada correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un error al agregar la reseña';
+                }
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
     } else {
         // Se compara la acción a realizar cuando un cliente no ha iniciado sesión.
         switch ($_GET['action']) {
+                // La acción readComments retorna los comentarios habilitados de un producto.
             case 'readComments':
                 if ($result['dataset'] = $valoracion->readComments($_POST['idProducto'])) {
                     $result['status'] = 1;

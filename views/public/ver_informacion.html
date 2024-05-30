@@ -31,6 +31,9 @@
                                 d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
                         </svg>
                         Regresar
+                        <form id="formIdProducto">
+                            <input type="number" class="" value="1" id="idProducto" name="idProducto">
+                        </form>
                     </button>
                 </div>
             </div>
@@ -52,31 +55,23 @@
                 </div>
                 <!-- Creamos el contenedor del texto -->
                 <div class="col-12 col-lg-5 mt-5 mt-md-0">
-                    <b>
-                        <p class="fs-2" id="nombreProducto"></p>
-                    </b>
+                    <p class="fs-2 fw-bold" id="nombreProducto"></p>
                     <div class="col-9 d-flex flex-row mb-3 d-grid gap-5">
                         <p class="text-start" id="estadoProducto"></p>
                         <p class="text-end" id="existenciasProducto"></p>
                     </div>
-
                     <!-- -->
                     <hr>
                     <p id="precioProducto" class="fw-bold fs-4"></p>
                     <hr>
-                    <b>
-                        <p id="tituloTallas">Tallas disponibles:</p>
-                    </b>
+                    <p id="tituloTallas" class="fw-bold">Tallas disponibles:</p>
                     <!-- Botones de las tallas -->
                     <div class="col-12 mb-5" id="contenedorTallas">
                     </div>
-                    <b>
-                        <p id="tituloColores">Colores disponibles:</p>
-                    </b>
+                    <p id="tituloColores" class="fw-bold">Colores disponibles:</p>
                     <!-- Botones de las tallas -->
                     <div class="col-12 mb-5 d-flex column-gap-1" id="contenedorColores">
                     </div>
-
                     <div class="col-12 d-flex align-items-center justify-content-center mt-5"
                         id="contenedorBotonComprar">
                         <button type="button" class="btn rounded-pill btn-primary p-2 fw-bold text-light">Comprar
@@ -112,8 +107,8 @@
                             </div>
                             <p id="cantidadComentarios"></p>
                             <!-- Creamos el boton que dirige al apartado de añadir una reseña -->
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn rounded-pill btn-warning mt-3" id="agregarComentario">
+                            <button type="button" class="btn rounded-pill btn-warning mt-3 d-none"
+                                id="agregarComentario" onclick="abrirModalValoracion()">
                                 Reseñar producto
                             </button>
                         </div>
@@ -121,6 +116,49 @@
                 </div>
                 <!-- Creamos el apartado de comentarios de otras personas -->
                 <div class="col-12 col-lg-9" id="contenedorComentarios">
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal agregar reseña -->
+        <div class="modal fade" id="modalValoracion">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form id="formValoracion">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="tituloModalEliminar"></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            <input type="number" class="d-none" id="idDetallePedido" name="idDetallePedido">
+                        </div>
+                        <div class="modal-body gap-3 d-flex flex-column">
+                            <label>Agregue una calificación</label>
+                            <div class="d-flex flex-row gap-3 justify-content-center align-items-center">
+                                <i class="bi bi-star-fill star" onmouseover="renderizarEstrellas(1)"
+                                    onmouseleave="renderizarEstrellas(0)" onmousedown="cambiarBooleano(1)"
+                                    id="estrella1"></i>
+                                <i class="bi bi-star-fill star" onmouseover="renderizarEstrellas(2)"
+                                    onmouseleave="renderizarEstrellas(0)" onmousedown="cambiarBooleano(2)"
+                                    id="estrella2"></i>
+                                <i class="bi bi-star-fill star" onmouseover="renderizarEstrellas(3)"
+                                    onmouseleave="renderizarEstrellas(0)" onmousedown="cambiarBooleano(3)"
+                                    id="estrella3"></i>
+                                <i class="bi bi-star-fill star" onmouseover="renderizarEstrellas(4)"
+                                    onmouseleave="renderizarEstrellas(0)" onmousedown="cambiarBooleano(4)"
+                                    id="estrella4"></i>
+                                <i class="bi bi-star-fill star" onmouseover="renderizarEstrellas(5)"
+                                    onmouseleave="renderizarEstrellas(0)" onmousedown="cambiarBooleano(5)"
+                                    id="estrella5"></i>
+                            </div>
+                            <p id="calificacionEstrella" class="textosinp text-center"></p>
+                            <input type="number" class="" id="calificacionProducto" name="calificacionProducto">
+                            <label for="comentarioProducto">Agrega un comentario</label>
+                            <textarea id="comentarioProducto" name="comentarioProducto" class="form-control"
+                                maxlength="200" minlength="10" required></textarea>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Agregar reseña</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

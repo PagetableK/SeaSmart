@@ -11,6 +11,9 @@ class ValoracionHandler
      */
     protected $id = null;
     protected $visibilidad = null;
+    protected $comentario = null;
+    protected $calificacion = null;
+    protected $id_detalle_pedido = null;
 
     /*
      *  Métodos para realizar operaciones (search, read, update).
@@ -40,6 +43,20 @@ class ValoracionHandler
         return Database::getRows($sql);
     }
 
+    public function readOne($id_producto)
+    {
+        $sql = 'SELECT id_valoracion, fecha_valoracion, calificacion_producto, estado_comentario, productos.id_producto
+                FROM valoraciones
+                INNER JOIN detalles_pedidos ON detalles_pedidos.id_detalle_pedido = valoraciones.id_detalle_pedido
+                INNER JOIN pedidos ON pedidos.id_pedido = detalles_pedidos.id_pedido
+                INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
+                INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
+                INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
+                WHERE productos.id_producto = ? AND clientes.id_cliente = ? AND estado_comentario = 1;';
+        $params = array($id_producto, $_SESSION['idCliente']);
+        return Database::getRow($sql, $params);
+    }
+
     public function updateRow()
     {
         $sql = 'UPDATE valoraciones
@@ -51,7 +68,7 @@ class ValoracionHandler
 
     public function readComments($id_producto)
     {
-        $sql = 'SELECT nombre_cliente, apellido_cliente,calificacion_producto, fecha_valoracion, comentario_producto
+        $sql = 'SELECT nombre_cliente, apellido_cliente, calificacion_producto, fecha_valoracion, comentario_producto
                 FROM valoraciones
                 INNER JOIN detalles_pedidos ON detalles_pedidos.id_detalle_pedido = valoraciones.id_detalle_pedido
                 INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
@@ -61,5 +78,13 @@ class ValoracionHandler
                 WHERE estado_comentario = 1 AND productos.id_producto = ?;';
         $params = array($id_producto);
         return Database::getRows($sql, $params);
+    }
+
+    public function makeComment()
+    {
+        $sql = 'INSERT INTO valoraciones(calificacion_producto, comentario_producto, id_detalle_pedido) 
+                VALUES(?, ?, ?);';
+        $params = array($this->calificacion, $this->comentario, $this->id_detalle_pedido);
+        return Database::executeRow($sql, $params);
     }
 }
