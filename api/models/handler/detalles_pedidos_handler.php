@@ -14,6 +14,7 @@ class DetallesPedidosHandler
     protected $precio_producto = null;
     protected $id_pedido = null;
     protected $id_detalle_producto = null;
+    protected $id_producto = null;
 
     // Constante para establecer la ruta de las imágenes.
     const RUTA_IMAGEN = '../../images/detalles_productos/';
@@ -21,7 +22,7 @@ class DetallesPedidosHandler
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
      */
-    public function readOrderWithProduct($id_producto)
+    public function readOrderWithProduct()
     {
         $sql = 'SELECT nombre_cliente, cantidad_producto, detalles_pedidos.precio_producto, estado_pedido, productos.id_producto, pedidos.id_pedido, detalles_pedidos.id_detalle_pedido
                 FROM detalles_pedidos
@@ -30,7 +31,20 @@ class DetallesPedidosHandler
                 INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
                 INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
                 WHERE productos.id_producto = ? AND clientes.id_cliente = ? AND estado_pedido = "Enviado";';
-        $params = array($id_producto, $_SESSION['idCliente']);
+        $params = array($this->id_producto, $_SESSION['idCliente']);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readCartWithProduct()
+    {
+        $sql = 'SELECT nombre_cliente, cantidad_producto, detalles_pedidos.precio_producto, estado_pedido, productos.id_producto, pedidos.id_pedido, detalles_pedidos.id_detalle_pedido
+                FROM detalles_pedidos
+                INNER JOIN pedidos ON pedidos.id_pedido = detalles_pedidos.id_pedido
+                INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
+                INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
+                INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
+                WHERE productos.id_producto = ? AND clientes.id_cliente = ? AND estado_pedido = "En carrito";';
+        $params = array($this->id_producto, $_SESSION['idCliente']);
         return Database::getRows($sql, $params);
     }
 }

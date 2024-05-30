@@ -37,6 +37,17 @@ class ValoracionData extends ValoracionHandler
             $this->data_error = 'El identificador del detalle de pedido es incorrecto';
             return false;
         }
+    }    
+    
+    public function setIdProducto($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_producto = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del producto es incorrecto';
+            return false;
+        }
     }
 
     public function setVisibilidad($value)

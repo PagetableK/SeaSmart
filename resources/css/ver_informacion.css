@@ -49,3 +49,7 @@
 .imagen-carrusel{
     width: 70%;
 }
+
+img.cantidad{
+    cursor: pointer;
+}

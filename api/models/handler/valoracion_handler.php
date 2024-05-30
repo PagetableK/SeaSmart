@@ -14,6 +14,7 @@ class ValoracionHandler
     protected $comentario = null;
     protected $calificacion = null;
     protected $id_detalle_pedido = null;
+    protected $id_producto = null;
 
     /*
      *  Métodos para realizar operaciones (search, read, update).
@@ -66,7 +67,7 @@ class ValoracionHandler
         return Database::executeRow($sql, $params);
     }
 
-    public function readComments($id_producto)
+    public function readComments()
     {
         $sql = 'SELECT nombre_cliente, apellido_cliente, calificacion_producto, fecha_valoracion, comentario_producto
                 FROM valoraciones
@@ -76,7 +77,7 @@ class ValoracionHandler
                 INNER JOIN pedidos ON pedidos.id_pedido = detalles_pedidos.id_pedido
                 INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
                 WHERE estado_comentario = 1 AND productos.id_producto = ?;';
-        $params = array($id_producto);
+        $params = array($this->id_producto);
         return Database::getRows($sql, $params);
     }
 

@@ -14,13 +14,24 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idCliente'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
-                // La acción readOrderWithProduct retorna los detalles de pedidos que tienen un producto específico.
+                // La acción readOrderWithProduct retorna los detalles de pedidos que tienen un producto específico y el estado_pedido es 'Enviado'.
             case 'readOrderWithProduct':
-                if ($result['dataset'] = $detalle_pedido->readOrderWithProduct($_POST['idProducto'])) {
+                if(!$detalle_pedido->setIdProducto($_POST['idProducto'])){
+                    $result['error'] = $detalle_pedido->getDataError(); 
+                } elseif ($result['dataset'] = $detalle_pedido->readOrderWithProduct()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Mostrando ' . count($result['dataset']) . ' registros';
                 } else {
                     $result['error'] = 'No hay compras registradas con el producto';
+                }
+                break;
+                // La acción readCartWithProduct retorna los detalles de pedidos que tienen un producto específico y el estado_pedido es 'En carrito'.
+            case 'readCartWithProduct':
+                if(!$detalle_pedido->setIdProducto($_POST['idProducto'])){
+                    $result['error'] = $detalle_pedido->getDataError(); 
+                } elseif (!$result['dataset'] = $detalle_pedido->readCartWithProduct()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'El producto ya se encuentra agregado al carrito';
                 }
                 break;
                 // Si no se encuentra la acción a realizar se muestra el error.

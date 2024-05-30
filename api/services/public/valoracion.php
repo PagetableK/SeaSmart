@@ -16,7 +16,9 @@ if (isset($_GET['action'])) {
         switch ($_GET['action']) {
                 // La acción readComments retorna los comentarios habilitados de un producto.
             case 'readComments':
-                if ($result['dataset'] = $valoracion->readComments($_POST['idProducto'])) {
+                if(!$valoracion->setIdProducto($_POST['idProducto'])){
+                    $result['error'] = $valoracion->getDataError();
+                } elseif ($result['dataset'] = $valoracion->readComments()) {
                     $result['status'] = 1;
                     $result['message'] = 'Mostrando ' . count($result['dataset']) . ' comentarios';
                 } else {
