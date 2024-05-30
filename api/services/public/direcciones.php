@@ -11,8 +11,7 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'username' => null);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
-    // if (isset($_SESSION['idCliente'])) {
-        $_SESSION['idCliente'] = 1;
+    if (isset($_SESSION['idCliente'])) {
         $result['session'] = 1;
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
@@ -40,12 +39,53 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No se han agregado direcciones';
                 }
                 break;
+                // La acción updateRow edita una dirección existente.
+            case 'updateRow':
+                if(
+                    !$direccion->setDireccion($_POST['inputDireccion']) or
+                    !$direccion->setId($_POST['idDireccion'])
+                ){
+                    $result['error'] = $direccion->getDataError();
+                } elseif($direccion->validarDireccion()){
+                    $result['error'] = 'La dirección ya ha sido agregada';
+                } elseif($direccion->updateRow()){
+                    $result['status'] = 1;
+                    $result['message'] = 'Dirección editada correctamente';
+                } else{
+                    $result['error'] = 'No se han agregado direcciones';
+                }
+                break;
+                // La acción deleteRow elimina una dirección específica.
+            case 'deleteRow':
+                if(
+                    !$direccion->setId($_POST['idDireccion'])
+                ){
+                    $result['error'] = $direccion->getDataError();
+                } elseif($direccion->deleteRow()){
+                    $result['status'] = 1;
+                    $result['message'] = 'Dirección eliminada correctamente';
+                } else{
+                    $result['error'] = 'No se pudo eliminar la dirección';
+                }
+                break;
+                // La acción readOne permite seleccionar una dirección específica de un cliente específico.
+            case 'readOne':
+                if (
+                    !$direccion->setId($_POST['idDireccion'])
+                ) {
+                    $result['error'] = 'Dirección incorrecta';
+                } elseif ($result['dataset'] = $direccion->readOne()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Dirección inexistente';
+                }
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
-    // } else {
-    //     print (json_encode('Acceso denegado'));
-    // }
+    } else {
+        print (json_encode('Acceso denegado'));
+    }
     // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
     $result['exception'] = Database::getException();
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.

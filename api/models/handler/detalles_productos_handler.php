@@ -112,4 +112,48 @@ class DetallesProductosHandler
         $params = array($this->id_producto, $this->id_color);
         return Database::getRows($sql, $params);
     }
+
+    public function readColors()
+    {
+        $sql = 'SELECT DISTINCT detalles_productos.id_producto_color, color_producto 
+                FROM detalles_productos, productos_colores
+                WHERE detalles_productos.id_producto_color = productos_colores.id_producto_color
+                AND estado_detalle_producto = 1
+                AND existencia_producto > 0
+                AND id_producto = ?;';
+        $params = array($this->id_producto);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readSizes()
+    {
+        $sql = 'SELECT DISTINCT detalles_productos.id_producto_talla, talla 
+                FROM detalles_productos, productos_tallas
+                WHERE detalles_productos.id_producto_talla = productos_tallas.id_producto_talla
+                AND estado_detalle_producto = 1
+                AND existencia_producto > 0
+                AND id_producto = ?;';
+        $params = array($this->id_producto);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readStock()
+    {
+        $sql = 'SELECT SUM(existencia_producto) AS existencias
+                FROM detalles_productos 
+                WHERE estado_detalle_producto = 1
+                AND id_producto = ?;';
+        $params = array($this->id_producto);
+        return Database::getRow($sql, $params);
+    }
+
+    public function readImages()
+    {
+        $sql = 'SELECT imagen_producto 
+                FROM detalles_productos
+                WHERE id_producto = ?
+                AND imagen_producto IS NOT NULL;';
+        $params = array($this->id_producto);
+        return Database::getRows($sql, $params);
+    }
 }

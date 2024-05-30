@@ -1,5 +1,7 @@
 // Ruta donde se encuentra el servicio de clientes.
 const CLIENTE_API = 'services/admin/clientes.php';
+// Se declara la constante que almacena la ruta de la API de direcciones.
+const DIRECCION_API = 'services/admin/direcciones.php'
 // Se almacena el formCliente para agregar o editar un cliente.
 const FORM_CLIENTE = document.getElementById('formCliente');
 // Se almacenan dentro de constantes los campos del form formCliente.
@@ -17,8 +19,14 @@ const ID_CLIENTE = document.getElementById('idCliente'),
 const CONTENEDOR_ESTADO = document.getElementById('contenedorEstadoCliente');
 // Se almacena el modal para eliminar un cliente.
 const MODAL_ELIMINAR_CLIENTE = new bootstrap.Modal('#borrarModalCliente');
+// Se almacena el modal que muestra las direcciones del cliente.
+const MODAL_DIRECCIONES = new bootstrap.Modal('#modalDireccionesCliente');
 // Se almacena el form para eliminar un cliente.
 const FORM_ELIMINAR_CLIENTE = document.getElementById('formEliminarCliente');
+// Se almacena el contenedor que contiene las direcciones.
+const CONTENEDOR_DIRECCIONES = document.getElementById('contenedorDirecciones');
+// Se almacena el título del modal de direcciones.
+const TITULO_MODAL_DIRECCIONES = document.getElementById('tituloModalDirecciones');
 
 // Función que retorna el estado en base del resultado de la bd.
 function validarEstado(estadoCliente) {
@@ -51,7 +59,7 @@ const abrirModalCliente = async (tituloModal, idCliente) => {
         CONFIRMAR_CONTRA_CLIENTE.disabled = false;
         // Se restablece el atributo type de los input de contraseña y confirmar contraseña.
         CONTRA_CLIENTE.type = 'password';
-        CONFIRMAR_CONTRA_CLIENTE.type = 'password'; 
+        CONFIRMAR_CONTRA_CLIENTE.type = 'password';
         // Se muestra el modal para agregar clientes.
         MODAL_CLIENTE.show();
     } else {
@@ -161,6 +169,44 @@ const abrirEliminarCliente = async (idCliente) => {
     }
 }
 
+// La función abrirDirecciones permite mostrar el modal con las direcciones del cliente.
+const abrirDirecciones = async (idCliente) => {
+    // Se define una constante tipo objeto que almacenará el idCliente.
+    const FORM = new FormData();
+    // Se almacena el nombre del campo y el valor (idCliente) en el formulario.
+    FORM.append('idCliente', idCliente);
+    // Petición para obtener las direcciones del cliente.
+    const DATA = await fetchData(DIRECCION_API, 'readAll', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se inicializa el contenedor de direcciones.
+        CONTENEDOR_DIRECCIONES.innerHTML = '';
+        // Se cargan las direcciones dentro del contenedor.
+        DATA.dataset.forEach(row => {
+            CONTENEDOR_DIRECCIONES.innerHTML += `
+            <div class="col-12">
+                <div class="row">
+                    <p class="fw-bold fs-4">Dirección ${row.id_direccion}</p>
+                </div>
+                <div class="row">
+                    <p>${row.direccion}</p>
+                </div>
+            </div>
+            `;
+        });
+        // Se asigna el título del modal.
+        TITULO_MODAL_DIRECCIONES.textContent = 'Direcciones de ' + DATA.dataset[0].nombre_cliente + ' ' + DATA.dataset[0].apellido_cliente;
+        // Se abre el modal para mostrar las direcciones del cliente.
+        MODAL_DIRECCIONES.show();
+    } else {
+        if(DATA.error == 'No se han agregado direcciones'){
+            sweetAlert(3, DATA.error, false);
+        } else{
+            sweetAlert(2, DATA.error, false);
+        }
+    }
+}
+
 // Método del evento para cuando se envía el formulario de eliminar cliente.
 FORM_ELIMINAR_CLIENTE.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
@@ -180,10 +226,11 @@ FORM_ELIMINAR_CLIENTE.addEventListener('submit', async (event) => {
     } else {
         if (DATA.exception == 'Violación de restricción de integridad') {
             MODAL_ELIMINAR_CLIENTE.hide();
-            sweetAlert(2, 'El cliente está involucrado en un pedido', false);
+            sweetAlert(2, 'El cliente está involucrado en un pedido o cuenta con una o más direcciones', false);
         } else {
             MODAL_ELIMINAR_CLIENTE.hide();
             sweetAlert(2, DATA.error, false);
         }
     }
 });
+

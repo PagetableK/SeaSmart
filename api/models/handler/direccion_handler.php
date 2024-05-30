@@ -18,8 +18,13 @@ class DireccionHandler
      */
     public function readAll()
     {
-        $sql = 'SELECT direccion, id_direccion FROM direcciones WHERE id_cliente = ?;';
-        $params = array($_SESSION['idCliente']);
+        $sql = 'SELECT direccion, id_direccion, nombre_cliente, apellido_cliente FROM direcciones, clientes WHERE direcciones.id_cliente = ? AND clientes.id_cliente = direcciones.id_cliente;';
+
+        if($this->id_cliente){
+            $params = array($this->id_cliente);
+        } else{
+            $params = array($_SESSION['idCliente']);
+        }
         return Database::getRows($sql, $params);
     }
 
@@ -27,13 +32,34 @@ class DireccionHandler
     {
         $sql = 'SELECT id_direccion, direccion, id_cliente FROM direcciones WHERE direccion = ?;';
         $params = array($this->direccion);
-        return Database::getRows($sql, $params);
+        return Database::getRow($sql, $params);
     }
 
     public function createRow()
     {
         $sql = 'INSERT INTO direcciones (direccion, id_cliente) VALUES(?, ?);';
         $params = array($this->direccion, $_SESSION['idCliente']);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function updateRow()
+    {
+        $sql = 'UPDATE direcciones SET direccion = ? WHERE id_direccion = ?;';
+        $params = array($this->direccion, $this->id);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function readOne()
+    {
+        $sql = 'SELECT id_direccion, direccion FROM direcciones WHERE id_cliente = ? AND id_direccion = ?';
+        $params = array($_SESSION['idCliente'], $this->id);
+        return Database::getRow($sql, $params);
+    }
+
+    public function deleteRow()
+    {
+        $sql = 'DELETE FROM direcciones WHERE id_direccion = ?';
+        $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
 }

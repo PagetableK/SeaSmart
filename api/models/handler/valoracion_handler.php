@@ -2,7 +2,7 @@
 // Se incluye la clase para trabajar con la base de datos.
 require_once('../../helpers/database.php');
 /*
- *  Clase para manejar el comportamiento de los datos de la tabla CALIFICACIONES.
+ *  Clase para manejar el comportamiento de los datos de la tabla VALORACIONES.
  */
 class ValoracionHandler
 {
@@ -16,7 +16,7 @@ class ValoracionHandler
      *  Métodos para realizar operaciones (search, read, update).
      */
 
-     //Buscador de valoraciones
+    //Buscador de valoraciones
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
@@ -47,5 +47,19 @@ class ValoracionHandler
                 WHERE id_valoracion = ?';
         $params = array($this->visibilidad, $this->id);
         return Database::executeRow($sql, $params);
+    }
+
+    public function readComments($id_producto)
+    {
+        $sql = 'SELECT nombre_cliente, apellido_cliente,calificacion_producto, fecha_valoracion, comentario_producto
+                FROM valoraciones
+                INNER JOIN detalles_pedidos ON detalles_pedidos.id_detalle_pedido = valoraciones.id_detalle_pedido
+                INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
+                INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
+                INNER JOIN pedidos ON pedidos.id_pedido = detalles_pedidos.id_pedido
+                INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
+                WHERE estado_comentario = 1 AND productos.id_producto = ?;';
+        $params = array($id_producto);
+        return Database::getRows($sql, $params);
     }
 }
