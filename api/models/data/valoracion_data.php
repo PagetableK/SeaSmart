@@ -28,6 +28,28 @@ class ValoracionData extends ValoracionHandler
         }
     }
 
+    public function setIdDetallePedido($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_detalle_pedido = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del detalle de pedido es incorrecto';
+            return false;
+        }
+    }    
+    
+    public function setIdProducto($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_producto = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del producto es incorrecto';
+            return false;
+        }
+    }
+
     public function setVisibilidad($value)
     {
         if (Validator::validateNaturalNumber($value) or ($value == 0)) {
@@ -35,6 +57,31 @@ class ValoracionData extends ValoracionHandler
             return true;
         } else {
             $this->data_error = 'El valor de la valoracion es incorrecto';
+            return false;
+        }
+    }
+
+    public function setComentario($value, $min = 10, $max = 200)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->comentario = $value;
+            return true;
+        } else {
+            $this->data_error = 'El comentario debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setCalificacion($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->calificacion = $value;
+            return true;
+        } else {
+            $this->data_error = 'La calificación debe ser un valor numérico';
             return false;
         }
     }
