@@ -150,6 +150,19 @@ class DetallesProductosHandler
         return Database::getRows($sql, $params);
     }
 
+    public function readDetailIdWithColorAndSize()
+    {
+        $sql = 'SELECT id_detalle_producto
+                FROM detalles_productos 
+                WHERE id_producto_color = ?
+                AND id_producto_talla = ?
+                AND id_producto = ?
+                AND existencia_producto > 0
+                AND estado_detalle_producto = 1;';
+        $params = array($this->id_color, $this->id_talla, $this->id_producto);
+        return Database::getRows($sql, $params);
+    }
+
     public function readStock()
     {
         $sql = 'SELECT SUM(existencia_producto) AS existencias

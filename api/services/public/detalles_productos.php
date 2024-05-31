@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase del modelo.
-require_once('../../models/data/detalles_productos_data.php');
+require_once ('../../models/data/detalles_productos_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -11,10 +11,10 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
     // Se verifica si existe una sesión iniciada como cliente, de lo contrario se finaliza el script con un mensaje de error.
-    // if (isset($_SESSION['idCliente'])) {
+    if (isset($_SESSION['idCliente'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
-                // La acción readColors retorna todos los registros de detalles_productos con color y en estado disponible.
+            // La acción readColors retorna todos los registros de detalles_productos con color y en estado disponible.
             case 'readColors':
                 if (!$detalle_producto->setIdProducto($_POST['idProducto'])) {
                     $result['error'] = $detalle_producto->getDataError();
@@ -25,7 +25,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay colores registrados';
                 }
                 break;
-                // La acción readSizes retorna todos los registros de detalles_productos con talla y en estado disponible.
+            // La acción readSizes retorna todos los registros de detalles_productos con talla y en estado disponible.
             case 'readSizes':
                 if (!$detalle_producto->setIdProducto($_POST['idProducto'])) {
                     $result['error'] = $detalle_producto->getDataError();
@@ -36,7 +36,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay tallas registradas';
                 }
                 break;
-                // La acción readColorsFromSize retorna todos los registros de detalles_productos con color y una talla específica.
+            // La acción readColorsFromSize retorna todos los registros de detalles_productos con color y una talla específica.
             case 'readColorsFromSize':
                 if (
                     !$detalle_producto->setIdProducto($_POST['idProducto']) or
@@ -50,7 +50,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay colores para la talla seleccionada';
                 }
                 break;
-                // La acción readStock retorna la cantidad de existencias de los registros en estado disponible.
+            // La acción readStock retorna la cantidad de existencias de los registros en estado disponible.
             case 'readStock':
                 if (!$detalle_producto->setIdProducto($_POST['idProducto'])) {
                     $result['error'] = $detalle_producto->getDataError();
@@ -61,7 +61,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay existencias disponibles';
                 }
                 break;
-                // La acción readImages retorna las imágenes de los detalles de productos registrados.
+            // La acción readImages retorna las imágenes de los detalles de productos registrados.
             case 'readImages':
                 if (!$detalle_producto->setIdProducto($_POST['idProducto'])) {
                     $result['error'] = $detalle_producto->getDataError();
@@ -72,7 +72,21 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay existencias registradas';
                 }
                 break;
-                // Si no se encuentra la acción a realizar se muestra el error.
+            // La acción readImages retorna las imágenes de los detalles de productos registrados.
+            case 'readDetailIdWithColorAndSize':
+                if (
+                    !$detalle_producto->setIdProducto($_POST['idProducto']) or
+                    !$detalle_producto->setIdColor($_POST['idColor']) or
+                    !$detalle_producto->setIdTalla($_POST['idTalla'])
+                ) {
+                    $result['error'] = $detalle_producto->getDataError();
+                } elseif ($result['dataset'] = $detalle_producto->readDetailIdWithColorAndSize()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Detalle de producto no disponible';
+                }
+                break;
+            // Si no se encuentra la acción a realizar se muestra el error.
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
@@ -81,10 +95,10 @@ if (isset($_GET['action'])) {
         // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
         header('Content-type: application/json; charset=utf-8');
         // Se imprime el resultado en formato JSON y se retorna al controlador.
-        print(json_encode($result));
-    // } else {
-    //     print(json_encode('Acceso denegado'));
-    // }
+        print (json_encode($result));
+    } else {
+        print (json_encode('Acceso denegado'));
+    }
 } else {
-    print(json_encode('Recurso no disponible'));
+    print (json_encode('Recurso no disponible'));
 }

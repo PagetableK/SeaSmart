@@ -7,6 +7,8 @@ const VALORACIONES_API = 'services/public/valoracion.php';
 
 const DETALLES_PEDIDOS_API = 'services/public/detalles_pedidos.php';
 
+const PEDIDOS_API = 'services/public/pedidos.php';
+
 const FORM_ID_PRODUCTO = document.getElementById('formIdProducto');
 
 const NOMBRE_PRODUCTO = document.getElementById('nombreProducto'), ESTADO_PRODUCTO = document.getElementById('estadoProducto'),
@@ -51,7 +53,7 @@ const NOMBRE_PRODUCTO_MODAL = document.getElementById('nombreProductoModal'),
 const SELECT_TALLAS = document.getElementById('selectTallas'),
     SELECT_COLORES = document.getElementById('selectColores');
 
-let BOOLEANO_ESTRELLA = true, CANTIDAD_CARRITO = 1;
+let BOOLEANO_ESTRELLA = true, CANTIDAD_CARRITO = 1, COLOR_DETALLE = 0, TALLA_DETALLE = 0;
 
 // Evento que carga los recursos de barra de navegación y función de rellenar tabla.
 document.addEventListener('DOMContentLoaded', () => {
@@ -360,11 +362,11 @@ function cambiarBooleano(numeroEstrella) {
     }
 }
 
-// Método del evento para cuando se envía el formulario de buscar.
+// Método del evento para cuando se envía el formulario de agregar reseña.
 FORM_VALORACION.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-
+    // Si se ha seleccionado una calificación se continúa con la operación.
     if (CALIFICACION_PRODUCTO.value > 0) {
         // Constante tipo objeto con los datos del formulario.
         const FORM = new FormData(FORM_VALORACION);
@@ -387,6 +389,9 @@ FORM_VALORACION.addEventListener('submit', async (event) => {
 
 // Función que permite abrir el modal de agregar el producto al carrito.
 const abrirModalAgregarCarrito = async () => {
+    // Se restablecen los valores de las variables globales.
+    TALLA_DETALLE = 0;
+    COLOR_DETALLE = 0;
     // Se inicializa el form donde se almacenará el id del producto.
     const FORM = new FormData(FORM_ID_PRODUCTO);
     // Se realiza una petición para buscar el producto en el carrito del cliente
@@ -420,8 +425,10 @@ const abrirModalAgregarCarrito = async () => {
         const DATA_TALLAS = await fetchData(DETALLES_PRODUCTOS_API, 'readSizes', FORM);
         // Si la respuesta es satisfactoria se ejecuta el código.
         if(DATA_TALLAS.status){
-            // Se agrega la primera opción por defecto en el combobox.
+            // Se inicializa el contenido del select de tallas.
             SELECT_TALLAS.innerHTML = '<option selected>Seleccione una talla</option>';
+            // Se asigna el valor de la variable global.
+            TALLA_DETALLE = 1;
             // Se agrega una opción del combobox por cada talla encontrada.
             DATA_TALLAS.dataset.forEach(row => {
                 SELECT_TALLAS.innerHTML += `
@@ -433,6 +440,23 @@ const abrirModalAgregarCarrito = async () => {
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         } else{
             sweetAlert(2, DATA_TALLAS.error, false);
+        }
+        // Se realiza una petición para obtener los colores disponibles.
+        const DATA_COLORES = await fetchData(DETALLES_PRODUCTOS_API, 'readColors', FORM);
+        if(DATA_COLORES.status){
+            // Se inicializa el contenido del select de colores.
+            SELECT_COLORES.innerHTML = '<option selected>Seleccione un color</option>';
+            // Se asigna el valor de la variable global.
+            COLOR_DETALLE = 1;
+            // Se agrega una opción del combobox por cada color encontrado.
+            DATA_COLORES.dataset.forEach(row => {
+                SELECT_COLORES.innerHTML += `
+                <option value="${row.id_producto_color}">${row.color_producto}</option>
+                `;
+            });
+        } else{
+            // Si no hay tallas para el producto se oculta el combobox de tallas.
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
         // Se muestra la cantidad inicial del producto.
         mostrarCantidad();
@@ -451,6 +475,51 @@ const abrirModalAgregarCarrito = async () => {
         }
     }
 }
+
+// Método del evento para cuando se envía el formulario de agregar producto al carrito.
+FORM_CARRITO.addEventListener('submit', async (event) => {
+    console.log('p');
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Se inicializa el form donde se almacenará el id del producto.
+    const FORM = new FormData(FORM_ID_PRODUCTO);
+    // Se insertan el idColor y el idTalla al form.
+    FORM.append('idColor', SELECT_COLORES.value);
+    FORM.append('idTalla', SELECT_TALLAS.value);
+    // Se verifica el tipo de detalle producto, pueden ser:
+    // Producto con color y con talla, producto solo con color, producto solo con talla, producto sin color y sin talla.
+    if(COLOR_DETALLE && TALLA_DETALLE){
+        if(SELECT_COLORES.value >=1 && SELECT_TALLAS.value >= 1){
+            console.log('P');
+            // Se realiza una petición para verificar que el detalle de producto con talla y con color se encuentra disponible.
+            const DATA = await fetchData(DETALLES_PRODUCTOS_API, 'readDetailIdWithColorAndSize', FORM);
+            // Si la respuesta es satisfactoria se ejecuta el código.
+            if(DATA.status){
+    
+                const DATA_PEDIDO = await fetchData(PEDIDOS);
+            } else if(DATA.error == 'Detalle de producto no disponible'){
+                sweetAlert(3, 'La opción del producto seleccionada no se encuentra disponible', false);
+            }
+        } else{
+            sweetAlert(3, 'Asegúrese de elegir una talla y un color');
+        }
+    } else if(COLOR_DETALLE){
+        if(SELECT_COLORES.value >= 1){
+
+        } else{
+            sweetAlert(3, 'Asegúrese de elegir un color');
+        }
+    } else if(TALLA_DETALLE){
+        if(SELECT_TALLAS.value >= 1){
+
+        } else{
+            sweetAlert(3, 'Asegúrese de elegir una talla');
+        }
+    } else{
+        console.log('d');
+    }
+});
+
 
 // La función mostrarCantidad muestra la cantidad seleccionada del producto.
 function mostrarCantidad() {
