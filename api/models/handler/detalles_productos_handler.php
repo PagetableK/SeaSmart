@@ -137,6 +137,19 @@ class DetallesProductosHandler
         return Database::getRows($sql, $params);
     }
 
+    public function readColorsFromSize()
+    {
+        $sql = 'SELECT productos_colores.id_producto_color, color_producto
+                FROM detalles_productos
+                INNER JOIN productos_colores ON productos_colores.id_producto_color = detalles_productos.id_producto_color
+                WHERE detalles_productos.id_producto = ? AND
+                id_producto_talla = ? AND
+                estado_detalle_producto = 1 AND
+                existencia_producto > 0;';
+        $params = array($this->id_producto, $this->id_talla);
+        return Database::getRows($sql, $params);
+    }
+
     public function readStock()
     {
         $sql = 'SELECT SUM(existencia_producto) AS existencias

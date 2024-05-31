@@ -11,7 +11,7 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
     // Se verifica si existe una sesión iniciada como cliente, de lo contrario se finaliza el script con un mensaje de error.
-    if (isset($_SESSION['idCliente'])) {
+    // if (isset($_SESSION['idCliente'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
                 // La acción readColors retorna todos los registros de detalles_productos con color y en estado disponible.
@@ -34,6 +34,20 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Mostrando ' . count($result['dataset']) . ' tallas';
                 } else {
                     $result['error'] = 'No hay tallas registradas';
+                }
+                break;
+                // La acción readColorsFromSize retorna todos los registros de detalles_productos con color y una talla específica.
+            case 'readColorsFromSize':
+                if (
+                    !$detalle_producto->setIdProducto($_POST['idProducto']) or
+                    !$detalle_producto->setIdTalla($_POST['idProductoTalla'])
+                ) {
+                    $result['error'] = $detalle_producto->getDataError();
+                } elseif ($result['dataset'] = $detalle_producto->readColorsFromSize()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Mostrando ' . count($result['dataset']) . ' colores';
+                } else {
+                    $result['error'] = 'No hay colores para la talla seleccionada';
                 }
                 break;
                 // La acción readStock retorna la cantidad de existencias de los registros en estado disponible.
@@ -68,9 +82,9 @@ if (isset($_GET['action'])) {
         header('Content-type: application/json; charset=utf-8');
         // Se imprime el resultado en formato JSON y se retorna al controlador.
         print(json_encode($result));
-    } else {
-        print(json_encode('Acceso denegado'));
-    }
+    // } else {
+    //     print(json_encode('Acceso denegado'));
+    // }
 } else {
     print(json_encode('Recurso no disponible'));
 }

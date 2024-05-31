@@ -48,6 +48,9 @@ const NOMBRE_PRODUCTO_MODAL = document.getElementById('nombreProductoModal'),
     SUB_TOTAL = document.getElementById('subTotal'),
     CONTENEDOR_IMAGEN_MODAL = document.getElementById('contenedorImagenModal');
 
+const SELECT_TALLAS = document.getElementById('selectTallas'),
+    SELECT_COLORES = document.getElementById('selectColores');
+
 let BOOLEANO_ESTRELLA = true, CANTIDAD_CARRITO = 1;
 
 // Evento que carga los recursos de barra de navegación y función de rellenar tabla.
@@ -285,22 +288,10 @@ const abrirModalValoracion = async () => {
     const DATA_PEDIDOS = await fetchData(DETALLES_PEDIDOS_API, 'readOrderWithProduct', FORM);
     // Se realiza una petición para buscar comentarios realizados del producto por el cliente.
     const DATA_VALIDAR_COMENTARIO = await fetchData(VALORACIONES_API, 'readOne', FORM);
-    // Se realiza una petición para obtener los colores disponibles del producto.
-    const DATA_COLORES = await fetchData(DETALLES_PRODUCTOS_API, 'readColors', FORM);
-    // Se realiza una petición para obtener las tallas disponibles del producto.
-    const DATA_TALLAS = await fetchData(DETALLES_PRODUCTOS_API, 'readSizes', FORM);
     // Si la respuesta es satisfactoria se ejecuta el código.
     if (DATA_PEDIDOS.status && DATA_VALIDAR_COMENTARIO.status) {
         // Se carga el valor del id de un detalle de pedido (Se toma el id_detalle_pedido del primer registro).
         ID_DETALLE_PEDIDO.value = DATA_PEDIDOS.dataset[0].id_detalle_pedido;
-        // Si la respuesta es satisfactoria se ejecuta el código.
-        if(DATA_COLORES.status){
-
-            await fillSelect(CATEGORIA_API, 'readAll1', 'categoriaSelect', ROW.id_categoria);
-        } else{
-
-        }
-
         // Se muestra el modal para agregar reseña.
         MODAL_VALORACION.show();
     } else if (DATA_PEDIDOS.error == 'No hay compras registradas con el producto') {
@@ -424,6 +415,24 @@ const abrirModalAgregarCarrito = async () => {
             CONTENEDOR_IMAGEN_MODAL.innerHTML = `
             <img src="../../api/images/detalles_productos/imageholder.png">
             `;
+        }
+        // Se realiza una petición para obtener las tallas disponibles del producto.
+        const DATA_TALLAS = await fetchData(DETALLES_PRODUCTOS_API, 'readSizes', FORM);
+        // Si la respuesta es satisfactoria se ejecuta el código.
+        if(DATA_TALLAS.status){
+            // Se agrega la primera opción por defecto en el combobox.
+            SELECT_TALLAS.innerHTML = '<option selected>Seleccione una talla</option>';
+            // Se agrega una opción del combobox por cada talla encontrada.
+            DATA_TALLAS.dataset.forEach(row => {
+                SELECT_TALLAS.innerHTML += `
+                <option value="${row.id_producto_talla}">${row.talla}</option>
+                `;
+            });
+        } else if(DATA_TALLAS.error == 'No hay tallas registradas'){
+            // Si no hay tallas para el producto se oculta el combobox de tallas.
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        } else{
+            sweetAlert(2, DATA_TALLAS.error, false);
         }
         // Se muestra la cantidad inicial del producto.
         mostrarCantidad();
