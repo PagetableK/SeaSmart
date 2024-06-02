@@ -52,7 +52,7 @@
                                 <label for="duiCliente" class="form-label">DUI</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend2">#</span>
-                                    <input type="text" class="form-control" id="duiCliente" placeholder="00000000-0"
+                                    <input type="text" class="form-control" id="duiCliente" placeholder="00000000-0" oninput="duiNacional(event)"
                                         name="duiCliente" required>
                                 </div>
                             </div>
@@ -115,6 +115,8 @@
     <script type="text/javascript" src="../../controllers/utils/publico.js"></script>
     <!-- Validar número de teléfono -->
     <script src="../../resources/js/validar_telefono.js"></script>
+    <!-- Validar número de DUI -->
+    <script src="../../resources/js/validar_dui.js"></script>
     <!-- Controlador del registro -->
     <script src="../../controllers/public/registro.js"></script>
 </body>
