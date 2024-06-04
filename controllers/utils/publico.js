@@ -150,8 +150,7 @@ const cargarPlantilla = async (tipoNavbar) => {
     const OPCIONES_USUARIO = document.querySelector('#opcionesUsuario');
 
     const DATA = await fetchData(USER_API, 'getUser');
-    if (DATA.session) {
-        console.log(DATA.username);
+    if (true ) {
 
         if (tipoNavbar == 1 || tipoNavbar == 3) {
             CONTENEDOR_USUARIO_CARRITO.insertAdjacentHTML('beforeend', `

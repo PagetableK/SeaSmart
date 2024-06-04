@@ -23,6 +23,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Correo de usuario indefinido';
                 }
                 break;
+            case ($ )
             case 'logOut':
                 if (session_destroy()) {
                     $result['status'] = 1;

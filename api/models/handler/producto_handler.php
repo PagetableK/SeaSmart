@@ -43,6 +43,13 @@ class ProductoHandler
         return Database::executeRow($sql, $params);
     }
 
+    public function readAllThats(){
+        $sql = 'SELECT a.id_producto, a.nombre_producto, a.descripcion_producto, b.imagen_producto, 
+        a.precio_producto from productos a, detalles_productos b where a.id_producto = b.id_producto';
+
+        return Database::getRows($sql);
+    }
+
     public function readAll()
     {
         $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, 
