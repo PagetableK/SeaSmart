@@ -1,4 +1,7 @@
+// URL de la API para manejar clientes.
 const CLIENTES_API = 'services/public/clientes.php';
+
+// Referencias a los elementos del DOM.
 const BTNMOSTRAR = document.getElementById('btnMostrar');
 const BTNOCULTAR = document.getElementById('btnOcultar');
 const TXTCONTRA = document.getElementById('contraRegistro');
@@ -45,30 +48,34 @@ FORM_REGISTRO.addEventListener('submit', async (event) => {
 });
 
 
-//Esto ya estaba
+// Función para mostrar la contraseña en el campo "contraRegistro".
 function MostrarContra(){
     BTNMOSTRAR.remove();
     CONTENEDORC.appendChild(BTNOCULTAR);
     TXTCONTRA.type = 'text';
 }
 
+// Función para ocultar la contraseña en el campo "contraRegistro".
 function OcultarContra(){
     BTNOCULTAR.remove();
     CONTENEDORC.appendChild(BTNMOSTRAR);
     TXTCONTRA.type = 'password';
 }
 
+// Función para mostrar la contraseña en el campo "confirmarContra".
 function MostrarContra1(){
     BTNMOSTRAR1.remove();
     CONTENEDORC1.appendChild(BTNOCULTAR1);
     TXTCONTRA1.type = 'text';
 }
 
+// Función para ocultar la contraseña en el campo "confirmarContra".
 function OcultarContra1(){
     BTNOCULTAR1.remove();
     CONTENEDORC1.appendChild(BTNMOSTRAR1);
     TXTCONTRA1.type = 'password';
 }
 
+//Remueve los botones "Ocultar" para las contraseñas.
 BTNOCULTAR.remove();
 BTNOCULTAR1.remove();

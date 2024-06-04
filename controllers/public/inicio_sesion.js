@@ -1,4 +1,7 @@
+// URL de la API para manejar clientes.
 const CLIENTES_API = 'services/public/clientes.php';
+
+// Referencias a los elementos del DOM.
 const BTNMOSTRAR = document.getElementById('btnMostrar');
 const BTNOCULTAR = document.getElementById('btnOcultar');
 const TXTCONTRA = document.getElementById('contraLogin');
@@ -7,12 +10,14 @@ const BTNENVIAR = document.getElementById('btnEnviar');
 // Constante para establecer el formulario de login cliente.
 const FORM_LOGIN = document.getElementById('formLogin');
  
+// Función para mostrar la contraseña.
 function Mostrar(){
     BTNMOSTRAR.remove();
     CONTENEDORC.appendChild(BTNOCULTAR);
     TXTCONTRA.type = 'text';
 }
- 
+
+// Función para ocultar la contraseña.
 function Ocultar(){
     BTNOCULTAR.remove();
     CONTENEDORC.appendChild(BTNMOSTRAR);
@@ -23,7 +28,8 @@ function ValidarCampos(){
     location.href='index.html';
 }
 */
- 
+
+// Evento que se dispara cuando se envía el formulario de login.
 FORM_LOGIN.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
@@ -50,5 +56,5 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarPlantilla(2);
 });
  
- 
+//Remueve el botón ocultar.
 BTNOCULTAR.remove();

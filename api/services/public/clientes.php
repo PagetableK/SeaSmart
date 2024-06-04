@@ -16,7 +16,9 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
             case 'createRow':
+                // Se validan los datos del formulario.
                 $_POST = Validator::validateForm($_POST);
+                // Se comprueba y establecen los datos del cliente.
                 if (
                     !$clientes->setNombre($_POST['nombreCliente']) or
                     !$clientes->setApellido($_POST['apellidoCliente']) or
@@ -39,6 +41,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'getUser':
+                // Se obtiene el correo del cliente si está en sesión.
                 if (isset($_SESSION['correoCliente'])) {
                     $result['status'] = 1;
                     $result['username'] = $_SESSION['correoCliente'];
@@ -47,6 +50,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'logOut':
+                // Se cierra la sesión del cliente.
                 if (session_destroy()) {
                     $result['status'] = 1;
                     $result['message'] = 'Sesión eliminada correctamente';
@@ -61,6 +65,7 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando el cliente no ha iniciado sesión.
         switch ($_GET['action']) {
             case 'signUp':
+                // Se establecen los datos del cliente.
                 if (
                     !$cliente->setNombre($_POST['nombreCliente']) or
                     !$cliente->setApellido($_POST['apellidoCliente']) or

@@ -15,6 +15,8 @@ class ClienteData extends ClienteHandler
     /*
     *  Métodos para validar y asignar los valores de los atributos.
     */
+
+    // Método para establecer el ID del cliente.
     public function setId($valor)
     {
         if(Validator::validateNaturalNumber($valor)){
@@ -27,6 +29,7 @@ class ClienteData extends ClienteHandler
         }
     }
 
+    // Método para establecer el nombre del cliente.
     public function setNombre($valor, $min = 4, $max = 20)
     {
         if (!Validator::validateAlphabetic($valor)) {
@@ -41,7 +44,7 @@ class ClienteData extends ClienteHandler
         }
     }
 
-    
+    // Método para establecer el apellido del cliente.
     public function setApellido($valor, $min = 4, $max = 20)
     {
         if (!Validator::validateAlphabetic($valor)) {
@@ -56,6 +59,7 @@ class ClienteData extends ClienteHandler
         }
     }
 
+    // Método para establecer el correo del cliente.
     public function setCorreo($valor, $min = 8, $max = 100)
     {
     if (!Validator::validateEmail($valor)) {
@@ -79,6 +83,7 @@ class ClienteData extends ClienteHandler
     }
     }
 
+    // Método para establecer la contraseña del cliente.
     public function setContra($valor)
     {
         if (Validator::validatePassword($valor)) {
@@ -90,6 +95,7 @@ class ClienteData extends ClienteHandler
         }
     }
 
+    // Método para establecer el DUI del cliente.
     public function setDUI($value)
     {
         if (!Validator::validateDUI($value)) {
@@ -104,6 +110,7 @@ class ClienteData extends ClienteHandler
         }
     }
 
+    // Método para establecer el estado del cliente.
     public function setEstado($value)
     {
         if (Validator::validateBoolean($value)) {
@@ -115,6 +122,7 @@ class ClienteData extends ClienteHandler
         }
     }
 
+    // Método para establecer el teléfono móvil del cliente.
     public function setTelefono($value)
     {
         if (!Validator::validatePhone($value)) {
@@ -129,6 +137,7 @@ class ClienteData extends ClienteHandler
         }
     }
 
+    // Método para establecer el teléfono fijo del cliente.
     public function setTelefonoFijo($value)
     {
         if (!Validator::validatePhone($value)) {
@@ -143,7 +152,7 @@ class ClienteData extends ClienteHandler
         }
     }
 
-
+    // Método para obtener el mensaje de error.
     public function getDataError()
     {
         return $this->info_error;
