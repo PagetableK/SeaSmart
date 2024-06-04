@@ -95,6 +95,9 @@ class ClienteData extends ClienteHandler
         if (!Validator::validateDUI($value)) {
             $this->info_error = 'El DUI debe tener el formato ########-#';
             return false;
+        } elseif($this->checkDuplicate($value)) {
+            $this->info_error = 'El DUI ingresado ya existe';
+            return false;
         } else {
             $this->dui = $value;
             return true;
