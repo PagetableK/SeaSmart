@@ -16,12 +16,12 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
             // Acción para crear un pedido del carrito.
-            case 'createOrder':
+            case 'startOrder':
                 if (!$pedido->startOrder()) {
                     $result['error'] = 'Ocurrió un problema al iniciar el pedido';
                 } elseif ($_SESSION['idPedido']) {
                     $result['status'] = 1;
-                    $result['message'] = 'Pedido creado correctamente';
+                    $result['message'] = 'Pedido iniciado correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al crear el pedido';
                 }
@@ -32,7 +32,7 @@ if (isset($_GET['action'])) {
     } else {
         // Se compara la acción a realizar cuando un cliente no ha iniciado sesión.
         switch ($_GET['action']) {
-            case 'createOrder':
+            case 'startOrder':
                 $result['error'] = 'Debe iniciar sesión para agregar el producto al carrito';
                 break;
             default:

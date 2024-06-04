@@ -34,6 +34,20 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'El producto ya se encuentra agregado al carrito';
                 }
                 break;
+            case 'addDetail':
+                if(
+                    !$detalle_pedido->setIdDetalleProducto($_POST['idDetalleProducto']) or
+                    !$detalle_pedido->setPrecioProducto($_POST['precioProducto']) or
+                    !$detalle_pedido->setCantidadProducto($_POST['cantidadRequerida'])
+                ){
+                    $result['error'] = 'Ocurrió un error al agregar el producto al carrito, intentélo de nuevo más tarde';
+                } elseif($detalle_pedido->addDetail()){
+                    $result['status'] = 1;
+                    $result['message'] = 'Producto agregado correctamente';
+                } else{
+                    $result['error'] = 'Ocurrió un error al agregar el producto al carrito, intentélo de nuevo más tarde';
+                }
+                break;
                 // Si no se encuentra la acción a realizar se muestra el error.
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';

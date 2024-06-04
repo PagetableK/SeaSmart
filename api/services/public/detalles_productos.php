@@ -80,10 +80,13 @@ if (isset($_GET['action'])) {
                     !$detalle_producto->setIdTalla($_POST['idTalla'])
                 ) {
                     $result['error'] = $detalle_producto->getDataError();
-                } elseif ($result['dataset'] = $detalle_producto->readDetailIdWithColorAndSize()) {
-                    $result['status'] = 1;
-                } else {
+                } elseif (!$result['dataset'] = $detalle_producto->readDetailIdWithColorAndSize()) {
                     $result['error'] = 'Detalle de producto no disponible';
+                } elseif (!($_POST['cantidadRequerida'] <= $result['dataset']['existencia_producto'])) {
+                    $result['error'] = 'La cantidad requerida del producto es mayor a la cantidad en stock';
+                    $result['message'] = $result['dataset']['existencia_producto'];
+                } else{
+                    $result['status'] = 1;
                 }
                 break;
             // Si no se encuentra la acción a realizar se muestra el error.

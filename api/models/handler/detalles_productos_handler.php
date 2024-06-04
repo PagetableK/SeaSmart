@@ -152,15 +152,16 @@ class DetallesProductosHandler
 
     public function readDetailIdWithColorAndSize()
     {
-        $sql = 'SELECT id_detalle_producto
-                FROM detalles_productos 
+        $sql = 'SELECT detalles_productos.id_detalle_producto, productos.precio_producto, existencia_producto
+                FROM detalles_productos
+                INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
                 WHERE id_producto_color = ?
                 AND id_producto_talla = ?
-                AND id_producto = ?
+                AND detalles_productos.id_producto = ?
                 AND existencia_producto > 0
                 AND estado_detalle_producto = 1;';
         $params = array($this->id_color, $this->id_talla, $this->id_producto);
-        return Database::getRows($sql, $params);
+        return Database::getRow($sql, $params);
     }
 
     public function readStock()
@@ -181,5 +182,13 @@ class DetallesProductosHandler
                 AND imagen_producto IS NOT NULL;';
         $params = array($this->id_producto);
         return Database::getRows($sql, $params);
+    }
+
+    public function selectForOrder()
+    {
+        $sql = 'SELECT detalles_productos.id_detalle_producto, productos.precio_producto, existencia_producto
+                FROM detalles_productos
+                INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
+                WHERE id_producto_color = ? AND id_producto_talla = ? AND detalles_productos.id_producto = ?';
     }
 }
