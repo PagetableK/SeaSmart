@@ -50,7 +50,7 @@ class DetallesPedidosHandler
     
     public function addDetail()
     {
-        $sql = 'INSERT INTO detalles_pedidos(cantidad_producto, precio_producto, id_pedido, id_detalle_producto) VALUES(?, ?, ?, ?);';
+        $sql = 'call agregarDetalle(?, ?, ?, ?);';
         $params = array($this->cantidad_producto, $this->precio_producto, $_SESSION['idPedido'], $this->id_detalle_producto);
         return Database::executeRow($sql, $params);
     }
