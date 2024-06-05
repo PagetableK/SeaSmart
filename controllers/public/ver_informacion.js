@@ -503,10 +503,10 @@ FORM_CARRITO.addEventListener('submit', async (event) => {
                         // Se cierra el modal para agregar el producto al carrito.
                         MODAL_CARRITO.hide();
                     } else {
-                        sweetAlert(2, DATA.error, false);
+                        sweetAlert(2, DATA_DETALLE_PEDIDO.error, false);
                     }
                 } else {
-                    sweetAlert(2, DATA.error, false);
+                    sweetAlert(2, DATA_PEDIDO.error, false);
                 }
             } else if (DATA_DETALLE.error == 'Detalle de producto no disponible') {
                 sweetAlert(3, 'La opción del producto seleccionada no se encuentra disponible', false);
