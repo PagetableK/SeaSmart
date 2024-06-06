@@ -13,23 +13,26 @@ const swiper = new Swiper('.swiper', {
     },
 });
 
-const CARRUSEL_CONTAINER = document.getElementById('wrapper');
+const CONTAINER = document.getElementById('galeria');
+const ID_SUB_CATEGORIA = localStorage.getItem('idSubCategoria');
 
-const PRODUCTO_API = "services/public/producto.php"
+const SUB_CATEGORIA_API = "services/public/subcategoria.php"
 // Evento que carga los recursos de barra de navegación y función de rellenar tabla.
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
     cargarPlantilla(1);
 
     // LLamada  a la función para llenar el carrusel
-    cargarCarrusel();
+    cargarContainer();
 });
 
-const cargarCarrusel = async () => {
-    const DATA = await fetchData(PRODUCTO_API, 'readAll');
+const cargarContainer = async () => {
+    FORM = new FormData();
+    FORM.append('idSubcategoria',1);
+    const DATA = await fetchData(SUB_CATEGORIA_API, 'readAllSub');
     if (DATA.status) {
         DATA.dataset.forEach(item => {
-            CARRUSEL_CONTAINER.innerHTML += `
+            CONTAINER.innerHTML += `
 
             <div class="swiper-slide">
 

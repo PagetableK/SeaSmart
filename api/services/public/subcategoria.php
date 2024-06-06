@@ -1,13 +1,13 @@
 <?php
 // Se incluye la clase del modelo.
-require_once('../../models/data/producto_data.php');
+require_once('../../models/data/subcategoria_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
     // Se instancia la clase correspondiente.
-    $producto = new ProductoData;
+    $subcategoria = new subCategoriaData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'error' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
@@ -16,25 +16,24 @@ if (isset($_GET['action'])) {
     // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
     switch ($_GET['action']) {
         case 'readAll':
-            if ($result['dataset'] = $producto->readAllThats()) {
+            if ($result['dataset'] = $subcategoria->readAllThats()) {
                 $result['status'] = 1;
                 $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
             } else {
-                $result['error'] = 'No existen productos registrados';
+                $result['error'] = 'No existen subcategorias registrados';
             }
             break;
-        case 'readAllSub':
-            if(!$producto->setSubcategoria($_POST['idSubCategoria'])){
-                $result['error'] = 'Error al setear sub categoria';
+        case 'readAllCategoria':
+            if(!$subcategoria->setIdCategoria($_POST['idCategoria'])){
+                $result['error'] = 'No existe la categoria ';
             }
-            else if ($result['dataset'] = $producto->readAllSub()) {
+            else if ($result['dataset'] = $subcategoria->readAllCategoria()) {
                 $result['status'] = 1;
                 $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
             } else {
-                $result['error'] = 'No existen productos registrados';
+                $result['error'] = 'No existen subcategorias registrados '+$_POST['idCategoria'];
             }
             break;
-            // La acción readOne permite seleccionar la información de un cliente específico.
         default:
             $result['error'] = 'Acción no disponible dentro de la sesión';
     }

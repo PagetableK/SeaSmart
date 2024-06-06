@@ -155,41 +155,48 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-group">
+                    <form id="formInfoCliente">
+                        <div>
                             <label for="nombres">Nombres</label>
                             <input type="text" class="form-control" id="nombres" placeholder="Ingrese sus nombres">
                         </div>
-                        <div class="form-group">
+                        
+                        <div>
                             <label for="apellidos">Apellidos</label>
                             <input type="text" class="form-control" id="apellidos" placeholder="Ingrese sus apellidos">
                         </div>
-                        <div class="form-group">
-                            <label for="documento">DUI Documento de Identificación</label>
+                        
+                        <div>
+                            <label for="documento">DUI (Documento unico de identidad)</label>
                             <input type="text" class="form-control" id="documento"
                                 placeholder="Ingrese su documento de identificación">
                         </div>
-                        <div class="form-group">
+                        
+                        <div>
                             <label for="correo">Correo Electrónico</label>
                             <input type="email" class="form-control" id="correo"
                                 placeholder="Ingrese su correo electrónico">
                         </div>
-                        <div class="form-group">
+                        <br>
+                        <div>
                             <label for="telefono-movil">Teléfono Móvil</label>
                             <input type="text" class="form-control" id="telefono-movil"
                                 placeholder="Ingrese su teléfono móvil">
                         </div>
-                        <div class="form-group">
+                        
+                        <div>
                             <label for="telefono-fijo">Teléfono Fijo</label>
                             <input type="text" class="form-control" id="telefono-fijo"
                                 placeholder="Ingrese su teléfono fijo">
                         </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-primary" type="submit">Guardar Cambios</button>
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -205,9 +212,9 @@
     <!-- Mandar a llamar el menú lateral -->
     <script type="text/javascript" src="../../controllers/utils/menu_lateral.js"></script>
     <!-- Mandar a llamar el controlador de direcciones -->
-    <script type="text/javascript" src="../../controllers/public/mi_informacion.js"></script>
-    <!-- Mandar a llamar el controlador de direcciones -->
     <script type="text/javascript" src="../../controllers/public/direcciones.js"></script>
+    
+    <script type="text/javascript" src="../../controllers/public/mi_informacion.js"></script>
     <!-- Mandar a llamar el controlador de clientes -->
     <script type="text/javascript" src="../../controllers/public/clientes.js"></script>
 

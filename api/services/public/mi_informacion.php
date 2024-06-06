@@ -1,13 +1,13 @@
 <?php
 // Se incluye la clase del modelo.
-require_once('../../models/data/cliente_data.php');
+require_once('../../models/data/mi_informacion_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
-    session_start();    
+    session_start();
     // Se instancia la clase correspondiente.
-    $cliente = new ClienteData;
+    $cliente = new miInformacionData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'error' => null, 'exception' => null, 'username' => null);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
@@ -23,6 +23,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Correo de usuario indefinido';
                 }
                 break;
+            case ($ )
             case 'logOut':
                 if (session_destroy()) {
                     $result['status'] = 1;
