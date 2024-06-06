@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase para trabajar con la base de datos.
-require_once ('../../helpers/database.php');
+require_once('../../helpers/database.php');
 /*
  *	Clase para manejar el comportamiento de los datos de la tabla PRODUCTO.
  */
@@ -36,6 +36,16 @@ class PedidoHandler
                 INNER JOIN pedidos USING(id_pedido)
                 ORDER BY id_pedido';
         return Database::getRows($sql);
+    }
+
+    public function readOrders()
+    {
+        $sql = 'SELECT id_pedido, estado_pedido, fecha_pedido, direccion
+                FROM pedidos
+                WHERE id_cliente = ?
+                AND estado_pedido != "En carrito";';
+        $params = array($_SESSION['idCliente']);
+        return Database::getRows($sql, $params);
     }
 
     public function readOne()
@@ -83,7 +93,7 @@ class PedidoHandler
     public function finishOrder()
     {
         $sql = 'UPDATE pedidos
-                SET estado_pedido = "Siendo enviado", direccion = ?
+                SET estado_pedido = "Siendo enviado", direccion = ?, fecha_pedido = DATE(NOW())
                 WHERE id_pedido = (SELECT id_pedido FROM pedidos WHERE estado_pedido = "En carrito" AND id_cliente = ?);';
         $params = array($this->direccion, $_SESSION['idCliente']);
         return Database::executeRow($sql, $params);

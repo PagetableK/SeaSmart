@@ -68,6 +68,16 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No se ha agregado ningún producto al carrito';
                 }
                 break;
+
+            case 'readDetails':
+                if(!$detalle_pedido->setIdPedido($_POST['idPedido'])){
+                    $result['error'] = $detalle_pedido->getDataError();
+                } elseif($result['dataset'] = $detalle_pedido->readDetails()){
+                    $result['status'] = 1;
+                } else{
+                    $result['error'] = 'Ocurrió un error al obtener los productos del pedido';
+                }
+                break;
                 // Si no se encuentra la acción a realizar se muestra el error.
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';

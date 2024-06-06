@@ -15,6 +15,14 @@ if (isset($_GET['action'])) {
         $result['session'] = 1;
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
+                // La acción readOrders retorna los pedidos realizados por el cliente.
+            case "readOrders":
+                if($result['dataset'] = $pedido->readOrders()){
+                    $result['status'] = 1;
+                } else{
+                    $result['error'] = "El cliente no ha realizado ningún pedido";
+                }
+                break;
                 // Acción para crear/iniciar un pedido del carrito.
             case 'startOrder':
                 if (!$pedido->startOrder()) {
