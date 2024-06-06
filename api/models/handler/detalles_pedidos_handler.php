@@ -68,7 +68,7 @@ class DetallesPedidosHandler
 
     public function readCart()
     {
-        $sql = 'SELECT detalles_productos.id_detalle_producto,  nombre_producto, cantidad_producto, detalles_pedidos.precio_producto, imagen_producto, id_producto_talla, id_producto_color
+        $sql = 'SELECT id_detalle_pedido, detalles_productos.id_detalle_producto,  nombre_producto, cantidad_producto, detalles_pedidos.precio_producto, imagen_producto, id_producto_talla, id_producto_color
                 FROM detalles_pedidos
                 INNER JOIN pedidos ON pedidos.id_pedido = detalles_pedidos.id_pedido
                 INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
@@ -88,5 +88,12 @@ class DetallesPedidosHandler
                 WHERE id_pedido = ?;';
         $params = array($this->id_pedido);
         return Database::getRows($sql, $params);
+    }
+
+    public function removeDetail()
+    {
+        $sql = 'call removerDetalle(?, ?)';
+        $params = array($this->id, $this->id_detalle_producto);
+        return Database::executeRow($sql, $params);
     }
 }
