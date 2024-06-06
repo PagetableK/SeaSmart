@@ -98,7 +98,7 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Autenticación correcta';
                     $result['username'] = $_SESSION['correoCliente'];
                 } else {
-                    $result['error'] = 'Credenciales incorrectas';
+                    $result['error'] = 'Su cuenta ha sido desactivada';
                 }
                 break;
                

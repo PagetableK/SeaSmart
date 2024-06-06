@@ -151,7 +151,7 @@ class ClienteHandler
     // Método para comprobar el usuario y contraseña.
     public function checkUser($correo, $contra)
     {
-        $sql = 'SELECT id_cliente, contra_cliente, correo_cliente
+        $sql = 'SELECT id_cliente, contra_cliente, correo_cliente, estado_cliente
                 FROM clientes
                 WHERE correo_cliente = ?';
         $params = array($correo);
@@ -161,7 +161,7 @@ class ClienteHandler
         if ($data) {
             // Se valida que la contraseña ingresada en el campo de login convertida a hash
             // sea igual a la contraseña almacenada en la bd.
-            if (password_verify($contra, $data['contra_cliente'])) {
+            if (password_verify($contra, $data['contra_cliente']) && $data['estado_cliente'] == 1) {
                 $this->id = $data['id_cliente'];
                 $this->correo = $data['correo_cliente'];
                 $_SESSION['idCliente'] = $this->id;
