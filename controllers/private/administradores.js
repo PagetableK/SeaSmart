@@ -76,6 +76,7 @@ const cargarTabla = async (form = null) => {
                 // Se valida el estado del administrador.
                 estadoCliente = validarEstado(row.estado_administrador);
                 // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+
                 CUERPO_ADMIN.innerHTML += `
                 <tr>
                     <td>${row.nombre_administrador}</td>
