@@ -23,85 +23,21 @@ class PedidoData extends PedidoHandler
             $this->id = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador del producto es incorrecto';
+            $this->data_error = 'El identificador del pedido es incorrecto';
             return false;
         }
     }
 
-    public function setNombre($value, $min = 2, $max = 50)
+    public function setDireccion($value, $min = 10, $max = 100)
     {
         if (!Validator::validateAlphanumeric($value)) {
-            $this->data_error = 'El nombre debe ser un valor alfanumérico';
+            $this->data_error = 'La dirección debe ser un valor alfanumérico';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->nombre = $value;
+            $this->direccion = $value;
             return true;
         } else {
-            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        }
-    }
-
-    public function setDescripcion($value, $min = 2, $max = 250)
-    {
-        if (!Validator::validateString($value)) {
-            $this->data_error = 'La descripción contiene caracteres prohibidos';
-            return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->descripcion = $value;
-            return true;
-        } else {
-            $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        }
-    }
-
-    public function setPrecio($value)
-    {
-        if (Validator::validateMoney($value)) {
-            $this->precio = $value;
-            return true;
-        } else {
-            $this->data_error = 'El precio debe ser un número positivo';
-            return false;
-        }
-    }
-
-    public function setExistencias($value)
-    {
-        if (Validator::validateNaturalNumber($value)) {
-            $this->existencias = $value;
-            return true;
-        } else {
-            $this->data_error = 'Las existencias debe ser un número entero positivo';
-            return false;
-        }
-    }
-
-    public function setImagen($file, $filename = null)
-    {
-        if (Validator::validateImageFile($file, 1000)) {
-            $this->imagen = Validator::getFileName();
-            return true;
-        } elseif (Validator::getFileError()) {
-            $this->data_error = Validator::getFileError();
-            return false;
-        } elseif ($filename) {
-            $this->imagen = $filename;
-            return true;
-        } else {
-            $this->imagen = 'default.png';
-            return true;
-        }
-    }
-
-    public function setCategoria($value)
-    {
-        if (Validator::validateNaturalNumber($value)) {
-            $this->categoria = $value;
-            return true;
-        } else {
-            $this->data_error = 'El identificador de la categoría es incorrecto';
+            $this->data_error = 'La dirección debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
         }
     }
@@ -113,17 +49,6 @@ class PedidoData extends PedidoHandler
             return true;
         } else {
             $this->data_error = 'Estado incorrecto';
-            return false;
-        }
-    }
-
-    public function setFilename()
-    {
-        if ($data = $this->readFilename()) {
-            $this->filename = $data['imagen_producto'];
-            return true;
-        } else {
-            $this->data_error = 'Producto inexistente';
             return false;
         }
     }

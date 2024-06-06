@@ -6,6 +6,8 @@ require_once('../../models/data/cliente_data.php');
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
+    $_SESSION['idCliente'] = 1;
+    $_SESSION['correoCliente'] = 'john.doe@example.com';
     // Se instancia la clase correspondiente.
     $cliente = new ClienteData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.

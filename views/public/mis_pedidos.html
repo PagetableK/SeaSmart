@@ -17,6 +17,7 @@
 </head>
 
 <!-- Cuerpo de la página -->
+
 <body>
     <!-- Contenido principal de la página -->
     <main>
@@ -28,74 +29,22 @@
 
                 </div>
                 <!-- Imagen de bienvenida -->
-                <div class="col-12 col-lg-8">
-                    <hr>
-                    <div class="row mt-5">
-                        <h3>Pedido 1</h3>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12 col-sm-3 col-md-2 col-lg-2">
-                                    <img src="../../resources/img/camion-envio.png" alt="Goggles" class="img-fluid">
-                                </div>
-                                <div class="col-12 col-sm-2 d-flex align-items-center justify-content-center">
-                                    <p class="fw-bold fs-6">En camino</p>
-                                </div>
-                                <div class="col-12 col-sm-7">
-                                    <div class="row d-flex flex-column">
-                                        <div class="col">
-                                            <p class="text-danger fw-bold text-center">Total del pedido: $12.00</p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="text-center"><a href="#">Ver detalles</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-12 col-lg-8" id="contenedorPedidos">
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para ver información del pedido -->
+        <div class="modal" id="modalDetalles">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Productos del pedido</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <hr>
-                    <div class="row mt-5">
-                        <h3>Pedido 2</h3>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12 col-sm-3 col-md-2">
-                                    <img src="../../resources/img/camion-envio.png" alt="Goggles" class="img-fluid">
-                                </div>
-                                <div class="col-12 col-sm-2 d-flex align-items-center justify-content-center">
-                                    <p class="fw-bold fs-6">En camino</p>
-                                </div>
-                                <div class="col-12 col-sm-7">
-                                    <div class="row d-flex flex-column">
-                                        <div class="col">
-                                            <p class="text-danger fw-bold text-center">Total del pedido: $12.00</p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="text-center"><a href="#">Ver detalles</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row mt-5">
-                        <h3>Pedido 1</h3>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-6">
-                                    <img src="../../resources/img/goggles.jpg" alt="Goggles" class="img-fluid">
-                                </div>
-                                <div class="col-6">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h5>Goggles color rosa</h5>
-                                            <p>Cantidad: 1</p>
-                                            <p>Precio: $12.00</p>
-                                            <p>SubTotal: $12.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="modal-body">
+                        <div class="col-12" id="contenedorProductos">
+
                         </div>
                     </div>
                 </div>

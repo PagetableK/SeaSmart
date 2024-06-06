@@ -17,7 +17,7 @@ MENU_CUENTA.insertAdjacentHTML('afterbegin', `
             </div>
         </div>
         <!-- Botones del menú -->
-        <div class="row gap-3 d-flex flex-column mb-5 mt-4">
+        <div class="row gap-3 d-flex flex-md-row flex-lg-column mb-5 mt-4">
             <!-- Botón mis pedidos -->
             <div class="col d-flex justify-content-center">
                 <div class="vr"></div>
@@ -46,3 +46,7 @@ MENU_CUENTA.insertAdjacentHTML('afterbegin', `
     </div>
     `
 );
+
+// if(){
+
+// }
