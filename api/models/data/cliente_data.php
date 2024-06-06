@@ -15,6 +15,8 @@ class ClienteData extends ClienteHandler
     /*
     *  Métodos para validar y asignar los valores de los atributos.
     */
+
+    // Método para establecer el ID del cliente.
     public function setId($valor)
     {
         if(Validator::validateNaturalNumber($valor)){
@@ -22,11 +24,12 @@ class ClienteData extends ClienteHandler
             return true;
         }
         else{
-            $this->info_error = 'El identificador del administrador es correcto';
+            $this->info_error = 'El identificador del cliente es correcto';
             return false;
         }
     }
 
+    // Método para establecer el nombre del cliente.
     public function setNombre($valor, $min = 4, $max = 20)
     {
         if (!Validator::validateAlphabetic($valor)) {
@@ -41,7 +44,7 @@ class ClienteData extends ClienteHandler
         }
     }
 
-    
+    // Método para establecer el apellido del cliente.
     public function setApellido($valor, $min = 4, $max = 20)
     {
         if (!Validator::validateAlphabetic($valor)) {
@@ -56,26 +59,31 @@ class ClienteData extends ClienteHandler
         }
     }
 
-    public function setCorreo($valor, $boolean, $min = 8, $max = 100)
+    // Método para establecer el correo del cliente.
+    public function setCorreo($valor, $min = 8, $max = 100)
     {
-        if (!Validator::validateEmail($valor)) {
-            $this->info_error = 'El correo no es válido';
+    if (!Validator::validateEmail($valor)) {
+        $this->info_error = 'El correo no es válido';
+        return false;
+    }
+    elseif (Validator::validateLength($valor, $min, $max)) {
+        // Verifica si el correo ya existe en la base de datos
+        if ($this->checkDuplicate($valor)) {
+            $this->info_error = 'El correo ingresado ya existe';
             return false;
-        } else if($boolean and !$this->checkDuplicateWithId($valor)){
-            $this->correo = $valor;
-            return true;
-        } else if($this->checkDuplicate($valor)){
-            $this->info_error = 'El correo ya está siendo usado por otro cliente';
-            return false;
-        } elseif (Validator::validateLength($valor, $min, $max)) {
-            $this->correo = $valor;
-            return true;
         } else {
-            $this->info_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
+            // Si todas las validaciones pasan, establece el correo
+            $this->correo = $valor;
+            return true;
         }
     }
+    else {
+        $this->info_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
+        return false;
+    }
+    }
 
+    // Método para establecer la contraseña del cliente.
     public function setContra($valor)
     {
         if (Validator::validatePassword($valor)) {
@@ -87,16 +95,14 @@ class ClienteData extends ClienteHandler
         }
     }
 
-    public function setDUI($value, $boolean)
+    // Método para establecer el DUI del cliente.
+    public function setDUI($value)
     {
         if (!Validator::validateDUI($value)) {
             $this->info_error = 'El DUI debe tener el formato ########-#';
             return false;
-        } else if($boolean and !$this->checkDuplicateWithId($value)){
-            $this->dui = $value;
-            return true;
         } elseif($this->checkDuplicate($value)) {
-            $this->info_error = 'El DUI ingresado está siendo utilizado por otro cliente';
+            $this->info_error = 'El DUI ingresado ya existe';
             return false;
         } else {
             $this->dui = $value;
@@ -104,6 +110,7 @@ class ClienteData extends ClienteHandler
         }
     }
 
+    // Método para establecer el estado del cliente.
     public function setEstado($value)
     {
         if (Validator::validateBoolean($value)) {
@@ -115,43 +122,37 @@ class ClienteData extends ClienteHandler
         }
     }
 
-    public function setTelefono($value, $boolean)
+    // Método para establecer el teléfono móvil del cliente.
+    public function setTelefono($value)
     {
-        if($boolean and !$this->checkDuplicateWithId($value)){
-            $this->telefono = $value;
-            return true;
-        } else if($this->checkDuplicate($value)){
-            $this->info_error = 'El teléfono móvil ya está siendo usado';
+        if (!Validator::validatePhone($value)) {
+            $this->info_error = 'El teléfono debe iniciar con el formato (6, 7)###-####';
             return false;
-        }  elseif (Validator::validatePhone($value)) {
-            $this->telefono = $value;
-            return true;
+        } elseif($this->checkDuplicate($value)) {
+            $this->info_error = 'El teléfono ingresado ya esta siendo usado por otro cliente';
+            return false;
         } else {
-            $this->info_error = 'El teléfono debe tener el formato ####-####';
-            return false;
+            $this->telefono = $value;
+            return true;
         }
     }
 
-    public function setTelefonoFijo($value, $boolean)
+    // Método para establecer el teléfono fijo del cliente.
+    public function setTelefonoFijo($value)
     {
-        if($value == null){
-            return true;
-        } else if($boolean and !$this->checkDuplicateWithId($value)){
+        if (!Validator::validatePhone($value)) {
+            $this->info_error = 'El teléfono debe iniciar con el formato (2)###-####';
+            return false;
+        } elseif($this->checkDuplicate($value)) {
+            $this->info_error = 'El teléfono fijo ingresado ya esta siendo usado por otro cliente';
+            return false;
+        } else {
             $this->telefono_fijo = $value;
             return true;
-        } else if($this->checkDuplicate($value)){
-            $this->info_error = 'El teléfono fijo ya está siendo usado';
-            return false;
-        }
-        else if (Validator::validatePhone($value)) {
-            $this->telefono_fijo = $value;
-            return true;
-        }  else {
-            $this->info_error = 'El teléfono fijo debe tener el formato ####-####';
-            return false;
         }
     }
 
+    // Método para obtener el mensaje de error.
     public function getDataError()
     {
         return $this->info_error;

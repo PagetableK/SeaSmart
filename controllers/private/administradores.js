@@ -151,6 +151,9 @@ const cargarTabla = async (form = null) => {
                                 <button type="button" class="btn btn-danger" onclick="abrirEliminarCliente(${row.id_cliente})">
                                     <img src="../../resources/img/eliminar.png" alt="lapizEliminar" width="30px">
                                 </button>
+                                <button type="button" class="btn btn-primary" onclick="abrirDirecciones(${row.id_cliente})">
+                                    <img src="../../resources/img/hogar.png" alt="direccionesVer" width="30px">
+                                </button>
                             </td>
                         </tr>
                     `;

@@ -72,7 +72,7 @@ const cargarPlantilla = async (tipoNavbar) => {
             </nav>
         </header>
         `);
-    } else if(tipoNavbar == 2){
+    } else if (tipoNavbar == 2) {
         MAIN.insertAdjacentHTML('beforebegin', `
         <header>
             <nav class="navbar navbar-expand-lg">
@@ -93,7 +93,7 @@ const cargarPlantilla = async (tipoNavbar) => {
             </nav>
         </header>
         `);
-    } else if(tipoNavbar == 3){
+    } else if (tipoNavbar == 3) {
         MAIN.insertAdjacentHTML('beforebegin', `
         <header>
             <nav class="navbar navbar-expand-lg">
@@ -160,21 +160,36 @@ const cargarPlantilla = async (tipoNavbar) => {
             `);
 
             OPCIONES_USUARIO.insertAdjacentHTML('afterbegin', `
-            <li><a class="dropdown-item px-5 text-center" href="mi_cuenta.html" id="miCuenta">Mi cuenta</a></li>
-            <li><a class="dropdown-item px-5 text-center botonAbajo" href="index.html" id="cerrarSesion">Cerrar sesión<img src="../../resources/img/logout.png" alt="salir" class="ms-2" width="20px" height="20px"></a></li>
+                <li>
+                    <a class="dropdown-item px-5 text-center" href="mi_cuenta.html" id="miCuenta">
+                        Mi cuenta
+                    </a>
+                </li>
+                <li>
+                    <button onclick="logOut()" class="dropdown-item px-5 text-center botonAbajo" id="cerrarSesion" style="background: none; border: none; padding: 0;">
+                        Cerrar sesión <img src="../../resources/img/logout.png" alt="salir" class="ms-2" width="20px" height="20px">
+                    </button>
+                </li>
             `);
-
         }
 
     } else {
         // AGREGAR BOTONES DE INICIAR SESIÓN Y REGISTRARSE
-
         if (tipoNavbar == 1) {
             OPCIONES_USUARIO.insertAdjacentHTML('afterbegin', `
-            <li><a class="dropdown-item pe-5 ps-5 text-center" href="inicio_sesion.html" id="btnLogin">Iniciar sesión</a></li>
-            <li><a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="registro.html" id="btnRegistro">Registrarse</a></li>
+            <li>
+                <a class="dropdown-item pe-5 ps-5 text-center" href="inicio_sesion.html" id="btnLogin">
+                    Iniciar sesión
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item pe-5 ps-5 text-center botonAbajo" href="registro.html" id="btnRegistro">
+                    Registrarse
+                </a>
+            </li>
             `);
-
+        } else if(tipoNavbar == 3){
+            window.location.href = "index.html";
         }
     }
 
@@ -194,7 +209,9 @@ const cargarPlantilla = async (tipoNavbar) => {
                     <h6>Contáctanos</h6>
                     <div>
                         <a href="https://facebook.com" target="_blank"><img src="../../resources/img/facebook.png" alt="facebook"></a>
-                        <a href="https://instagram.com/sea__smart/" target="_blank"><img src="../../resources/img/instagram.png" alt="instagram"></a>
+                        <a href="https://instagram.com/sea__smart/" target="_blank">
+                            <img src="../../resources/img/instagram.png" alt="instagram">
+                        </a>
                         <a href="https://web.whatsapp.com/" target="_blank"><img src="../../resources/img/whatsapp.png" alt="whatsapp"></a>
                     </div>
                 </div>
@@ -202,4 +219,25 @@ const cargarPlantilla = async (tipoNavbar) => {
         </nav>
     </footer>
     `);
+
+    /*
+*   Función asíncrona para cerrar la sesión del usuario.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+    const logOut = async () => {
+        // Se muestra un mensaje de confirmación y se captura la respuesta en una constante.
+        const RESPONSE = await confirmAction('¿Está seguro de cerrar la sesión?');
+        // Se verifica la respuesta del mensaje.
+        if (RESPONSE) {
+            // Petición para eliminar la sesión.
+            const DATA = await fetchData(USER_API, 'logOut');
+            // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+            if (DATA.status) {
+                sweetAlert(1, DATA.message, true, 'index.html');
+            } else {
+                sweetAlert(2, DATA.exception, false);
+            }
+        }
+    }
 }

@@ -24,8 +24,17 @@ class Database
             self::$connection = new PDO('mysql:host=' . SERVER . ';dbname=' . DATABASE, USERNAME, PASSWORD);
             // Se prepara la sentencia SQL.
             self::$statement = self::$connection->prepare($query);
+            // $p1 = 1;
+            // $p2 = 2;
+            // $p3 = 3;
+            // $p4 = 4;
+            // self::$statement->bindParam(1,$p1);
+            // self::$statement->bindParam(2,$p2);
+            // self::$statement->bindParam(3,$p3);
+            // self::$statement->bindParam(4,$p4);
             // Se ejecuta la sentencia preparada y se retorna el resultado.
             return self::$statement->execute($values);
+            // return self::$statement->execute();
         } catch (PDOException $error) {
             // Se obtiene el código y el mensaje de la excepción para establecer un error personalizado.
             self::setException($error->getCode(), $error->getMessage());

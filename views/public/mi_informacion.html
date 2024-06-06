@@ -29,7 +29,7 @@
                 <div class="col d-flex flex-column" id="menu_cuenta">
 
                 </div>
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-xl-8">
                     <form class="">
                         <fieldset class="row d-flex" id="contenedorInfo">
 
@@ -89,7 +89,6 @@
                                             id="txtTelefono_fijo" disabled>
                                     </div>
                                     <div class="col-1 mb-3 d-flex align-items-end">
-
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +99,7 @@
                                 </button>
                             </div>
                             <p class="fw-bold fs-5 mt-5">Mis direcciones de envío</p>
-                            <div class="row d-flex" id="contenedorDirecciones">
+                            <div class="row d-flex row-gap-2 column-gap-5 pb-5 justify-content-center justify-content-md-start" id="contenedorDirecciones">
                             </div>
                         </fieldset>
                     </form>
@@ -109,7 +108,7 @@
         </div>
     </main>
 
-    <!-- Modal agregar -->
+    <!-- Modal de direcciones -->
     <div class="modal fade" id="modalDireccion">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -197,6 +196,21 @@
                     </form>
                 </div>
 
+    <!-- Modal eliminar -->
+    <div class="modal fade" id="modalBorrarDireccion">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="formEliminar">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="tituloModalEliminar"></h1>
+                        <input type="number" class="d-none" id="idDireccionEliminar" name="idDireccion">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

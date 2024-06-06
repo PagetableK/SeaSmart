@@ -19,10 +19,11 @@ html{
 
 .botonAbajo{
     margin-top: 8px;
-    background-color: #4285F4;
+    background-color: #f44242 !important; 
     color: white;
     --bs-dropdown-link-hover-bg: #4285F4;
     --bs-dropdown-link-hover-color: #ffffff;
+    padding: 10px !important;
 }
 
 a{

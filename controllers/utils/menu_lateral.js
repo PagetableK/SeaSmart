@@ -1,5 +1,5 @@
 const MENU_CUENTA = document.getElementById('menu_cuenta');
-
+ 
 MENU_CUENTA.insertAdjacentHTML('afterbegin', `
     <!-- Título de menú -->
     <div class="container-fluid px-5">
@@ -17,7 +17,7 @@ MENU_CUENTA.insertAdjacentHTML('afterbegin', `
             </div>
         </div>
         <!-- Botones del menú -->
-        <div class="row gap-3 d-flex flex-column mb-5 mt-4">
+        <div class="row gap-3 d-flex flex-md-row flex-lg-column mb-5 mt-4">
             <!-- Botón mis pedidos -->
             <div class="col d-flex justify-content-center">
                 <div class="vr"></div>
@@ -35,14 +35,16 @@ MENU_CUENTA.insertAdjacentHTML('afterbegin', `
                 </div>
                 <!-- Botón cerrar sesión -->
                 <div class="col d-flex justify-content-center ms-1">
-                    <a href="index.html">
-                        <button class="btn btn-primary rounded-pill fw-semibold" type="button">
-                            Cerrar sesión
-                            <img src="../../resources/img/logout.png" alt="Cerrar Sesion" width="20px">
-                        </button>
-                    </a>
+            <button class="btn btn-primary rounded-pill fw-semibold" type="button" onclick="logOut()">
+                Cerrar sesión
+                <img src="../../resources/img/logout.png" alt="Cerrar Sesion" width="20px">
+            </button>
             </div>
         </div>
     </div>
     `
 );
+ 
+// if(){
+ 
+// } 

@@ -41,3 +41,8 @@
         overflow-y: auto;
     }
 }
+
+#contenedorDirecciones{
+    max-height: 830px;
+    overflow-y: auto;
+}

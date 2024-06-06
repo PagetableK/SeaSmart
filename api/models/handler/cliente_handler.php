@@ -2,7 +2,7 @@
 // Se incluye la clase para trabajar con la base de datos.
 require_once('../../helpers/database.php');
 /*
-*	Clase para manejar el comportamiento de los datos de la tabla CLIENTE.
+*   Clase para manejar el comportamiento de los datos de la tabla CLIENTE.
 */
 class ClienteHandler
 {
@@ -18,27 +18,12 @@ class ClienteHandler
     protected $telefono = null;
     protected $telefono_fijo = null;
     protected $estado = null;
-
+ 
     /*
     *   Métodos para gestionar la cuenta del cliente.
     */
-    public function checkUser($mail, $password)
-    {
-        $sql = 'SELECT id_cliente, correo_cliente, contra_cliente, estado_cliente
-                FROM clientes
-                WHERE correo_cliente = ?';
-        $params = array($mail);
-        $data = Database::getRow($sql, $params);
-        if (password_verify($password, $data['contra_cliente'])) {
-            $this->id = $data['id_cliente'];
-            $this->correo = $data['correo_cliente'];
-            $this->estado = $data['estado_cliente'];
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+ 
+    // Método para verificar el estado del cliente.
     public function checkStatus()
     {
         if ($this->estado) {
@@ -49,7 +34,8 @@ class ClienteHandler
             return false;
         }
     }
-
+ 
+    // Método para cambiar la contraseña del cliente.
     public function changePassword()
     {
         $sql = 'UPDATE clientes
@@ -58,7 +44,8 @@ class ClienteHandler
         $params = array($this->contra, $this->id);
         return Database::executeRow($sql, $params);
     }
-
+ 
+    // Método para editar el perfil del cliente.
     public function editProfile()
     {
         $sql = 'UPDATE clientes
@@ -67,7 +54,8 @@ class ClienteHandler
         $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->telefono_fijo, $this->id);
         return Database::executeRow($sql, $params);
     }
-
+ 
+    // Método para cambiar el estado del cliente.
     public function changeStatus()
     {
         $sql = 'UPDATE clientes
@@ -76,10 +64,12 @@ class ClienteHandler
         $params = array($this->estado, $this->id);
         return Database::executeRow($sql, $params);
     }
-
+ 
     /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
     */
+
+    // Método para buscar clientes.
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
@@ -90,7 +80,8 @@ class ClienteHandler
         $params = array($value, $value, $value);
         return Database::getRows($sql, $params);
     }
-
+ 
+    // Método para crear un nuevo cliente.
     public function createRow()
     {
         $sql = 'INSERT INTO clientes(nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_movil, contra_cliente, telefono_fijo)
@@ -98,7 +89,8 @@ class ClienteHandler
         $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->contra, $this->telefono_fijo);
         return Database::executeRow($sql, $params);
     }
-
+ 
+    // Método para leer todos los clientes.
     public function readAll()
     {
         $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, estado_cliente
@@ -106,7 +98,8 @@ class ClienteHandler
                 ORDER BY apellido_cliente';
         return Database::getRows($sql);
     }
-
+ 
+    // Método para leer un cliente específico.
     public function readOne()
     {
         $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_movil, estado_cliente, telefono_fijo
@@ -115,7 +108,8 @@ class ClienteHandler
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
-
+ 
+     // Método para actualizar un cliente.
     public function updateRow()
     {
         $sql = 'UPDATE clientes
@@ -125,6 +119,7 @@ class ClienteHandler
         return Database::executeRow($sql, $params);
     }
 
+    // Método para eliminar un cliente.
     public function deleteRow()
     {
         $sql = 'DELETE FROM clientes
@@ -132,7 +127,8 @@ class ClienteHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
-
+ 
+    // Método para comprobar duplicados.
     public function checkDuplicate($value)
     {
         $sql = 'SELECT id_cliente
@@ -141,7 +137,8 @@ class ClienteHandler
         $params = array($value, $value, $value, $value);
         return Database::getRow($sql, $params);
     }
-
+ 
+    // Método para comprobar duplicados por valor excluyendo un ID.
     public function checkDuplicateWithId($value)
     {
         $sql = 'SELECT id_cliente
@@ -150,4 +147,34 @@ class ClienteHandler
         $params = array($value, $value, $value, $value, $this->id);
         return Database::getRow($sql, $params);
     }
+ 
+    // Método para comprobar el usuario y contraseña.
+    public function checkUser($correo, $contra)
+    {
+        $sql = 'SELECT id_cliente, contra_cliente, correo_cliente, estado_cliente
+                FROM clientes
+                WHERE correo_cliente = ?';
+        $params = array($correo);
+        $data = Database::getRow($sql, $params);
+ 
+        // Se valida que el query retorne un registro de la tabla.
+        if ($data) {
+            // Se valida que la contraseña ingresada en el campo de login convertida a hash
+            // sea igual a la contraseña almacenada en la bd.
+            if (password_verify($contra, $data['contra_cliente']) && $data['estado_cliente'] == 1) {
+                $this->id = $data['id_cliente'];
+                $this->correo = $data['correo_cliente'];
+                $_SESSION['idCliente'] = $this->id;
+                $_SESSION['correoCliente'] = $this->correo;
+                return true;
+            } else {
+                // Si la contraseña no es correcta se devuelve false.
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+ 
+ 
 }
