@@ -70,7 +70,56 @@ if (isset($_GET['action'])) {
                 $result['error'] = 'No hay existencias registradas';
             }
             break;
-            // La acción readImages retorna las imágenes de los detalles de productos registrados.
+            // La acción readDetailId retorna el id del detalle del producto, además la acción se utiliza para validar que
+            // el producto esté disponible y la cantidad requerida del producto no sea mayor a la cantidad en stock.
+        case 'readDetailId':
+            if (!$detalle_producto->setIdProducto($_POST['idProducto'])) {
+                $result['error'] = $detalle_producto->getDataError();
+            } elseif (!$result['dataset'] = $detalle_producto->readDetailId()) {
+                $result['error'] = 'Detalle de producto no disponible';
+            } elseif (!($_POST['cantidadRequerida'] <= $result['dataset']['existencia_producto'])) {
+                $result['error'] = 'La cantidad requerida del producto es mayor a la cantidad en stock';
+                $result['message'] = $result['dataset']['existencia_producto'];
+            } else {
+                $result['status'] = 1;
+            }
+            break;
+            // La acción readDetailIdWithColor retorna el id del detalle del producto con un color en específico, además la acción se utiliza para validar que
+            // el producto esté disponible y la cantidad requerida del producto no sea mayor a la cantidad en stock.
+        case 'readDetailIdWithColor':
+            if (
+                !$detalle_producto->setIdProducto($_POST['idProducto']) or
+                !$detalle_producto->setIdColor($_POST['idColor'])
+            ) {
+                $result['error'] = $detalle_producto->getDataError();
+            } elseif (!$result['dataset'] = $detalle_producto->readDetailIdWithColor()) {
+                $result['error'] = 'Detalle de producto no disponible';
+            } elseif (!($_POST['cantidadRequerida'] <= $result['dataset']['existencia_producto'])) {
+                $result['error'] = 'La cantidad requerida del producto es mayor a la cantidad en stock';
+                $result['message'] = $result['dataset']['existencia_producto'];
+            } else {
+                $result['status'] = 1;
+            }
+            break;
+            // La acción readDetailIdWithSize retorna el id del detalle del producto con una talla en específico, además la acción se utiliza para validar que
+            // el producto esté disponible y la cantidad requerida del producto no sea mayor a la cantidad en stock.
+        case 'readDetailIdWithSize':
+            if (
+                !$detalle_producto->setIdProducto($_POST['idProducto']) or
+                !$detalle_producto->setIdTalla($_POST['idTalla'])
+            ) {
+                $result['error'] = $detalle_producto->getDataError();
+            } elseif (!$result['dataset'] = $detalle_producto->readDetailIdWithSize()) {
+                $result['error'] = 'Detalle de producto no disponible';
+            } elseif (!($_POST['cantidadRequerida'] <= $result['dataset']['existencia_producto'])) {
+                $result['error'] = 'La cantidad requerida del producto es mayor a la cantidad en stock';
+                $result['message'] = $result['dataset']['existencia_producto'];
+            } else {
+                $result['status'] = 1;
+            }
+            break;
+            // La acción readDetailIdWithColorAndSize retorna el id del detalle del producto con 1 color y talla en específico, además la acción se utiliza para validar que
+            // el producto esté disponible y la cantidad requerida del producto no sea mayor a la cantidad en stock.
         case 'readDetailIdWithColorAndSize':
             if (
                 !$detalle_producto->setIdProducto($_POST['idProducto']) or
@@ -85,6 +134,26 @@ if (isset($_GET['action'])) {
                 $result['message'] = $result['dataset']['existencia_producto'];
             } else {
                 $result['status'] = 1;
+            }
+            break;
+            // La acción readColorFromId retorna el nombre de un color a partir de su id.
+        case 'readColorFromId':
+            if(!$detalle_producto->setIdColor($_POST['idColor'])){
+                $result['error'] = $detalle_producto->getDataError();
+            } elseif($result['dataset'] = $detalle_producto->readColorFromId()){
+                $result['status'] = 1;
+            } else{
+                $result['error'] = 'Ocurrió un error inesperado';
+            }
+            break;
+            // La acción readSizeFromId retorna el nombre de una talla a partir de su id.
+        case 'readSizeFromId':
+            if(!$detalle_producto->setIdTalla($_POST['idTalla'])){
+                $result['error'] = $detalle_producto->getDataError();
+            } elseif($result['dataset'] = $detalle_producto->readSizeFromId()){
+                $result['status'] = 1;
+            } else{
+                $result['error'] = 'Ocurrió un error inesperado';
             }
             break;
             // Si no se encuentra la acción a realizar se muestra el error.

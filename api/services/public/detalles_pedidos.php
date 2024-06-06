@@ -34,6 +34,17 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'El producto ya se encuentra agregado al carrito';
                 }
                 break;
+                // La acción readCartWithDetail valida que un detalle de producto en específico no se haya agregado al carrito con anterioridad.
+            case 'readCartWithDetail':
+                if(!$detalle_pedido->setIdDetalleProducto($_POST['idDetalleProducto'])){
+                    $result['error'] = $detalle_pedido->getDataError();
+                } elseif(!$result['dataset'] = $detalle_pedido->readCartWithDetail()){
+                    $result['status'] = 1;
+                } else{
+                    $result['error'] = 'El detalle del producto ya ha sido agregado al carrito';
+                }
+                break;
+                // La acción addDetail permite agregar un detalle de pedido con el id del detalle del producto al carrito. 
             case 'addDetail':
                 if(
                     !$detalle_pedido->setIdDetalleProducto($_POST['idDetalleProducto']) or
@@ -46,6 +57,15 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Producto agregado correctamente';
                 } else{
                     $result['error'] = 'Ocurrió un error al agregar el producto al carrito, intentélo de nuevo más tarde';
+                }
+                break;
+                // La acción readCart selecciona todos los productos agregados al carrito.
+            case 'readCart':
+                if ($result['dataset'] = $detalle_pedido->readCart()){
+                    $result['status'] = 1;
+                    $result['message'] = count($result['dataset']) . ' productos';
+                } else{
+                    $result['error'] = 'No se ha agregado ningún producto al carrito';
                 }
                 break;
                 // Si no se encuentra la acción a realizar se muestra el error.

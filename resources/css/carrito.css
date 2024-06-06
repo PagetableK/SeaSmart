@@ -6,11 +6,7 @@ img.cantidad{
     cursor: pointer;
 }
 
-#hr{
-    border-width: 4px;
-}
-
-#producto_hr{
+.producto_hr{
     border-width: 4px;
 }
 

@@ -12,7 +12,7 @@ class PedidoHandler
     protected $id = null;
     protected $fecha = null;
     protected $estado = null;
-
+    protected $direccion = null;
 
     /*
      *   Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
@@ -78,5 +78,14 @@ class PedidoHandler
                 return false;
             }
         }
+    }
+
+    public function finishOrder()
+    {
+        $sql = 'UPDATE pedidos
+                SET estado_pedido = "Siendo enviado", direccion = ?
+                WHERE id_pedido = (SELECT id_pedido FROM pedidos WHERE estado_pedido = "En carrito" AND id_cliente = ?);';
+        $params = array($this->direccion, $_SESSION['idCliente']);
+        return Database::executeRow($sql, $params);
     }
 }

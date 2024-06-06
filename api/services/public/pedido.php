@@ -15,7 +15,7 @@ if (isset($_GET['action'])) {
         $result['session'] = 1;
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
-            // Acción para crear un pedido del carrito.
+                // Acción para crear/iniciar un pedido del carrito.
             case 'startOrder':
                 if (!$pedido->startOrder()) {
                     $result['error'] = 'Ocurrió un problema al iniciar el pedido';
@@ -24,6 +24,17 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Pedido iniciado correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al crear el pedido';
+                }
+                break;
+                // Acción para finalizar un pedido.
+            case 'finishOrder':
+                if(!$pedido->setDireccion($_POST['direccion'])){
+                    $result['error'] = $pedido->getDataError();
+                } elseif (!$pedido->finishOrder()) {
+                    $result['error'] = 'Ocurrió un problema al finalizar el pedido';
+                } else {
+                    $result['status'] = 1;
+                    $result['message'] = 'Pedido realizado correctamente';
                 }
                 break;
             default:
