@@ -161,9 +161,14 @@ const cargarPlantilla = async (tipoNavbar) => {
             `);
 
             OPCIONES_USUARIO.insertAdjacentHTML('afterbegin', `
-            <li><a class="dropdown-item px-5 text-center" href="mi_cuenta.html" id="miCuenta">Mi cuenta</a></li>
-            <li><a class="dropdown-item px-5 text-center botonAbajo" href="index.html" id="cerrarSesion">Cerrar sesión<img src="../../resources/img/logout.png" alt="salir" class="ms-2" width="20px" height="20px"></a></li>
-            `);
+        <li><a class="dropdown-item px-5 text-center" href="mi_cuenta.html" id="miCuenta">Mi cuenta</a></li>
+        <li>
+        <button onclick="logOut()" class="dropdown-item px-5 text-center botonAbajo" id="cerrarSesion" style="background: none; border: none; padding: 0;">
+            Cerrar sesión <img src="../../resources/img/logout.png" alt="salir" class="ms-2" width="20px" height="20px">
+        </button>
+        </li>
+`);
+
 
         }
 
@@ -203,4 +208,25 @@ const cargarPlantilla = async (tipoNavbar) => {
         </nav>
     </footer>
     `);
+
+    /*
+*   Función asíncrona para cerrar la sesión del usuario.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const logOut = async () => {
+    // Se muestra un mensaje de confirmación y se captura la respuesta en una constante.
+    const RESPONSE = await confirmAction('¿Está seguro de cerrar la sesión?');
+    // Se verifica la respuesta del mensaje.
+    if (RESPONSE) {
+        // Petición para eliminar la sesión.
+        const DATA = await fetchData(USER_API, 'logOut');
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            sweetAlert(1, DATA.message, true, 'index.html');
+        } else {
+            sweetAlert(2, DATA.exception, false);
+        }
+    }
+}
 }

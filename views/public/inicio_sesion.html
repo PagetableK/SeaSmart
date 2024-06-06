@@ -21,7 +21,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <!-- Formulario de inicio de sesión -->
-                <form class="col-11 col-sm-11 col-md-6 col-lg-5 border border-secondary rounded-5">
+                <form class="col-11 col-sm-11 col-md-6 col-lg-5 border border-secondary rounded-5" id="formLogin">
                     <!-- Div para ingresar credenciales de inicio de sesión -->
                     <!-- <div class="border border-secondary rounded-5"> -->
                     <div class="mt-5 mb-5 me-4 ms-4">
@@ -30,12 +30,13 @@
                         <div class="mb-4">
                             <label for="correoLogin" class="form-label">Correo electrónico</label>
                             <input type="email" class="form-control" id="correoLogin" required
-                                placeholder="juanadelcarmen@gmail.com">
+                                placeholder="juanadelcarmen@gmail.com" name="correo">
                         </div>
                         <div>
                             <label for="contraLogin" class="form-label">Contraseña</label>
                             <div class="mb-3 d-flex" id="contenedor_contra">
-                                <input type="password" class="form-control" id="contraLogin" required placeholder="•••••••••••">
+                                <input type="password" class="form-control" id="contraLogin" required placeholder="•••••••••••"
+                                name="contra">
                                 <div class="btn input-group-addon d-flex align-items-center justify-content-center"
                                     id="btnMostrar" onclick="Mostrar()">
                                     <img src="../../resources/img/ojo_ocultar.png" class="img-fluid" width="25px"
@@ -50,7 +51,7 @@
                         </div>
                         <p class="mb-4 text-center"><a class="link-offset-1" href="#">¿Olvidaste tu contraseña?</a></p>
                         <div class="d-grid gap-1">
-                            <button class="btn btn-dark rounded-pill" onclick="ValidarCampos()">Iniciar sesión</button>
+                            <button class="btn btn-dark rounded-pill" type="submit" id="btnEnviar">Iniciar sesión</button>
                         </div>
                     </div>
                     <!-- </div> -->
