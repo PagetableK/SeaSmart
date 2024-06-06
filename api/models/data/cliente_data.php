@@ -124,33 +124,39 @@ class ClienteData extends ClienteHandler
 
     // Método para establecer el teléfono móvil del cliente.
     public function setTelefono($value)
-    {
-        if (!Validator::validatePhone($value)) {
-            $this->info_error = 'El teléfono debe iniciar con el formato (6, 7)###-####';
-            return false;
-        } elseif($this->checkDuplicate($value)) {
-            $this->info_error = 'El teléfono ingresado ya esta siendo usado por otro cliente';
-            return false;
-        } else {
-            $this->telefono = $value;
-            return true;
-        }
+{
+    if (!Validator::validatePhone($value)) {
+        $this->info_error = 'El teléfono debe iniciar con el formato (6, 7)###-####';
+        return false;
+    } elseif ($this->checkDuplicate($value)) {
+        $this->info_error = 'El teléfono ingresado ya está siendo usado por otro cliente';
+        return false;
+    } elseif ($value == $this->telefono_fijo) {
+        $this->info_error = 'El teléfono móvil no puede ser igual al teléfono fijo';
+        return false;
+    } else {
+        $this->telefono = $value;
+        return true;
     }
+}
 
-    // Método para establecer el teléfono fijo del cliente.
-    public function setTelefonoFijo($value)
-    {
-        if (!Validator::validatePhone($value)) {
-            $this->info_error = 'El teléfono debe iniciar con el formato (2)###-####';
-            return false;
-        } elseif($this->checkDuplicate($value)) {
-            $this->info_error = 'El teléfono fijo ingresado ya esta siendo usado por otro cliente';
-            return false;
-        } else {
-            $this->telefono_fijo = $value;
-            return true;
-        }
+// Método para establecer el teléfono fijo del cliente.
+public function setTelefonoFijo($value)
+{
+    if (!Validator::validatePhone($value)) {
+        $this->info_error = 'El teléfono debe iniciar con el formato (2)###-####';
+        return false;
+    } elseif ($this->checkDuplicate($value)) {
+        $this->info_error = 'El teléfono fijo ingresado ya está siendo usado por otro cliente';
+        return false;
+    } elseif ($value == $this->telefono) {
+        $this->info_error = 'El teléfono fijo no puede ser igual al teléfono móvil';
+        return false;
+    } else {
+        $this->telefono_fijo = $value;
+        return true;
     }
+}
 
     // Método para obtener el mensaje de error.
     public function getDataError()
