@@ -16,8 +16,8 @@ if (isset($_GET['action'])) {
         switch ($_GET['action']) {
                 // La acción readOrderWithProduct retorna los detalles de pedidos que tienen un producto específico y el estado_pedido es 'Enviado'.
             case 'readOrderWithProduct':
-                if(!$detalle_pedido->setIdProducto($_POST['idProducto'])){
-                    $result['error'] = $detalle_pedido->getDataError(); 
+                if (!$detalle_pedido->setIdProducto($_POST['idProducto'])) {
+                    $result['error'] = $detalle_pedido->getDataError();
                 } elseif ($result['dataset'] = $detalle_pedido->readOrderWithProduct()) {
                     $result['status'] = 1;
                 } else {
@@ -26,8 +26,8 @@ if (isset($_GET['action'])) {
                 break;
                 // La acción readCartWithProduct retorna los detalles de pedidos que tienen un producto específico y el estado_pedido es 'En carrito'.
             case 'readCartWithProduct':
-                if(!$detalle_pedido->setIdProducto($_POST['idProducto'])){
-                    $result['error'] = $detalle_pedido->getDataError(); 
+                if (!$detalle_pedido->setIdProducto($_POST['idProducto'])) {
+                    $result['error'] = $detalle_pedido->getDataError();
                 } elseif (!$result['dataset'] = $detalle_pedido->readCartWithProduct()) {
                     $result['status'] = 1;
                 } else {
@@ -36,45 +36,58 @@ if (isset($_GET['action'])) {
                 break;
                 // La acción readCartWithDetail valida que un detalle de producto en específico no se haya agregado al carrito con anterioridad.
             case 'readCartWithDetail':
-                if(!$detalle_pedido->setIdDetalleProducto($_POST['idDetalleProducto'])){
+                if (!$detalle_pedido->setIdDetalleProducto($_POST['idDetalleProducto'])) {
                     $result['error'] = $detalle_pedido->getDataError();
-                } elseif(!$result['dataset'] = $detalle_pedido->readCartWithDetail()){
+                } elseif (!$result['dataset'] = $detalle_pedido->readCartWithDetail()) {
                     $result['status'] = 1;
-                } else{
+                } else {
                     $result['error'] = 'El detalle del producto ya ha sido agregado al carrito';
                 }
                 break;
                 // La acción addDetail permite agregar un detalle de pedido con el id del detalle del producto al carrito. 
             case 'addDetail':
-                if(
+                if (
                     !$detalle_pedido->setIdDetalleProducto($_POST['idDetalleProducto']) or
                     !$detalle_pedido->setPrecioProducto($_POST['precioProducto']) or
                     !$detalle_pedido->setCantidadProducto($_POST['cantidadRequerida'])
-                ){
+                ) {
                     $result['error'] = 'Ocurrió un error al agregar el producto al carrito, intentélo de nuevo más tarde';
-                } elseif($detalle_pedido->addDetail()){
+                } elseif ($detalle_pedido->addDetail()) {
                     $result['status'] = 1;
                     $result['message'] = 'Producto agregado correctamente';
-                } else{
+                } else {
                     $result['error'] = 'Ocurrió un error al agregar el producto al carrito, intentélo de nuevo más tarde';
                 }
                 break;
                 // La acción readCart selecciona todos los productos agregados al carrito.
             case 'readCart':
-                if ($result['dataset'] = $detalle_pedido->readCart()){
+                if ($result['dataset'] = $detalle_pedido->readCart()) {
                     $result['status'] = 1;
                     $result['message'] = count($result['dataset']) . ' productos';
-                } else{
+                } else {
                     $result['error'] = 'No se ha agregado ningún producto al carrito';
                 }
                 break;
-
-            case 'readDetails':
-                if(!$detalle_pedido->setIdPedido($_POST['idPedido'])){
+                // La acción readDetail permite remover un detalle de producto del carrito.
+            case 'removeDetail':
+                if(
+                    !$detalle_pedido->setId($_POST['idDetallePedido']) or
+                    !$detalle_pedido->setIdDetalleProducto($_POST['idDetalleProducto'])
+                ){
                     $result['error'] = $detalle_pedido->getDataError();
-                } elseif($result['dataset'] = $detalle_pedido->readDetails()){
+                } elseif($detalle_pedido->removeDetail()){
                     $result['status'] = 1;
+                    $result['message'] = 'Producto removido del carrito';
                 } else{
+                    $result['error'] = 'Ocurrió un error al remover el producto del carrito';
+                }
+                break;
+            case 'readDetails':
+                if (!$detalle_pedido->setIdPedido($_POST['idPedido'])) {
+                    $result['error'] = $detalle_pedido->getDataError();
+                } elseif ($result['dataset'] = $detalle_pedido->readDetails()) {
+                    $result['status'] = 1;
+                } else {
                     $result['error'] = 'Ocurrió un error al obtener los productos del pedido';
                 }
                 break;
