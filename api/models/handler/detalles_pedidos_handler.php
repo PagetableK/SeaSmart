@@ -68,11 +68,13 @@ class DetallesPedidosHandler
 
     public function readCart()
     {
-        $sql = 'SELECT detalles_productos.id_detalle_producto,  nombre_producto, cantidad_producto, detalles_pedidos.precio_producto, imagen_producto, id_producto_talla, id_producto_color
+        $sql = 'SELECT detalles_productos.id_detalle_producto,  nombre_producto, cantidad_producto, detalles_pedidos.precio_producto, imagen_producto, detalles_productos.id_producto_talla, detalles_productos.id_producto_color, talla, color_producto
                 FROM detalles_pedidos
                 INNER JOIN pedidos ON pedidos.id_pedido = detalles_pedidos.id_pedido
                 INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
                 INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
+                INNER JOIN productos_tallas ON productos_tallas.id_producto_talla = detalles_productos.id_producto_talla
+                INNER JOIN productos_colores ON productos_colores.id_producto_color = detalles_productos.id_producto_color
                 WHERE id_cliente = ?
                 AND estado_pedido = "En carrito";';
         $params = array($_SESSION['idCliente']);
