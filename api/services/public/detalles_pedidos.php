@@ -51,7 +51,7 @@ if (isset($_GET['action'])) {
                     !$detalle_pedido->setPrecioProducto($_POST['precioProducto']) or
                     !$detalle_pedido->setCantidadProducto($_POST['cantidadRequerida'])
                 ){
-                    $result['error'] = 'Ocurrió un error al agregar el producto al carrito, intentélo de nuevo más tarde';
+                    $result['error'] = $detalle_pedido->getDataError();
                 } elseif($detalle_pedido->addDetail()){
                     $result['status'] = 1;
                     $result['message'] = 'Producto agregado correctamente';
