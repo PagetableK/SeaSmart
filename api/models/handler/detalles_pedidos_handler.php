@@ -66,9 +66,23 @@ class DetallesPedidosHandler
         return Database::executeRow($sql, $params);
     }
 
+    public function updateDetail()
+    {
+        $sql = 'call actualizarDetalle(?, ?, ?);';
+        $params = array($this->cantidad_producto, $this->id_detalle_producto, $this->id);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function removeDetail()
+    {
+        $sql = 'call removerDetalle(?, ?, ?);';
+        $params = array($this->id, $this->id_detalle_producto, $_SESSION['idPedido']);
+        return Database::executeRow($sql, $params);
+    }
+
     public function readCart()
     {
-        $sql = 'SELECT detalles_productos.id_detalle_producto,  nombre_producto, cantidad_producto, detalles_pedidos.precio_producto, imagen_producto, detalles_productos.id_producto_talla, detalles_productos.id_producto_color, talla, color_producto
+        $sql = 'SELECT detalles_productos.id_detalle_producto,  nombre_producto, cantidad_producto, detalles_pedidos.precio_producto, imagen_producto, detalles_productos.id_producto_talla, detalles_productos.id_producto_color, talla, color_producto, existencia_producto, id_detalle_pedido
                 FROM detalles_pedidos
                 INNER JOIN pedidos ON pedidos.id_pedido = detalles_pedidos.id_pedido
                 INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
