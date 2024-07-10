@@ -147,7 +147,17 @@ class ClienteHandler
         $params = array($value, $value, $value, $value, $this->id);
         return Database::getRow($sql, $params);
     }
- 
+    
+    public function readProfile()
+    {
+        $sql = "SELECT id_cliente, nombre_cliente, apellido_cliente, dui_cliente, estado_cliente, telefono_movil, telefono_fijo, correo_cliente
+                FROM clientes
+                WHERE id_cliente = ?";
+        $params = array($_SESSION['idCliente']);
+        return Database::getRow($sql, $params);
+    }
+
+
     // Método para comprobar el usuario y contraseña.
     public function checkUser($correo, $contra)
     {

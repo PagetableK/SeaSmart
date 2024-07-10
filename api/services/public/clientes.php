@@ -20,20 +20,20 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 // Se comprueba y establecen los datos del cliente.
                 if (
-                    !$clientes->setNombre($_POST['nombreCliente']) or
-                    !$clientes->setApellido($_POST['apellidoCliente']) or
-                    !$clientes->setDUI($_POST['duiCliente'], 0) or
-                    !$clientes->setCorreo($_POST['correoCliente'], 0) or
-                    !$clientes->setContra($_POST['contraCliente']) or
-                    !$clientes->setTelefono($_POST['telefonoCliente'], 0) or
-                    !$clientes->setTelefonoFijo($_POST['telefonoFijoCliente'], 0)
+                    !$cliente->setNombre($_POST['nombreCliente']) or
+                    !$cliente->setApellido($_POST['apellidoCliente']) or
+                    !$cliente->setDUI($_POST['duiCliente'], 0) or
+                    !$cliente->setCorreo($_POST['correoCliente'], 0) or
+                    !$cliente->setContra($_POST['contraCliente']) or
+                    !$cliente->setTelefono($_POST['telefonoCliente'], 0) or
+                    !$cliente->setTelefonoFijo($_POST['telefonoFijoCliente'], 0)
                 ) {
-                    $result['error'] = $clientes->getDataError();
+                    $result['error'] = $cliente->getDataError();
                 } elseif ($_POST['contraCliente'] != $_POST['confirmarContraCliente']) {
                     $result['error'] = 'Contraseñas diferentes';
                 } elseif ($_POST['telefonoCliente'] == $_POST['telefonoFijoCliente']) {
                     $result['error'] = 'El teléfono fijo no puede ser el mismo que el teléfono móvil';
-                } elseif ($clientes->createRow()) {
+                } elseif ($cliente->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Cliente creado correctamente';
                 } else {
@@ -57,6 +57,33 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['error'] = 'Ocurrió un problema al cerrar la sesión';
                 }
+                break;
+            case 'readProfile':
+                    if ($result['dataset'] = $cliente->readProfile()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al leer el perfil';
+                    }
+                break;
+            case 'editProfile':
+                    $_POST = Validator::validateForm($_POST);
+                    if (
+                    !$cliente->setId($_POST['idCliente']) or
+                    !$cliente->setNombre($_POST['nombreCliente']) or
+                    !$cliente->setApellido($_POST['apellidoCliente']) or
+                    !$cliente->setCorreo($_POST['correoCliente'], 1) or
+                    !$cliente->setDUI($_POST['duiCliente'], 1) or
+                    !$cliente->setTelefono($_POST['telefonoCliente'], 1) or
+                    !$cliente->setTelefonoFijo($_POST['telefonoFijoCliente'], 1)
+                    ) {
+                        $result['error'] = $cliente->getDataError();
+                    } elseif ($cliente->editProfile()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Perfil modificado correctamente';
+                        $_SESSION['idCliente'] = $_POST['idCliente'];
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al modificar el perfil';
+                    }
                 break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
