@@ -6,12 +6,10 @@ require_once('../../models/data/cliente_data.php');
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();    
-    $_SESSION['idCliente'] = 1;
-    $_SESSION['correoCliente'] = 'correo@gmail.com';
     // Se instancia la clase correspondiente.
     $cliente = new ClienteData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'error' => null, 'exception' => null, 'username' => null, 'debug' => null );
+    $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'error' => null, 'exception' => null, 'username' => null, 'debug' => null, 'usuario' => null);
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
     if (isset($_SESSION['idCliente'])) {
         $result['session'] = 1;
@@ -89,6 +87,7 @@ if (isset($_GET['action'])) {
                 break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
+            break;
         }
     }  else {
         // Se compara la acción a realizar cuando el cliente no ha iniciado sesión.
@@ -119,20 +118,23 @@ if (isset($_GET['action'])) {
                 // Se validan los campos del form que se encuentran en el array $_POST.
                 $_POST = Validator::validateForm($_POST);
                 if ($cliente->checkUser($_POST['correo'], $_POST['contra'])) {
-                    // Si el estado del administrador es activo se ejecuta el código.
                     // Se asigna el valor de status.
                     $result['status'] = 1;
                     // Se asignan los valores de sesión obtenidos de la función checkUser().
                     // Se devuelve el mensaje del resultado de la acción logIn.
                     $result['message'] = 'Autenticación correcta';
                     $result['username'] = $_SESSION['correoCliente'];
-                } else {
+                    $result['nombre'] = $_SESSION['nombre'];
+                } elseif(isset($_SESSION['estado']) and $_SESSION['estado'] == 0){
                     $result['error'] = 'Su cuenta ha sido desactivada';
+                } else {
+                    $result['error'] = 'Las credenciales son incorrectas';
                 }
                 break;
                
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
+            break;
         }
     }
     // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.

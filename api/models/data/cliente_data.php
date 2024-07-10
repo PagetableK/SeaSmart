@@ -126,7 +126,7 @@ class ClienteData extends ClienteHandler
     public function setTelefono($value)
     {
         if (!Validator::validatePhone($value)) {
-            $this->info_error = 'El teléfono debe iniciar con el formato (6, 7)###-####';
+            $this->info_error = 'El teléfono debe iniciar con el formato ###-####';
         return false;
         } elseif ($this->checkDuplicate($value)) {
             $this->info_error = 'El teléfono ingresado ya está siendo usado por otro cliente';
@@ -144,7 +144,7 @@ class ClienteData extends ClienteHandler
     public function setTelefonoFijo($value)
     {
         if (!Validator::validatePhone($value)) {
-            $this->info_error = 'El teléfono debe iniciar con el formato (2)###-####';
+            $this->info_error = 'El teléfono debe iniciar con el formato ####-####';
         return false;
         } elseif ($this->checkDuplicate($value)) {
             $this->info_error = 'El teléfono fijo ingresado ya está siendo usado por otro cliente';

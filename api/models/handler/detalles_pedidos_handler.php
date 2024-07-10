@@ -105,11 +105,4 @@ class DetallesPedidosHandler
         $params = array($this->id_pedido);
         return Database::getRows($sql, $params);
     }
-
-    public function removeDetail()
-    {
-        $sql = 'call removerDetalle(?, ?)';
-        $params = array($this->id, $this->id_detalle_producto);
-        return Database::executeRow($sql, $params);
-    }
 }
