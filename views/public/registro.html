@@ -28,44 +28,44 @@
                             <h4>Regístrate</h4>
                             <h6 class="mb-4">Ingresa tu información para crear una cuenta</h6>
                             <div class="mb-4">
-                                <label for="nombreCliente" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombreCliente" placeholder="Juana José"
-                                    onkeypress="return /[A-Za-z ]/i.test(event.key)" required>
+                                <label for="nombreCliente" class="form-label" for="validationDefault01">Nombre</label>
+                                <input type="text" class="form-control" id="nombreCliente"  id="validationDefault01" placeholder="Juana José"
+                                    name='nombreCliente' required>
                             </div>
                             <div class="mb-4">
-                                <label for="apellidoCliente" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="apellidoCliente" placeholder="Carmen del Paz"
-                                    onkeypress="return /[A-Za-z ]/i.test(event.key)" required>
+                                <label for="apellidoCliente" class="form-label" for="validationDefault02">Apellido</label>
+                                <input type="text" class="form-control" id="apellidoCliente" id="validationDefault02" placeholder="Carmen del Paz"
+                                    name='apellidoCliente' required>
                             </div>
                             <div class="mb-4">
-                                <label for="telefonoCliente" class="form-label">Número de teléfono</label>
+                                <label for="telefonoCliente" class="form-label" for="validationDefault03">Número de teléfono</label>
                                 <input type="text" class="form-control" id="telefonoCliente" required
-                                    placeholder="Ejemplo: 75854595" oninput="numeroNacional(event)">
+                                    name='telefonoMovil' id="validationDefault03" placeholder="Ejemplo: 75854595" oninput="numeroNacional(event)">
                             </div>
                             <div class="mb-4">
-                                <label for="telefonoSecundarioCliente" class="form-label">Teléfono secundario / Teléfono de
+                                <label for="telefonoSecundarioCliente" class="form-label" for="validationDefault04">Teléfono secundario / Teléfono de
                                     emergencia</label>
-                                <input type="text" class="form-control" id="telefonoSecundarioCliente" required
-                                    placeholder="Ejemplo: 25452547" oninput="numeroNacional(event)">
+                                <input type="text" class="form-control" id="telefonoSecundarioCliente" id="validationDefault04" required
+                                    name='telefonoFijo' placeholder="Ejemplo: 25452547" oninput="numeroNacional(event)">
                             </div>
                             <div class="mb-4">
-                                <label for="duiCliente" class="form-label">DUI</label>
+                                <label for="duiCliente" class="form-label" for="validationDefault05">DUI</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend2">#</span>
-                                    <input type="text" class="form-control" id="duiCliente" placeholder="00000000-0"
-                                        onkeypress="return /[0-9]/i.test(event.key)" required>
+                                    <input type="text" class="form-control" id="duiCliente" id="validationDefault05" placeholder="00000000-0" oninput="duiNacional(event)"
+                                        name="duiCliente" required>
                                 </div>
                             </div>
                             <div class="mb-4">
-                                <label for="correoCliente" class="form-label">Correo electrónico</label>
-                                <input type="email" class="form-control" id="correoCliente" required
-                                    placeholder="juanadelcarmen@gmail.com">
+                                <label for="correoCliente" class="form-label" for="validationDefault06">Correo electrónico</label>
+                                <input type="email" class="form-control" id="correoCliente" id="validationDefault06" required
+                                    name='correoCliente' placeholder="juanadelcarmen@gmail.com">
                             </div>
                             <div class="mb-4">
-                                <label for="contraRegistro" class="form-label">Crea una contraseña</label>
+                                <label for="contraRegistro" class="form-label" for="validationDefault07">Crea una contraseña</label>
                                 <div class="mb-3 d-flex" id="contenedor_contra">
                                     <input type="password" class="form-control" id="contraRegistro" required
-                                        placeholder="•••••••••••">
+                                        name='claveCliente' id="validationDefault07" placeholder="•••••••••••">
                                     <div class="btn input-group-addon d-flex align-items-center justify-content-center"
                                         id="btnMostrar" onclick="MostrarContra()">
                                         <img src="../../resources/img/ojo_ocultar.png" class="img-fluid" width="25px"
@@ -79,10 +79,10 @@
                                 </div>
                             </div>
                             <div class="mb-4">
-                                <label for="confirmarContra" class="form-label">Confirme su contraseña</label>
+                                <label for="confirmarContra" class="form-label" for="validationDefault08">Confirme su contraseña</label>
                                 <div class="mb-3 d-flex" id="contenedor_contra_2">
                                     <input type="password" class="form-control" id="confirmarContra" required
-                                        placeholder="•••••••••••">
+                                        name='confirmarClave' id="validationDefault08" placeholder="•••••••••••">
                                     <div class="btn input-group-addon d-flex align-items-center justify-content-center"
                                         id="btnMostrar1" onclick="MostrarContra1()">
                                         <img src="../../resources/img/ojo_ocultar.png" class="img-fluid" width="25px"
@@ -115,6 +115,8 @@
     <script type="text/javascript" src="../../controllers/utils/publico.js"></script>
     <!-- Validar número de teléfono -->
     <script src="../../resources/js/validar_telefono.js"></script>
+    <!-- Validar número de DUI -->
+    <script src="../../resources/js/validar_dui.js"></script>
     <!-- Controlador del registro -->
     <script src="../../controllers/public/registro.js"></script>
 </body>

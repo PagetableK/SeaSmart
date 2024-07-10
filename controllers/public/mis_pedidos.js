@@ -57,7 +57,7 @@ const cargarPedidos = async() => {
         // Se muestra el mensaje.
         sweetAlert(4, "No se han realizado pedidos", false);
         // Se muestra el texto.
-        CONTENEDOR_PEDIDOS.innerHTML = '<p class="fs-3 fw-bold">No se han realizado pedidos</p>';
+        CONTENEDOR_PEDIDOS.innerHTML = '<p class="fs-3 fw-bold text-center">No se han realizado pedidos</p>';
     }
 }
 

@@ -49,7 +49,7 @@ const cargarProductos = async () => {
                     <div class="col-12 col-sm-8 col-md-4 d-flex justify-content-center">
                         <img src="${SERVER_URL}images/detalles_productos/${row.imagen_producto}" alt="productocarro" class="img-fluid" width="275px" height="275px"">
                     </div>
-                    <div class="col-12 col-sm-12 col-md-4 col-md-5 d-flex align-items-center d-flex flex-column gap-3">
+                    <div class="col-12 col-sm-12 col-md-4 d-flex align-items-center d-flex flex-column gap-3">
                         <p class="fw-bold fs-5">${row.nombre_producto}</p>
                         <div class="d-flex gap-3 align-items-center">
                             <p class="fw-bold fs-6 cantidad">Cantidad:</p>
@@ -65,6 +65,11 @@ const cargarProductos = async () => {
                         <div class="d-flex gap-2 text-danger">
                             <p class="fw-semibold">Sub-total:</p>
                             <p class="fw-semibold">$${calcularSubTotal(row.cantidad_producto, row.precio_producto)}</p>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="btn btn-danger" onclick="eliminarProducto(${row.id_detalle_producto}, ${row.id_detalle_pedido})">
+                            <img src="../../resources/img/eliminar.png" alt="eliminarCan" width="30px">
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
@@ -85,6 +90,8 @@ const cargarProductos = async () => {
         RESUMEN_ORDEN.classList.add('d-none');
         // Se muestra el contenedor con el mensaje.
         MENSAJE_CARRO.classList.remove('d-none');
+        // Se vacía el contenido del contenedor de productos.
+        CONTENEDOR_PRODUCTOS.innerHTML = '';
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -146,5 +153,26 @@ const finalizarPedido = async () => {
         }
     } else{
         sweetAlert(3, "Asegúrese de seleccionar una dirección", false);
+    }
+}
+
+// La función eliminarProducto permite remover un producto del carrito de compras.
+const eliminarProducto = async (idDetalleProducto, idDetallePedido) =>{
+    // Se declara una constante dónde se almacenará el idDetalleProducto y el idDetallePedido.
+    const FORM = new FormData();
+    // Se agrega el id del detalle de producto al form.
+    FORM.append('idDetalleProducto', idDetalleProducto);
+    // Se agrega el id del detalle de pedido al form.
+    FORM.append('idDetallePedido', idDetallePedido);
+    // Se realiza una petición a la API para eliminar el detalle del pedido del pedido.
+    const DATA = await fetchData(DETALLES_PEDIDOS_API, 'removeDetail', FORM);
+    // Si la respuesta es satisfactoria se ejecuta el código.
+    if(DATA.status){
+        // Se muestra el mensaje con el éxito de la acción.
+        sweetAlert(1, "Producto removido del carrito", false);
+        // Se recargan los productos del carrito.
+        cargarProductos();
+    } else{
+        sweetAlert(2, DATA.error, false);
     }
 }

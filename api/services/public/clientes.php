@@ -1,23 +1,49 @@
 <?php
 // Se incluye la clase del modelo.
 require_once('../../models/data/cliente_data.php');
-
+ 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
-    session_start();
+    session_start();    
     $_SESSION['idCliente'] = 1;
-    $_SESSION['correoCliente'] = 'john.doe@example.com';
+    $_SESSION['correoCliente'] = 'correo@gmail.com';
     // Se instancia la clase correspondiente.
     $cliente = new ClienteData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'error' => null, 'exception' => null, 'username' => null);
+    $result = array('status' => 0, 'session' => 0, 'recaptcha' => 0, 'message' => null, 'error' => null, 'exception' => null, 'username' => null, 'debug' => null );
     // Se verifica si existe una sesión iniciada como cliente para realizar las acciones correspondientes.
     if (isset($_SESSION['idCliente'])) {
         $result['session'] = 1;
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
+            case 'createRow':
+                // Se validan los datos del formulario.
+                $_POST = Validator::validateForm($_POST);
+                // Se comprueba y establecen los datos del cliente.
+                if (
+                    !$cliente->setNombre($_POST['nombreCliente']) or
+                    !$cliente->setApellido($_POST['apellidoCliente']) or
+                    !$cliente->setDUI($_POST['duiCliente'], 0) or
+                    !$cliente->setCorreo($_POST['correoCliente'], 0) or
+                    !$cliente->setContra($_POST['contraCliente']) or
+                    !$cliente->setTelefono($_POST['telefonoCliente'], 0) or
+                    !$cliente->setTelefonoFijo($_POST['telefonoFijoCliente'], 0)
+                ) {
+                    $result['error'] = $cliente->getDataError();
+                } elseif ($_POST['contraCliente'] != $_POST['confirmarContraCliente']) {
+                    $result['error'] = 'Contraseñas diferentes';
+                } elseif ($_POST['telefonoCliente'] == $_POST['telefonoFijoCliente']) {
+                    $result['error'] = 'El teléfono fijo no puede ser el mismo que el teléfono móvil';
+                } elseif ($cliente->createRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Cliente creado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al crear el cliente';
+                }
+                break;
             case 'getUser':
+                // Se obtiene el correo del cliente si está en sesión.
                 if (isset($_SESSION['correoCliente'])) {
                     $result['status'] = 1;
                     $result['username'] = $_SESSION['correoCliente'];
@@ -26,6 +52,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'logOut':
+                // Se cierra la sesión del cliente.
                 if (session_destroy()) {
                     $result['status'] = 1;
                     $result['message'] = 'Sesión eliminada correctamente';
@@ -33,45 +60,49 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al cerrar la sesión';
                 }
                 break;
+            case 'readProfile':
+                    if ($result['dataset'] = $cliente->readProfile()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al leer el perfil';
+                    }
+                break;
+            case 'editProfile':
+                    $_POST = Validator::validateForm($_POST);
+                    if (
+                    !$cliente->setId($_POST['idCliente']) or
+                    !$cliente->setNombre($_POST['nombreCliente']) or
+                    !$cliente->setApellido($_POST['apellidoCliente']) or
+                    !$cliente->setCorreo($_POST['correoCliente'], 1) or
+                    !$cliente->setDUI($_POST['duiCliente'], 1) or
+                    !$cliente->setTelefono($_POST['telefonoCliente'], 1) or
+                    !$cliente->setTelefonoFijo($_POST['telefonoFijoCliente'], 1)
+                    ) {
+                        $result['error'] = $cliente->getDataError();
+                    } elseif ($cliente->editProfile()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Perfil modificado correctamente';
+                        $_SESSION['idCliente'] = $_POST['idCliente'];
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al modificar el perfil';
+                    }
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
-    } else {
+    }  else {
         // Se compara la acción a realizar cuando el cliente no ha iniciado sesión.
         switch ($_GET['action']) {
             case 'signUp':
-                $_POST = Validator::validateForm($_POST);
-                // Se establece la clave secreta para el reCAPTCHA de acuerdo con la cuenta de Google.
-                $secretKey = '6LdBzLQUAAAAAL6oP4xpgMao-SmEkmRCpoLBLri-';
-                // Se establece la dirección IP del servidor.
-                $ip = $_SERVER['REMOTE_ADDR'];
-                // Se establecen los datos del raCAPTCHA.
-                $data = array('secret' => $secretKey, 'response' => $_POST['gRecaptchaResponse'], 'remoteip' => $ip);
-                // Se establecen las opciones del reCAPTCHA.
-                $options = array(
-                    'http' => array('header' => 'Content-type: application/x-www-form-urlencoded\r\n', 'method' => 'POST', 'content' => http_build_query($data)),
-                    'ssl' => array('verify_peer' => false, 'verify_peer_name' => false)
-                );
-
-                $url = 'https://www.google.com/recaptcha/api/siteverify';
-                $context = stream_context_create($options);
-                $response = file_get_contents($url, false, $context);
-                $captcha = json_decode($response, true);
-
-                if (!$captcha['success']) {
-                    $result['recaptcha'] = 1;
-                    $result['error'] = 'No eres humano';
-                } elseif(!isset($_POST['condicion'])) {
-                    $result['error'] = 'Debe marcar la aceptación de términos y condiciones';
-                } elseif (
+                // Se establecen los datos del cliente.
+                if (
                     !$cliente->setNombre($_POST['nombreCliente']) or
                     !$cliente->setApellido($_POST['apellidoCliente']) or
                     !$cliente->setCorreo($_POST['correoCliente']) or
-                    !$cliente->setDireccion($_POST['direccionCliente']) or
                     !$cliente->setDUI($_POST['duiCliente']) or
-                    !$cliente->setNacimiento($_POST['nacimientoCliente']) or
-                    !$cliente->setTelefono($_POST['telefonoCliente']) or
-                    !$cliente->setClave($_POST['claveCliente'])
+                    !$cliente->setTelefono($_POST['telefonoMovil']) or
+                    !$cliente->setTelefonoFijo($_POST['telefonoFijo']) or
+                    !$cliente->setContra($_POST['claveCliente'])
                 ) {
                     $result['error'] = $cliente->getDataError();
                 } elseif ($_POST['claveCliente'] != $_POST['confirmarClave']) {
@@ -83,17 +114,23 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al registrar la cuenta';
                 }
                 break;
+               
             case 'logIn':
+                // Se validan los campos del form que se encuentran en el array $_POST.
                 $_POST = Validator::validateForm($_POST);
-                if (!$cliente->checkUser($_POST['correo'], $_POST['clave'])) {
-                    $result['error'] = 'Datos incorrectos';
-                } elseif ($cliente->checkStatus()) {
+                if ($cliente->checkUser($_POST['correo'], $_POST['contra'])) {
+                    // Si el estado del administrador es activo se ejecuta el código.
+                    // Se asigna el valor de status.
                     $result['status'] = 1;
+                    // Se asignan los valores de sesión obtenidos de la función checkUser().
+                    // Se devuelve el mensaje del resultado de la acción logIn.
                     $result['message'] = 'Autenticación correcta';
+                    $result['username'] = $_SESSION['correoCliente'];
                 } else {
-                    $result['error'] = 'La cuenta ha sido desactivada';
+                    $result['error'] = 'Su cuenta ha sido desactivada';
                 }
                 break;
+               
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }
@@ -107,3 +144,5 @@ if (isset($_GET['action'])) {
 } else {
     print(json_encode('Recurso no disponible'));
 }
+
+?>

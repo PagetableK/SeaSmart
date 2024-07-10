@@ -14,22 +14,10 @@
     <link rel="stylesheet" href="../../resources/css/indexpublico.css" type="text/css">
     <!-- Mandar a llamar el css del navbar -->
     <link rel="stylesheet" href="../../resources/css/navbar_publico.css" type="text/css">
+    <!-- Mandar a llamar al css de la página -->
+    <link rel="stylesheet" href="../../resources/css/sub_categoria.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
-
-<!-- Cuerpo de la página web -->
-<style>
-    .unselectable {
-        -webkit-user-select: none;
-        /* Safari */
-        -moz-user-select: none;
-        /* Firefox */
-        -ms-user-select: none;
-        /* IE10+/Edge */
-        user-select: none;
-        /* Standard */
-    }
-</style>
-
 
 <body>
     <!-- Contenido principal de la página -->
@@ -41,14 +29,12 @@
                 de dos piezas está diseñado para verse bien y al mismo tiempo brindarte libertad en el agua. Compra
                 trajes de baño tankini y bikinis SeaSmart para mujer para ganar confianza en la piscina.</p>
         </div>
-
-        <!-- Esto es para mostrar los productos y agruparlos en filas y columnas dependiendo de cuantos 
-            productos (imagenes) se le mostrará al usuario. Mandará a llamar a una funcion en js-->
-        <div class="container m-5">
-            <div class="row" id="productosRow">
-                <!-- Aquí se cargarán los productos -->
-            </div>
+        <!-- Carrusel  -->
+        <h2>Mujer</h2>
+        <div class="container" id="galeria">
+            
         </div>
+        
 
     </main>
     <!-- Mandar a llamar el framework -->
@@ -62,7 +48,10 @@
     <!-- Mandar a llamar el controlador -->
     <script type="text/javascript" src="../../controllers/private/index_publico.js"></script>
     <!-- Mandar a llamar el controlador de lo de los productos -->
-    <script src="../../resources/js/agrupar_los_productos.js"></script>    
+    <script src="../../resources/js/agrupar_los_productos.js"></script>
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </body>
 
 </html>

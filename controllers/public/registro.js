@@ -1,4 +1,7 @@
-const ADMINISTRADOR_API = 'services/admin/administrador.php';
+// URL de la API para manejar clientes.
+const CLIENTES_API = 'services/public/clientes.php';
+
+// Referencias a los elementos del DOM.
 const BTNMOSTRAR = document.getElementById('btnMostrar');
 const BTNOCULTAR = document.getElementById('btnOcultar');
 const TXTCONTRA = document.getElementById('contraRegistro');
@@ -26,10 +29,6 @@ const FORM_REGISTRO = document.getElementById('formRegistro');
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
     cargarPlantilla(2);
-    // Se asigna como título la categoría de los productos.
-    MAIN_TITLE.textContent = 'Crear cuenta';
-    // LLamada a la función para asignar el token del reCAPTCHA al formulario.
-    reCAPTCHA();
 });
 
 // Método del evento para cuando se envía el formulario de registrar cliente.
@@ -39,76 +38,52 @@ FORM_REGISTRO.addEventListener('submit', async (event) => {
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(FORM_REGISTRO);
     // Petición para registrar un cliente.
-    const DATA = await fetchData(USER_API, 'signUp', FORM);
+    const DATA = await fetchData(CLIENTES_API, 'signUp', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         sweetAlert(1, DATA.message, true, 'inicio_sesion.html');
-    } else if (DATA.recaptcha) {
-        sweetAlert(2, DATA.error, false, 'index.html');
+    } else if(DATA.error == "El correo ingresado ya existe"){
+        sweetAlert(3, "El correo ingresado ya está siendo usado", false);
+    } else if(DATA.error == "El DUI ingresado ya existe"){
+        sweetAlert(3, "El DUI ingresado ya está siendo usado", false);
     } else {
         sweetAlert(2, DATA.error, false);
-        // Se genera un nuevo token cuando ocurre un problema.
-        reCAPTCHA();
     }
 });
 
-/*
-*   Función para obtener un token del reCAPTCHA y asignarlo al formulario.
-*   Parámetros: ninguno.
-*   Retorno: ninguno.
-*/
-function reCAPTCHA() {
-    // Método para generar el token del reCAPTCHA.
-    grecaptcha.ready(() => {
-        // Constante para establecer la llave pública del reCAPTCHA.
-        const PUBLIC_KEY = '6LdBzLQUAAAAAJvH-aCUUJgliLOjLcmrHN06RFXT';
-        // Se obtiene un token para la página web mediante la llave pública.
-        grecaptcha.execute(PUBLIC_KEY, { action: 'homepage' }).then((token) => {
-            // Se asigna el valor del token al campo oculto del formulario
-            document.getElementById('gRecaptchaResponse').value = token;
-        });
-    });
-}
 
-
-//Esto ya estaba
+// Función para mostrar la contraseña en el campo "contraRegistro".
 function MostrarContra(){
     BTNMOSTRAR.remove();
     CONTENEDORC.appendChild(BTNOCULTAR);
     TXTCONTRA.type = 'text';
+    TXTCONTRA.focus();
 }
 
+// Función para ocultar la contraseña en el campo "contraRegistro".
 function OcultarContra(){
     BTNOCULTAR.remove();
     CONTENEDORC.appendChild(BTNMOSTRAR);
     TXTCONTRA.type = 'password';
+    TXTCONTRA.focus();
 }
 
+// Función para mostrar la contraseña en el campo "confirmarContra".
 function MostrarContra1(){
     BTNMOSTRAR1.remove();
     CONTENEDORC1.appendChild(BTNOCULTAR1);
     TXTCONTRA1.type = 'text';
+    TXTCONTRA1.focus();
 }
 
+// Función para ocultar la contraseña en el campo "confirmarContra".
 function OcultarContra1(){
     BTNOCULTAR1.remove();
     CONTENEDORC1.appendChild(BTNMOSTRAR1);
     TXTCONTRA1.type = 'password';
+    TXTCONTRA1.focus();
 }
 
+//Remueve los botones "Ocultar" para las contraseñas.
 BTNOCULTAR.remove();
 BTNOCULTAR1.remove();
-
-function ValidarCampos(asyn){
-    location.href='registro_finalizar.html';
-}
-
-BTNCONTINUAR.addEventListener('submit', async(event) => {
-    event.preventDefault();
-    const FORM = new FormData(SAVE_FORM);
-    const DATA = await fetchData(ADMINISTRADOR_API, FORM);
-    if(DATA.status)
-    {
-        alert('a');
-    }
-});
