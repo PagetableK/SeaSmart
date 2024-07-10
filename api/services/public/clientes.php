@@ -97,10 +97,10 @@ if (isset($_GET['action'])) {
                 if (
                     !$cliente->setNombre($_POST['nombreCliente']) or
                     !$cliente->setApellido($_POST['apellidoCliente']) or
-                    !$cliente->setCorreo($_POST['correoCliente']) or
-                    !$cliente->setDUI($_POST['duiCliente']) or
-                    !$cliente->setTelefono($_POST['telefonoMovil']) or
-                    !$cliente->setTelefonoFijo($_POST['telefonoFijo']) or
+                    !$cliente->setCorreo($_POST['correoCliente'], 0) or
+                    !$cliente->setDUI($_POST['duiCliente'], 0) or
+                    !$cliente->setTelefono($_POST['telefonoMovil'], 0) or
+                    !$cliente->setTelefonoFijo($_POST['telefonoFijo'], 0) or
                     !$cliente->setContra($_POST['claveCliente'])
                 ) {
                     $result['error'] = $cliente->getDataError();
