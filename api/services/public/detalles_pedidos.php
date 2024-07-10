@@ -44,19 +44,48 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'El detalle del producto ya ha sido agregado al carrito';
                 }
                 break;
-                // La acción addDetail permite agregar un detalle de pedido con el id del detalle del producto al carrito. 
+                // La acción addDetail permite agregar un detalle de pedido al carrito con el id del detalle del producto. 
             case 'addDetail':
                 if (
                     !$detalle_pedido->setIdDetalleProducto($_POST['idDetalleProducto']) or
                     !$detalle_pedido->setPrecioProducto($_POST['precioProducto']) or
                     !$detalle_pedido->setCantidadProducto($_POST['cantidadRequerida'])
-                ) {
-                    $result['error'] = 'Ocurrió un error al agregar el producto al carrito, intentélo de nuevo más tarde';
-                } elseif ($detalle_pedido->addDetail()) {
+                ){
+                    $result['error'] = $detalle_pedido->getDataError();
+                } elseif($detalle_pedido->addDetail()){
                     $result['status'] = 1;
                     $result['message'] = 'Producto agregado correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un error al agregar el producto al carrito, intentélo de nuevo más tarde';
+                }
+                break;
+                // La acción updateDetail permite editar un detalle de pedido con el id del detalle del producto. 
+            case 'updateDetail':
+                if(
+                    !$detalle_pedido->setId($_POST['idDetallePedido']) or
+                    !$detalle_pedido->setIdDetalleProducto($_POST['idDetalleProducto']) or
+                    !$detalle_pedido->setCantidadProducto($_POST['nuevaCantidad'])
+                ){
+                    $result['error'] = $detalle_pedido->getDataError();
+                } elseif($detalle_pedido->updateDetail()){
+                    $result['status'] = 1;
+                    $result['message'] = 'Detalle de pedido editado correctamente';
+                } else{
+                    $result['error'] = 'Ocurrió un error al editar el detalle del pedido';
+                }
+                break;
+                // La acción removeDetail permite eliminar un detalle de pedido de la tabla detalles_pedidos con el id del detalle del pedido. 
+            case 'removeDetail':
+                if(
+                    !$detalle_pedido->setId($_POST['idDetallePedido']) or
+                    !$detalle_pedido->setIdDetalleProducto($_POST['idDetalleProducto'])
+                ){
+                    $result['error'] = $detalle_pedido->getDataError();
+                } elseif($detalle_pedido->removeDetail()){
+                    $result['status'] = 1;
+                    $result['message'] = 'Detalle de pedido eliminado correctamente';
+                } else{
+                    $result['error'] = 'Ocurrió un error al eliminar el detalle del pedido';
                 }
                 break;
                 // La acción readCart selecciona todos los productos agregados al carrito.
