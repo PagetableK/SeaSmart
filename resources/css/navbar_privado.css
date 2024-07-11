@@ -23,6 +23,10 @@ html, main{
     margin: 0px;
 }
 
+.contenedor-grafico{
+    height: 50vh;
+}
+
 @media only screen and (max-width: 500px) {
     #contenedorSeaSmart{
         display: none;
