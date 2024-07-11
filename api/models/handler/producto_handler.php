@@ -35,12 +35,37 @@ class ProductoHandler
         return Database::getRows($sql, $params);
     }
 
+    public function getProducts()
+    {
+        $sql = 'SELECT id_detalle_producto, talla, color_producto, nombre_producto, imagen_producto, existencia_producto, precio_producto
+                FROM detalles_productos
+                INNER JOIN productos_tallas ON productos_tallas.id_producto_talla = detalles_productos.id_producto_talla
+                INNER JOIN productos_colores ON productos_colores.id_producto_color = detalles_productos.id_producto_color
+                INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
+                WHERE estado_detalle_producto = 1;';
+        return Database::getRows($sql);
+    }
+
     public function createRow()
     {
         $sql = 'INSERT INTO productos(nombre_producto, descripcion_producto, id_sub_categoria, precio_producto, id_administrador)
                 VALUES(?, ?, ?, ?, ?)';
         $params = array($this->nombre, $this->descripcion, $this->id_subcategoria, $this->precio, $_SESSION['idAdministrador']);
         return Database::executeRow($sql, $params);
+    }
+
+    public function readAllThats(){
+        $sql = 'SELECT a.id_producto, a.nombre_producto, a.descripcion_producto, b.imagen_producto, 
+        a.precio_producto from productos a, detalles_productos b where a.id_producto = b.id_producto';
+
+        return Database::getRows($sql);
+    }
+
+    public function readAllSub(){
+        $sql = 'SELECT a.id_producto, a.nombre_producto, a.descripcion_producto, b.imagen_producto, 
+        a.precio_producto from productos a, detalles_productos b , sub_categorias c where a.id_producto = b.id_producto AND c.id_sub_categoria = a.id_sub_categoria AND c.id_sub_categoria = ?';
+        $params = array($this->id_subcategoria);
+        return Database::getRows($sql, $params);
     }
 
     public function readAll()

@@ -15,6 +15,7 @@ function Mostrar(){
     BTNMOSTRAR.remove();
     CONTENEDORC.appendChild(BTNOCULTAR);
     TXTCONTRA.type = 'text';
+    TXTCONTRA.focus();
 }
 
 // Función para ocultar la contraseña.
@@ -22,12 +23,8 @@ function Ocultar(){
     BTNOCULTAR.remove();
     CONTENEDORC.appendChild(BTNMOSTRAR);
     TXTCONTRA.type = 'password';
+    TXTCONTRA.focus();
 }
-/*
-function ValidarCampos(){
-    location.href='index.html';
-}
-*/
 
 // Evento que se dispara cuando se envía el formulario de login.
 FORM_LOGIN.addEventListener('submit', async (event) => {
@@ -39,12 +36,8 @@ FORM_LOGIN.addEventListener('submit', async (event) => {
     const DATA = await fetchData(CLIENTES_API, 'logIn', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        console.log('Exito, si  accedi');
-        console.log(DATA.username);
-        console.log(DATA.debug);
         sweetAlert(1, DATA.message, true, 'index.html');
     } else {
-        console.log('Caí en error');
         sweetAlert(2, DATA.error, false);
     }
 });

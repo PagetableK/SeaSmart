@@ -42,6 +42,10 @@ FORM_REGISTRO.addEventListener('submit', async (event) => {
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         sweetAlert(1, DATA.message, true, 'inicio_sesion.html');
+    } else if(DATA.error == "El correo ingresado ya existe"){
+        sweetAlert(3, "El correo ingresado ya está siendo usado", false);
+    } else if(DATA.error == "El DUI ingresado ya existe"){
+        sweetAlert(3, "El DUI ingresado ya está siendo usado", false);
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -53,6 +57,7 @@ function MostrarContra(){
     BTNMOSTRAR.remove();
     CONTENEDORC.appendChild(BTNOCULTAR);
     TXTCONTRA.type = 'text';
+    TXTCONTRA.focus();
 }
 
 // Función para ocultar la contraseña en el campo "contraRegistro".
@@ -60,6 +65,7 @@ function OcultarContra(){
     BTNOCULTAR.remove();
     CONTENEDORC.appendChild(BTNMOSTRAR);
     TXTCONTRA.type = 'password';
+    TXTCONTRA.focus();
 }
 
 // Función para mostrar la contraseña en el campo "confirmarContra".
@@ -67,6 +73,7 @@ function MostrarContra1(){
     BTNMOSTRAR1.remove();
     CONTENEDORC1.appendChild(BTNOCULTAR1);
     TXTCONTRA1.type = 'text';
+    TXTCONTRA1.focus();
 }
 
 // Función para ocultar la contraseña en el campo "confirmarContra".
@@ -74,6 +81,7 @@ function OcultarContra1(){
     BTNOCULTAR1.remove();
     CONTENEDORC1.appendChild(BTNMOSTRAR1);
     TXTCONTRA1.type = 'password';
+    TXTCONTRA1.focus();
 }
 
 //Remueve los botones "Ocultar" para las contraseñas.
