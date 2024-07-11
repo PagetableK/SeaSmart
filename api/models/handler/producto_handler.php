@@ -107,4 +107,14 @@ class ProductoHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function porcentajeProductosSubcategoria()
+    {
+        $sql = 'SELECT nombre_sub_categoria, ROUND((COUNT(id_producto) * 100.0 / (SELECT COUNT(id_producto) FROM productos)), 2) porcentaje
+                FROM productos
+                INNER JOIN sub_categorias USING(id_sub_categoria)
+                GROUP BY nombre_sub_categoria ORDER BY porcentaje DESC
+                ';
+        return Database::getRows($sql);
+    }
 }
