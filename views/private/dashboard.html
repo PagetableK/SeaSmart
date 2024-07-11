@@ -22,12 +22,47 @@
     <!-- Contenido principal del documento -->
     <main>
         <div class="container-fluid text-center pt-5">
-            <p class="fs-4 fw-bold" id="tituloPrincipal">
+            <!-- Título del contenido principal -->
+            <p class="fs-4 fw-bold" id="tituloPrincipal"></p>
 
-            </p>
+            <!-- Contenedor del carrusel -->
+            <div class="row">
+                <!-- Carrusel con los gráficos -->
+                <div id="carruselGraficos" class="carousel slide">
+                    <!-- Contenedor de gráficos -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" id="carouselChart1">
+                            <div class="contenedor-grafico d-flex justify-content-center">
+                                <!-- Se muestra un gráfico con el porcentaje de productos por subcategoría -->
+                                <canvas id="chart1" class="col-lg-4"></canvas>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="..." class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="..." class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <!-- Flecha de navegación izquierda-->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carruselGraficos"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <!-- Flecha de navegación derecha -->
+                    <button class="carousel-control-next" type="button" data-bs-target="#carruselGraficos"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </main>
     <!-- IMPORTANDO ARCHIVOS JAVASCRIPT -->
+    <!-- Importación de la librería para generar los gráficos. Para más información https://www.chartjs.org/ -->
+    <script type="text/javascript" src="../../resources/js/chart.umd.min.js"></script>
     <!-- Mandar a llamar el framework -->
     <script type="text/javascript" src="../../resources/js/bootstrap.bundle.min.js"></script>
     <!-- Mandar a llamar la librería de alertas -->

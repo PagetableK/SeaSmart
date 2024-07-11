@@ -36,7 +36,7 @@ if (isset($_GET['action'])) {
                     !$producto->setPrecio($_POST['precioProducto'])
                 ) {
                     $result['error'] = $producto->getDataError();
-                } elseif($_POST['precioProducto'] == 0){
+                } elseif ($_POST['precioProducto'] == 0) {
                     $result['error'] = 'El precio del producto no puede ser cero';
                 } elseif ($producto->createRow()) {
                     $result['status'] = 1;
@@ -76,7 +76,7 @@ if (isset($_GET['action'])) {
                     !$producto->setPrecio($_POST['precioProducto'])
                 ) {
                     $result['error'] = $producto->getDataError();
-                } elseif($_POST['precioProducto'] === 0){
+                } elseif ($_POST['precioProducto'] === 0) {
                     $result['error'] = 'El precio del producto no puede ser cero';
                 } elseif ($producto->updateRow()) {
                     $result['status'] = 1;
@@ -101,6 +101,15 @@ if (isset($_GET['action'])) {
                 // Si no se encuentra la acción se muestra el mensaje.
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
+                break;
+                // La acción porcentajeProductosCategoria permite seleccionar los productos agrupados por subcategorías 
+            case 'porcentajeProductosSubcategoria':
+                if ($result['dataset'] = $producto->porcentajeProductosSubcategoria()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break;
         }
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
         $result['exception'] = Database::getException();
