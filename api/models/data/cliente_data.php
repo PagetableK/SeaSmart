@@ -60,7 +60,7 @@ class ClienteData extends ClienteHandler
     }
 
     // Método para establecer el correo del cliente.
-    public function setCorreo($valor, $min = 8, $max = 100)
+    public function setCorreo($valor, $boolean = null, $min = 8, $max = 100)
     {
     if (!Validator::validateEmail($valor)) {
         $this->info_error = 'El correo no es válido';
@@ -68,8 +68,11 @@ class ClienteData extends ClienteHandler
     }
     elseif (Validator::validateLength($valor, $min, $max)) {
         // Verifica si el correo ya existe en la base de datos
-        if ($this->checkDuplicate($valor)) {
-            $this->info_error = 'El correo ingresado ya existe';
+        if($boolean and $this->checkDuplicateWithId($valor)){
+            $this->info_error = 'El correo ingresado ya está siendo utilizado';
+            return false;
+        } elseif ($this->checkDuplicate($valor)) {
+            $this->info_error = 'El correo ingresado ya está siendo utilizado';
             return false;
         } else {
             // Si todas las validaciones pasan, establece el correo
@@ -96,13 +99,16 @@ class ClienteData extends ClienteHandler
     }
 
     // Método para establecer el DUI del cliente.
-    public function setDUI($value)
+    public function setDUI($value, $boolean)
     {
         if (!Validator::validateDUI($value)) {
             $this->info_error = 'El DUI debe tener el formato ########-#';
             return false;
+        } elseif($boolean and $this->checkDuplicateWithId($value)){
+            $this->info_error = 'El DUI ingresado ya está siendo utilizado por otro cliente';
+            return false;
         } elseif($this->checkDuplicate($value)) {
-            $this->info_error = 'El DUI ingresado ya existe';
+            $this->info_error = 'El DUI ingresado ya está siendo utilizado por otro cliente';
             return false;
         } else {
             $this->dui = $value;
@@ -123,38 +129,44 @@ class ClienteData extends ClienteHandler
     }
 
     // Método para establecer el teléfono móvil del cliente.
-    public function setTelefono($value)
+    public function setTelefono($value, $boolean)
     {
         if (!Validator::validatePhone($value)) {
-            $this->info_error = 'El teléfono debe iniciar con el formato (6, 7)###-####';
-        return false;
+            $this->info_error = 'El teléfono debe iniciar con el formato ###-####';
+            return false;
+        } elseif($boolean and $this->checkDuplicateWithId($value)){
+            $this->info_error = 'El teléfono ingresado ya está siendo usado por otro cliente';
+            return false;
         } elseif ($this->checkDuplicate($value)) {
             $this->info_error = 'El teléfono ingresado ya está siendo usado por otro cliente';
-        return false;
+            return false;
         } elseif ($this->telefono_fijo && $this->telefono_fijo == $value) {
             $this->info_error = 'El teléfono móvil no puede ser igual al teléfono fijo de otro cliente';
-        return false;
+            return false;
         } else {
             $this->telefono = $value;
-        return true;
+            return true;
         }
     }
 
     // Método para establecer el teléfono fijo del cliente.
-    public function setTelefonoFijo($value)
+    public function setTelefonoFijo($value, $boolean)
     {
         if (!Validator::validatePhone($value)) {
-            $this->info_error = 'El teléfono debe iniciar con el formato (2)###-####';
-        return false;
+            $this->info_error = 'El teléfono fijo debe iniciar con el formato ####-####';
+            return false;
+        } elseif($boolean and $this->checkDuplicateWithId($value)){
+            $this->info_error = 'El teléfono fijo ingresado ya está siendo usado por otro cliente';
+            return false;
         } elseif ($this->checkDuplicate($value)) {
             $this->info_error = 'El teléfono fijo ingresado ya está siendo usado por otro cliente';
-        return false;
+            return false;
         } elseif ($this->telefono && $this->telefono == $value) {
-            $this->info_error = 'El teléfono fijo no puede ser igual al teléfono móvil de otro cliente';
-        return false;
+            $this->info_error = 'El teléfono fijo no puede ser igual al teléfono móvil';
+            return false;
         } else {
             $this->telefono_fijo = $value;
-        return true;
+            return true;
         }
     }
 
