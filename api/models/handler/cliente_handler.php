@@ -147,11 +147,21 @@ class ClienteHandler
         $params = array($value, $value, $value, $value, $this->id);
         return Database::getRow($sql, $params);
     }
- 
+    
+    public function readProfile()
+    {
+        $sql = "SELECT id_cliente, nombre_cliente, apellido_cliente, dui_cliente, estado_cliente, telefono_movil, telefono_fijo, correo_cliente
+                FROM clientes
+                WHERE id_cliente = ?";
+        $params = array($_SESSION['idCliente']);
+        return Database::getRow($sql, $params);
+    }
+
+
     // Método para comprobar el usuario y contraseña.
     public function checkUser($correo, $contra)
     {
-        $sql = 'SELECT id_cliente, contra_cliente, correo_cliente, estado_cliente
+        $sql = 'SELECT id_cliente, nombre_cliente, contra_cliente, correo_cliente, estado_cliente
                 FROM clientes
                 WHERE correo_cliente = ?';
         $params = array($correo);
@@ -159,6 +169,7 @@ class ClienteHandler
  
         // Se valida que el query retorne un registro de la tabla.
         if ($data) {
+            $_SESSION['estado'] = $data['estado_cliente'];
             // Se valida que la contraseña ingresada en el campo de login convertida a hash
             // sea igual a la contraseña almacenada en la bd.
             if (password_verify($contra, $data['contra_cliente']) && $data['estado_cliente'] == 1) {
@@ -166,6 +177,7 @@ class ClienteHandler
                 $this->correo = $data['correo_cliente'];
                 $_SESSION['idCliente'] = $this->id;
                 $_SESSION['correoCliente'] = $this->correo;
+                $_SESSION['nombre'] = $data['nombre_cliente'];
                 return true;
             } else {
                 // Si la contraseña no es correcta se devuelve false.

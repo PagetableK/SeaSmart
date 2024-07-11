@@ -16,7 +16,7 @@ if (isset($_GET['action'])) {
     // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
     switch ($_GET['action']) {
         case 'readAll':
-            if ($result['dataset'] = $subcategoria->readAllThats()) {
+            if ($result['dataset'] = $subcategoria->readAll()) {
                 $result['status'] = 1;
                 $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
             } else {
@@ -31,7 +31,7 @@ if (isset($_GET['action'])) {
                 $result['status'] = 1;
                 $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
             } else {
-                $result['error'] = 'No existen subcategorias registrados '+$_POST['idCategoria'];
+                $result['error'] = 'No existen subcategorias registrados';
             }
             break;
         default:

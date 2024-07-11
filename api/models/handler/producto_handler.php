@@ -35,6 +35,17 @@ class ProductoHandler
         return Database::getRows($sql, $params);
     }
 
+    public function getProducts()
+    {
+        $sql = 'SELECT id_detalle_producto, talla, color_producto, nombre_producto, imagen_producto, existencia_producto, precio_producto
+                FROM detalles_productos
+                INNER JOIN productos_tallas ON productos_tallas.id_producto_talla = detalles_productos.id_producto_talla
+                INNER JOIN productos_colores ON productos_colores.id_producto_color = detalles_productos.id_producto_color
+                INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
+                WHERE estado_detalle_producto = 1;';
+        return Database::getRows($sql);
+    }
+
     public function createRow()
     {
         $sql = 'INSERT INTO productos(nombre_producto, descripcion_producto, id_sub_categoria, precio_producto, id_administrador)
