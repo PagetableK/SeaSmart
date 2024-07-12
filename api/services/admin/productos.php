@@ -110,6 +110,20 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay datos disponibles';
                 }
                 break;
+            case 'cantidadProductosSubcategoria':
+                if ($result['dataset'] = $producto->cantidadProductosSubcategoria()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break;
+            case 'cantidadProductosCategoria':
+                if ($result['dataset'] = $producto->cantidadProductosCategoria()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break;
         }
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
         $result['exception'] = Database::getException();
