@@ -117,4 +117,27 @@ class ProductoHandler
                 ';
         return Database::getRows($sql);
     }
+
+    public function cantidadProductosSubcategoria()
+    {
+        $sql = 'SELECT COUNT(id_producto) AS cantidad_productos, nombre_sub_categoria
+                FROM productos 
+                    INNER JOIN sub_categorias  USING(id_sub_categoria)
+                GROUP BY nombre_sub_categoria
+                ORDER BY nombre_sub_categoria
+                ';
+        return Database::getRows($sql);
+    }
+
+    public function cantidadProductosCategoria()
+    {
+        $sql = 'SELECT COUNT(id_producto) AS cantidad_productos, nombre_categoria
+                FROM productos 
+                    INNER JOIN sub_categorias USING(id_sub_categoria)
+                    INNER JOIN categorias USING(id_categoria)
+                GROUP BY nombre_categoria
+                ORDER BY nombre_categoria
+                ';
+        return Database::getRows($sql);
+    }
 }
