@@ -76,7 +76,7 @@ const graficoPastelCantidadProductosSubcategoria = async () => {
         });
         // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
         //pieGraph = (id del elemento HTML <canvas>, valor en X, valor en Y, Titulo del grafico)
-        pieGraph('chartProdSub', subcategorias, cantidades, 'Cantidad de productos por subcategoría');
+        barGraph('chartProdSub', subcategorias, cantidades, 'Cantidad de productos', 'Cantidad de productos por subcategoría');
     } else {
         document.getElementById('carouselChartProdSub').remove();
         console.log(DATA.error);
@@ -105,7 +105,7 @@ const graficoPastelCantidadProductosCategoria = async () => {
         });
         // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
         ////pieGraph = (id del elemento HTML <canvas>, valor en X, valor en Y, Titulo del grafico)
-        pieGraph('chartProdCat', categorias, cantidades, 'Cantidad de productos por categoría');
+        barGraph('chartProdCat', categorias, cantidades, 'Cantidad de productos', 'Cantidad de productos por categoría');
     } else {
         document.getElementById('carouselChartProdCat').remove();
         console.log(DATA.error);
