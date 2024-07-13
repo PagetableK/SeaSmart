@@ -110,6 +110,22 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay datos disponibles';
                 }
                 break;
+            // Case para porcentaje de porductos por categoria 
+            case 'porcentajeProductosCategoria':
+                 if ($result['dataset'] = $producto->porcentajeProductosCategoria()) {
+                     $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break; 
+            //Case para el grafico de barras top 5 productos mas vendidos
+            /*case 'topProductosMasVendidos':
+                if ($result['dataset'] = $producto->topProductosMasVendidos()) {
+                    $result['status'] = 1;
+               } else {
+                   $result['error'] = 'No hay datos disponibles';
+               }
+               break; */      
         }
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
         $result['exception'] = Database::getException();
