@@ -119,13 +119,13 @@ if (isset($_GET['action'])) {
                 }
                 break; 
             //Case para el grafico de barras top 5 productos mas vendidos
-            /*case 'topProductosMasVendidos':
+            case 'topProductosMasVendidos':
                 if ($result['dataset'] = $producto->topProductosMasVendidos()) {
                     $result['status'] = 1;
                } else {
                    $result['error'] = 'No hay datos disponibles';
                }
-               break; */      
+               break;    
         }
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
         $result['exception'] = Database::getException();

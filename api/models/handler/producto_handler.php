@@ -130,16 +130,16 @@ class ProductoHandler
     }
 
     // Definir la función para obtener los top 5 productos más vendidos
-    /*public function topProductosMasVendidos()
+    public function topProductosMasVendidos()
     {
-        $sql = 'SELECT p.nombre_producto, SUM(dp.existencia_producto) as cantidad_vendida
+        $sql = 'SELECT p.nombre_producto, SUM(dp.cantidad_producto) as cantidad_vendida
                 FROM productos p
                 INNER JOIN detalles_productos dp ON p.id_producto = dp.id_producto
-                INNER JOIN detalles_pedidos dped ON dp.id_detalle_producto = dped.id_detalle_producto
-                INNER JOIN pedidos ped ON dped.id_pedido = ped.id_pedido AND ped.estado_pedido = 'Enviado'
+                INNER JOIN detalles_pedidos dped ON dp.id_detalle_pedido = dped.id_detalle_pedido
+                INNER JOIN pedidos ped ON dped.id_pedido = ped.id_pedido AND ped.estado_pedido = "Enviado"
                 GROUP BY p.nombre_producto
                 ORDER BY cantidad_vendida DESC
-                LIMIT 5'; 
+                LIMIT 5';
         return Database::getRows($sql);
-    }*/
+    }
 }

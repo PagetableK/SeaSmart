@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Llamada a las funciones que generan los gráficos.
     graficoPastelSubcategorias();
     graficoPastelCategorias();
-    //graficoBarrasTopProductos();
+    graficoBarrasTopProductos();
     // Se establece el título del contenido principal.
     LB_TITULO.textContent = `${greeting}, bienvenido`;
 });
@@ -85,7 +85,7 @@ const graficoPastelCategorias = async () => {
 *   Función asíncrona para mostrar un gráfico de barras top 5 productos mas vendidos
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
-
+*/
 const graficoBarrasTopProductos = async () => {
     const DATA = await fetchData(PRODUCTO_API, 'topProductosMasVendidos');
 
@@ -103,5 +103,5 @@ const graficoBarrasTopProductos = async () => {
         document.getElementById('carouselChart3').remove();  // Remover el gráfico si no hay datos
         console.log(DATA.error);
     }
-}*/
+}
     
