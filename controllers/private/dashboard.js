@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     graficoPastelSubcategorias();
     graficoPastelCategorias();
     graficoBarrasTopProductos();
-    graficoPastelCantidadProductosSubcategoria();
-    graficoPastelCantidadProductosCategoria();
+    graficoBarraCantidadProductosSubcategoria();
+    graficoBarraCantidadProductosCategoria();
     // Se establece el título del contenido principal.
     LB_TITULO.textContent = `${greeting}, bienvenido`;
 });
@@ -89,7 +89,7 @@ const graficoPastelCategorias = async () => {
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
 */
-const graficoPastelCantidadProductosSubcategoria = async () => {
+const graficoBarraCantidadProductosSubcategoria = async () => {
     // Petición para obtener los datos del gráfico.
     const DATA = await fetchData(PRODUCTO_API, 'cantidadProductosSubcategoria');
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
@@ -141,7 +141,7 @@ const graficoBarrasTopProductos = async () => {
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
 */
-const graficoPastelCantidadProductosCategoria = async () => {
+const graficoBarraCantidadProductosCategoria = async () => {
     // Petición para obtener los datos del gráfico.
     const DATA = await fetchData(PRODUCTO_API, 'cantidadProductosCategoria');
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.

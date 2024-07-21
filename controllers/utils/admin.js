@@ -10,12 +10,8 @@ const LB_TITULO = document.getElementById('tituloPrincipal');
 
 const cargarPlantilla = async () => {
     const DATA = await fetchData(USER_API, 'getUser');
-    console.log(DATA);
     if (DATA.session) {
         if (DATA.status) {
-            console.log('El usuario tiene una sesión activa');
-
-            let colorBotones;
             let [colorBoton1, colorBoton2, colorBoton3, colorBoton4, colorBoton5, colorBoton6,
                 colorBoton7, colorBoton8] = Array(8).fill('bg-light');
             let [colorTexto1, colorTexto2, colorTexto3, colorTexto4, colorTexto5, colorTexto6,
