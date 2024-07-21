@@ -205,8 +205,8 @@ const cargarTabla = async (form = null) => {
                         <button type="button" class="btn btn-danger" onclick="abrirEliminar(${row.id_sub_categoria})">
                             <img src="../../resources/img/eliminar.png" alt="lapizEditar" width="30px">
                         </button>
-                        <button type="button" class="btn btn-info" onclick="openReport(${row.id_sub_categoria})">
-                            <img src="../../resources/img/lapiz.png" alt="ImprimirReporte" width="30px">
+                        <button type="button" class="btn btn-warning" onclick="openReport(${row.id_sub_categoria})">
+                            <i class="bi bi-filetype-pdf fs-5 text-light"></i>
                         </button>
                     </td>
                 </tr>

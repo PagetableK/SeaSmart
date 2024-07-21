@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.psinmargen{
+    margin: 0;
+}
+
 main{
     width: 100vw;
 }

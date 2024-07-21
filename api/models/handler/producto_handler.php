@@ -152,7 +152,7 @@ class ProductoHandler
                 WHERE id_sub_categoria = ?
                 ORDER BY nombre_producto;
                 ';
-        $params = array($this->id);
+        $params = array($this->id_subcategoria);
         return Database::getRows($sql, $params);
     }
 
