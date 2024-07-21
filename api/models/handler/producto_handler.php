@@ -118,6 +118,7 @@ class ProductoHandler
         return Database::getRows($sql);
     }
 
+    //Consulta para grafico de cantidad (COUNT) de Productos por subcategoria
     public function cantidadProductosSubcategoria()
     {
         $sql = 'SELECT COUNT(id_producto) AS cantidad_productos, nombre_sub_categoria
@@ -129,6 +130,7 @@ class ProductoHandler
         return Database::getRows($sql);
     }
 
+    //Consulta para grafico de cantidad (COUNT) de Productos por categoria
     public function cantidadProductosCategoria()
     {
         $sql = 'SELECT COUNT(id_producto) AS cantidad_productos, nombre_categoria
@@ -137,6 +139,31 @@ class ProductoHandler
                     INNER JOIN categorias USING(id_categoria)
                 GROUP BY nombre_categoria
                 ORDER BY nombre_categoria
+                ';
+        return Database::getRows($sql);
+    }
+
+    //Consulta para reporte de productos por Subcategoria (parametro: id_sub_categoria)
+    public function productosSubCategoria()
+    {
+        $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, precio_producto, nombre_sub_categoria, estado_producto
+                FROM productos 
+                    INNER JOIN sub_categorias USING(id_sub_categoria)
+                WHERE id_sub_categoria = ?
+                ORDER BY nombre_producto;
+                ';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    //Consulta para reporte de productos ordenados por Categoria y Subcategoria 
+    public function productosOrdenSubYCategoria()
+    {
+        $sql = 'SELECT nombre_categoria, nombre_sub_categoria, id_producto, nombre_producto, descripcion_producto, precio_producto, estado_producto 
+                FROM productos 
+                    INNER JOIN sub_categorias USING(id_sub_categoria)
+                    INNER JOIN categorias USING(id_categoria)
+                ORDER BY nombre_categoria, nombre_sub_categoria, nombre_producto;
                 ';
         return Database::getRows($sql);
     }
