@@ -10,12 +10,8 @@ const LB_TITULO = document.getElementById('tituloPrincipal');
 
 const cargarPlantilla = async () => {
     const DATA = await fetchData(USER_API, 'getUser');
-    console.log(DATA);
     if (DATA.session) {
         if (DATA.status) {
-            console.log('El usuario tiene una sesión activa');
-
-            let colorBotones;
             let [colorBoton1, colorBoton2, colorBoton3, colorBoton4, colorBoton5, colorBoton6,
                 colorBoton7, colorBoton8] = Array(8).fill('bg-light');
             let [colorTexto1, colorTexto2, colorTexto3, colorTexto4, colorTexto5, colorTexto6,
@@ -69,7 +65,7 @@ const cargarPlantilla = async () => {
                                 <div class="col" id="seasmart-container">
                                     <div class="row d-flex justify-content-start">
                                         <div class="col-12 d-flex align-items-center justify-content-center">
-                                            <img src="../../resources/img/logo1.png" width="75px" height="75px">
+                                            <img src="../../resources/img/logo.png" width="75px" height="75px">
                                         </div>
                                         <div class="col-12 d-flex align-items-center justify-content-center">
                                             <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>

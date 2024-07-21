@@ -330,3 +330,12 @@ FORM_ELIMINAR.addEventListener('submit', async (event) => {
         }
     }
 });
+
+//Función para abrir reporte de todos los registros "Productos ordenados por categoria y subcategoria"
+const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte.
+    const PATH = new URL(`${SERVER_URL}reports/admin/productos_orden_sub_cat.php`);    
+    
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}

@@ -133,6 +133,7 @@ const barGraph = (canvas, xAxis, yAxis, legend, title) => {
             }]
         },
         options: {
+            responsive: true,
             plugins: {
                 title: {
                     display: true,
@@ -170,6 +171,7 @@ const pieGraph = (canvas, legends, values, title) => {
             }]
         },
         options: {
+            responsive: true,
             plugins: {
                 title: {
                     display: true,

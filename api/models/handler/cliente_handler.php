@@ -18,6 +18,7 @@ class ClienteHandler
     protected $telefono = null;
     protected $telefono_fijo = null;
     protected $estado = null;
+    protected $clientes = null;
  
     /*
     *   Métodos para gestionar la cuenta del cliente.
@@ -187,6 +188,15 @@ class ClienteHandler
             return false;
         }
     }
- 
- 
+    
+    /*
+    *   Métodos para generar el reporte con la información del cliente.
+    */
+    public function datosCliente()
+    {
+        $sql = 'SELECT nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_movil, telefono_fijo
+                FROM clientes';
+        $params = array($this->clientes);
+        return Database::getRows($sql, $params);
+    }
 }

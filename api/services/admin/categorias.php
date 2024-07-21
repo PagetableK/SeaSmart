@@ -106,6 +106,21 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar la categoría';
                 }
                 break;
+            // Cases para grafico
+            case 'cantidadProductosCategoria':
+                if ($result['dataset'] = $categoria->cantidadProductosCategoria()) {
+                        $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                    break;
+            case 'porcentajeProductosCategoria':
+                if ($result['dataset'] = $categoria->porcentajeProductosCategoria()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break;
                 // Si no se encuentra la acción a realizar se muestra el error.
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';

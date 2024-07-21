@@ -205,6 +205,9 @@ const cargarTabla = async (form = null) => {
                         <button type="button" class="btn btn-danger" onclick="abrirEliminar(${row.id_sub_categoria})">
                             <img src="../../resources/img/eliminar.png" alt="lapizEditar" width="30px">
                         </button>
+                        <button type="button" class="btn btn-warning" onclick="openReport(${row.id_sub_categoria})">
+                            <i class="bi bi-filetype-pdf fs-5 text-light"></i>
+                        </button>
                     </td>
                 </tr>
             `;
@@ -227,4 +230,14 @@ const cargarTabla = async (form = null) => {
             sweetAlert(2, DATA.error, true);
         }
     }
+}
+
+
+//Función para abrir reporte de un registro "Productos por subcategoria"
+const openReport = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte.
+    const PATH = new URL(`${SERVER_URL}reports/admin/productos_subcategoria.php`);    // Se agrega un parámetro a la ruta con el valor de la subcategoria seleccionada.
+    PATH.searchParams.append('id_sub_categoria', id);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }
