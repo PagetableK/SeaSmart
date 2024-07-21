@@ -26,7 +26,7 @@ const cargarPlantilla = async (tipoNavbar) => {
                     <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                         <div class="row">
                             <div class="col-12 d-flex align-items-center justify-content-center">
-                                <img src="../../resources/img/logo1.png" width="55px" height="55px">
+                                <img src="../../resources/img/logo.png" width="55px" height="55px">
                             </div>
                             <div class="col-12 d-flex align-items-center justify-content-center">
                                 <p id="texto-ss">S<span>ea</span>S<span>mart</span></p>
@@ -39,7 +39,7 @@ const cargarPlantilla = async (tipoNavbar) => {
                                 aria-label="Buscar" id="buscarCategoria">
                             <div class="btn input-group-addon d-flex align-items-center justify-content-center"
                                 id="btnBuscarCategoria">
-                                <img src="../../resources/img/lupaa.png" class="img-fluid" width="18px" height="18px"
+                                <img src="../../resources/img/lupa.png" class="img-fluid" width="18px" height="18px"
                                     alt="buscarimg">
                             </div>
                         </form>
@@ -80,7 +80,7 @@ const cargarPlantilla = async (tipoNavbar) => {
                     <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                         <div class="row">
                             <div class="col-12 d-flex align-items-center justify-content-center">
-                                <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                                <img src="../../resources/img/logo.png" width="55px" height="55px">
                             </div>
                             <div class="col-12 d-flex align-items-center justify-content-center">
                                 <p class="parrafoSeaSmart">
@@ -101,7 +101,7 @@ const cargarPlantilla = async (tipoNavbar) => {
                     <div class="col-12 col-sm-2" id="seasmart-container" onclick="abrirIndex()">
                         <div class="row">
                             <div class="col-12 d-flex align-items-center justify-content-center">
-                                <img src="../../resources/img/Logo1.png" width="55px" height="55px">
+                                <img src="../../resources/img/logo.png" width="55px" height="55px">
                             </div>
                             <div class="col-12 d-flex align-items-center justify-content-center">
                                 <p class="parrafoSeaSmart">

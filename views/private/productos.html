@@ -15,6 +15,8 @@
     <link href="../../resources/css/navbar_privado.css" rel="stylesheet">
     <!-- Mandar a llamar css de productos -->
     <link href="../../resources/css/productos.css" rel="stylesheet">
+    <!-- CDN Icons Boostrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <!-- Cuerpo de la página web -->
@@ -26,27 +28,28 @@
         <div class="container-fluid">
             <!-- CREAMOS LA FILA DONDE COLOCAMOS EL BOTON "AGREGAR PRODUCTO"-->
             <div class="row mt-5 row-gap-3 px-md-5">
-                <div class="col-12 col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                <div class="col-12 col-sm-6 col-md-4">
                     <!-- Botón para abrir el Modal -->
                     <button type="button" class="btn btn-primary ms-5" onclick="abrirModal('Agregar producto')">+
                         Agregar
                         Producto</button>
                 </div>
-                <div class="col-12 col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                    <!-- Botón para abrir el reporte de productos ordenados -->
-                    <button type="button" class="btn btn-info ms-5" onclick="openReport()">Reporte</button>
-                </div>
                 <!-- CREAMOS LA COLUMNA DONDE COLOCAMOS LA "BARRA DE BUSQUEDA"  -->
-                <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6 d-flex px-4 px-sm-0">
+                <div class="col-12 col-sm-6 d-flex px-4 px-sm-0 flex-fill">
                     <!--COLOCAMOS LA BARRA DE BUSQUEDA-->
-                    <div class="col">
-                        <form class="d-flex ps-3" id="formBuscar">
+                    <div class="col d-flex flex-fill">
+                        <form class="d-flex ps-3 flex-fill" id="formBuscar">
                             <input class="form-control" type="search"
                                 placeholder="Buscar un producto por nombre, descripción o subcategoría..."
                                 id="buscarProducto" name="buscarProducto" oninput="verificarReset()">
                             <button class="btn" type="enviar"><img src="../../resources/img/lupa.png" class="img-fluid"
                                     width="35px" height="35px" alt="buscarimg"></button>
                         </form>
+                        <!-- Botón para abrir el reporte de productos ordenados -->
+                        <button type="button" class="btn btn-warning ms-5 d-flex align-items-center justify-content-center gap-3 text-light" onclick="openReport()">
+                            <i class="bi bi-filetype-pdf fs-5"></i>
+                            <p class="psinmargen fw-semibold">Generar reporte</p>
+                        </button>
                     </div>
                 </div>
             </div>
