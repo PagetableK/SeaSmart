@@ -98,4 +98,25 @@ class PedidoHandler
         $params = array($this->direccion, $_SESSION['idCliente']);
         return Database::executeRow($sql, $params);
     }
+
+    //Función para obtener reporte de pedidos ordenados por estado
+    public function getReportePedidosPorEstado()
+    {
+        $sql = 'SELECT p.id_pedido, p.fecha_pedido, p.estado_pedido, p.direccion, c.nombre_cliente, c.apellido_cliente
+                FROM pedidos p
+                INNER JOIN clientes c ON p.id_cliente = c.id_cliente
+                ORDER BY p.estado_pedido, p.fecha_pedido DESC';
+        return Database::getRows($sql);
+    }
+
+    //Función para el reporte de información de los clientes
+    public function readByCliente($id_cliente)
+    {
+        $sql = 'SELECT id_pedido, fecha_pedido, estado_pedido, direccion
+                FROM pedidos
+                WHERE id_cliente = ?
+                ORDER BY fecha_pedido DESC;';
+        $params = array($id_cliente);
+        return Database::getRows($sql, $params);
+    }
 }
