@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // La función cargarPedidos permite cargar dinámicamente los pedidos realizados por el cliente.
-const cargarPedidos = async() => {
+const cargarPedidos = async () => {
     // Se realiza una petición para obtener los pedidos realizados por el cliente.
     const DATA = await fetchData(PEDIDOS_API, "readOrders");
     // Si la respuesta es satisfactoria se ejecuta el código.
-    if(DATA.status){
+    if (DATA.status) {
         // Variable que se utiliza para agregar la numeración de los pedidos.
         let nPedido = 1;
         // Se agregan dinámicamente los pedidos por cada resultado.
@@ -53,7 +53,7 @@ const cargarPedidos = async() => {
             </div>
             `;
         });
-    } else{
+    } else {
         // Se muestra el mensaje.
         sweetAlert(4, "No se han realizado pedidos", false);
         // Se muestra el texto.
@@ -70,7 +70,7 @@ const verDetalles = async (idPedido) => {
     // Se realiza una petición para obtener los productos del pedido.
     const DATA = await fetchData(DETALLES_PEDIDOS_API, 'readDetails', FORM);
     // Si la respuesta es satisfactoria se ejecuta el código.
-    if(DATA.status){
+    if (DATA.status) {
         // Se inicializa el contenido del contenedor.
         CONTENEDOR_PRODUCTOS.innerHTML = '';
         // Se agregan los productos del pedido al contenedor dinámicamente.
@@ -94,7 +94,12 @@ const verDetalles = async (idPedido) => {
         });
 
         MODAL_DETALLES.show();
-    } else{
+    } else {
         sweetAlert(2, DATA.error, false);
     }
+}
+
+const mostrarPdf = async () =>{
+
+    
 }

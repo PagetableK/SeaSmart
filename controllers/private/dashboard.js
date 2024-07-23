@@ -2,7 +2,7 @@
 const PRODUCTO_API = 'services/admin/productos.php';
 
 // Método del evento para cuando el documento ha cargado.
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Constante para obtener el número de horas.
     const HOUR = new Date().getHours();
     // Se define una variable para guardar un saludo.
@@ -26,8 +26,18 @@ document.addEventListener('DOMContentLoaded', () => {
     graficoBarraCantidadProductosCategoria();
     // Se establece el título del contenido principal.
     LB_TITULO.textContent = `${greeting}, bienvenido`;
+
+    cargarPDF();
 });
 
+function cargarPDF(){
+
+    var pdf = new jsPDF();
+
+    pdf.addHTML(document.body,function() {
+        pdf.save('web.pdf');
+    });
+}
 
 /*
 *   Función asíncrona para mostrar un gráfico de pastel con el porcentaje de productos por categoría.

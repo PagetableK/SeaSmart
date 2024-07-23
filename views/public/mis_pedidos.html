@@ -10,6 +10,8 @@
     <title>Mis pedidos</title>
     <!-- Mandar a llamar el framework -->
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Mandar a llamar íconos del framework -->
+    <link href="../../resources/css/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Mandar a llamar el css del navbar -->
     <link rel="stylesheet" href="../../resources/css/navbar_publico.css" type="text/css">
     <!-- Mandar a llamar el css de la página -->
@@ -45,6 +47,11 @@
                     <div class="modal-body">
                         <div class="col-12" id="contenedorProductos">
 
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <div class="btn btn-primary d-flex justify-content-center text-light fw-semibold gap-3" onclick="abrirPdf()">
+                            <i class="bi bi-filetype-pdf"></i>Generar factura
                         </div>
                     </div>
                 </div>

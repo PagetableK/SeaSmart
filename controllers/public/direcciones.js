@@ -51,7 +51,7 @@ const cargarDirecciones = async () => {
     } else {
         if (DATA.error == 'No se han agregado direcciones') {
             // Se muestra el mensaje con el error.
-            sweetAlert(3, DATA.error, false);
+            sweetAlert(4, DATA.error, false);
             // Se vacía el contenido del contenedorDirecciones.
             CONTENEDOR_DIRECCIONES.innerHTML = '';
         } else {
