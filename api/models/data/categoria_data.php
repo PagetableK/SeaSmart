@@ -28,7 +28,7 @@ class CategoriaData extends CategoriaHandler
         }
     }
 
-    public function setNombre($value, $min = 2, $max = 20)
+    public function setNombre($value, $min = 2, $max = 50)
     {
         if (!Validator::validateAlphanumeric($value)) {
             $this->data_error = 'El nombre debe ser un valor alfanumérico';
