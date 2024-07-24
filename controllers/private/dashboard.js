@@ -26,18 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     graficoBarraCantidadProductosCategoria();
     // Se establece el título del contenido principal.
     LB_TITULO.textContent = `${greeting}, bienvenido`;
-
-    cargarPDF();
 });
-
-function cargarPDF(){
-
-    var pdf = new jsPDF();
-
-    pdf.addHTML(document.body,function() {
-        pdf.save('web.pdf');
-    });
-}
 
 /*
 *   Función asíncrona para mostrar un gráfico de pastel con el porcentaje de productos por categoría.
