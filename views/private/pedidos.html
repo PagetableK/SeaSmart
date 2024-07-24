@@ -13,8 +13,10 @@
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Mandar a llamar css del navbar -->
     <link href="../../resources/css/navbar_privado.css" rel="stylesheet">
-    <!-- CDN Icons Boostrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Mandar a llamar íconos del framework -->
+    <link href="../../resources/css/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Mandar a llamar el css de la página -->
+    <link href="../../resources/css/pedidos.css" rel="stylesheet">
 </head>
 
 <!-- Cuerpo de la página -->
@@ -25,73 +27,55 @@
         <!-- CREAMOS EL CONTENEDOR PADRE -->
         <div class="container-fluid">
             <div class="row mt-4 px-md-5">
-                <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <div class="ms-4 d-flex align-items-center" id="contenedor-img-filtro">
-                        <div class="text-start">Filtros</div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-2"
-                            viewBox="0 0 16 16">
-                            <path
-                                d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z">
-                            </path>
-                        </svg>
+                <div class="col-12 col-md-6 d-flex flex-column gap-3">
+                    <div class="row" id="contenedor-img-filtro">
+                        <div class="col d-flex flex-row gap-2">
+                            <div class="text-start">Filtros</div>
+                            <div><i class="bi bi-funnel"></i></div>
+                        </div>
                     </div>
-                    <div class="col-11 d-flex align-items-center mt-4 ms-4">
-                        <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                    <div class="row d-flex align-items-center">
+                        <div class="col d-flex flex-row gap-3">
                             <p class="text-start">Estado:</p>
-                        </div>
-                        <!-- CREAMOS UN COMBO BOX DONDE SE VERAN LOS DETALLES DE LOS PEDIDOS -->
-                        <!-- DROPDOWN ES UN COMBO BOX -->
-                        <div class="col">
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Todos
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Pendiente</a></li>
-                                    <li><a class="dropdown-item" href="#">Siendo enviado</a></li>
-                                    <li><a class="dropdown-item" href="#">Finalizado</a></li>
-                                    <li><a class="dropdown-item" href="#">Enviado</a></li>
-                                    <li><a class="dropdown-item" href="#">Anulado</a></li>
-                                </ul>
-                            </div>
+                            <select name="estadoPedido" id="estadoPedido" class="form-select w-50">
+                                
+                            </select>
                         </div>
                     </div>
-                    <div class="col d-flex align-items-center mt-3 ms-4">
-                        <div class="row d-flex flex-row">
+                    <div class="row">
+                        <div class="col d-flex flex-row flex-wrap align-items-center gap-3">
                             <!-- CREAMOS LAS CLASES PARA COLOCAR LAS FECHAS -->
-                            <p class="text-start col-12 col-lg-3">Fecha de:</p>
-                            <div class="col-11 col-lg-4">
+                            <p class="text-start psinmargen">Fecha desde:</p>
+                            <div class="">
                                 <input placeholder="Seleccione rango de inicio" type="date" id="fechaInicio"
                                     class="form-control">
                             </div>
-                            <p class="text-center col-12 col-lg-1">a</p>
-                            <div class="col-11 col-lg-4">
+                            <p class="text-center psinmargen">hasta</p>
+                            <div class="">
                                 <input placeholder="Seleccione rango  final" type="date" id="fechaFinal"
                                     class="form-control">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6 d-flex mt-4 px-4 px-sm-0">
+                <div class="col-12 col-md-6 d-flex flex-column mt-4 px-4 px-sm-0 row-gap-3">
                     <!--COLOCAMOS LA BARRA DE BUSQUEDA-->
-                    <div class="col">
-                        <div class="col d-flex flex-fill">
-                            <form class="d-flex ps-3" id="formBuscar">
-                                <input class="form-control" type="search" placeholder="Buscar un cliente..."
-                                    name="buscarPedido" id="buscarPedido" oninput="verificarReset()"
-                                    aria-label="Search">
-                                <button class="btn" type="submit"><img src="../../resources/img/lupa.png"
-                                        class="img-fluid" width="35px" height="35px" alt="buscarimg"></button>
-                            </form>
-                            <!-- Botón para abrir el reporte de pedidos -->
-                            <button type="button"
-                                class="btn btn-warning ms-5 d-flex align-items-center justify-content-center gap-3 text-light"
-                                onclick="openReport()">
-                                <i class="bi bi-filetype-pdf fs-5"></i>
-                                <p class="psinmargen fw-semibold">Generar reporte</p>
-                            </button>
-                        </div>
+                    <div class="row d-flex">
+                        <form class="col-12 d-flex ps-3" id="formBuscar">
+                            <input class="form-control" type="search" placeholder="Buscar un cliente..."
+                                name="buscarPedido" id="buscarPedido" oninput="verificarReset()" aria-label="Search">
+                            <button class="btn" type="submit"><img src="../../resources/img/lupa.png" class="img-fluid"
+                                    width="35px" height="35px" alt="buscarimg"></button>
+                        </form>
+                    </div>
+                    <div class="row d-flex justify-content-md-end justify-content-center">
+                        <!-- Botón para abrir el reporte de pedidos -->
+                        <button type="button"
+                            class="btn btn-warning d-flex align-items-center justify-content-center gap-3 text-light w-50" id="botonReporte"
+                            onclick="openReport()">
+                            <i class="bi bi-filetype-pdf fs-5"></i>
+                            <p class="psinmargen fw-semibold">Generar reporte</p>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -104,7 +88,7 @@
                 <thead>
                     <tr>
                         <!-- Cantidad de registros -->
-                        <td id="filasEncontradas"></td>
+                        <td colspan="7" id="filasEncontradas"></td>
                     </tr>
                     <tr>
                         <th class="text-center">Nombre del cliente</th>
@@ -118,60 +102,6 @@
                 </thead>
                 <!-- CREAMOS EL INTERIOR DE LA TABLA (LAS FILAS Y COLUMNAS DE CADA INFORMACIÓN)-->
                 <tbody id="cuerpoTabla">
-                    <!-- FILA 1 -->
-                    <tr>
-                        <td class="text-center">Charlotte Chacón</td>
-                        <td class="text-center">9078-7856</td>
-                        <td class="text-center">05/05/2024</td>
-                        <td class="text-center">Pendiente</td>
-                        <td class="text-center">2</td>
-                        <td class="text-center">$25.00</td>
-                        <!-- COLOCAMOS EL BOTON PARA VER MÁS INFORMACIÓN DEL PEDIDO-->
-                        <td class="text-center">
-                            <a href="../../views/private/informacion_de_pedido.html"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                    class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
-                                </svg></a>
-                        </td>
-                    </tr>
-                    <!-- FILA 2 -->
-                    <tr>
-                        <td class="text-center">Carlos López</td>
-                        <td class="text-center">9078-7856</td>
-                        <td class="text-center">05/05/2024</td>
-                        <td class="text-center">Pendiente</td>
-                        <td class="text-center">2</td>
-                        <td class="text-center">$25.00</td>
-                        <!-- COLOCAMOS EL BOTON PARA VER MÁS INFORMACIÓN DEL PEDIDO-->
-                        <td class="text-center">
-                            <a href="../../views/private/informacion_de_pedido.html"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                    class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
-                                </svg></a>
-                        </td>
-                    </tr>
-                    <!-- FILA 3 -->
-                    <tr>
-                        <td class="text-center">Josue Barahona</td>
-                        <td class="text-center">7450-0089</td>
-                        <td class="text-center">27/04/2024</td>
-                        <td class="text-center">Siendo enviado</td>
-                        <td class="text-center">5</td>
-                        <td class="text-center">$87.00</td>
-                        <!-- COLOCAMOS EL BOTON PARA VER MÁS INFORMACIÓN DEL PEDIDO-->
-                        <td class="text-center">
-                            <a href="../../views/private/informacion_de_pedido.html"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                    class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
-                                </svg></a>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
