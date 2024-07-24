@@ -192,11 +192,56 @@ class ClienteHandler
     /*
     *   Métodos para generar el reporte con la información del cliente.
     */
-    public function datosCliente()
+
+    // Función que devuelve todos los clientes
+    public function getClientes()
     {
-        $sql = 'SELECT nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_movil, telefono_fijo
-                FROM clientes';
-        $params = array($this->clientes);
+        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_movil, telefono_fijo, estado_cliente
+                FROM clientes
+                ORDER BY nombre_cliente, apellido_cliente;';
+        return Database::getRows($sql);
+    }
+
+    // Función que devuelve las direcciones del cliente
+    public function getDireccionesCliente($id_cliente)
+    {
+        $sql = 'SELECT id_direccion, direccion
+                FROM direcciones
+                WHERE id_cliente = ?
+                ORDER BY direccion;';
+        $params = array($id_cliente);
         return Database::getRows($sql, $params);
+    }
+
+    // Función que devuelve los pedidos del cliente
+    public function getPedidosCliente($id_cliente)
+    {
+        $sql = 'SELECT id_pedido, fecha_pedido, estado_pedido, direccion
+                FROM pedidos
+                WHERE id_cliente = ?
+                ORDER BY fecha_pedido DESC;';
+        $params = array($id_cliente);
+        return Database::getRows($sql, $params);
+    }
+
+    // Función que devuelve los detalles de un pedido específico
+    public function getDetallesPedido($id_pedido)
+    {
+        $sql = 'SELECT dp.id_detalle_pedido, dp.cantidad_producto, dp.precio_producto, p.nombre_producto, dp.id_detalle_producto
+                FROM detalles_pedidos dp
+                INNER JOIN detalles_productos dpr ON dp.id_detalle_producto = dpr.id_detalle_producto
+                INNER JOIN productos p ON dpr.id_producto = p.id_producto
+                WHERE dp.id_pedido = ?
+                ORDER BY p.nombre_producto;';
+        $params = array($id_pedido);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readAll2()
+    {
+        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_movil, telefono_fijo, estado_cliente
+                FROM clientes
+                ORDER BY nombre_cliente, apellido_cliente;';
+        return Database::getRows($sql);
     }
 }
