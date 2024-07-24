@@ -44,6 +44,10 @@ html{
     cursor: pointer;
 }
 
+.psinmargen{
+    margin: 0;
+}
+
 @media only screen and (min-width: 1920px) {
     #contenedorDirecciones{
         height: 425px;
@@ -69,5 +73,32 @@ html{
     #contenedorDirecciones{
         max-height: 360px;
         overflow-y: auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .flex-fill {
+        flex: 0 0 auto !important;
+    }
+}
+
+@media (max-width: 1199px) {
+    .col-md-5 {
+        flex: 0 0 auto;
+        width: 49%;
+    }
+}
+
+@media (max-width: 1199px) {
+    .col-md-5 {
+        flex: 0 0 auto;
+        width: 49%;
+    }
+}
+
+@media (max-width: 555px) {
+    .col-md-5 {
+        flex: 0 0 auto;
+        width: 100%;
     }
 }
