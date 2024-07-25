@@ -110,28 +110,33 @@ class ProductoHandler
 
     public function porcentajeProductosSubcategoria()
     {
+        // Se estalece la estructura de la sentencia.
         $sql = 'SELECT nombre_sub_categoria, ROUND((COUNT(id_producto) * 100.0 / (SELECT COUNT(id_producto) FROM productos)), 2) porcentaje
                 FROM productos
                 INNER JOIN sub_categorias USING(id_sub_categoria)
                 GROUP BY nombre_sub_categoria ORDER BY porcentaje DESC
                 ';
+        // Se capturan y retornan los datos.
         return Database::getRows($sql);
     }
 
     public function porcentajeProductosCategoria()
     {
+        // Se estalece la estructura de la sentencia.
         $sql = 'SELECT categorias.nombre_categoria, ROUND((COUNT(productos.id_producto) * 100.0 / (SELECT COUNT(*) FROM productos)), 2) AS porcentaje
                 FROM productos
                 INNER JOIN sub_categorias ON productos.id_sub_categoria = sub_categorias.id_sub_categoria
                 INNER JOIN categorias ON sub_categorias.id_categoria = categorias.id_categoria
                 GROUP BY categorias.nombre_categoria
                 ORDER BY porcentaje DESC';
+        // Se capturan y retornan los datos.
         return Database::getRows($sql);
     }
 
     // Definir la función para obtener los top 5 productos más vendidos
     public function topProductosMasVendidos()
     {
+        // Se estalece la estructura de la sentencia.
         $sql = 'SELECT p.nombre_producto, SUM(dped.cantidad_producto) AS cantidad_vendida
                 FROM productos p
                 INNER JOIN detalles_productos dp ON p.id_producto = dp.id_producto
@@ -140,24 +145,28 @@ class ProductoHandler
                 GROUP BY p.nombre_producto
                 ORDER BY cantidad_vendida DESC
                 LIMIT 5';
+        // Se capturan y retornan los datos.
         return Database::getRows($sql);
     }
   
     //Consulta para grafico de cantidad (COUNT) de Productos por subcategoria
     public function cantidadProductosSubcategoria()
     {
+        // Se estalece la estructura de la sentencia.
         $sql = 'SELECT COUNT(id_producto) AS cantidad_productos, nombre_sub_categoria
                 FROM productos 
                     INNER JOIN sub_categorias  USING(id_sub_categoria)
                 GROUP BY nombre_sub_categoria
                 ORDER BY nombre_sub_categoria
                 ';
+        // Se capturan y retornan los datos.
         return Database::getRows($sql);
     }
 
     //Consulta para grafico de cantidad (COUNT) de Productos por categoria
     public function cantidadProductosCategoria()
     {
+        // Se establece la estructura de la sentencia.
         $sql = 'SELECT COUNT(id_producto) AS cantidad_productos, nombre_categoria
                 FROM productos 
                     INNER JOIN sub_categorias USING(id_sub_categoria)
@@ -165,12 +174,14 @@ class ProductoHandler
                 GROUP BY nombre_categoria
                 ORDER BY nombre_categoria
                 ';
+        // Se capturan y retornan los datos.
         return Database::getRows($sql);
     }
 
     //Consulta para reporte de productos por Subcategoria (parametro: id_sub_categoria)
     public function productosSubCategoria()
     {
+        // Se establece la estructura de la sentencia.
         $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, precio_producto, nombre_sub_categoria, estado_producto
                 FROM productos 
                     INNER JOIN sub_categorias USING(id_sub_categoria)
@@ -178,6 +189,7 @@ class ProductoHandler
                 ORDER BY nombre_producto;
                 ';
         $params = array($this->id_subcategoria);
+        // Se capturan y retornan los datos.
         return Database::getRows($sql, $params);
     }
 
