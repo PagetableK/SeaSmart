@@ -154,7 +154,7 @@ class ClienteHandler
     {
         // Se establece la estructura de la sentencia.
         $sql = "SELECT id_cliente, nombre_cliente, apellido_cliente, dui_cliente, estado_cliente, telefono_movil, telefono_fijo, correo_cliente, 
-                (SELECT COUNT(id_pedido) FROM pedidos INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente WHERE pedidos.id_cliente = ?) as pedidos
+                (SELECT COUNT(id_pedido) FROM pedidos INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente WHERE pedidos.id_cliente = ? AND (estado_pedido != 'En carrito')) as pedidos
                 FROM clientes
                 WHERE id_cliente = ?";
         // Si el valor del atributo es nulo se establece el parámetro.

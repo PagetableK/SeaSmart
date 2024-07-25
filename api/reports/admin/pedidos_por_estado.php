@@ -25,8 +25,8 @@ if ($dataPedidos) {
     $pdf->setFont('Arial', 'B', 11);
     // Imprimir las celdas con los encabezados.
     $pdf->cell(40, 10, 'Fecha del Pedido', 1, 0, 'C', 1);
-    $pdf->cell(25, 10, 'Estado', 1, 0, 'C', 1);
-    $pdf->cell(45, 10, 'Cantidad de productos', 1, 0, 'C', 1);
+    $pdf->cell(35, 10, 'Estado', 1, 0, 'C', 1);
+    $pdf->cell(35, 10, 'Productos', 1, 0, 'C', 1);
     $pdf->cell(75, 10, 'Cliente', 1, 1, 'C', 1);
 
     // Establecer la fuente para los datos de los pedidos
@@ -38,8 +38,8 @@ if ($dataPedidos) {
         $fechaPedido = $rowPedido['fecha_pedido'] ? date('m/d/Y', strtotime($rowPedido['fecha_pedido'])) : 'Fecha no disponible';
         // Imprimir las celdas con los datos de los pedidos
         $pdf->cell(40, 10, $fechaPedido, 1, 0);
-        $pdf->cell(25, 10, $pdf->encodeString($rowPedido['estado_pedido']), 1, 0);
-        $pdf->cell(45, 10, $pdf->encodeString($rowPedido['cantidad']), 1, 0);
+        $pdf->cell(35, 10, $pdf->encodeString($rowPedido['estado_pedido']), 1, 0);
+        $pdf->cell(35, 10, $pdf->encodeString($rowPedido['cantidad']), 1, 0);
         $pdf->cell(75, 10, $pdf->encodeString($rowPedido['nombre_cliente'] . ' ' . $rowPedido['apellido_cliente']), 1, 1);
     }
 } else {
