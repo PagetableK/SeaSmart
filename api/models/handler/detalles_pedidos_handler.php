@@ -97,11 +97,12 @@ class DetallesPedidosHandler
 
     public function readDetails()
     {
-        $sql = 'SELECT detalles_pedidos.precio_producto, nombre_producto, cantidad_producto, imagen_producto
+        $sql = 'SELECT detalles_pedidos.precio_producto, nombre_producto, cantidad_producto, imagen_producto, fecha_pedido, estado_pedido
                 FROM detalles_pedidos
                 INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
                 INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
-                WHERE id_pedido = ?;';
+                INNER JOIN pedidos ON pedidos.id_pedido = detalles_pedidos.id_pedido
+                WHERE detalles_pedidos.id_pedido = ?;';
         $params = array($this->id_pedido);
         return Database::getRows($sql, $params);
     }

@@ -16,7 +16,7 @@ $pedido = new PedidoData;
 $direccion = new DireccionData;
 
 // Se inicia el reporte con el encabezado del documento.
-$pdf->startReport('Reporte de Clientes, Direcciones y Pedidos');
+$pdf->startReport('Reporte de Clientes y Pedidos');
 
 // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
 if ($dataClientes = $clientes->readAll2()) {
@@ -25,12 +25,11 @@ if ($dataClientes = $clientes->readAll2()) {
     // Se establece la fuente para los encabezados.
     $pdf->setFont('Arial', 'B', 11);
     // Se imprimen las celdas con los encabezados.
-    $pdf->cell(30, 10, 'Nombre', 1, 0, 'C', 1);
-    $pdf->cell(30, 10, 'Apellido', 1, 0, 'C', 1);
-    $pdf->cell(40, 10, 'Correo', 1, 0, 'C', 1);
-    $pdf->cell(30, 10, 'DUI', 1, 0, 'C', 1);
-    $pdf->cell(30, 10, 'Tel. Movil', 1, 0, 'C', 1);
-    $pdf->cell(30, 10, 'Tel. Fijo', 1, 1, 'C', 1);
+    $pdf->cell(70, 10, 'Nombre', 1, 0, 'C', 1);
+    $pdf->cell(55, 10, 'Correo', 1, 0, 'C', 1);
+    $pdf->cell(25, 10, 'DUI', 1, 0, 'C', 1);
+    $pdf->cell(20, 10, 'Tel. Movil', 1, 0, 'C', 1);
+    $pdf->cell(20, 10, 'Tel. Fijo', 1, 1, 'C', 1);
 
     // Se establece la fuente para los datos de los clientes.
     $pdf->setFont('Arial', '', 11);
@@ -38,12 +37,11 @@ if ($dataClientes = $clientes->readAll2()) {
     // Se recorren los registros fila por fila.
     foreach ($dataClientes as $rowClientes) {
         // Se imprimen las celdas con los datos de los clientes.
-        $pdf->cell(30, 10, $pdf->encodeString($rowClientes['nombre_cliente']), 1, 0);
-        $pdf->cell(30, 10, $pdf->encodeString($rowClientes['apellido_cliente']), 1, 0);
-        $pdf->cell(40, 10, $pdf->encodeString($rowClientes['correo_cliente']), 1, 0);
-        $pdf->cell(30, 10, $pdf->encodeString($rowClientes['dui_cliente']), 1, 0);
-        $pdf->cell(30, 10, $pdf->encodeString(isset($rowClientes['telefono_movil']) ? $rowClientes['telefono_movil'] : 'N/A'), 1, 0);
-        $pdf->cell(30, 10, $pdf->encodeString(isset($rowClientes['telefono_fijo']) ? $rowClientes['telefono_fijo'] : 'N/A'), 1, 1);
+        $pdf->cell(70, 10, $pdf->encodeString($rowClientes['nombre_cliente'] . " " . $rowClientes['apellido_cliente']), 1, 0);
+        $pdf->cell(55, 10, $pdf->encodeString($rowClientes['correo_cliente']), 1, 0);
+        $pdf->cell(25, 10, $pdf->encodeString($rowClientes['dui_cliente']), 1, 0);
+        $pdf->cell(20, 10, $pdf->encodeString(isset($rowClientes['telefono_movil']) ? $rowClientes['telefono_movil'] : 'N/A'), 1, 0);
+        $pdf->cell(20, 10, $pdf->encodeString(isset($rowClientes['telefono_fijo']) ? $rowClientes['telefono_fijo'] : 'N/A'), 1, 1);
 
         // Se imprimen las direcciones del cliente.
         if ($dataDirecciones = $direccion->readByCliente($rowClientes['id_cliente'])) {

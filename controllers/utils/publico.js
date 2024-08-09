@@ -12,6 +12,7 @@ function abrirIndex() {
     window.location.href = 'index.html';
 }
 
+
 const cargarPlantilla = async (tipoNavbar) => {
 
     // Se valida el navbar que se mostrará en la pantalla.
@@ -34,17 +35,21 @@ const cargarPlantilla = async (tipoNavbar) => {
                         </div>
                     </div>
                     <div class="col-10 col-sm-8 d-flex justify-content-center" id="divBuscador">
-                        <form class="d-flex w-75 bg-light" role="busqueda" id="form-buscarCategoria">
+                        <form class="d-flex w-75 bg-light" id="formBuscar">
+                            <button type="reset" class="btn input-group-addon d-flex align-items-center justify-content-center"
+                                id="btnReset">
+                                <i class="bi bi-arrow-clockwise"></i>
+                            </button>
                             <input class="form-control bg-light" type="search" placeholder="Buscar una categoría.."
-                                aria-label="Buscar" id="buscarCategoria">
-                            <div class="btn input-group-addon d-flex align-items-center justify-content-center"
-                                id="btnBuscarCategoria">
+                                aria-label="Buscar" id="busqueda" name="busqueda">
+                            <button type="submit" class="btn input-group-addon d-flex align-items-center justify-content-center"
+                                id="btnBuscar">
                                 <img src="../../resources/img/lupa.png" class="img-fluid" width="18px" height="18px"
                                     alt="buscarimg">
-                            </div>
+                            </button>
                         </form>
                     </div>
-                    <div class="col-2 col-sm-2 d-flex justify-content-end pe-3 d-block d-md-none" id="btnCollapse">
+                    <div class="col-1 d-flex justify-content-end pe-3 d-block d-md-none" id="btnCollapse">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#listaCollapse">
                             <span class="navbar-toggler-icon"></span></button>
@@ -58,7 +63,7 @@ const cargarPlantilla = async (tipoNavbar) => {
                             </div>
                         </div>
                     </div>
-                    <div class="col-2 d-none d-md-block">
+                    <div class="col-1 d-none d-md-block">
                         <div class="row d-flex justify-content-center align-items-center gap-0" id="contenedorUsuarioCarrito">
                             <div class="dropdown col-auto" id="cuenta">
                                 <img src="../../resources/img/user.png" class="dropdown-toggle" type="button" width="35px"
@@ -72,6 +77,35 @@ const cargarPlantilla = async (tipoNavbar) => {
             </nav>
         </header>
         `);
+
+        const FORM_BUSQUEDA = document.getElementById('formBuscar');
+
+        FORM_BUSQUEDA.addEventListener('submit', async (e) => {
+        
+            e.preventDefault();
+        
+            if(FORM_BUSQUEDA['busqueda'].value.trim() == ""){
+        
+                await sweetAlert(3, 'Asegúrese de agregar el nombre de la categoría para filtrar');
+        
+                FORM_BUSQUEDA['busqueda'].focus();
+            } else{
+                
+                const FORM = new FormData(FORM_BUSQUEDA);
+
+                cargarCategorias(FORM);
+            }   
+        });
+
+        FORM_BUSQUEDA.addEventListener('reset', async (e) => {
+        
+            e.preventDefault();
+        
+            FORM_BUSQUEDA['busqueda'].value = "";
+
+            cargarCategorias();
+        });
+
     } else if (tipoNavbar == 2) {
         MAIN.insertAdjacentHTML('beforebegin', `
         <header>
@@ -124,7 +158,7 @@ const cargarPlantilla = async (tipoNavbar) => {
                             </div>
                         </div>
                     </div>
-                    <div class="col-2 d-none d-md-block">
+                    <div class="col-1 d-none d-md-block">
                         <div class="row d-flex justify-content-center align-items-center gap-0" id="contenedorUsuarioCarrito">
                             <div class="dropdown col-auto" id="cuenta">
                                 <img src="../../resources/img/user.png" class="dropdown-toggle" type="button" width="35px"
@@ -150,8 +184,8 @@ const cargarPlantilla = async (tipoNavbar) => {
     const OPCIONES_USUARIO = document.querySelector('#opcionesUsuario');
 
     const DATA = await fetchData(USER_API, 'getUser');
-    if (true ) {
 
+    if (DATA.status) {
         if (tipoNavbar == 1 || tipoNavbar == 3) {
             CONTENEDOR_USUARIO_CARRITO.insertAdjacentHTML('beforeend', `
             <div class="btn col-auto" type="button" id="carrito" onclick="abrirCarro()">
@@ -172,7 +206,6 @@ const cargarPlantilla = async (tipoNavbar) => {
                 </li>
             `);
         }
-
     } else {
         // AGREGAR BOTONES DE INICIAR SESIÓN Y REGISTRARSE
         if (tipoNavbar == 1) {
@@ -188,7 +221,7 @@ const cargarPlantilla = async (tipoNavbar) => {
                 </a>
             </li>
             `);
-        } else if(tipoNavbar == 3){
+        } else if (tipoNavbar == 3) {
             window.location.href = "index.html";
         }
     }
@@ -219,25 +252,4 @@ const cargarPlantilla = async (tipoNavbar) => {
         </nav>
     </footer>
     `);
-
-    /*
-*   Función asíncrona para cerrar la sesión del usuario.
-*   Parámetros: ninguno.
-*   Retorno: ninguno.
-*/
-    const logOut = async () => {
-        // Se muestra un mensaje de confirmación y se captura la respuesta en una constante.
-        const RESPONSE = await confirmAction('¿Está seguro de cerrar la sesión?');
-        // Se verifica la respuesta del mensaje.
-        if (RESPONSE) {
-            // Petición para eliminar la sesión.
-            const DATA = await fetchData(USER_API, 'logOut');
-            // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-            if (DATA.status) {
-                sweetAlert(1, DATA.message, true, 'index.html');
-            } else {
-                sweetAlert(2, DATA.exception, false);
-            }
-        }
-    }
 }

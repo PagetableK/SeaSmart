@@ -8,6 +8,8 @@ const CONTENEDOR_PEDIDOS = document.getElementById('contenedorPedidos');
 const MODAL_DETALLES = new bootstrap.Modal('#modalDetalles');
 // Se almacena el contenedor donde se cargarán los productos del pedido.
 const CONTENEDOR_PRODUCTOS = document.getElementById('contenedorProductos');
+// Se declara la constante global dónde se almacenará la información del detalle de pedido.
+let detallesPedido = [];
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,11 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // La función cargarPedidos permite cargar dinámicamente los pedidos realizados por el cliente.
-const cargarPedidos = async() => {
+const cargarPedidos = async () => {
     // Se realiza una petición para obtener los pedidos realizados por el cliente.
     const DATA = await fetchData(PEDIDOS_API, "readOrders");
     // Si la respuesta es satisfactoria se ejecuta el código.
-    if(DATA.status){
+    if (DATA.status) {
         // Variable que se utiliza para agregar la numeración de los pedidos.
         let nPedido = 1;
         // Se agregan dinámicamente los pedidos por cada resultado.
@@ -53,7 +55,7 @@ const cargarPedidos = async() => {
             </div>
             `;
         });
-    } else{
+    } else {
         // Se muestra el mensaje.
         sweetAlert(4, "No se han realizado pedidos", false);
         // Se muestra el texto.
@@ -70,7 +72,9 @@ const verDetalles = async (idPedido) => {
     // Se realiza una petición para obtener los productos del pedido.
     const DATA = await fetchData(DETALLES_PEDIDOS_API, 'readDetails', FORM);
     // Si la respuesta es satisfactoria se ejecuta el código.
-    if(DATA.status){
+    if (DATA.status) {
+        // Se almacena el conjunto de datos provenientes de la petición en la variable global.
+        detallesPedido = DATA.dataset;
         // Se inicializa el contenido del contenedor.
         CONTENEDOR_PRODUCTOS.innerHTML = '';
         // Se agregan los productos del pedido al contenedor dinámicamente.
@@ -94,7 +98,79 @@ const verDetalles = async (idPedido) => {
         });
 
         MODAL_DETALLES.show();
-    } else{
+    } else {
         sweetAlert(2, DATA.error, false);
     }
+}
+
+// Función que permite cargar pdf con información del pedido.
+async function mostrarPdf() {
+    // Se crea el contenedor padre.
+    const CONTENEDOR_PADRE = document.createElement('div');
+    // Se agregan las clases del framework de diseño,
+    CONTENEDOR_PADRE.classList.add('container-fluid', 'p-5');
+    // Se separa la fecha obtenida del pedido.
+    let fecha = detallesPedido[0].fecha_pedido.split('-');
+    // Se instancia la variable dónde se almacenará el total del pedido.
+    var total = 0;
+    // Se agrega la información principal del documento.
+    CONTENEDOR_PADRE.innerHTML = `
+            <div class="row">
+                <div class="col d-flex align-items-center">
+                    <img src="../../resources/img/logo_grande.png" class="img-fluid" style="height:50px; width:50px">
+                </div>
+                <div class="col d-flex align-items-center">
+                    <p class="fw-bold fs-5 text-start psinmargen">Factura de pedido</p>
+                </div>
+                <div class="col d-flex align-items-center">
+                    <p class="fw-semibold text-end fs-6 psinmargen">Fecha del pedido: ${fecha[1]}/${fecha[2]}/${fecha[0]}</p>
+                </div>
+            </div>
+            <div class="row">
+                <p class="fw-semibold text-end">Estado del pedido: ${detallesPedido[0].estado_pedido}</p>
+            </div>
+            <div class="row mt-5">
+                <p class="fw-semibold">Productos del pedido</p>
+                <hr>
+            </div>
+    `;
+    // Se itera el conjunto de datos para cargar la información de los productos en el documento.
+    detallesPedido.forEach(row => {
+        // Se agrega la información del producto.
+        CONTENEDOR_PADRE.innerHTML += `
+            <div class="row d-flex gap-3 p-5">
+                <div class="col d-flex justify-content-center align-items-center">
+                    <img src="${SERVER_URL}images/detalles_productos/${row.imagen_producto}" width="100px" height="100px">
+                </div>
+                <div class="col-7 d-flex flex-column gap-1">
+                    <p class="">Nombre del producto: ${row.nombre_producto}</p>
+                    <p class="">Cantidad: ${row.cantidad_producto}</p>
+                    <p class="">Precio: $${row.precio_producto}</p>
+                    <p class="text-danger fw-semibold">Subtotal: $${row.precio_producto * row.cantidad_producto}</p>
+                </div>
+                <hr>
+            </div>
+        `;
+        // Se agrega el subtotal del producto actual a la variable.
+        total += row.precio_producto * row.cantidad_producto;
+    });
+    // Se muestra el total del pedido en la etiqueta de texto.
+    CONTENEDOR_PADRE.innerHTML += '<p class="text-danger text-end fw-semibold fs-5">Total del pedido: $'+total+'</p>';
+    // Se carga el pdf y se guarda en el equipo del cliente.
+    html2pdf().from(CONTENEDOR_PADRE).toPdf().get('pdf').then((pdf) => descargarPdf(pdf));
+}
+
+// Función que permite descargar el pdf en el equipo del cliente.
+function descargarPdf(pdf){
+    // Se crea la etiqueta a para abrir el documento en una nueva pestaña.
+    let link = document.createElement('a');
+    // Se indica que el documento se abrirá en una nueva pestaña.
+    link.target = '_blank';
+    // Se almacena el pdf en la etiqueta.
+    link.href = pdf.output('bloburl');
+    // Se configura el nombre del documento.
+    link.download = 'factura.pdf';
+    // Se abre el link para comenzar la descarga y se quita el link posteriormente.
+    link.click();
+    link.remove();
 }

@@ -104,37 +104,49 @@ if (isset($_GET['action'])) {
                 break;
                 // La acción porcentajeProductosCategoria permite seleccionar los productos agrupados por subcategorías 
             case 'porcentajeProductosSubcategoria':
+                // Se verifica que se la sentencia sql se ejecuta y se almacena en el array asociativo.
                 if ($result['dataset'] = $producto->porcentajeProductosSubcategoria()) {
+                    // Se devuelve el estado de la acción.
                     $result['status'] = 1;
                 } else {
                     $result['error'] = 'No hay datos disponibles';
                 }
                 break;
-            // Case para porcentaje de porductos por categoria 
+            // Case para porcentaje de productos por categoria. 
             case 'porcentajeProductosCategoria':
+                // Se verifica que se la sentencia sql se ejecuta y se almacena en el array asociativo.
                  if ($result['dataset'] = $producto->porcentajeProductosCategoria()) {
+                    // Se devuelve el estado de la acción.
                      $result['status'] = 1;
                 } else {
                     $result['error'] = 'No hay datos disponibles';
                 }
                 break; 
-            //Case para el grafico de barras top 5 productos mas vendidos
+            // Case para el gráfico de barras top 5 productos más vendidos.
             case 'topProductosMasVendidos':
+                // Se verifica que se la sentencia sql se ejecuta y se almacena en el array asociativo.
                 if ($result['dataset'] = $producto->topProductosMasVendidos()) {
+                    // Se devuelve el estado de la acción.
                     $result['status'] = 1;
                } else {
                    $result['error'] = 'No hay datos disponibles';
                }
                break;    
+               // Case para el gráfico de cantidad de productos por subcategoría.
             case 'cantidadProductosSubcategoria':
+                // Se verifica que se la sentencia sql se ejecuta y se almacena en el array asociativo.
                 if ($result['dataset'] = $producto->cantidadProductosSubcategoria()) {
+                    // Se devuelve el estado de la acción.
                     $result['status'] = 1;
                 } else {
                     $result['error'] = 'No hay datos disponibles';
                 }
                 break;
+                // Case para el gráfico de cantidad de productos por categoría.
             case 'cantidadProductosCategoria':
+                // Se verifica que se la sentencia sql se ejecuta y se almacena en el array asociativo.
                 if ($result['dataset'] = $producto->cantidadProductosCategoria()) {
+                    // Se devuelve el estado de la acción.
                     $result['status'] = 1;
                 } else {
                     $result['error'] = 'No hay datos disponibles';

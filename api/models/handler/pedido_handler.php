@@ -102,10 +102,11 @@ class PedidoHandler
     //Función para obtener reporte de pedidos ordenados por estado
     public function getReportePedidosPorEstado()
     {
-        $sql = 'SELECT p.id_pedido, p.fecha_pedido, p.estado_pedido, p.direccion, c.nombre_cliente, c.apellido_cliente
+        $sql = 'SELECT p.id_pedido, p.fecha_pedido, p.estado_pedido, p.direccion, c.nombre_cliente, c.apellido_cliente, 
+                (SELECT SUM(cantidad_producto) FROM detalles_pedidos WHERE id_pedido = p.id_pedido) as cantidad
                 FROM pedidos p
                 INNER JOIN clientes c ON p.id_cliente = c.id_cliente
-                ORDER BY p.estado_pedido, p.fecha_pedido DESC';
+                ORDER BY p.estado_pedido, p.fecha_pedido DESC;';
         return Database::getRows($sql);
     }
 
