@@ -62,22 +62,20 @@
                                     <input type="text" class="form-control" id="txtFijo" disabled>
                                 </div>
                             </div>
-                            <!-- Creamos el boton que servira para abrir el modal de editar información -->
-                            <div class="col-12 mb-2 d-flex align-items-end mt-3">
+                            <div class="col-12 mb-2 d-flex flex-wrap align-items-end mt-3 gap-2">
+                                <!-- Creamos el boton que servira para abrir el modal de editar información -->
                                 <div class="btn btn-success d-flex justify-content-center align-items-center gap-2 flex-fill" onclick="abrirModalInfo()">
                                     <p class="psinmargen">Editar información</p>
                                     <i class="bi bi-pencil-square h5 psinmargen"></i>
                                 </div>
-                            </div>
-                            <!-- Creamos el boton que servira para cargar el pdf con la información del cliente -->
-                            <div class="col-12 mb-2 d-flex align-items-end mt-3">
+                                <!-- Creamos el boton que servira para cargar el pdf con la información del cliente -->
                                 <div class="btn btn-warning text-light fw-semibold d-flex justify-content-center align-items-center gap-2 flex-fill" onclick="generarInfo()">
                                     <p class="psinmargen">Cargar información</p>
                                     <i class="bi bi-filetype-pdf psinmargen"></i>
                                 </div>
                             </div>
                             <p class="fw-bold fs-5 mt-5">Mis direcciones de envío</p>
-                            <div class="row d-flex row-gap-2 column-gap-5 pb-5 justify-content-center justify-content-md-start"
+                            <div class="container-fluid d-flex flex-wrap gap-2 pb-5 justify-content-center justify-content-md-start"
                                 id="contenedorDirecciones">
                             </div>
                         </fieldset>

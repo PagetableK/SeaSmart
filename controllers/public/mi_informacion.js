@@ -77,20 +77,13 @@ const cargarDirecciones = async () => {
         DATA.dataset.forEach(row => {
             // Se crea un campo de dirección por cada dirección encontrada.
             CONTENEDOR_DIRECCIONES.innerHTML += `
-            <div class="col-9 col-md-5">
-                <div class="row d-flex">
-                    <div class="col-10 mb-3 d-flex align-items-start">
-                        <label for="${row.id_direccion}" class="form-label"></label>
-                        <input type="text" class="form-control" placeholder="${row.direccion}" id="${row.id_direccion}" disabled>
-                    </div>
-                    <div class="col-2 mb-3 d-flex align-items-start">
-                        <div class="btn btn-success" onclick="abrirModalDireccion('Editar dirección', ${row.id_direccion})">
-                            <img src="../../resources/img/lapiz.png" height="20px" width="20px" alt="editar">
-                        </div>
-                        <div class="btn btn-danger" onclick="abrirModalEliminarDireccion(${row.id_direccion})">
-                            <img src="../../resources/img/eliminar.png" height="20px" width="20px" alt="eliminar">
-                        </div>
-                    </div>
+            <div class="col-12 col-md-5 d-flex">
+                <input type="text" class="form-control" placeholder="${row.direccion}" id="${row.id_direccion}" disabled>
+                <div class="btn btn-success botonDireccion d-flex align-items-center" onclick="abrirModalDireccion('Editar dirección', ${row.id_direccion})">
+                    <i class="bi bi-pencil-square text-light"></i>
+                </div>
+                <div class="btn btn-danger botonDireccion d-flex align-items-center" onclick="abrirModalEliminarDireccion(${row.id_direccion})">
+                    <i class="bi bi-trash"></i>
                 </div>
             </div>
             `;
@@ -108,7 +101,7 @@ const cargarDirecciones = async () => {
     }
     // Se agrega el botón para abrir el modal que permite agregar una dirección.
     CONTENEDOR_DIRECCIONES.innerHTML += `
-    <div class="col-11 col-sm-5 d-flex align-items-center justify-content-center fw-medium align-self-start" id="contenedor-agregar-direccion" onclick="abrirModalDireccion('Agregar dirección')">
+    <div class="col-11 col-md-5 d-flex align-items-center justify-content-center fw-medium align-self-start" id="contenedor-agregar-direccion" onclick="abrirModalDireccion('Agregar dirección')">
         <p class="text-center agregar-direccion">Agregar dirección</p>
         <p class="agregar-direccion fs-5 ms-2">+</p>
     </div>`;
@@ -242,13 +235,54 @@ FORM_ELIMINAR.addEventListener('submit', async (event) => {
     }
 });
 
+// Función que permite cargar un reporte formato pdf con la información del cliente.
 async function generarInfo() {
     // Se realiza una petición a la API para obtener la información del cliente.
     const DATA = await fetchData(USER_API, 'readProfile');
     // Si la respuesta es satisfactoria se ejecuta el código.
     if (DATA.status) {
-        
-        
+        // Se crea el contenedor padre.
+        const CONTENEDOR_PADRE = document.createElement('div');
+        // Se agregan las clases del framework de diseño,
+        CONTENEDOR_PADRE.classList.add('container-fluid', 'p-5');
+        // Se carga la información del cliente en el contenedor principal.
+        CONTENEDOR_PADRE.innerHTML = `
+            <div class="row">
+                <div class="col-4 d-flex align-items-center">
+                    <img src="../../resources/img/logo_grande.png" class="img-fluid" style="height:50px; width:50px">
+                </div>
+                <div class="col d-flex align-items-center">
+                    <p class="fw-bold fs-5 text-start psinmargen">Información del cliente</p>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <p class="fw-semibold">Datos personales</p>
+                <hr>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6 d-flex align-items-center">
+                    <p class="fw-semibold">Nombre: ${DATA.dataset.nombre_cliente}</p>
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                    <p class="fw-semibold">Correo electrónico: ${DATA.dataset.correo_cliente}</p>
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                    <p class="fw-semibold">Teléfono Móvil: ${DATA.dataset.telefono_movil}</p>
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                    <p class="fw-semibold">Teléfono Fijo: ${DATA.dataset.telefono_fijo}</p>
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                    <p class="fw-semibold">DUI: ${DATA.dataset.dui_cliente}</p>
+                </div>
+                <hr>
+                <div class="col-6 d-flex align-items-center">
+                    <p class="fw-semibold">Pedidos realizados: ${DATA.dataset.pedidos}</p>
+                </div>
+            </div>
+        `;
+        // Se carga el pdf y se guarda en el equipo del cliente.
+        html2pdf().from(CONTENEDOR_PADRE).toPdf().get('pdf').then((pdf) => descargarPdf(pdf));
     } else {
         // Se muestra el mensaje con el error.
         sweetAlert(2, DATA.error, false);
