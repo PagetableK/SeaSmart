@@ -10,6 +10,8 @@
     <title>SeaSmart</title>
     <!-- Mandar a llamar el framework -->
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Mandar a llamar íconos del framework -->
+    <link href="../../resources/css/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Mandar a llamar el css de la página -->
     <link rel="stylesheet" href="../../resources/css/indexpublico.css" type="text/css">
     <!-- Mandar a llamar el css del navbar -->
@@ -23,9 +25,8 @@
     <main>
         <!-- Contenedor padre -->
         <div class="container-fluid p-0">
-            <!-- Fila 1 -->
             <div class="col">
-                <!-- Carrusel con imagenes -->
+                <!-- Carrusel con imágenes -->
                 <div id="carouselExample" class="carousel slide">
                     <!-- Contenedor con las imagenes -->
                     <div class="carousel-inner">
@@ -56,7 +57,6 @@
                     </button>
                 </div>
             </div>
-            <!-- Fila 2 -->
             <div class="container">
                 <div class="row mt-5 d-flex justify-content-center align-items-center">
                     <!-- Texto de bienvenida -->
@@ -70,71 +70,14 @@
                     </div>
                 </div>
             </div>
-            <!-- Fila 3 -->
-            <div class="col">
+            <!-- Mensaje que se muestra al cargar las categorías -->
+            <div class="col" id="mensajeCategorias">
                 <p class="text-center fs-3 fw-bold mt-5">Explora nuestras
                     <span>categorías</span> y
                     <span>productos</span>
                 </p>
             </div>
-            <!-- Fila 4 -->
-            <div class="p-5 grid gap-3 d-flex justify-content-center" id="contenedorCategorias">
-                <!-- Card de categoría -->
-                <div class="card d-flex align-items-center">
-                    <!-- Imagen de la categoría -->
-                    <img src="../../resources/img/traje_mujer6.png" class="img-fluid" width="150px" height="150px"
-                        alt="mujerCategoria">
-                    <!-- Cuerpo de la card -->
-                    <div class="card-body d-flex align-items-center justify-content-center flex-column">
-                        <!-- Nombre de la categoría -->
-                        <h5 class="card-title text-center">Mujer</h5>
-                        <p class="card-text text-center">Echa un vistazo a los productos de la categoría mujeres</p>
-                        <!-- Botón para ver los productos -->
-                        <a href="../../views/public/productos.html" class="btn btn-primary" id="verProductos">Ver productos</a>
-                    </div>
-                </div>
-
-                <div class="card d-flex align-items-center">
-                    <!-- Imagen de la categoría -->
-                    <img src="../../resources/img/trajeHombre3.jpg" class="img-fluid" width="150px" height="150px"
-                        alt="mujerCategoria">
-                    <!-- Cuerpo de la card -->
-                    <div class="card-body d-flex align-items-center justify-content-center flex-column">
-                        <!-- Nombre de la categoría -->
-                        <h5 class="card-title text-center">Hombre</h5>
-                        <p class="card-text text-center">Echa un vistazo a los productos de la categoría hombres</p>
-                        <!-- Botón para ver los productos -->
-                        <a href="../../views/public/productos.html" class="btn btn-primary" id="verProductos">Ver productos</a>
-                    </div>
-                </div>
-
-                <div class="card d-flex align-items-center">
-                    <!-- Imagen de la categoría -->
-                    <img src="../../resources/img/trajeInfantil1.jpg" class="img-fluid" width="150px" height="150px"
-                        alt="mujerCategoria">
-                    <!-- Cuerpo de la card -->
-                    <div class="card-body d-flex align-items-center justify-content-center flex-column">
-                        <!-- Nombre de la categoría -->
-                        <h5 class="card-title text-center">Infantil</h5>
-                        <p class="card-text text-center">Echa un vistazo a los productos de la categoría infantil</p>
-                        <!-- Botón para ver los productos -->
-                        <a href="../../views/public/productos.html" class="btn btn-primary" id="verProductos">Ver productos</a>
-                    </div>
-                </div>
-
-                <div class="card d-flex align-items-center">
-                    <!-- Imagen de la categoría -->
-                    <img src="../../resources/img/accesorios1.jpg" class="img-fluid" width="150px" height="150px"
-                        alt="mujerCategoria">
-                    <!-- Cuerpo de la card -->
-                    <div class="card-body d-flex align-items-center justify-content-center flex-column">
-                        <!-- Nombre de la categoría -->
-                        <h5 class="card-title text-center">Accesorios</h5>
-                        <p class="card-text text-center">Echa un vistazo a los productos de la categoría accesorios</p>
-                        <!-- Botón para ver los productos -->
-                        <a href="../../views/public/productos.html" class="btn btn-primary" id="verProductos">Ver productos</a>
-                    </div>
-                </div>
+            <div class="col-12 p-5 grid gap-3 d-flex justify-content-center flex-wrap" id="contenedorCategorias">
             </div>
         </div>
     </main>

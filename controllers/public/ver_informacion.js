@@ -528,7 +528,7 @@ FORM_CARRITO.addEventListener('submit', async (event) => {
                     }
                 } else {
                     if (DATA_DETALLE_CARRITO.error == 'El detalle del producto ya ha sido agregado al carrito') {
-                        sweetAlert(3, 'La opción seleccionada del producto ya ha sido agregada al carrito', false);
+                        sweetAlert(3, DATA_DETALLE_CARRITO.error, false);
                     } else {
                         sweetAlert(2, DATA_DETALLE_CARRITO.error, false);
                     }
@@ -582,7 +582,7 @@ FORM_CARRITO.addEventListener('submit', async (event) => {
                     }
                 } else {
                     if (DATA_DETALLE_CARRITO.error == 'El detalle del producto ya ha sido agregado al carrito') {
-                        sweetAlert(3, 'La opción seleccionada del producto ya ha sido agregada al carrito', false);
+                        sweetAlert(3, 'La opción seleccionada del producto ya ha sido agregado al carrito', false);
                     } else {
                         sweetAlert(2, DATA_DETALLE_CARRITO.error, false);
                     }
@@ -636,7 +636,7 @@ FORM_CARRITO.addEventListener('submit', async (event) => {
                     }
                 } else {
                     if (DATA_DETALLE_CARRITO.error == 'El detalle del producto ya ha sido agregado al carrito') {
-                        sweetAlert(3, 'La opción seleccionada del producto ya ha sido agregada al carrito', false);
+                        sweetAlert(3, 'La opción seleccionada del producto ya ha sido agregado al carrito', false);
                     } else {
                         sweetAlert(2, DATA_DETALLE_CARRITO.error, false);
                     }
@@ -689,7 +689,7 @@ FORM_CARRITO.addEventListener('submit', async (event) => {
                 }
             } else {
                 if (DATA_DETALLE_CARRITO.error == 'El detalle del producto ya ha sido agregado al carrito') {
-                    sweetAlert(3, 'El producto ya ha sido agregada al carrito', false);
+                    sweetAlert(3, 'El producto ya ha sido agregado al carrito', false);
                 } else {
                     sweetAlert(2, DATA_DETALLE_CARRITO.error, false);
                 }

@@ -10,6 +10,8 @@
     <title>Mi información</title>
     <!-- Mandamos a llamar al framework -->
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Mandar a llamar íconos del framework -->
+    <link href="../../resources/css/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Mandar a llamar el css del navbar -->
     <link rel="stylesheet" href="../../resources/css/navbar_publico.css" type="text/css">
     <!-- Mandar a llamar el css de la página -->
@@ -32,74 +34,49 @@
                 <div class="col-12 col-xl-8">
                     <form class="">
                         <fieldset class="row d-flex" id="contenedorInfo">
-
-                            <div class="row d-flex" id="contenedorCliente">
-
-                                <div class="row d-flex">
-                                    <p class="fw-bold fs-5">Información de contacto</p>
-
-                                    <div class="col-10 col-sm-5 col-lg-5 mb-3">
-                                        <label for="txtTelefono_movil" class="form-label">Nombres</label>
-                                        <input type="text" class="form-control" placeholder="Hazel Nicole"
-                                            id="txtNombres" disabled>
-                                    </div>
-                                    <div class="col-1 mb-3 d-flex align-items-end">
-
-                                    </div>
-
-                                    <div class="col-10 col-sm-5 mb-3">
-                                        <label for="txtTelefono_fijo" class="form-label">Apellidos</label>
-                                        <input type="text" class="form-control" placeholder="García Hernández"
-                                            id="txtApellidos" disabled>
-                                    </div>
-                                    <div class="col-1 mb-3 d-flex align-items-end">
-
-                                    </div>
-
-                                    <div class="col-10 col-sm-5 col-lg-5 mb-3">
-                                        <label for="txtTelefono_movil" class="form-label">DUI (Documento único de
-                                            identidad)</label>
-                                        <input type="text" class="form-control" placeholder="00000000-1" id="txtDUI"
-                                            disabled>
-                                    </div>
-                                    <div class="col-1 mb-3 d-flex align-items-end">
-
-                                    </div>
-
-                                    <div class="col-10 col-sm-5 mb-3">
-                                        <label for="txtTelefono_fijo" class="form-label">Correo Electronico</label>
-                                        <input type="text" class="form-control" placeholder="hazel@gamil.com"
-                                            id="txtCorreo" disabled>
-                                    </div>
-                                    <div class="col-1 mb-3 d-flex align-items-end">
-
-                                    </div>
-
-                                    <div class="col-10 col-sm-5 col-lg-5 mb-3">
-                                        <label for="txtTelefono_movil" class="form-label">Teléfono móvil</label>
-                                        <input type="text" class="form-control" placeholder="7845 9067"
-                                            id="txtTelefono_movil" disabled>
-                                    </div>
-                                    <div class="col-1 mb-3 d-flex align-items-end">
-
-                                    </div>
-                                    <div class="col-10 col-sm-5 mb-3">
-                                        <label for="txtTelefono_fijo" class="form-label">Teléfono fijo</label>
-                                        <input type="text" class="form-control" placeholder="2375 1265"
-                                            id="txtTelefono_fijo" disabled>
-                                    </div>
-                                    <div class="col-1 mb-3 d-flex align-items-end">
-                                    </div>
+                            <div class="row d-flex gap-2" id="contenedorCliente">
+                                <p class="fw-bold fs-5">Información de contacto</p>
+                                <div class="col-12 col-md-5 d-flex flex-column row-gap-1">
+                                    <label for="txtNombres" class="form-label">Nombres</label>
+                                    <input type="text" class="form-control" id="txtNombres" disabled>
+                                </div>
+                                <div class="col-12 col-md-5 d-flex flex-column row-gap-1">
+                                    <label for="txtApellidos" class="form-label">Apellidos</label>
+                                    <input type="text" class="form-control" id="txtApellidos" disabled>
+                                </div>
+                                <div class="col-12 col-md-5 d-flex flex-column row-gap-1">
+                                    <label for="txtDUI" class="form-label">DUI (Documento único de
+                                        identidad)</label>
+                                    <input type="text" class="form-control" id="txtDUI" disabled>
+                                </div>
+                                <div class="col-12 col-md-5 d-flex flex-column row-gap-1">
+                                    <label for="txtCorreo" class="form-label">Correo Electronico</label>
+                                    <input type="text" class="form-control" id="txtCorreo" disabled>
+                                </div>
+                                <div class="col-12 col-md-5 d-flex flex-column row-gap-1">
+                                    <label for="txtMovil" class="form-label">Teléfono móvil</label>
+                                    <input type="text" class="form-control" id="txtMovil" disabled>
+                                </div>
+                                <div class="col-12 col-md-5 d-flex flex-column row-gap-1">
+                                    <label for="txtFijo" class="form-label">Teléfono fijo</label>
+                                    <input type="text" class="form-control" id="txtFijo" disabled>
                                 </div>
                             </div>
-                            <!-- Creamos el boton que servira para abrir el modal de editar información -->
-                            <div class="col-3 mb-2 d-flex align-items-end">
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formModal">
-                                    Editar información
-                                </button>
+                            <div class="col-12 mb-2 d-flex flex-wrap align-items-end mt-3 gap-2">
+                                <!-- Creamos el boton que servira para abrir el modal de editar información -->
+                                <div class="btn btn-success d-flex justify-content-center align-items-center gap-2 flex-fill" onclick="abrirModalInfo()">
+                                    <p class="psinmargen">Editar información</p>
+                                    <i class="bi bi-pencil-square h5 psinmargen"></i>
+                                </div>
+                                <!-- Creamos el boton que servira para cargar el pdf con la información del cliente -->
+                                <div class="btn btn-warning text-light fw-semibold d-flex justify-content-center align-items-center gap-2 flex-fill" onclick="generarInfo()">
+                                    <p class="psinmargen">Cargar información</p>
+                                    <i class="bi bi-filetype-pdf psinmargen"></i>
+                                </div>
                             </div>
                             <p class="fw-bold fs-5 mt-5">Mis direcciones de envío</p>
-                            <div class="row d-flex row-gap-2 column-gap-5 pb-5 justify-content-center justify-content-md-start" id="contenedorDirecciones">
+                            <div class="container-fluid d-flex flex-wrap gap-2 pb-5 justify-content-center justify-content-md-start"
+                                id="contenedorDirecciones">
                             </div>
                         </fieldset>
                     </form>
@@ -143,58 +120,56 @@
     </div>
 
     <!-- Modal editar -->
-    <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="editarModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="formModalLabel">Formulario de Información</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title">Edite su información personal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="formInfoCliente">
-                        <div>
+                <form id="formInfoCliente">
+                    <div class="modal-body d-flex flex-column gap-3">
+                        <div class="d-flex flex-column gap-2">
                             <label for="nombres">Nombres</label>
-                            <input type="text" class="form-control" id="nombres" placeholder="Ingrese sus nombres">
+                            <input type="text" class="form-control" id="nombres" name="nombres"
+                                placeholder="Ingrese sus nombres">
                         </div>
-                        
-                        <div>
+                        <div class="d-flex flex-column gap-2">
                             <label for="apellidos">Apellidos</label>
-                            <input type="text" class="form-control" id="apellidos" placeholder="Ingrese sus apellidos">
+                            <input type="text" class="form-control" id="apellidos" name="apellidos"
+                                placeholder="Ingrese sus apellidos">
                         </div>
-                        
-                        <div>
-                            <label for="documento">DUI (Documento unico de identidad)</label>
-                            <input type="text" class="form-control" id="documento"
+                        <div class="d-flex flex-column gap-2">
+                            <label for="dui">DUI (Documento unico de identidad)</label>
+                            <input type="text" class="form-control" id="dui" name="dui"
                                 placeholder="Ingrese su documento de identificación">
                         </div>
-                        
-                        <div>
+                        <div class="d-flex flex-column gap-2">
                             <label for="correo">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="correo"
+                            <input type="email" class="form-control" id="correo" name="correo"
                                 placeholder="Ingrese su correo electrónico">
                         </div>
-                        <br>
-                        <div>
-                            <label for="telefono-movil">Teléfono Móvil</label>
-                            <input type="text" class="form-control" id="telefono-movil"
+                        <div class="d-flex flex-column gap-2">
+                            <label for="movil">Teléfono Móvil</label>
+                            <input type="text" class="form-control" id="movil" name="movil"
                                 placeholder="Ingrese su teléfono móvil">
                         </div>
-                        
-                        <div>
-                            <label for="telefono-fijo">Teléfono Fijo</label>
-                            <input type="text" class="form-control" id="telefono-fijo"
+                        <div class="d-flex flex-column gap-2">
+                            <label for="fijo">Teléfono Fijo</label>
+                            <input type="text" class="form-control" id="fijo" name="fijo"
                                 placeholder="Ingrese su teléfono fijo">
                         </div>
-                        
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-primary" type="submit">Guardar Cambios</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button class="btn btn-success d-flex justify-content-center align-items-center gap-2" type="submit">
+                            <p class="psinmargen">Editar información</p>
+                            <i class="bi bi-pencil-square h5 psinmargen"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal eliminar -->
     <div class="modal fade" id="modalBorrarDireccion">
@@ -214,7 +189,8 @@
             </div>
         </div>
     </div>
-
+    <!-- Librería para generar PDF -->
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
     <!-- Mandar a llamar el framework -->
     <script src="../../resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <!-- Mandar a llamar la librería de alertas -->
@@ -225,17 +201,8 @@
     <script type="text/javascript" src="../../controllers/utils/publico.js"></script>
     <!-- Mandar a llamar el menú lateral -->
     <script type="text/javascript" src="../../controllers/utils/menu_lateral.js"></script>
-    <!-- Mandar a llamar el controlador de direcciones -->
-    <script type="text/javascript" src="../../controllers/public/direcciones.js"></script>
-    
+    <!-- Mandar a llamar el controlador de la página -->
     <script type="text/javascript" src="../../controllers/public/mi_informacion.js"></script>
-    <!-- Mandar a llamar el controlador de clientes -->
-    <script type="text/javascript" src="../../controllers/public/clientes.js"></script>
-
-    <!-- Enlazar con el JavaScript de Bootstrap y jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

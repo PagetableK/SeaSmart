@@ -43,6 +43,8 @@ const FORM_ELIMINAR_ADMIN = document.getElementById('formEliminarAdmin');
 const CONTENEDOR_ESTADO_ADMIN = document.getElementById('contenedorEstadoAdmin');
 // Se almacena el select estadoAdmin.
 const ESTADO_ADMIN = document.getElementById('estadoAdministrador');
+// Se almacena el botón para generar el reporte en la constante.
+const BOTON_REPORTE_CLIENTES = document.getElementById('botonReporteClientes');
 
 // Evento que carga los recursos de barra de navegación y función de rellenar tabla.
 document.addEventListener('DOMContentLoaded', () => {
@@ -54,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const cargarTabla = async (form = null) => {
     if (SELECT_USUARIOS.value == "Administradores") {
+        // Se oculta el botón de reporte.
+        BOTON_REPORTE_CLIENTES.classList.add('d-none');
         // Se cambia el texto dentro del botón de agregar.
         BOTON_AGREGAR.innerHTML = '+ Agregar administrador';
         //Se cambia el placeholder dentro del input para filtrar registros.
@@ -115,6 +119,8 @@ const cargarTabla = async (form = null) => {
         }
     }
     else {
+        // Se muestra el botón de reporte.
+        BOTON_REPORTE_CLIENTES.classList.remove('d-none');
         // Se cambia el texto dentro del botón de agregar.
         BOTON_AGREGAR.innerHTML = '+ Agregar cliente';
         //Se cambia el placeholder dentro del input para filtrar registros.
@@ -144,7 +150,7 @@ const cargarTabla = async (form = null) => {
                             <td>${row.correo_cliente}</td>
                             <td>${row.dui_cliente}</td>
                             <td>${estadoCliente}</td>
-                            <td>
+                            <td class="text-center">
                                 <button type="button" class="btn btn-success" onclick="abrirModalCliente('Editar administrador',${row.id_cliente})">
                                     <img src="../../resources/img/lapiz.png" alt="lapizEditar" width="30px">
                                 </button>
@@ -153,6 +159,9 @@ const cargarTabla = async (form = null) => {
                                 </button>
                                 <button type="button" class="btn btn-primary" onclick="abrirDirecciones(${row.id_cliente})">
                                     <img src="../../resources/img/hogar.png" alt="direccionesVer" width="30px">
+                                </button>
+                                <button type="button" class="btn btn-warning" onclick="cargarReporte(${row.id_cliente})">
+                                    <i class="bi bi-filetype-pdf fs-5 text-light"></i>
                                 </button>
                             </td>
                         </tr>
@@ -177,6 +186,79 @@ const cargarTabla = async (form = null) => {
             }
         }
     }
+}
+
+// Función que permite cargar un reporte formato pdf con la información del cliente.
+async function cargarReporte(id_cliente) {
+    // Se crea el form dónde se almacenará el id del cliente.
+    const FORM = new FormData();
+    // Se almacena el id del cliente en el form.
+    FORM.append('idCliente', id_cliente);
+    // Se realiza una petición a la API para obtener la información del cliente.
+    const DATA = await fetchData(CLIENTE_API, 'readProfile', FORM);
+    // Si la respuesta es satisfactoria se ejecuta el código.
+    if (DATA.status) {
+        // Se crea el contenedor padre.
+        const CONTENEDOR_PADRE = document.createElement('div');
+        // Se agregan las clases del framework de diseño,
+        CONTENEDOR_PADRE.classList.add('container-fluid', 'p-5');
+        // Se carga la información del cliente en el contenedor principal.
+        CONTENEDOR_PADRE.innerHTML = `
+            <div class="row">
+                <div class="col-4 d-flex align-items-center">
+                    <img src="../../resources/img/logo_grande.png" class="img-fluid" style="height:50px; width:50px">
+                </div>
+                <div class="col d-flex align-items-center">
+                    <p class="fw-bold fs-5 text-start psinmargen">Información del cliente</p>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <p class="fw-semibold">Datos personales</p>
+                <hr>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6 d-flex align-items-center">
+                    <p class="fw-semibold">Nombre: ${DATA.dataset.nombre_cliente}</p>
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                    <p class="fw-semibold">Correo electrónico: ${DATA.dataset.correo_cliente}</p>
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                    <p class="fw-semibold">Teléfono Móvil: ${DATA.dataset.telefono_movil}</p>
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                    <p class="fw-semibold">Teléfono Fijo: ${DATA.dataset.telefono_fijo}</p>
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                    <p class="fw-semibold">DUI: ${DATA.dataset.dui_cliente}</p>
+                </div>
+                <hr>
+                <div class="col-6 d-flex align-items-center">
+                    <p class="fw-semibold">Pedidos realizados: ${DATA.dataset.pedidos}</p>
+                </div>
+            </div>
+        `;
+        // Se carga el pdf y se guarda en el equipo del cliente.
+        html2pdf().from(CONTENEDOR_PADRE).toPdf().get('pdf').then((pdf) => descargarPdf(pdf));
+    } else {
+        // Se muestra el mensaje con el error.
+        sweetAlert(2, DATA.error, false);
+    }
+}
+
+// Función que permite descargar el pdf en el equipo del cliente.
+function descargarPdf(pdf){
+    // Se crea la etiqueta a para abrir el documento en una nueva pestaña.
+    let link = document.createElement('a');
+    // Se indica que el documento se abrirá en una nueva pestaña.
+    link.target = '_blank';
+    // Se almacena el pdf en la etiqueta.
+    link.href = pdf.output('bloburl');
+    // Se configura el nombre del documento.
+    link.download = 'Informacion Personal.pdf';
+    // Se abre el link para comenzar la descarga y se quita el link posteriormente.
+    link.click();
+    link.remove();
 }
 
 // Método del evento para cuando se envía el formulario de buscar.
