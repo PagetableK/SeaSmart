@@ -24,6 +24,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Producto inexistente';
                 }
                 break;
+                // La función getDetalles devuelve los detalles de un producto específico.
+            case 'getDetalles':
+                break;
                 // La acción getProducts retorna los productos agregados como un conjunto de datos.
             case 'getProducts':
                 if(!$producto->setIdCategoria($_POST['idCategoria'])){
