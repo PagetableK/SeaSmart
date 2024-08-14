@@ -22,3 +22,7 @@
 .row.d-flex{
     --bs-gutter-x:0rem;
 }
+
+.psinmargen{
+    margin: 0;
+}

@@ -234,3 +234,11 @@ FORM_ELIMINAR_CLIENTE.addEventListener('submit', async (event) => {
     }
 });
 
+//Función para abrir reporte con la información de los clientes
+const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte.
+    const PATH = new URL(`${SERVER_URL}reports/admin/informacion_cliente.php`);    
+    
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}

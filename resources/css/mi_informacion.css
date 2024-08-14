@@ -44,30 +44,38 @@ html{
     cursor: pointer;
 }
 
-@media only screen and (min-width: 1920px) {
-    #contenedorDirecciones{
-        height: 425px;
-        overflow-y: auto;
+.botonDireccion{
+    height: 45px !important;
+    width: 42px;
+}
+
+.psinmargen{
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .flex-fill {
+        flex: 0 0 auto !important;
     }
 }
 
-@media only screen and (max-width: 1629px) {
-    #contenedorDirecciones{
-        max-height: 340px;
-        overflow-y: auto;
+@media (max-width: 1199px) {
+    .col-md-5 {
+        flex: 0 0 auto;
+        width: 49%;
     }
 }
 
-@media only screen and (max-width: 575px) {
-    #contenedorDirecciones{
-        max-height: 300px;
-        overflow-y: auto;
+@media (max-width: 1199px) {
+    .col-md-5 {
+        flex: 0 0 auto;
+        width: 49%;
     }
 }
 
-@media only screen and (max-width: 431px) {
-    #contenedorDirecciones{
-        max-height: 360px;
-        overflow-y: auto;
+@media (max-width: 555px) {
+    .col-md-5 {
+        flex: 0 0 auto;
+        width: 100%;
     }
 }

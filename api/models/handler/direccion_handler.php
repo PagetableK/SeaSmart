@@ -62,4 +62,15 @@ class DireccionHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    //Función para el reporte de la información del cliente
+    public function readByCliente($id_cliente)
+    {
+        $sql = 'SELECT id_direccion, direccion
+                FROM direcciones
+                WHERE id_cliente = ?
+                ORDER BY direccion;';
+        $params = array($id_cliente);
+        return Database::getRows($sql, $params);
+    }
 }

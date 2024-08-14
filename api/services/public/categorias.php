@@ -21,9 +21,21 @@ if (isset($_GET['action'])) {
                 $result['error'] = 'No existen categorías registradas';
             }
             break;
+            // La acción searchRows permite buscar categorías por nombre o palabra clave en la descripción.
+        case 'searchRows':
+            if (!Validator::validateSearch($_POST['busqueda'])) {
+                $result['error'] = Validator::getSearchError();
+            } elseif ($result['dataset'] = $categoria->searchRows()) {
+                $result['status'] = 1;
+                $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+            } else {
+                $result['error'] = 'No hay coincidencias';
+            }
+            break;
             // Si no se encuentra la acción a realizar se muestra el error.
         default:
-            $result['error'] = 'Acción no disponible';
+            $result['error'] = 'Acción no disponible dentro de la sesión';
+            break;
     }
     // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
     $result['exception'] = Database::getException();

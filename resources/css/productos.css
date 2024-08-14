@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.psinmargen{
+    margin: 0;
+}
+
 main{
     width: 100vw;
 }
@@ -69,4 +73,10 @@ main{
 .cloth-card-buy:hover {
     background-color: black;
     color: white;
+}
+
+@media only screen and (min-width:575px) {
+    .md-justify-content-end{
+        justify-content: end !important;
+    }
 }

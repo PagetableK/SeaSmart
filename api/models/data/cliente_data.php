@@ -30,7 +30,7 @@ class ClienteData extends ClienteHandler
     }
 
     // Método para establecer el nombre del cliente.
-    public function setNombre($valor, $min = 4, $max = 20)
+    public function setNombre($valor, $min = 4, $max = 50)
     {
         if (!Validator::validateAlphabetic($valor)) {
             $this->info_error = 'El nombre debe ser un valor alfabético';
@@ -45,7 +45,7 @@ class ClienteData extends ClienteHandler
     }
 
     // Método para establecer el apellido del cliente.
-    public function setApellido($valor, $min = 4, $max = 20)
+    public function setApellido($valor, $min = 4, $max = 50)
     {
         if (!Validator::validateAlphabetic($valor)) {
             $this->info_error = 'El apellido debe ser un valor alfabético';

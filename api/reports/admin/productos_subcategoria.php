@@ -4,14 +4,17 @@ require_once('../../helpers/report.php');
 
 // Se instancia la clase para crear el reporte.
 $pdf = new Report;
+
+// Se incluyen las clases para la transferencia y acceso a datos.
+require_once('../../models/data/subcategoria_data.php');
+require_once('../../models/data/producto_data.php');
+
+// Se instancian las entidades correspondientes.
+$subcategoria = new subCategoriaData;
+$producto = new ProductoData;
+
 // Se verifica si existe un valor para la categoría, de lo contrario se muestra un mensaje.
 if (isset($_GET['id_sub_categoria'])) {
-    // Se incluyen las clases para la transferencia y acceso a datos.
-    require_once('../../models/data/subcategoria_data.php');
-    require_once('../../models/data/producto_data.php');
-    // Se instancian las entidades correspondientes.
-    $subcategoria = new subCategoriaData;
-    $producto = new ProductoData;
     // Se establece el valor de la subcategoría, de lo contrario se muestra un mensaje.
     if ($subcategoria->setId($_GET['id_sub_categoria']) && $producto->setSubCategoria($_GET['id_sub_categoria'])) {
         // Se verifica si la subcategoría existe, de lo contrario se muestra un mensaje.
@@ -25,11 +28,9 @@ if (isset($_GET['id_sub_categoria'])) {
                 // Se establece la fuente para los encabezados.
                 //setFont(Nombre de la fuente, Estilo, Tamaño)
                 $pdf->setFont('Arial', 'B', 11);
-
                 // Se imprimen las celdas con los encabezados.
                 //cell(Ancho de la celda, Alto de la celda, Valor de la celda, Tendrá Borde o no, Salto de linea, Alineado del texto C: center, Relleno de la celda)
-                $pdf->cell(50, 10, 'Nombre', 1, 0, 'C', 1);
-                $pdf->cell(70, 10, 'Descripción', 1, 0, 'C', 1);
+                $pdf->cell(126, 10, 'Nombre', 1, 0, 'C', 1);
                 $pdf->cell(30, 10, 'Precio (US$)', 1, 0, 'C', 1);
                 $pdf->cell(30, 10, 'Estado', 1, 1, 'C', 1);
 
@@ -42,8 +43,7 @@ if (isset($_GET['id_sub_categoria'])) {
                     ($rowProducto['estado_producto']) ? $estado = 'Activo' : $estado = 'Inactivo';
                     // Se imprimen las celdas con los datos de los productos.
                     //cell(Ancho de la celda, Alto de la celda, Valor de la celda, Tendrá Borde o no, Salto de linea, Alineado del texto C: center, Relleno de la celda)
-                    $pdf->cell(50, 10, $pdf->encodeString($rowProducto['nombre_producto']), 1, 0);
-                    $pdf->cell(70, 10, $pdf->encodeString($rowProducto['descripcion_producto']), 1, 0);
+                    $pdf->cell(126, 10, $pdf->encodeString($rowProducto['nombre_producto']), 1, 0);
                     $pdf->cell(30, 10, $rowProducto['precio_producto'], 1, 0);
                     $pdf->cell(30, 10, $estado, 1, 1);
                 }

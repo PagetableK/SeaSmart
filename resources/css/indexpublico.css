@@ -1,17 +1,14 @@
-#form-buscarCategoria{
-    border-width: 1px;
-    border-style: solid;
-    border-color: #79747E;
+#formBuscar{
     border-radius: 10px;
     padding: 1px;
 }
 
-#buscarCategoria{
+#busqueda{
     background-color: #BCE7FD;
     border: 0;
 }
 
-#btnBuscarCategoria{
+#btnBuscar{
     border-radius: 10px;
 }
 
@@ -23,10 +20,10 @@ span{
     color: #3E88DE;
 }
 
-#buscarCategoria{
-    font-size: 15px;
-}
-
 .card{
     width: 18rem;
+}
+
+.swal-modal .swal-text {
+    text-align: center;
 }
