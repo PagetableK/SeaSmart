@@ -85,14 +85,22 @@ class ProductoHandler
     public function readOne()
     {
         $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, categorias.id_categoria, sub_categorias.id_sub_categoria, estado_producto, precio_producto, nombre_administrador, 
-                        nombre_categoria, nombre_sub_categoria, (SELECT imagen_producto FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto and estado_detalle_producto = 1 LIMIT 1) as imagen_producto
-                        (SELECT COUNT(id_producto_talla), COUNT(id_producto_color) FROM detalles_productos WHERE id_producto = ?) as colores, (SELECT COUNT(id_producto_talla) FROM detalles_productos WHERE id_producto = ?) as tallas
+                        nombre_categoria, nombre_sub_categoria, (SELECT imagen_producto FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto and estado_detalle_producto = 1 LIMIT 1) as imagen_producto,
+                        (SELECT COUNT(id_producto_color) FROM detalles_productos WHERE id_producto = ?) as colores, (SELECT COUNT(id_producto_talla) FROM detalles_productos WHERE id_producto = ?) as tallas,
+                        (SELECT SUM(existencia_producto) FROM detalles_productos WHERE id_producto = ? AND estado_detalle_producto = 1) as existencias
                 FROM productos, sub_categorias, categorias, administradores
                 WHERE id_producto = ? AND
                 categorias.id_categoria = sub_categorias.id_categoria AND
                 sub_categorias.id_sub_categoria = productos.id_sub_categoria AND
                 administradores.id_administrador = productos.id_administrador';
-        $params = array($this->id, $this->id, $this->id);
+        $params = array($this->id, $this->id, $this->id, $this->id);
+        return Database::getRow($sql, $params);
+    }
+
+    public function readSingleDetailProduct()
+    {
+        $sql = '';
+        $params = '';
         return Database::getRow($sql, $params);
     }
 

@@ -27,6 +27,17 @@ if (isset($_GET['action'])) {
                 // La función getDetalles devuelve los detalles de un producto específico.
             case 'getDetalles':
                 break;
+                // La función readSingleDetailProduct devuelve el detalle de un producto.
+            case 'readSingleDetailProduct':
+                if (!$producto->setId($_POST['idProducto'])) {
+                    $result['error'] = $producto->getDataError();
+                } elseif ($result['dataset'] = $producto->readOne()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Producto inexistente';
+                }
+                break;
+                break;
                 // La acción getProducts retorna los productos agregados como un conjunto de datos.
             case 'getProducts':
                 if(!$producto->setIdCategoria($_POST['idCategoria'])){
