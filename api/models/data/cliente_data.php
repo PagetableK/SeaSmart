@@ -169,6 +169,24 @@ class ClienteData extends ClienteHandler
             return true;
         }
     }
+     if ($result) {
+            // Generar un enlace de recuperación
+            $token = bin2hex(random_bytes(32)); // Generar un token único
+
+            // Guardar el token en la base de datos asociado al correo electrónico
+            $query = 'UPDATE clientes SET contra_cliente = ? WHERE correo_cliente = ?';
+            $params = array($token, $correo);
+            Database::executeRow($query, $params);
+
+            // Enviar el correo electrónico con el enlace de recuperación
+            $subject = 'Recuperación de contraseña';
+            $message = 'Utiliza el siguiente token para recuperar tu contraseña: ' . $token;
+            $headers = 'From: 20220356@ricaldone.edu.sv';
+
+            return mail($correo, $subject, $message, $headers);
+        } else {
+            return false; // Correo no encontrado
+        }
 
 
     // Método para obtener el mensaje de error.
