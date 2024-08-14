@@ -115,9 +115,11 @@ if (isset($_GET['action'])) {
                 break;
                 // Acción para recuperar la contraseña
             case 'recoverPassword':
-                $data = json_decode(file_get_contents('php://input'), true);
-                $correo = $data['correo'] ?? '';
+                // $data = json_decode(file_get_contents('php://input'), true);
+                // $correo = $data['correo'] ?? '';
                 
+                echo $_POST['correo'];
+
                 if (empty($correo)) {
                     $result['error'] = 'El correo electrónico es obligatorio';
                 } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
