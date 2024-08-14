@@ -84,7 +84,7 @@ class ProductoHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, categorias.id_categoria, sub_categorias.id_sub_categoria, estado_producto, precio_producto, nombre_administrador, nombre_categoria, nombre_sub_categoria
+        $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, categorias.id_categoria, sub_categorias.id_sub_categoria, estado_producto, precio_producto, nombre_administrador, nombre_categoria, nombre_sub_categoria, (SELECT imagen_producto FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto and estado_detalle_producto = 1 LIMIT 1) as imagen_producto
                 FROM productos, sub_categorias, categorias, administradores
                 WHERE id_producto = ? AND
                 categorias.id_categoria = sub_categorias.id_categoria AND
