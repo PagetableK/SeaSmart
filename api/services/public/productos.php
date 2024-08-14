@@ -9,10 +9,10 @@ if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
     $producto = new ProductoData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null, 'nombre' => null);
-    // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
+    $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'nombre' => null);
+    // Se verifica si existe una sesión iniciada como cliente, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['idCliente'])) {
-        // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
+        // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
                 // La acción readOne retorna la información de un producto específico.
             case 'readOne':
@@ -26,11 +26,14 @@ if (isset($_GET['action'])) {
                 break;
                 // La acción getProducts retorna los productos agregados como un conjunto de datos.
             case 'getProducts':
-                if ($result['dataset'] = $producto->getProducts()) {
+                if(!$producto->setIdCategoria($_POST['idCategoria'])){
+                    $result['error'] = $producto->getDataError();
+                }
+                elseif ($result['dataset'] = $producto->getProducts()) {
                     $result['status'] = 1;
                     $result['nombre'] = $_SESSION['nombre'];
                 } else {
-                    $result['error'] = 'No se han registrado productos';
+                    $result['error'] = 'No hay productos para la categoría';
                 }
                 break;
                 // Si no se encuentra la acción se muestra el mensaje.

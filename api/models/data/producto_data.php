@@ -28,6 +28,17 @@ class ProductoData extends ProductoHandler
         }
     }
 
+    public function setIdCategoria($value)
+    {
+        if(Validator::validateNaturalNumber($value)){
+            $this->id_categoria = $value;
+            return true;
+        } else{
+            $this->data_error = 'El identificador de la categoría es incorrecto';
+            return false;
+        }
+    }
+
     public function setNombre($value, $min = 2, $max = 30)
     {
         if (!Validator::validateAlphanumeric($value)) {

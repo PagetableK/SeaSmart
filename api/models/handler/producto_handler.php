@@ -10,6 +10,7 @@ class ProductoHandler
     *   Declaración de atributos para el manejo de datos.
     */
     protected $id = null;
+    protected $id_categoria = null;
     protected $nombre = null;
     protected $descripcion = null;
     protected $id_subcategoria = null;
@@ -37,13 +38,15 @@ class ProductoHandler
 
     public function getProducts()
     {
-        $sql = 'SELECT id_detalle_producto, talla, color_producto, nombre_producto, imagen_producto, existencia_producto, precio_producto
-                FROM detalles_productos
-                INNER JOIN productos_tallas ON productos_tallas.id_producto_talla = detalles_productos.id_producto_talla
-                INNER JOIN productos_colores ON productos_colores.id_producto_color = detalles_productos.id_producto_color
-                INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
-                WHERE estado_detalle_producto = 1;';
-        return Database::getRows($sql);
+        $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, estado_producto, precio_producto, nombre_sub_categoria, (SELECT imagen_producto FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto AND estado_detalle_producto = 1 LIMIT 1) AS imagen_producto, (SELECT SUM(existencia_producto) FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto AND estado_detalle_producto = 1) as existencias
+                FROM productos
+                INNER JOIN sub_categorias USING(id_sub_categoria)
+                INNER JOIN categorias USING (id_categoria)
+                WHERE estado_producto = 1 AND
+                categorias.id_categoria = ? AND
+					 (SELECT SUM(existencia_producto) FROM detalles_productos WHERE estado_detalle_producto = 1 AND detalles_productos.id_producto = productos.id_producto) > 0;';
+        $params = array($this->id_categoria);
+        return Database::getRows($sql, $params);
     }
 
     public function createRow()
