@@ -106,6 +106,15 @@ class ProductoHandler
         return Database::getRow($sql, $params);
     }
 
+    public function readColorDetailProduct()
+    {
+        $sql = 'SELECT id_detalle_producto, existencia_producto, id_producto
+                FROM detalles_productos
+                WHERE id_producto = ?;';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+
     public function updateRow()
     {
         $sql = 'UPDATE productos

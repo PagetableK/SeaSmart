@@ -121,16 +121,14 @@ class PedidoHandler
         return Database::getRows($sql, $params);
     }
 
-    // AQUÍ ME QUEDÉ
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function readCart()
     {
-        $sql = 'SELECT id_detalle_pedido, detalles_productos.id_detalle_producto,  nombre_producto, cantidad_producto, detalles_pedidos.precio_producto, imagen_producto, existencia_producto, (SELECT COUNT(id_producto_talla) FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto) AS talla, (SELECT COUNT(id_producto_color) FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto) AS color
+        $sql = 'SELECT id_detalle_pedido, detalles_productos.id_detalle_producto,  nombre_producto, cantidad_producto, detalles_pedidos.precio_producto, imagen_producto, existencia_producto, (SELECT COUNT(id_producto_talla) FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto) AS talla, (SELECT COUNT(id_producto_color) FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto) AS color, (CASE (SELECT COUNT(id_producto_color) FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto) WHEN 0 THEN false ELSE (SELECT color_producto FROM productos_colores WHERE id_producto_color = detalles_productos.id_producto_color) END) AS color_producto, (CASE (SELECT COUNT(id_producto_talla) FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto) WHEN 0 THEN false ELSE (SELECT talla FROM productos_tallas WHERE id_producto_talla = detalles_productos.id_producto_talla) END) AS talla_producto
                 FROM detalles_pedidos
                 INNER JOIN pedidos ON pedidos.id_pedido = detalles_pedidos.id_pedido
                 INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
                 INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
-                WHERE id_cliente = 1
+                WHERE id_cliente = ?
                 AND estado_pedido = "En carrito";';
         $params = array($_SESSION['idCliente']);
         return Database::getRows($sql, $params);
