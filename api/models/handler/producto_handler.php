@@ -108,11 +108,12 @@ class ProductoHandler
 
     public function readColorDetailProduct()
     {
-        $sql = 'SELECT id_detalle_producto, existencia_producto, id_producto
+        $sql = 'SELECT id_detalle_producto, existencia_producto, id_producto, color_producto, id_producto_color
                 FROM detalles_productos
+                INNER JOIN productos_colores USING (id_producto_color)
                 WHERE id_producto = ?;';
         $params = array($this->id);
-        return Database::getRow($sql, $params);
+        return Database::getRows($sql, $params);
     }
 
     public function updateRow()
