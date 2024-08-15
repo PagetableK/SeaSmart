@@ -31,12 +31,11 @@ if (isset($_GET['action'])) {
             case 'readSingleDetailProduct':
                 if (!$producto->setId($_POST['idProducto'])) {
                     $result['error'] = $producto->getDataError();
-                } elseif ($result['dataset'] = $producto->readOne()) {
+                } elseif ($result['dataset'] = $producto->readSingleDetailProduct()) {
                     $result['status'] = 1;
                 } else {
                     $result['error'] = 'Producto inexistente';
                 }
-                break;
                 break;
                 // La acción getProducts retorna los productos agregados como un conjunto de datos.
             case 'getProducts':

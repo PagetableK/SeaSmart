@@ -17,9 +17,9 @@ if (isset($_GET['action'])) {
         switch ($_GET['action']) {
                 // La acción readOrders retorna los pedidos realizados por el cliente.
             case "readOrders":
-                if($result['dataset'] = $pedido->readOrders()){
+                if ($result['dataset'] = $pedido->readOrders()) {
                     $result['status'] = 1;
-                } else{
+                } else {
                     $result['error'] = "El cliente no ha realizado ningún pedido";
                 }
                 break;
@@ -36,13 +36,21 @@ if (isset($_GET['action'])) {
                 break;
                 // Acción para finalizar un pedido.
             case 'finishOrder':
-                if(!$pedido->setDireccion($_POST['direccion'])){
+                if (!$pedido->setDireccion($_POST['direccion'])) {
                     $result['error'] = $pedido->getDataError();
                 } elseif (!$pedido->finishOrder()) {
                     $result['error'] = 'Ocurrió un problema al finalizar el pedido';
                 } else {
                     $result['status'] = 1;
                     $result['message'] = 'Pedido realizado correctamente';
+                }
+                break;
+                // Acción para obtener los detalles de un producto.
+            case 'readCart':
+                if($result['dataset'] = $pedido->readCart()){
+                    $result['status'] = 1;
+                } else{
+                    $result['error'] = 'No se ha agregado ningún producto al carrito';
                 }
                 break;
             default:

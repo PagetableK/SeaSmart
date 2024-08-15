@@ -120,4 +120,19 @@ class PedidoHandler
         $params = array($id_cliente);
         return Database::getRows($sql, $params);
     }
+
+    // AQUÍ ME QUEDÉ
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function readCart()
+    {
+        $sql = 'SELECT id_detalle_pedido, detalles_productos.id_detalle_producto,  nombre_producto, cantidad_producto, detalles_pedidos.precio_producto, imagen_producto, existencia_producto, (SELECT COUNT(id_producto_talla) FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto) AS talla, (SELECT COUNT(id_producto_color) FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto) AS color
+                FROM detalles_pedidos
+                INNER JOIN pedidos ON pedidos.id_pedido = detalles_pedidos.id_pedido
+                INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
+                INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
+                WHERE id_cliente = 1
+                AND estado_pedido = "En carrito";';
+        $params = array($_SESSION['idCliente']);
+        return Database::getRows($sql, $params);
+    }
 }
