@@ -41,7 +41,7 @@ class DireccionData extends DireccionHandler
     
     public function setDireccion($value, $min = 10, $max = 100)
     {
-        if (!Validator::validateAlphanumeric($value)) {
+        if (!Validator::validateString($value)) {
             $this->data_error = 'La dirección debe ser un valor alfanumérico';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {

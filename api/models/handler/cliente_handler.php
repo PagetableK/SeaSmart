@@ -19,11 +19,11 @@ class ClienteHandler
     protected $telefono_fijo = null;
     protected $estado = null;
     protected $clientes = null;
- 
+
     /*
     *   Métodos para gestionar la cuenta del cliente.
     */
- 
+
     // Método para verificar el estado del cliente.
     public function checkStatus()
     {
@@ -35,7 +35,7 @@ class ClienteHandler
             return false;
         }
     }
- 
+
     // Método para cambiar la contraseña del cliente.
     public function changePassword()
     {
@@ -45,7 +45,7 @@ class ClienteHandler
         $params = array($this->contra, $this->id);
         return Database::executeRow($sql, $params);
     }
- 
+
     // Método para editar el perfil del cliente.
     public function editProfile()
     {
@@ -55,7 +55,7 @@ class ClienteHandler
         $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->telefono_fijo, $this->id);
         return Database::executeRow($sql, $params);
     }
- 
+
     // Método para cambiar el estado del cliente.
     public function changeStatus()
     {
@@ -65,7 +65,7 @@ class ClienteHandler
         $params = array($this->estado, $this->id);
         return Database::executeRow($sql, $params);
     }
- 
+
     /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
     */
@@ -81,7 +81,7 @@ class ClienteHandler
         $params = array($value, $value, $value);
         return Database::getRows($sql, $params);
     }
- 
+
     // Método para crear un nuevo cliente.
     public function createRow()
     {
@@ -90,7 +90,7 @@ class ClienteHandler
         $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->contra, $this->telefono_fijo);
         return Database::executeRow($sql, $params);
     }
- 
+
     // Método para leer todos los clientes.
     public function readAll()
     {
@@ -99,7 +99,7 @@ class ClienteHandler
                 ORDER BY apellido_cliente';
         return Database::getRows($sql);
     }
- 
+
     // Método para leer un cliente específico.
     public function readOne()
     {
@@ -109,8 +109,8 @@ class ClienteHandler
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
- 
-     // Método para actualizar un cliente.
+
+    // Método para actualizar un cliente.
     public function updateRow()
     {
         $sql = 'UPDATE clientes
@@ -128,7 +128,7 @@ class ClienteHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
- 
+
     // Método para comprobar duplicados.
     public function checkDuplicate($value)
     {
@@ -138,7 +138,7 @@ class ClienteHandler
         $params = array($value, $value, $value, $value);
         return Database::getRow($sql, $params);
     }
- 
+
     // Método para comprobar duplicados por valor excluyendo un ID.
     public function checkDuplicateWithId($value)
     {
@@ -148,13 +148,24 @@ class ClienteHandler
         $params = array($value, $value, $value, $value, $this->id);
         return Database::getRow($sql, $params);
     }
-    
+
+    // Función que permite capturar la información del cliente.
     public function readProfile()
     {
-        $sql = "SELECT id_cliente, nombre_cliente, apellido_cliente, dui_cliente, estado_cliente, telefono_movil, telefono_fijo, correo_cliente
+        // Se establece la estructura de la sentencia.
+        $sql = "SELECT id_cliente, nombre_cliente, apellido_cliente, dui_cliente, estado_cliente, telefono_movil, telefono_fijo, correo_cliente, 
+                (SELECT COUNT(id_pedido) FROM pedidos INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente WHERE pedidos.id_cliente = ? AND (estado_pedido != 'En carrito')) as pedidos
                 FROM clientes
                 WHERE id_cliente = ?";
-        $params = array($_SESSION['idCliente']);
+        // Si el valor del atributo es nulo se establece el parámetro.
+        if ($this->id == null) {
+            $params = array($_SESSION['idCliente'], $_SESSION['idCliente']);
+        } 
+        // De lo contrario se establece el parámetro.
+        else {
+            $params = array($this->id, $this->id);
+        }
+        // Se ejecuta la sentencia y se capturan los datos para su retorno.
         return Database::getRow($sql, $params);
     }
 
@@ -167,7 +178,7 @@ class ClienteHandler
                 WHERE correo_cliente = ?';
         $params = array($correo);
         $data = Database::getRow($sql, $params);
- 
+
         // Se valida que el query retorne un registro de la tabla.
         if ($data) {
             $_SESSION['estado'] = $data['estado_cliente'];
@@ -188,7 +199,7 @@ class ClienteHandler
             return false;
         }
     }
-    
+
     /*
     *   Métodos para generar el reporte con la información del cliente.
     */

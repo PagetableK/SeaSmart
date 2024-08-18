@@ -102,9 +102,20 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el cliente';
                 }
                 break;
+            case 'readProfile':
+                if(!$clientes->setId($_POST['idCliente'])){
+                    $result['error'] = $clientes->getDataError();
+                }
+                elseif ($result['dataset'] = $clientes->readProfile()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Ocurrió un problema al leer el perfil';
+                }
+                break;
                 // Si no se encuentra la acción a realizar se muestra el error.
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
+                break;
         }
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
         $result['exception'] = Database::getException();
@@ -113,7 +124,7 @@ if (isset($_GET['action'])) {
         // Se imprime el resultado en formato JSON y se retorna al controlador. 
         print(json_encode($result));
     } else {
-        print (json_encode('Acceso denegado'));
+        print(json_encode('Acceso denegado'));
     }
 } else {
     print(json_encode('Recurso no disponible'));

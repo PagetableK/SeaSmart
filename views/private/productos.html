@@ -15,8 +15,8 @@
     <link href="../../resources/css/navbar_privado.css" rel="stylesheet">
     <!-- Mandar a llamar css de productos -->
     <link href="../../resources/css/productos.css" rel="stylesheet">
-    <!-- CDN Icons Boostrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Mandar a llamar íconos del framework -->
+    <link href="../../resources/css/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
 <!-- Cuerpo de la página web -->
@@ -45,12 +45,16 @@
                             <button class="btn" type="enviar"><img src="../../resources/img/lupa.png" class="img-fluid"
                                     width="35px" height="35px" alt="buscarimg"></button>
                         </form>
-                        <!-- Botón para abrir el reporte de productos ordenados -->
-                        <button type="button" class="btn btn-warning ms-5 d-flex align-items-center justify-content-center gap-3 text-light" onclick="openReport()">
-                            <i class="bi bi-filetype-pdf fs-5"></i>
-                            <p class="psinmargen fw-semibold">Generar reporte</p>
-                        </button>
                     </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center md-justify-content-end">
+                    <!-- Botón para abrir el reporte de productos ordenados -->
+                    <button type="button"
+                        class="btn btn-warning d-flex align-items-center justify-content-center gap-3 text-light"
+                        onclick="openReport()">
+                        <i class="bi bi-filetype-pdf fs-5"></i>
+                        <p class="psinmargen fw-semibold">Generar reporte</p>
+                    </button>
                 </div>
             </div>
             <!-- CREAMOS LA FILA DONDE COLOCAMOS LA TABLA DE LOS ELEMENTOS DE "PRODUCTO" -->
@@ -181,7 +185,8 @@
                                             </div>
                                             <div class="col mt-2">
                                                 <form id="filtroDetalles" class="d-flex flex-column gap-2">
-                                                    <input type="number" id="idProductoDetalles" name="idProducto" class="d-none">
+                                                    <input type="number" id="idProductoDetalles" name="idProducto"
+                                                        class="d-none">
                                                     <div class="row gap-0 row-gap-2">
                                                         <div class="col-12 col-sm-6 d-flex gap-3">
                                                             <p class="m-2">Color:</p>
@@ -199,10 +204,14 @@
                                                     <div class="row">
                                                         <div class="col-12 d-flex justify-content-end gap-1">
                                                             <button type="reset" class="btn btn-info">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bootstrap-reboot" viewBox="0 0 16 16">
-                                                                    <path d="M1.161 8a6.84 6.84 0 1 0 6.842-6.84.58.58 0 1 1 0-1.16 8 8 0 1 1-6.556 3.412l-.663-.577a.58.58 0 0 1 .227-.997l2.52-.69a.58.58 0 0 1 .728.633l-.332 2.592a.58.58 0 0 1-.956.364l-.643-.56A6.8 6.8 0 0 0 1.16 8z"/>
-                                                                    <path d="M6.641 11.671V8.843h1.57l1.498 2.828h1.314L9.377 8.665c.897-.3 1.427-1.106 1.427-2.1 0-1.37-.943-2.246-2.456-2.246H5.5v7.352zm0-3.75V5.277h1.57c.881 0 1.416.499 1.416 1.32 0 .84-.504 1.324-1.386 1.324z"/>
-                                                                  </svg>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-bootstrap-reboot" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M1.161 8a6.84 6.84 0 1 0 6.842-6.84.58.58 0 1 1 0-1.16 8 8 0 1 1-6.556 3.412l-.663-.577a.58.58 0 0 1 .227-.997l2.52-.69a.58.58 0 0 1 .728.633l-.332 2.592a.58.58 0 0 1-.956.364l-.643-.56A6.8 6.8 0 0 0 1.16 8z" />
+                                                                    <path
+                                                                        d="M6.641 11.671V8.843h1.57l1.498 2.828h1.314L9.377 8.665c.897-.3 1.427-1.106 1.427-2.1 0-1.37-.943-2.246-2.456-2.246H5.5v7.352zm0-3.75V5.277h1.57c.881 0 1.416.499 1.416 1.32 0 .84-.504 1.324-1.386 1.324z" />
+                                                                </svg>
                                                             </button>
                                                             <button class="btn btn-primary" type="submit">
                                                                 Buscar
@@ -212,7 +221,8 @@
                                                 </form>
                                             </div>
                                             <div class="col-lg-12 d-flex justify-content-start align-items-center">
-                                                <div class="container-fluid table-responsive-md" id="contenedorTablaExistencia">
+                                                <div class="container-fluid table-responsive-md"
+                                                    id="contenedorTablaExistencia">
                                                     <!-- Tabla con los datos -->
                                                     <table class="table" id="tablaExistencias">
                                                         <!-- Cabeceras de la tabla -->
@@ -337,7 +347,8 @@
                             <div class="modal-body">
                                 <div class="row g-3">
                                     <div class="col-md-6">
-                                        <input type="number" class="d-none" id="idProductoDetalle" name="idProductoDetalle">
+                                        <input type="number" class="d-none" id="idProductoDetalle"
+                                            name="idProductoDetalle">
                                         <label for="nombreProducto" class="form-label">Nombre</label>
                                         <input type="text" class="form-control" id="nombreProducto"
                                             name="nombreProducto" required>

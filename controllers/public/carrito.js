@@ -143,7 +143,7 @@ const finalizarPedido = async () => {
         // Si la respuesta es satisfactoria se ejecuta el código.
         if(DATA.status){
             // Se muestra el mensaje con el éxito de la acción.
-            sweetAlert(1, 'Pedido realizado', false);
+            await sweetAlert(1, 'Pedido realizado', false);
             // Se esconde el modal.
             MODAL_PEDIDO.hide();
             // Se vuelve a cargar la página.
