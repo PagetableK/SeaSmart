@@ -23,6 +23,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = "El cliente no ha realizado ningún pedido";
                 }
                 break;
+            // La acción readOrders retorna los pedidos realizados por el cliente en mobile.
+            case "readOrdersMobile":
+                if($result['dataset'] = $pedido->readOrdersMobile()){
+                    $result['status'] = 1;
+                } else{
+                    $result['error'] = "El cliente no ha realizado ningún pedido";
+                }
+                break;
                 // Acción para crear/iniciar un pedido del carrito.
             case 'startOrder':
                 if (!$pedido->startOrder()) {

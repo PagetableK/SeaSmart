@@ -47,6 +47,27 @@ class PedidoHandler
         $params = array($_SESSION['idCliente']);
         return Database::getRows($sql, $params);
     }
+    public function readOrdersMobile()
+    {
+        $sql = 'SELECT p.id_pedido, p.estado_pedido, p.fecha_pedido, p.direccion, SUM(dp.precio_producto) AS precio_unidad, 
+        SUM(dp.precio_producto * dp.cantidad_producto) AS precio_total
+        FROM 
+        pedidos p
+        INNER JOIN 
+	    detalles_pedidos dp ON p.id_pedido = dp.id_pedido
+        WHERE 
+        p.id_cliente = ?
+        AND 
+        p.estado_pedido != "En carrito"
+        GROUP BY 
+        p.id_pedido, 
+        p.estado_pedido, 
+        p.fecha_pedido, 
+        p.direccion;';
+        $params = array($_SESSION['idCliente']);
+        return Database::getRows($sql, $params);
+
+    }
 
     public function readOne()
     {
@@ -102,10 +123,11 @@ class PedidoHandler
     //Función para obtener reporte de pedidos ordenados por estado
     public function getReportePedidosPorEstado()
     {
-        $sql = 'SELECT p.id_pedido, p.fecha_pedido, p.estado_pedido, p.direccion, c.nombre_cliente, c.apellido_cliente
+        $sql = 'SELECT p.id_pedido, p.fecha_pedido, p.estado_pedido, p.direccion, c.nombre_cliente, c.apellido_cliente, 
+                (SELECT SUM(cantidad_producto) FROM detalles_pedidos WHERE id_pedido = p.id_pedido) as cantidad
                 FROM pedidos p
                 INNER JOIN clientes c ON p.id_cliente = c.id_cliente
-                ORDER BY p.estado_pedido, p.fecha_pedido DESC';
+                ORDER BY p.estado_pedido, p.fecha_pedido DESC;';
         return Database::getRows($sql);
     }
 
