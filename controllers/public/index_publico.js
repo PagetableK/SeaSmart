@@ -35,7 +35,7 @@ const cargarCategorias = async (form = null) => {
                     <div class="card-body d-flex align-items-center justify-content-center flex-column">
                         <h5 class="card-title text-center">${row.nombre_categoria}</h5>
                         <p class="card-text text-center">Echa un vistazo a los productos de la categoría ${row.nombre_categoria}</p>
-                        <a href="#" class="btn btn-primary" id="verProductos(${row.id_categoria})">Ver productos</a>
+                        <a href="productos.html" class="btn btn-primary" id="verProductos(${row.id_categoria})">Ver productos</a>
                     </div>
                 </div>
             `;

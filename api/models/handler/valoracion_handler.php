@@ -34,13 +34,27 @@ class ValoracionHandler
 
     public function readAll()
     {
-        $sql = 'SELECT * FROM view_valoraciones ORDER BY fecha_valoracion ASC;';
+        $sql = 'SELECT nombre_cliente, apellido_cliente, calificacion_producto, fecha_valoracion, comentario_producto,nombre_producto
+                FROM valoraciones
+                INNER JOIN detalles_pedidos ON detalles_pedidos.id_detalle_pedido = valoraciones.id_detalle_pedido
+                INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
+                INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
+                INNER JOIN pedidos ON pedidos.id_pedido = detalles_pedidos.id_pedido
+                INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
+                WHERE estado_comentario = 1';
         return Database::getRows($sql);
     }
 
     public function readAllAsc()
     {
-        $sql = 'SELECT * FROM view_valoraciones ORDER BY fecha_valoracion DESC;';
+        $sql = 'SELECT nombre_cliente, apellido_cliente, calificacion_producto, fecha_valoracion, comentario_producto,nombre_producto
+                FROM valoraciones
+                INNER JOIN detalles_pedidos ON detalles_pedidos.id_detalle_pedido = valoraciones.id_detalle_pedido
+                INNER JOIN detalles_productos ON detalles_productos.id_detalle_producto = detalles_pedidos.id_detalle_producto
+                INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
+                INNER JOIN pedidos ON pedidos.id_pedido = detalles_pedidos.id_pedido
+                INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
+                WHERE estado_comentario = 1';
         return Database::getRows($sql);
     }
 
