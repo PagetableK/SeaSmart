@@ -87,13 +87,13 @@ class ProductoHandler
         $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, categorias.id_categoria, sub_categorias.id_sub_categoria, estado_producto, precio_producto, nombre_administrador, 
                         nombre_categoria, nombre_sub_categoria, (SELECT imagen_producto FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto and estado_detalle_producto = 1 LIMIT 1) as imagen_producto,
                         (SELECT COUNT(id_producto_color) FROM detalles_productos WHERE id_producto = ?) as colores, (SELECT COUNT(id_producto_talla) FROM detalles_productos WHERE id_producto = ?) as tallas,
-                        (SELECT SUM(existencia_producto) FROM detalles_productos WHERE id_producto = ? AND estado_detalle_producto = 1) as existencias
+                        (SELECT SUM(existencia_producto) FROM detalles_productos WHERE id_producto = ? AND estado_detalle_producto = 1) as existencias, (SELECT id_detalle_pedido FROM detalles_pedidos INNER JOIN pedidos USING(id_pedido) INNER JOIN detalles_productos USING(id_detalle_producto) INNER JOIN productos USING(id_producto) WHERE id_cliente = ? AND id_producto = ? AND estado_pedido = "Enviado" LIMIT 1) AS compra_cliente, (SELECT id_valoracion FROM valoraciones INNER JOIN detalles_pedidos USING(id_detalle_pedido) INNER JOIN detalles_productos USING(id_detalle_producto) INNER JOIN productos USING(id_producto) INNER JOIN pedidos USING (id_pedido) WHERE id_producto = ? AND id_cliente = ? LIMIT 1) AS valoraciones
                 FROM productos, sub_categorias, categorias, administradores
                 WHERE id_producto = ? AND
                 categorias.id_categoria = sub_categorias.id_categoria AND
                 sub_categorias.id_sub_categoria = productos.id_sub_categoria AND
                 administradores.id_administrador = productos.id_administrador';
-        $params = array($this->id, $this->id, $this->id, $this->id);
+        $params = array($this->id, $this->id, $this->id, $_SESSION['idCliente'], $this->id, $this->id, $_SESSION['idCliente'], $this->id);
         return Database::getRow($sql, $params);
     }
 
