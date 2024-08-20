@@ -116,6 +116,28 @@ class ProductoHandler
         return Database::getRows($sql, $params);
     }
 
+    public function readDetailProduct()
+    {
+        $sql = 'SELECT id_detalle_producto, existencia_producto, id_producto, talla, id_producto_talla, color_producto, id_producto_color
+                FROM detalles_productos
+                INNER JOIN productos_tallas USING (id_producto_talla)
+                INNER JOIN productos_colores USING (id_producto_color)
+                WHERE id_producto = ? AND
+                estado_detalle_producto = 1;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readSizeDetailProduct()
+    {
+        $sql = 'SELECT id_detalle_producto, existencia_producto, id_producto, talla, id_producto_talla
+                FROM detalles_productos
+                INNER JOIN productos_tallas USING (id_producto_talla)
+                WHERE id_producto = ?;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
     public function updateRow()
     {
         $sql = 'UPDATE productos

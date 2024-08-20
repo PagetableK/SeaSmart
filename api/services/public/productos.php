@@ -27,6 +27,26 @@ if (isset($_GET['action'])) {
                 // La función getDetalles devuelve los detalles de un producto específico.
             case 'getDetalles':
                 break;
+                // La función readDetailProduct devuelve los detalles de un producto con tallas y colores.
+            case 'readDetailProduct':
+                if (!$producto->setId($_POST['idProducto'])) {
+                    $result['error'] = $producto->getDataError();
+                } elseif ($result['dataset'] = $producto->readDetailProduct()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Producto inexistente';
+                }
+                break;
+                // La función readSizeDetailProduct devuelve los detalles de un producto con tallas.
+            case 'readSizeDetailProduct':
+                if (!$producto->setId($_POST['idProducto'])) {
+                    $result['error'] = $producto->getDataError();
+                } elseif ($result['dataset'] = $producto->readSizeDetailProduct()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Producto inexistente';
+                }
+                break;
                 // La función readColorDetailProduct devuelve los detalles de un producto con colores.
             case 'readColorDetailProduct':
                 if (!$producto->setId($_POST['idProducto'])) {
