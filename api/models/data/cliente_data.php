@@ -71,7 +71,7 @@ class ClienteData extends ClienteHandler
         if($boolean and $this->checkDuplicateWithId($valor)){
             $this->info_error = 'El correo ingresado ya está siendo utilizado';
             return false;
-        } elseif ($this->checkDuplicate($valor)) {
+        } elseif (!$boolean and $this->checkDuplicate($valor)) {
             $this->info_error = 'El correo ingresado ya está siendo utilizado';
             return false;
         } else {
@@ -102,12 +102,12 @@ class ClienteData extends ClienteHandler
     public function setDUI($value, $boolean)
     {
         if (!Validator::validateDUI($value)) {
-            $this->info_error = 'El DUI debe tener el formato ########-#';
+            $this->info_error = 'El DUI debe tener el formato ########-#' . $value;
             return false;
-        } elseif($boolean and $this->checkDuplicateWithId($value)){
+        } else if($boolean and $this->checkDuplicateWithId($value)){
             $this->info_error = 'El DUI ingresado ya está siendo utilizado por otro cliente';
             return false;
-        } elseif($this->checkDuplicate($value)) {
+        } elseif(!$boolean and $this->checkDuplicate($value)) {
             $this->info_error = 'El DUI ingresado ya está siendo utilizado por otro cliente';
             return false;
         } else {
@@ -137,7 +137,7 @@ class ClienteData extends ClienteHandler
         } elseif($boolean and $this->checkDuplicateWithId($value)){
             $this->info_error = 'El teléfono ingresado ya está siendo usado por otro cliente';
             return false;
-        } elseif ($this->checkDuplicate($value)) {
+        } elseif (!$boolean and $this->checkDuplicate($value)) {
             $this->info_error = 'El teléfono ingresado ya está siendo usado por otro cliente';
             return false;
         } elseif ($this->telefono_fijo && $this->telefono_fijo == $value) {
@@ -158,7 +158,7 @@ class ClienteData extends ClienteHandler
         } elseif($boolean and $this->checkDuplicateWithId($value)){
             $this->info_error = 'El teléfono fijo ingresado ya está siendo usado por otro cliente';
             return false;
-        } elseif ($this->checkDuplicate($value)) {
+        } elseif (!$boolean and $this->checkDuplicate($value)) {
             $this->info_error = 'El teléfono fijo ingresado ya está siendo usado por otro cliente';
             return false;
         } elseif ($this->telefono && $this->telefono == $value) {

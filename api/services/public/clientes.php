@@ -1,11 +1,11 @@
 <?php
 // Se incluye la clase del modelo.
 require_once('../../models/data/cliente_data.php');
- 
+
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
-    session_start();    
+    session_start();
     // Se instancia la clase correspondiente.
     $cliente = new ClienteData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
@@ -16,7 +16,7 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
             case 'validarSesion':
-                    $result['status'] = 1;
+                $result['status'] = 1;
                 break;
             case 'createRow':
                 // Se validan los datos del formulario.
@@ -62,15 +62,15 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readProfile':
-                    if ($result['dataset'] = $cliente->readProfile()) {
-                        $result['status'] = 1;
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al leer el perfil';
-                    }
+                if ($result['dataset'] = $cliente->readProfile()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Ocurrió un problema al leer el perfil';
+                }
                 break;
             case 'editProfile':
-                    $_POST = Validator::validateForm($_POST);
-                    if (
+                $_POST = Validator::validateForm($_POST);
+                if (
                     !$cliente->setId($_POST['idCliente']) or
                     !$cliente->setNombre($_POST['nombreCliente']) or
                     !$cliente->setApellido($_POST['apellidoCliente']) or
@@ -78,21 +78,21 @@ if (isset($_GET['action'])) {
                     !$cliente->setDUI($_POST['duiCliente'], 1) or
                     !$cliente->setTelefono($_POST['telefonoCliente'], 1) or
                     !$cliente->setTelefonoFijo($_POST['telefonoFijoCliente'], 1)
-                    ) {
-                        $result['error'] = $cliente->getDataError();
-                    } elseif ($cliente->editProfile()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Perfil modificado correctamente';
-                        $_SESSION['idCliente'] = $_POST['idCliente'];
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al modificar el perfil';
-                    }
+                ) {
+                    $result['error'] = $cliente->getDataError();
+                } elseif ($cliente->editProfile()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Perfil modificado correctamente';
+                    $_SESSION['idCliente'] = $_POST['idCliente'];
+                } else {
+                    $result['error'] = 'Ocurrió un problema al modificar el perfil';
+                }
                 break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
-            break;
+                break;
         }
-    }  else {
+    } else {
         // Se compara la acción a realizar cuando el cliente no ha iniciado sesión.
         switch ($_GET['action']) {
             case 'signUp':
@@ -120,7 +120,7 @@ if (isset($_GET['action'])) {
             case 'recoverPassword':
                 // $data = json_decode(file_get_contents('php://input'), true);
                 // $correo = $data['correo'] ?? '';
-                
+
                 echo $_POST['correo'];
 
                 if (empty($correo)) {
@@ -134,7 +134,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No se pudo enviar el correo de recuperación';
                 }
                 break;
-               
+
             case 'logIn':
                 // Se validan los campos del form que se encuentran en el array $_POST.
                 $_POST = Validator::validateForm($_POST);
@@ -146,16 +146,16 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Autenticación correcta';
                     $result['username'] = $_SESSION['correoCliente'];
                     $result['nombre'] = $_SESSION['nombre'];
-                } elseif(isset($_SESSION['estado']) and $_SESSION['estado'] == 0){
+                } elseif (isset($_SESSION['estado']) and $_SESSION['estado'] == 0) {
                     $result['error'] = 'Su cuenta ha sido desactivada';
                 } else {
                     $result['error'] = 'Las credenciales son incorrectas';
                 }
                 break;
-               
+
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
-            break;
+                break;
         }
     }
     // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
@@ -167,5 +167,3 @@ if (isset($_GET['action'])) {
 } else {
     print(json_encode('Recurso no disponible'));
 }
-
-?>
