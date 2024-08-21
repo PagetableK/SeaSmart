@@ -15,6 +15,9 @@ if (isset($_GET['action'])) {
         $result['session'] = 1;
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
+            case 'validarSesion':
+                    $result['status'] = 1;
+                break;
             case 'createRow':
                 // Se validan los datos del formulario.
                 $_POST = Validator::validateForm($_POST);
@@ -111,6 +114,24 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Cuenta registrada correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al registrar la cuenta';
+                }
+                break;
+                // Acción para recuperar la contraseña
+            case 'recoverPassword':
+                // $data = json_decode(file_get_contents('php://input'), true);
+                // $correo = $data['correo'] ?? '';
+                
+                echo $_POST['correo'];
+
+                if (empty($correo)) {
+                    $result['error'] = 'El correo electrónico es obligatorio';
+                } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+                    $result['error'] = 'El formato del correo electrónico es inválido';
+                } elseif ($clientes->recoverPassword($correo)) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Se ha enviado un enlace para recuperar la contraseña a tu correo electrónico.';
+                } else {
+                    $result['error'] = 'No se pudo enviar el correo de recuperación';
                 }
                 break;
                

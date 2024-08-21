@@ -10,6 +10,7 @@ class ProductoHandler
     *   Declaración de atributos para el manejo de datos.
     */
     protected $id = null;
+    protected $id_categoria = null;
     protected $nombre = null;
     protected $descripcion = null;
     protected $id_subcategoria = null;
@@ -37,15 +38,17 @@ class ProductoHandler
 
     public function getProducts()
     {
-        $sql = 'SELECT id_detalle_producto, talla, color_producto, nombre_producto, imagen_producto, existencia_producto, precio_producto
-                FROM detalles_productos
-                INNER JOIN productos_tallas ON productos_tallas.id_producto_talla = detalles_productos.id_producto_talla
-                INNER JOIN productos_colores ON productos_colores.id_producto_color = detalles_productos.id_producto_color
-                INNER JOIN productos ON productos.id_producto = detalles_productos.id_producto
-                WHERE estado_detalle_producto = 1;';
-        return Database::getRows($sql);
+        $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, estado_producto, precio_producto, nombre_sub_categoria, (SELECT imagen_producto FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto AND estado_detalle_producto = 1 LIMIT 1) AS imagen_producto, (SELECT SUM(existencia_producto) FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto AND estado_detalle_producto = 1) as existencias
+                FROM productos
+                INNER JOIN sub_categorias USING(id_sub_categoria)
+                INNER JOIN categorias USING (id_categoria)
+                WHERE estado_producto = 1 AND
+                categorias.id_categoria = ? AND
+					 (SELECT SUM(existencia_producto) FROM detalles_productos WHERE estado_detalle_producto = 1 AND detalles_productos.id_producto = productos.id_producto) > 0;';
+        $params = array($this->id_categoria);
+        return Database::getRows($sql, $params);
     }
-
+    
     public function createRow()
     {
         $sql = 'INSERT INTO productos(nombre_producto, descripcion_producto, id_sub_categoria, precio_producto, id_administrador)
@@ -81,14 +84,58 @@ class ProductoHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, categorias.id_categoria, sub_categorias.id_sub_categoria, estado_producto, precio_producto, nombre_administrador, nombre_categoria, nombre_sub_categoria
+        $sql = 'SELECT id_producto, nombre_producto, descripcion_producto, categorias.id_categoria, sub_categorias.id_sub_categoria, estado_producto, precio_producto, nombre_administrador, 
+                        nombre_categoria, nombre_sub_categoria, (SELECT imagen_producto FROM detalles_productos WHERE detalles_productos.id_producto = productos.id_producto and estado_detalle_producto = 1 LIMIT 1) as imagen_producto,
+                        (SELECT COUNT(id_producto_color) FROM detalles_productos WHERE id_producto = ?) as colores, (SELECT COUNT(id_producto_talla) FROM detalles_productos WHERE id_producto = ?) as tallas,
+                        (SELECT SUM(existencia_producto) FROM detalles_productos WHERE id_producto = ? AND estado_detalle_producto = 1) as existencias, (SELECT id_detalle_pedido FROM detalles_pedidos INNER JOIN pedidos USING(id_pedido) INNER JOIN detalles_productos USING(id_detalle_producto) INNER JOIN productos USING(id_producto) WHERE id_cliente = ? AND id_producto = ? AND estado_pedido = "Enviado" LIMIT 1) AS compra_cliente, (SELECT id_valoracion FROM valoraciones INNER JOIN detalles_pedidos USING(id_detalle_pedido) INNER JOIN detalles_productos USING(id_detalle_producto) INNER JOIN productos USING(id_producto) INNER JOIN pedidos USING (id_pedido) WHERE id_producto = ? AND id_cliente = ? LIMIT 1) AS valoraciones
                 FROM productos, sub_categorias, categorias, administradores
                 WHERE id_producto = ? AND
                 categorias.id_categoria = sub_categorias.id_categoria AND
                 sub_categorias.id_sub_categoria = productos.id_sub_categoria AND
                 administradores.id_administrador = productos.id_administrador';
+        $params = array($this->id, $this->id, $this->id, $_SESSION['idCliente'], $this->id, $this->id, $_SESSION['idCliente'], $this->id);
+        return Database::getRow($sql, $params);
+    }
+
+    public function readSingleDetailProduct()
+    {
+        $sql = 'SELECT id_detalle_producto, existencia_producto, id_producto
+                FROM detalles_productos
+                WHERE id_producto = ?;';
         $params = array($this->id);
         return Database::getRow($sql, $params);
+    }
+
+    public function readColorDetailProduct()
+    {
+        $sql = 'SELECT id_detalle_producto, existencia_producto, id_producto, color_producto, id_producto_color
+                FROM detalles_productos
+                INNER JOIN productos_colores USING (id_producto_color)
+                WHERE id_producto = ?;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readDetailProduct()
+    {
+        $sql = 'SELECT id_detalle_producto, existencia_producto, id_producto, talla, id_producto_talla, color_producto, id_producto_color
+                FROM detalles_productos
+                INNER JOIN productos_tallas USING (id_producto_talla)
+                INNER JOIN productos_colores USING (id_producto_color)
+                WHERE id_producto = ? AND
+                estado_detalle_producto = 1;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readSizeDetailProduct()
+    {
+        $sql = 'SELECT id_detalle_producto, existencia_producto, id_producto, talla, id_producto_talla
+                FROM detalles_productos
+                INNER JOIN productos_tallas USING (id_producto_talla)
+                WHERE id_producto = ?;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
     }
 
     public function updateRow()
