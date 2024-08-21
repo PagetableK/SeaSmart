@@ -83,8 +83,8 @@ class ValoracionHandler
 
     public function makeComment()
     {
-        $sql = 'INSERT INTO valoraciones(calificacion_producto, comentario_producto, id_detalle_pedido) 
-                VALUES(?, ?, ?);';
+        $sql = 'INSERT INTO valoraciones(fecha_valoracion, calificacion_producto, comentario_producto, id_detalle_pedido) 
+                VALUES(NOW(), ?, ?, ?);';
         $params = array($this->calificacion, $this->comentario, $this->id_detalle_pedido);
         return Database::executeRow($sql, $params);
     }

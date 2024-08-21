@@ -64,7 +64,7 @@ class ValoracionData extends ValoracionHandler
     public function setComentario($value, $min = 10, $max = 200)
     {
         if (!Validator::validateAlphanumeric($value)) {
-            $this->data_error = 'El nombre debe ser un valor alfanumérico';
+            $this->data_error = 'La reseña no puede contener caracteres especiales';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
             $this->comentario = $value;
