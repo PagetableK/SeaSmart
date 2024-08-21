@@ -47,26 +47,30 @@ class PedidoHandler
         $params = array($_SESSION['idCliente']);
         return Database::getRows($sql, $params);
     }
+
     public function readOrdersMobile()
     {
-        $sql = 'SELECT p.id_pedido, p.estado_pedido, p.fecha_pedido, p.direccion, SUM(dp.precio_producto) AS precio_unidad, 
-        SUM(dp.precio_producto * dp.cantidad_producto) AS precio_total
-        FROM 
-        pedidos p
-        INNER JOIN 
-	    detalles_pedidos dp ON p.id_pedido = dp.id_pedido
-        WHERE 
-        p.id_cliente = ?
-        AND 
-        p.estado_pedido != "En carrito"
-        GROUP BY 
-        p.id_pedido, 
-        p.estado_pedido, 
-        p.fecha_pedido, 
-        p.direccion;';
-        $params = array($_SESSION['idCliente']);
-        return Database::getRows($sql, $params);
+        $sql = 'SELECT p.id_pedido, 
+                p.estado_pedido, 
+                DATE_FORMAT(p.fecha_pedido, "%d/%m/%Y") AS fecha_pedido, -- Sirve para el formato de fecha con plecas
+                p.direccion, 
+                SUM(dp.precio_producto * dp.cantidad_producto) AS precio_total
+                FROM pedidos p
+                INNER JOIN detalles_pedidos dp ON p.id_pedido = dp.id_pedido
+                WHERE p.id_cliente = ?
+                AND p.estado_pedido != "En carrito"
+                GROUP BY p.id_pedido, 
+                p.estado_pedido, 
+                p.fecha_pedido, 
+                p.direccion;';
+            $params = array($_SESSION['idCliente']);
+            $data = Database::getRows($sql, $params);
 
+            // Sirve para redondear el total del pedido
+            foreach ($data as &$row) {
+            $row['precio_total'] = round($row['precio_total'], 2); // Redondea a 2 decimales
+        }
+        return $data;
     }
 
     public function readOne()
