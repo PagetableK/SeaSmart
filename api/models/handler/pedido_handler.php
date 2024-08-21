@@ -47,6 +47,27 @@ class PedidoHandler
         $params = array($_SESSION['idCliente']);
         return Database::getRows($sql, $params);
     }
+    public function readOrdersMobile()
+    {
+        $sql = 'SELECT p.id_pedido, p.estado_pedido, p.fecha_pedido, p.direccion, SUM(dp.precio_producto) AS precio_unidad, 
+        SUM(dp.precio_producto * dp.cantidad_producto) AS precio_total
+        FROM 
+        pedidos p
+        INNER JOIN 
+	    detalles_pedidos dp ON p.id_pedido = dp.id_pedido
+        WHERE 
+        p.id_cliente = ?
+        AND 
+        p.estado_pedido != "En carrito"
+        GROUP BY 
+        p.id_pedido, 
+        p.estado_pedido, 
+        p.fecha_pedido, 
+        p.direccion;';
+        $params = array($_SESSION['idCliente']);
+        return Database::getRows($sql, $params);
+
+    }
 
     public function readOne()
     {
@@ -120,6 +141,7 @@ class PedidoHandler
         $params = array($id_cliente);
         return Database::getRows($sql, $params);
     }
+
 
     public function readCart()
     {
