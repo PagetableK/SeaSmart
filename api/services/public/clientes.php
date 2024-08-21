@@ -15,6 +15,9 @@ if (isset($_GET['action'])) {
         $result['session'] = 1;
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
+            case 'validarSesion':
+                    $result['status'] = 1;
+                break;
             case 'createRow':
                 // Se validan los datos del formulario.
                 $_POST = Validator::validateForm($_POST);
