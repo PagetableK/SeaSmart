@@ -104,7 +104,7 @@ class PedidoHandler
             return true;
         } else {
             // Si no existe un pedido con el estado 'En carrito' se crea el pedido.
-            $sql = 'INSERT INTO pedidos (estado_pedido, id_cliente) VALUES("En carrito", ?);';
+            $sql = 'INSERT INTO pedidos (estado_pedido, id_cliente, fecha_pedido) VALUES("En carrito", ?, DATE(NOW()));';
             $params = array($_SESSION['idCliente']);
             // Se obtiene el ultimo valor insertado de la llave primaria en la tabla pedidos.
             if ($_SESSION['idPedido'] = Database::getLastRow($sql, $params)) {
