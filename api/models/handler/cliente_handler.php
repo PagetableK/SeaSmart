@@ -160,7 +160,7 @@ class ClienteHandler
         // Si el valor del atributo es nulo se establece el parámetro.
         if ($this->id == null) {
             $params = array($_SESSION['idCliente'], $_SESSION['idCliente']);
-        } 
+        }
         // De lo contrario se establece el parámetro.
         else {
             $params = array($this->id, $this->id);
@@ -254,5 +254,23 @@ class ClienteHandler
                 FROM clientes
                 ORDER BY nombre_cliente, apellido_cliente;';
         return Database::getRows($sql);
+    }
+
+    public function verificarCorreo() 
+    {
+        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente
+                FROM clientes
+                WHERE correo_cliente = ?;';
+        $params = array($this->correo);
+        return Database::getRow($sql, $params);
+    }
+
+    public function restablecerContra()
+    {
+        $sql = 'UPDATE clientes
+                SET contra_cliente = ?
+                WHERE id_cliente = ?';
+        $params = array($this->contra, $this->id);
+        return Database::executeRow($sql, $params);
     }
 }

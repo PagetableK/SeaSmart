@@ -134,7 +134,30 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No se pudo enviar el correo de recuperación';
                 }
                 break;
-
+            case 'verificarCorreo':
+                if (!$cliente->setVerificarCorreo($_POST['correoCliente'])) {
+                    $result['error'] = $cliente->getDataError();
+                } elseif ($result['dataset'] = $cliente->verificarCorreo()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No se puedo verificar el correo';
+                }
+                break;
+            case 'restablecerContra':
+                if (
+                    !$cliente->setContra($_POST['contraCliente']) or
+                    !$cliente->setId($_POST['idCliente'])
+                ) {
+                    $result['error'] = $cliente->getDataError();
+                } elseif ($_POST['contraCliente'] != $_POST['confirmarContra']) {
+                    $result['error'] = 'Contraseñas diferentes';
+                } elseif ($cliente->restablecerContra()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Contraseña restablecida';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al restablecer la contraseña';
+                }
+                break;
             case 'logIn':
                 // Se validan los campos del form que se encuentran en el array $_POST.
                 $_POST = Validator::validateForm($_POST);

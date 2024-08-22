@@ -19,11 +19,10 @@ class ClienteData extends ClienteHandler
     // Método para establecer el ID del cliente.
     public function setId($valor)
     {
-        if(Validator::validateNaturalNumber($valor)){
+        if (Validator::validateNaturalNumber($valor)) {
             $this->id = $valor;
             return true;
-        }
-        else{
+        } else {
             $this->info_error = 'El identificador del cliente es correcto';
             return false;
         }
@@ -62,28 +61,37 @@ class ClienteData extends ClienteHandler
     // Método para establecer el correo del cliente.
     public function setCorreo($valor, $boolean = null, $min = 8, $max = 100)
     {
-    if (!Validator::validateEmail($valor)) {
-        $this->info_error = 'El correo no es válido';
-        return false;
-    }
-    elseif (Validator::validateLength($valor, $min, $max)) {
-        // Verifica si el correo ya existe en la base de datos
-        if($boolean and $this->checkDuplicateWithId($valor)){
-            $this->info_error = 'El correo ingresado ya está siendo utilizado';
+        if (!Validator::validateEmail($valor)) {
+            $this->info_error = 'El correo no es válido';
             return false;
-        } elseif (!$boolean and $this->checkDuplicate($valor)) {
-            $this->info_error = 'El correo ingresado ya está siendo utilizado';
+        } elseif (Validator::validateLength($valor, $min, $max)) {
+            // Verifica si el correo ya existe en la base de datos
+            if ($boolean and $this->checkDuplicateWithId($valor)) {
+                $this->info_error = 'El correo ingresado ya está siendo utilizado';
+                return false;
+            } elseif (!$boolean and $this->checkDuplicate($valor)) {
+                $this->info_error = 'El correo ingresado ya está siendo utilizado';
+                return false;
+            } else {
+                // Si todas las validaciones pasan, establece el correo
+                $this->correo = $valor;
+                return true;
+            }
+        } else {
+            $this->info_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setVerificarCorreo($valor)
+    {
+        if (!Validator::validateEmail($valor)) {
+            $this->info_error = 'El correo no es válido';
             return false;
         } else {
-            // Si todas las validaciones pasan, establece el correo
             $this->correo = $valor;
             return true;
         }
-    }
-    else {
-        $this->info_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
-        return false;
-    }
     }
 
     // Método para establecer la contraseña del cliente.
@@ -104,10 +112,10 @@ class ClienteData extends ClienteHandler
         if (!Validator::validateDUI($value)) {
             $this->info_error = 'El DUI debe tener el formato ########-#' . $value;
             return false;
-        } else if($boolean and $this->checkDuplicateWithId($value)){
+        } else if ($boolean and $this->checkDuplicateWithId($value)) {
             $this->info_error = 'El DUI ingresado ya está siendo utilizado por otro cliente';
             return false;
-        } elseif(!$boolean and $this->checkDuplicate($value)) {
+        } elseif (!$boolean and $this->checkDuplicate($value)) {
             $this->info_error = 'El DUI ingresado ya está siendo utilizado por otro cliente';
             return false;
         } else {
@@ -134,7 +142,7 @@ class ClienteData extends ClienteHandler
         if (!Validator::validatePhone($value)) {
             $this->info_error = 'El teléfono debe iniciar con el formato ###-####';
             return false;
-        } elseif($boolean and $this->checkDuplicateWithId($value)){
+        } elseif ($boolean and $this->checkDuplicateWithId($value)) {
             $this->info_error = 'El teléfono ingresado ya está siendo usado por otro cliente';
             return false;
         } elseif (!$boolean and $this->checkDuplicate($value)) {
@@ -155,7 +163,7 @@ class ClienteData extends ClienteHandler
         if (!Validator::validatePhone($value)) {
             $this->info_error = 'El teléfono fijo debe iniciar con el formato ####-####';
             return false;
-        } elseif($boolean and $this->checkDuplicateWithId($value)){
+        } elseif ($boolean and $this->checkDuplicateWithId($value)) {
             $this->info_error = 'El teléfono fijo ingresado ya está siendo usado por otro cliente';
             return false;
         } elseif (!$boolean and $this->checkDuplicate($value)) {
